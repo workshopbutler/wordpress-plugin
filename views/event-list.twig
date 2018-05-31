@@ -1,0 +1,8 @@
+{% from "common/filters.twig" import drawFilters as drawFilters %}
+{% from "event/list.twig" import list as drawEvents %}
+<div class="{{ theme }}">
+    <div class="wb-content">
+        {{ drawFilters(filters) }}
+        {{ drawEvents(events, template) }}
+    </div>
+</div>

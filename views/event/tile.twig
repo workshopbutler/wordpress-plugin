@@ -1,0 +1,26 @@
+{% macro drawEvent(event) %}
+    <div class="wb-tile" data-event-obj data-event-type="{{ event.type.id }}"
+         data-event-location="{{ event.country }}"
+         data-event-language="{{ event.spoken_languages| join(',') }}"
+         data-event-trainer="{{ event.names_of_trainers| join(',') }}">
+        <a data-widget-go href="{{ event.url }}" class="wb-tile-title">{{ event.title }}</a>
+        <div class="wb-tile-info">
+            {{ event.schedule }}
+            {% if event.free %}
+                <div class="wb-tile-free">free</div>
+            {% endif %}
+            <br/>
+            {{ event.location }}
+        </div>
+        <div class="wb-tile-content">{{ event.description }}</div>
+        <div class="wb-tile-button">
+            <a data-widget-go href="{{ event.url }}" class="wb-btn wb-btn-primary wb-tile-btn">
+                {% if event.sold_out %}
+                    {{ __('Sold Out', 'wsbintegration') }}
+                {% else %}
+                    {{ __('Register', 'wsbintegration') }}
+                {% endif %}
+            </a>
+        </div>
+    </div>
+{% endmacro %}

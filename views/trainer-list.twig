@@ -1,0 +1,8 @@
+{% from "common/filters.twig" import drawFilters as drawFilters %}
+{% from "trainer/list.twig" import drawTrainers as drawTrainers %}
+<div class="{{ theme }}">
+    <div class="wb-content">
+        {{ drawFilters(filters) }}
+        {{ drawTrainers(trainers) }}
+    </div>
+</div>

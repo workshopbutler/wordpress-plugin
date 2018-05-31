@@ -1,0 +1,8 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+.wsb_row input {
+  width: 100%;
+  max-width: 500px;
+}

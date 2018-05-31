@@ -1,0 +1,43 @@
+<div class="wb-content">
+    <div class="wb-page">
+        <div class="wb-body wb-center">
+            <div class="wb-right-col">
+                <div class="wb-info">
+                    <div class="wb-info__title">Date:</div>
+                    {{ event.schedule }}
+                    {#<div class="wb-info__footer">{{ formatDate(event.start) }}</div>#}
+                </div>
+                <div class="wb-info">
+                    <div class="wb-info__title">Location:</div>
+                    {{ event.location }}
+                    {#<div class="wb-info__footer">{{ formatLanguages(event) }}</div>#}
+                </div>
+                {% if event.tickets.nonEmpty() %}
+                    <div class="wb-tickets wb-info">
+                        <div class="wb-info__title">Tickets:</div>
+                        {% if event.free %}
+                            {% set freeDesc = formatTicketState(event.tickets.free, false) %}
+                            Free. Registration is required
+                            <br/>
+                            {{ freeDesc }}
+                        {% else %}
+                            {% for ticket in event.tickets.paid %}
+                                <div>OK {{ ticket.isActive() }}</div>
+                                <div class="wb-ticket {% if not ticket.isActive() %} ended {% endif %}">
+                                    {{ formatPrice(ticket.price, ticket.withTax) }} – {{ ticket.name }}
+                                    <br/>
+                                    <span class="hint">{{ formatTicket(ticket) }}</span>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+            </div>
+            <div class="wb-left-col">
+                {% from "./builtInForm.njk" import registrationForm %}
+                {{ registrationForm(event.instructions, event.registration_form, countries) }}
+            </div>
+        </div>
+    </div>
+</div>

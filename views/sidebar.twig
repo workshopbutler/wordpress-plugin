@@ -1,0 +1,13 @@
+{% for event in events %}
+    <div class="wb-workshop">
+        {% if event.country is same as('') %}
+            {{ event.schedule }} {{ event.location }}
+        {% else %}
+            {{ event.schedule }} {{ __('in', 'wsbintegration') }} {{ event.location }}
+        {% endif %}
+        <br>
+        <a href="{{ event.url }}" class="wb-link">
+            {{ event.title }}
+        </a>
+    </div>
+{% endfor %}

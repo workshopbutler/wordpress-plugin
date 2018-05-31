@@ -1,0 +1,114 @@
+<div class="{{ theme }}">
+    <div class="wb-content">
+    <div class="wb-page">
+        <div class="wb-header wb-center">
+            <h1>{{ event.title }}</h1>
+        </div>
+        <div class="wb-body wb-center">
+            <div class="wb-right-col">
+                <div>
+                    {% if event.is_registration_closed %}
+                        <button class="wb-sidebar__register" disabled>{{ event.reason_for_closed_registration }}</button>
+                    {% else %}
+                        <a href="#" target="_blank" data-registration-button
+                                {% if event.tickets.get_active_ticket_id %}
+                                    data-ticket-id="{{ event.tickets.get_active_ticket_id }}"
+                                {% endif %}
+                           class="wb-sidebar__register">{{ __('Register Now', 'wsbintegration') }}</a>
+                    {% endif %}
+                </div>
+                <div class="wb-info">
+                    <div class="wb-info__title">{{ __('Date', 'wsbintegration') }}:</div>
+                    {{ event.schedule }}
+                </div>
+                <div class="wb-info">
+                    <div class="wb-info__title">{{ __('Location', 'wsbintegration') }}:</div>
+                    {{ event.location }}
+                    <div class="wb-info__footer">{{ event.formatted_languages }}</div>
+                </div>
+                {% if event.tickets.non_empty %}
+                    <div class="wb-tickets wb-info">
+                        {% if event.free %}
+                            <div class="wb-ticket">
+                                <div class="wb-ticket__val">
+                                    {{ __('Free', 'wsbintegration') }}
+                                </div>
+                                <div class="wb-ticket__footer">
+                                    {{ event.tickets.free.formatted_state }}
+                                </div>
+                            </div>
+                        {% else %}
+                            {% for ticket in event.tickets.paid %}
+                                <div class="wb-ticket {% if not ticket.is_active %} state-closed {% endif %}">
+                                    <div class="wb-ticket__val">
+                                        {{ ticket.formatted_price }}
+                                    </div>
+                                    <div class="wb-ticket__name">
+                                        {{ ticket.name }}
+                                    </div>
+                                    <div class="wb-ticket__desc">
+                                        {{ ticket.formatted_description }}
+                                    </div>
+                                    <div class="wb-ticket__footer">
+                                        {{ ticket.formatted_state }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+                <div class="wb-workshops" id="upcoming-events">
+                    <div class="wb-workshops__title">
+                        {{ __('Upcoming events nearby', 'wsbintegration') }}:
+                    </div>
+                    <div data-events-list></div>
+                </div>
+                {% from "event/share.twig" import shareEvent as shareEvent %}
+                {{ shareEvent(event) }}
+            </div>
+            <div class="wb-left-col">
+                {% if event.description %}
+                    <div class="wb-desc">{{ event.description }}</div>
+                {% endif %}
+                {#{% if options.withTrainers %}#}
+                    <div class="wb-trainers">
+                        {% for trainer in event.trainers %}
+                            <div class="wb-trainer">
+                                <div class="wb-profile">
+                                    <a class="wb-profile_img" href="{{ trainer.url }}" style="background-image: url({{ trainer.photo }});"></a>
+                                    <div class="wb-profile__name">
+                                        <div class="inner">
+                                            <h3>
+                                                {{ trainer.first_name }}
+                                                <br/>
+                                                {{ trainer.last_name }}
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if trainer.bio %}
+                                    <div class="wb-profile__text b-flip js-text-flip" data-max-height="80">
+                                        <div class="b-flip__inner" data-flip-helper>
+                                            {{ trainer.bio }}
+                                        </div>
+                                        <a href="#" class="b-flip__link" data-flip-link>
+                                            <span class="b-flip__show">Show bio</span>
+                                            <span class="b-flip__hide">Hide</span>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {#{% endif %}#}
+
+                {% from "built-in-form.twig" import registrationForm as renderRegistrationForm%}
+                <div data-registration-form>
+                    {{ renderRegistrationForm(event.instructions, event.registration_form, countries) }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>

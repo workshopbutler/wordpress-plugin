@@ -1,0 +1,13 @@
+{% macro drawTrainers(trainers) %}
+    {% from "trainer/item.twig" import drawTrainer as drawTrainer %}
+    <div class="wb-trainer-list">
+        <div class="wb-tiles" data-trainer-list>
+            {% for trainer in trainers %}
+                {{ drawTrainer(trainer) }}
+            {% endfor %}
+        </div>
+        <div class="wb-no-trainers">
+            {{ __('No trainers were found', 'wsbintegration') }}
+        </div>
+    </div>
+{% endmacro %}
