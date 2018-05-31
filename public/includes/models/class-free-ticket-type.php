@@ -70,12 +70,12 @@ class Free_Ticket_Type {
      * @param $jsonData object JSON for a ticket type
      */
     public function __construct($jsonData) {
-        $this->number_of_tickets      = $jsonData->number_of_tickets;
-        $this->number_of_tickets_left = $jsonData->number_of_tickets_left;
+        $this->number_of_tickets      = $jsonData->amount;
+        $this->number_of_tickets_left = $jsonData->left;
         $this->start                  = new DateTime($jsonData->start);
         $this->end                    = new DateTime($jsonData->end);
         $this->unlimited              = $jsonData->unlimited;
-        $this->sold_out               = $jsonData->sold_out;
+        $this->sold_out               = $jsonData->state->sold_out;
     }
     
     /**
@@ -95,7 +95,7 @@ class Free_Ticket_Type {
             } else if ($this->number_of_tickets_left < 0) {
                 return '';
             } else {
-                return $this->number_of_tickets_left . __(' tickets left');
+                return $this->number_of_tickets_left . __(' tickets left', 'wsbintegration');
             }
         }
     }

@@ -7,6 +7,7 @@
  * @package    WSB_Integration
  */
 define( 'WSB_API_END_POINT', 'https://api.workshopbutler.com/' );
+require_once plugin_dir_path( __FILE__ ) . 'class-wsb-response.php';
 
 /**
  * The request wrapper class
@@ -25,20 +26,14 @@ class WSB_Requests {
      * @param $method string API method
      * @param $query array API query parameters
      *
-     * @return null | string
+     * @return WSB_Response
      */
     public function get( $method, $query ) {
         $options = get_option( 'wsb_options' );
     
         $query["api_key"] = $options["wsb_field_api_key"];
         $url = WSB_API_END_POINT . $method . '?' . http_build_query($query);
-        $resp = wp_remote_get($url);
-    
-        if(is_wp_error($resp)) {
-            error_log("Workshop Butler Integration: GET request failed");
-            return null;
-        }
-        return $resp['body'];
+        return new WSB_Response(wp_remote_get($url));
     }
     
     /**
@@ -47,7 +42,7 @@ class WSB_Requests {
      * @param $method string API method
      * @param $data array Post data
      *
-     * @return null | array
+     * @return WSB_Response
      */
     public function post( $method, $data ) {
         $options = get_option( 'wsb_options' );
@@ -67,11 +62,7 @@ class WSB_Requests {
                 'body' => $data_string)
         );
     
-        if(is_wp_error($resp)) {
-            error_log("Workshop Butler Integration: POST request failed.");
-            return null;
-        }
-        return $resp['body'];
+        return new WSB_Response($resp);
     }
     
 }

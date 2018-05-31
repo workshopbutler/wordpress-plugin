@@ -52,26 +52,27 @@ class WSB_Sidebar extends WSB_Page {
      * @return string
      */
     public function render( $method, $query ) {
-        $data = json_decode( $this->requests->get( $method, $query ) );
-        return $this->render_list($data);
+        $response = $this->requests->get( $method, $query );
+        return $this->render_list($response);
     }
     
     /**
      * Renders the list of trainers
      *
-     * @param $json_events object JSON trainers data
+     * @param $response WSB_Response
      *
      * @since  0.2.0
      * @return string
      */
-    private function render_list( $json_events) {
-        if ( $json_events == null || $json_events->code == 404) {
-            $html = __('No events were found', 'wsbintegration');
+    private function render_list( $response ) {
+        if ( $response->is_error()) {
+            $html = "<h2>" . __('Workshop Butler API: Request failed', 'wsbintegration')  . "</h2>";
+            $html .= "<p>" . __('Reason : ', 'wsbintegration') . $response->error . "</p>";
             return $html;
         }
     
         $events = [];
-        foreach ( $json_events as $json_event) {
+        foreach ( $response->body as $json_event) {
             $event = new Event( $json_event, WSB_Options::get_event_page_url(), WSB_Options::get_trainer_page_url());
             array_push($events, $event );
         }

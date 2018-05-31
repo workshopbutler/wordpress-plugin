@@ -43,7 +43,7 @@ class WSB_Trainer_Page extends WSB_Page {
     
     
     public function render( $attrs = [], $content = null ) {
-        $data = null;
+        $response = null;
         $id   = ( ! empty( $_GET['id'] ) ) ? $_GET['id'] : '';
         
         if ( $id !== "" ) {
@@ -60,27 +60,32 @@ class WSB_Trainer_Page extends WSB_Page {
             $method .= rawurlencode( $id );
             $query  = array();
             
-            $data = json_decode( $this->requests->get( $method, $query ) );
+            $response = $this->requests->get( $method, $query );
+            $html = $this->renderProfile( $response );
+        } else {
+            $html = "<h2>" . __('Workshop Butler API: Request failed', 'wsbintegration')  . "</h2>";
+            $html .= "<p>" . __('Reason : empty trainer ID', 'wsbintegration') . "</p>";
         }
-        $html = $this->renderProfile( $data );
         
         return $html;
     }
     
     /**
      * Renders the profile of trainer
-     * @param $data object JSON trainer data
+     *
+     * @param $response WSB_Response
      *
      * @return string
      */
-    private function renderProfile( $data ) {
-        if($data == null || $data->code == 404) {
-            $html = "<h2>" . __('Error 404 - Not Found', 'wsbintegration')  . "</h2>";
-            $html .= "<p>" . __('Sorry, but the page you were looking for could not be found.', 'wsbintegration')  . "</p>";
+    private function renderProfile( $response ) {
+        if ( $response->is_error()) {
+            $html = "<h2>" . __('Workshop Butler API: Request failed', 'wsbintegration')  . "</h2>";
+            $html .= "<p>" . __('Reason : ', 'wsbintegration') . $response->error . "</p>";
             return $html;
         }
+    
         $filename = 'trainer-page.twig';
-        $template_data = array('trainer' => new Trainer($data),
+        $template_data = array('trainer' => new Trainer( $response->body ),
                                'theme' => $this->get_theme());
     
         return $this->engine->fetch($filename, $template_data);

@@ -39,7 +39,7 @@ class WSB_Ajax {
             }
             $requests = new WSB_Sidebar();
             echo $requests->render( $method, $query );
-            die();
+            wp_die();
         } else {
             exit();
         }
@@ -55,8 +55,7 @@ class WSB_Ajax {
     
             $requests = new WSB_Requests();
             $response = $requests->post( 'attendees/register', $form_data );
-            echo $response;
-            die();
+            wp_send_json($response->body, $response->http_code);
         } else {
             exit();
         }

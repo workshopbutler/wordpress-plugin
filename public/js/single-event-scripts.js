@@ -87,12 +87,19 @@ function register_attendee(e) {
             cache: false,
             url: wsb_single_event.ajax_url,
             data: form_data,
-            dataType: 'json',
-            success: function (data) {
-                form_helper.clearForm();
-                $root.addClass('wb-state__post-registration').removeClass('h-busy wb-state__pre-registration');
-                jQuery(e.target).removeProp('disabled').removeClass('h-busy');
-            }
+            dataType: 'json'
+        }).done(function(data) {
+            form_helper.clearForm();
+            $root.addClass('wb-state__post-registration').removeClass('h-busy wb-state__pre-registration');
+        }).fail(function(jqXHR) {
+            var message = (jqXHR.responseJSON && jqXHR.responseJSON.message) ?
+                jqXHR.responseJSON.message :
+                'Unknown server error';
+            message += ' <br> Something is wrong. This error should not happen. Check console logs or ask a support team for help';
+            jQuery('[data-form-major-error]').html(message);
+            console.log(jqXHR.responseJSON);
+        }).always(function(data) {
+            jQuery(e.target).removeProp('disabled').removeClass('h-busy');
         });
     } else {
         console.log("Registration is closed. The plugin is configured incorrectly");

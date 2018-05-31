@@ -324,9 +324,9 @@ function wsb_get_date_interval($start_date, $end_date, $without_year) {
     }
     $monthIndex = 0 + (int) !$with_year;
     if ($start_date->format('m') != $end_date->format('m')) {
-        $str_start = $months[(int)$start_date->format('m')][$monthIndex] . ' ' . $str_start;
+        $str_start = $months[(int)$start_date->format('m') - 1][$monthIndex] . ' ' . $str_start;
     }
-    $str_end = $months[(int)$end_date->format('m')][$monthIndex] . ' ' . $str_end;
+    $str_end = $months[(int)$end_date->format('m') - 1][$monthIndex] . ' ' . $str_end;
     if ($start_date != $end_date) {
         $str_start = $start_date->format('d') . ' ' . $str_start;
     }

@@ -61,14 +61,14 @@ class WSB_Event_Page extends WSB_Page {
             $method = 'events/';
             $method .= rawurlencode($id);
             $query = array();
-            $data = json_decode($this->requests->get($method, $query));
-            if( $data == null || $data->code == 404) {
-                $html = "<h2>" . __('Error 404 - Not Found', 'wsbintegration')  . "</h2>";
-                $html .= "<p>" . __('Sorry, but the page you were looking for could not be found.', 'wsbintegration')  . "</p>";
+            $response = $this->requests->get($method, $query);
+            if ( $response->is_error()) {
+                $html = "<h2>" . __('Workshop Butler API: Request failed', 'wsbintegration')  . "</h2>";
+                $html .= "<p>" . __('Reason : ', 'wsbintegration') . $response->error . "</p>";
                 return $html;
             }
     
-            $event = $this->get_event( $data );
+            $event = $this->get_event( $response->body );
     
             wp_localize_script( 'wsb-single-event-scripts', 'wsb_single_event', array(
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -76,7 +76,7 @@ class WSB_Event_Page extends WSB_Page {
                 'country' => $data->country,
                 'is_registration_closed' => $event->is_registration_closed(),
                 'registration_url' => $event->get_registration_url(),
-                'id' => $data->id,
+                'id' => $event->id,
                 'error_required' => __("This field is required.", 'wsbintegration'),
                 'error_email' => __("Please enter a valid email address.", 'wsbintegration'),
                 'error_url' => __("Please enter a valid URL.", 'wsbintegration'),
@@ -91,9 +91,12 @@ class WSB_Event_Page extends WSB_Page {
                 'string_try_again' => __('Please try again. If the error persists please contact your trainer.', 'wsbintegration'),
                 'single_event_url' => WSB_Options::get_event_page_url(),
             ));
+            $html = $this->render_page( $event );
             
+        } else {
+            $html = "<h2>" . __('Workshop Butler API: Request failed', 'wsbintegration')  . "</h2>";
+            $html .= "<p>" . __('Reason : empty event ID', 'wsbintegration') . "</p>";
         }
-        $html = $this->render_page( $event );
     
         return $html;
     }

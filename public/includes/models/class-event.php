@@ -358,7 +358,6 @@ class Event {
             $paid_tickets = array_map( function ( $type ) {
                 return new Paid_Ticket_Type( $type );
             }, $paid_ticket_types );
-            
             return $free ?
                 new Tickets( [], new Free_Ticket_Type( $free_ticket_type ) ) :
                 new Tickets( $paid_tickets, null );

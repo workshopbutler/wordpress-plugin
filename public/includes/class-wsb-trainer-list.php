@@ -47,26 +47,27 @@ class WSB_Trainer_List extends WSB_Page {
         $method = 'facilitators';
         $query  = array();
     
-        $data = json_decode( $this->requests->get( $method, $query ) );
-        return $this->renderList($data, WSB_Options::get_trainer_page_url());
+        $response = $this->requests->get( $method, $query );
+        return $this->renderList($response, WSB_Options::get_trainer_page_url());
     }
     
     /**
      * Renders the list of trainers
      *
-     * @param $jsonTrainers object JSON trainers data
+     * @param $response WSB_Response
      * @param $trainerUrl string Trainer profile page URL
      *
      * @return string
      */
-    private function renderList( $jsonTrainers, $trainerUrl ) {
-        if ( $jsonTrainers == null || $jsonTrainers->code == 404) {
-            $html = "<h2>" . __('Error 404 - Not Found', 'wsbintegration')  . "</h2>";
-            $html .= "<p>" . __('Sorry, but the page you were looking for could not be found.', 'wsbintegration')  . "</p>";
+    private function renderList( $response, $trainerUrl ) {
+        if ( $response->is_error()) {
+            $html = "<h2>" . __('Workshop Butler API: Request failed', 'wsbintegration')  . "</h2>";
+            $html .= "<p>" . __('Reason : ', 'wsbintegration') . $response->error . "</p>";
             return $html;
         }
+    
         $trainers = [];
-        foreach ( $jsonTrainers as $jsonTrainer) {
+        foreach ( $response->body as $jsonTrainer) {
             $trainer = new Trainer( $jsonTrainer, $trainerUrl);
             array_push($trainers, $trainer );
         }
