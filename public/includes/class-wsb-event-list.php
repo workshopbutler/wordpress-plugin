@@ -37,6 +37,7 @@ class WSB_Event_List extends WSB_Page {
      * @access   private
      */
     private function load_dependencies() {
+        require_once plugin_dir_path( __FILE__ ) . '/../../includes/class-wsb-options.php';
         require_once plugin_dir_path( __FILE__ ) . 'helper-functions.php';
         require_once plugin_dir_path( __FILE__ ) . 'class-wsb-requests.php';
         require_once plugin_dir_path(__FILE__) . 'ui/class-event-filters.php';
@@ -81,14 +82,10 @@ class WSB_Event_List extends WSB_Page {
             $html .= "<p>" . __('Sorry, but the page you were looking for could not be found.', 'wsbintegration')  . "</p>";
             return $html;
         }
-    
-        $internal_options = get_option("wsb_internal_options");
-        $trainer_page_url = get_permalink( $internal_options['trainer_detail_page_id'] );
-        $event_page_url = get_permalink( $internal_options['event_detail_page_id']);
-
+        
         $events = [];
         foreach ( $json_events as $json_event) {
-            $event = new Event( $json_event, $event_page_url, $trainer_page_url);
+            $event = new Event( $json_event, WSB_Options::get_event_page_url(), WSB_Options::get_trainer_page_url());
             array_push($events, $event );
         }
         $event_filters = new Event_Filters($events, ['location', 'type', 'language', 'trainer']);

@@ -6,10 +6,10 @@
  * @package           WSB_Integration
  *
  * @wordpress-plugin
- * Plugin Name:       WordPress Plugin Boilerplate
+ * Plugin Name:       Workshop Butler
  * Plugin URI:        https://workshopbutler.com/plugin-name-uri/
  * Description:       This plugin helps you integrate Workshop Butler Events and Trainers to your WordPress website.
- * Version:           0.2.0
+ * Version:           0.3.0
  * Author:            Workshop Butler
  * Author URI:        https://workshopbutler.com/
  * License:           GPL-2.0+
@@ -26,7 +26,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'WSB_INTEGRATION_VERSION', '0.2.0' );
+define( 'WSB_INTEGRATION_VERSION', '0.3.0' );
 
 /**
  * The code that runs during plugin activation.

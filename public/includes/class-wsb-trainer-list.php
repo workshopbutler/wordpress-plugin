@@ -32,6 +32,7 @@ class WSB_Trainer_List extends WSB_Page {
      * @access   private
      */
     private function load_dependencies() {
+        require_once plugin_dir_path( __FILE__ ) . '/../../includes/class-wsb-options.php';
         require_once plugin_dir_path( __FILE__ ) . 'helper-functions.php';
         require_once plugin_dir_path( __FILE__ ) . 'class-wsb-requests.php';
         require_once plugin_dir_path(__FILE__) . 'ui/class-trainer-filters.php';
@@ -43,22 +44,11 @@ class WSB_Trainer_List extends WSB_Page {
         wp_enqueue_script( "wsb-helper-scripts" );
         wp_enqueue_script( "wsb-all-trainers-scripts" );
         
-        $wsb_nonce = wp_create_nonce( 'wsb-nonce' );
-        
-        $internal_options = get_option( "wsb_internal_options" );
-        $trainerUrl = get_permalink( $internal_options['trainer_detail_page_id'] );
-//        wp_localize_script( 'wsb-all-trainers-scripts', 'wsb_trainers', array(
-//            'ajax_url'            => admin_url( 'admin-ajax.php' ),
-//            'nonce'               => $wsb_nonce,
-//            'string_show_details' => __( 'Open trainer details', 'wsbintegration' ),
-//            'single_trainer_url'  => get_permalink( $internal_options['trainer_detail_page_id'] )
-//        ) );
-    
         $method = 'facilitators';
         $query  = array();
     
         $data = json_decode( $this->requests->get( $method, $query ) );
-        return $this->renderList($data, $trainerUrl);
+        return $this->renderList($data, WSB_Options::get_trainer_page_url());
     }
     
     /**

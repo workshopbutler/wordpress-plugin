@@ -37,6 +37,7 @@ class WSB_Event_Page extends WSB_Page {
      * @access   private
      */
     private function load_dependencies() {
+        require_once plugin_dir_path( __FILE__ ) . '/../../includes/class-wsb-options.php';
         require_once plugin_dir_path( __FILE__ ) . 'helper-functions.php';
         require_once plugin_dir_path( __FILE__ ) . 'class-wsb-requests.php';
         require_once plugin_dir_path(__FILE__) . 'models/class-event.php';
@@ -48,14 +49,6 @@ class WSB_Event_Page extends WSB_Page {
      * @since    0.2.0
      */
     public function render( $attrs = [], $content = null ) {
-        // normalize attribute keys, lowercase
-        $atts = array_change_key_case((array)$attrs, CASE_LOWER);
-    
-        // override default attributes with user attributes
-        $wsb_atts = shortcode_atts([
-            'id' => -1,
-        ], $atts);
-    
         $data = null;
         $id = ( ! empty( $_GET['id'] ) ) ? $_GET['id'] : '';
         if($id !== "") {
@@ -65,8 +58,6 @@ class WSB_Event_Page extends WSB_Page {
         
             $wsb_nonce = wp_create_nonce( 'wsb-nonce' );
         
-            $internal_options = get_option("wsb_internal_options");
-    
             $method = 'events/';
             $method .= rawurlencode($id);
             $query = array();
@@ -98,7 +89,7 @@ class WSB_Event_Page extends WSB_Page {
                 'string_validation_errors' => __('Validation errors occurred. Please confirm the fields and try again.', 'wsbintegration'),
                 'string_error_try_again' => __('The server doesn\'t response. Please try again. If the error persists please contact your trainer.', 'wsbintegration'),
                 'string_try_again' => __('Please try again. If the error persists please contact your trainer.', 'wsbintegration'),
-                'single_event_url' => get_permalink($internal_options['event_detail_page_id']),
+                'single_event_url' => WSB_Options::get_event_page_url(),
             ));
             
         }
@@ -114,11 +105,7 @@ class WSB_Event_Page extends WSB_Page {
      * @return Event
      */
     private function get_event( $data ) {
-        $internal_options = get_option( "wsb_internal_options" );
-        $event_page_url = get_permalink( $internal_options['event_detail_page_id'] );
-        $trainer_page_url = get_permalink( $internal_options['trainer_detail_page_id'] );
-    
-        return new Event($data, $event_page_url, $trainer_page_url);
+        return new Event($data, WSB_Options::get_event_page_url(), WSB_Options::get_trainer_page_url());
     }
     
     /**

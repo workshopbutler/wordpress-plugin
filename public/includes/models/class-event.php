@@ -280,7 +280,7 @@ class Event {
         } else if ($this->free && $this->tickets->free->is_sold_out()) {
             return true;
         } else {
-            if (!$this->free && $this->tickets->non_empty()) {
+            if (!$this->free && $this->tickets && $this->tickets->non_empty()) {
                 $closed = true;
                 foreach ($this->tickets->paid as $ticket) {
                     if ($ticket->is_active()) {
