@@ -6,14 +6,21 @@
          data-trainer-language="{{ trainer.languages|join(',') }}"
          data-trainer-trainer="{{ trainerName }}">
         <div class="wb-trainer-tile__box">
-            <a href="{{ trainer.url }}">
-                <div class="wb-trainer-tile_img" style="background-image: url({{ trainer.photo }});"></div>
-            </a>
-
-            <div class="wb-trainer-tile__info">
+            {% if trainer.url %}
                 <a href="{{ trainer.url }}">
-                    <div>{{ trainerName }}</div>
+                    <div class="wb-trainer-tile_img" style="background-image: url({{ trainer.photo }});"></div>
                 </a>
+            {% else %}
+                <div class="wb-trainer-tile_img" style="background-image: url({{ trainer.photo }});"></div>
+            {% endif %}
+            <div class="wb-trainer-tile__info">
+                {% if trainer.url %}
+                    <a href="{{ trainer.url }}">
+                        <div>{{ trainerName }}</div>
+                    </a>
+                {% else %}
+                    <div>{{ trainerName }}</div>
+                {% endif %}
                 <div class="wb-trainer-tile__country">
                     {{ __(trainer.country, 'wsbintegration') }}
                 </div>

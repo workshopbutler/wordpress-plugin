@@ -48,7 +48,7 @@ class WSB_Trainer_List extends WSB_Page {
         $query  = array();
     
         $response = $this->requests->get( $method, $query );
-        return $this->renderList($response, WSB_Options::get_trainer_page_url());
+        return $this->renderList($response, $this->settings->get_trainer_page_url());
     }
     
     /**

@@ -89,7 +89,7 @@ class WSB_Event_Page extends WSB_Page {
                 'string_validation_errors' => __('Validation errors occurred. Please confirm the fields and try again.', 'wsbintegration'),
                 'string_error_try_again' => __('The server doesn\'t response. Please try again. If the error persists please contact your trainer.', 'wsbintegration'),
                 'string_try_again' => __('Please try again. If the error persists please contact your trainer.', 'wsbintegration'),
-                'single_event_url' => WSB_Options::get_event_page_url(),
+                'single_event_url' => $this->settings->get_event_page_url(),
             ));
             $html = $this->render_page( $event );
             
@@ -108,7 +108,7 @@ class WSB_Event_Page extends WSB_Page {
      * @return Event
      */
     private function get_event( $data ) {
-        return new Event($data, WSB_Options::get_event_page_url(), WSB_Options::get_trainer_page_url());
+        return new Event($data, $this->settings->get_event_page_url(), $this->settings->get_trainer_page_url());
     }
     
     /**

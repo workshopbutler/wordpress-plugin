@@ -45,10 +45,10 @@ class Trainer {
     /**
      * Creates a new object
      *
-     * @param $jsonData object JSON data from Workshop Butler API
-     * @param $trainerUrl string Trainer profile page URL
+     * @param $jsonData object          JSON data from Workshop Butler API
+     * @param $trainer_url string|null   Trainer profile page URL
      */
-    public function __construct( $jsonData, $trainerUrl = '' ) {
+    public function __construct( $jsonData, $trainer_url = null ) {
         $this->id                  = $jsonData->id;
         $this->first_name          = $jsonData->first_name;
         $this->last_name           = $jsonData->last_name;
@@ -66,7 +66,12 @@ class Trainer {
         $this->recent_private_stats = $this->getStatistics( $jsonData, false, true );
         $this->endorsements         = $jsonData->endorsements;
         
-        $this->url = $trainerUrl . '?id=' . $this->id;
+        if ($trainer_url) {
+            $this->url = $trainer_url . '?id=' . $this->id;
+        } else {
+            $this->url = null;
+        }
+        
         $this->country   = $this->getCountryName( $jsonData );
         $this->languages = $jsonData->languages;
     }

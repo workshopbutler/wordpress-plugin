@@ -21,16 +21,15 @@
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Integration_Deactivator {
-
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    0.2.0
-	 */
-	public static function deactivate() {
-
-	}
-
+    
+    /**
+     * Short Description. (use period)
+     *
+     * Long Description.
+     *
+     * @since    0.2.0
+     */
+    public static function deactivate() {
+    }
+    
 }

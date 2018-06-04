@@ -73,7 +73,9 @@ class WSB_Sidebar extends WSB_Page {
     
         $events = [];
         foreach ( $response->body as $json_event) {
-            $event = new Event( $json_event, WSB_Options::get_event_page_url(), WSB_Options::get_trainer_page_url());
+            $event = new Event( $json_event,
+                $this->settings->get_event_page_url(),
+                $this->settings->get_trainer_page_url());
             array_push($events, $event );
         }
         $sliced = array_slice($events, 0, 5);

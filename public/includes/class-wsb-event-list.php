@@ -85,7 +85,9 @@ class WSB_Event_List extends WSB_Page {
         
         $events = [];
         foreach ( $response->body as $json_event) {
-            $event = new Event( $json_event, WSB_Options::get_event_page_url(), WSB_Options::get_trainer_page_url());
+            $event = new Event( $json_event,
+                $this->settings->get_event_page_url(),
+                $this->settings->get_trainer_page_url());
             array_push($events, $event );
         }
         $event_filters = new Event_Filters($events, ['location', 'type', 'language', 'trainer']);
@@ -109,7 +111,7 @@ class WSB_Event_List extends WSB_Page {
      * @return string
      */
     private function get_list_type() {
-        return $this->get_option_value('wsb_field_event_list_type', 'table');
+        return $this->settings->get( WSB_Options::EVENT_LIST_LAYOUT, 'table' );
     }
     
     

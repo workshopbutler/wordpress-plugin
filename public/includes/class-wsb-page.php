@@ -28,6 +28,15 @@ abstract class WSB_Page {
     protected $engine;
     
     /**
+     * Plugin settings
+     *
+     * @access  protected
+     * @since   0.3.0
+     * @var     WSB_Options $settings Plugin settings
+     */
+    protected $settings;
+    
+    /**
      * Creates a template engine entity
      *
      * @since 0.2.0
@@ -36,7 +45,27 @@ abstract class WSB_Page {
         require_once plugin_dir_path(__FILE__) . '../../vendor/autoload.php';
         \Timber\Timber::$locations = plugin_dir_path(__FILE__) . '../../views';
         $this->engine = new Timber\Timber();
+        
+        $this->load_dependencies();
     }
+    
+    /**
+     * Load the required dependencies
+     *
+     * @since    0.3.0
+     * @access   private
+     */
+    private function load_dependencies() {
+        
+        /**
+         * The class responsible for all plugin-related options
+         * core plugin.
+         */
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . '../includes/class-wsb-options.php';
+        
+        $this->settings = new WSB_Options();
+    }
+    
     
     /**
      * Returns an active theme for the integration
@@ -45,22 +74,7 @@ abstract class WSB_Page {
      * @return mixed
      */
     protected function get_theme() {
-        return $this->get_option_value('wsb_field_theme', 'alfred');
+        return $this->settings->get( WSB_Options::THEME, 'alfred' );
     }
     
-    /**
-     * Returns the value of the option
-     *
-     * @since 0.2.0
-     * @param $name           string Option name
-     * @param $default_value  string Default value if the option is not set
-     *
-     * @return mixed
-     */
-    protected function get_option_value($name, $default_value) {
-        $options = get_option( 'wsb_options' );
-        $is_option_set = $options[$name] !== "" && $options[$name] != null;
-    
-        return $is_option_set ? $options[$name] : $default_value;
-    }
 }

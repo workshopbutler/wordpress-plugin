@@ -9,6 +9,7 @@
  * @package    WSB_Integration
  * @subpackage WSB_Integration/includes
  */
+require_once plugin_dir_path( __FILE__ ) . 'class-wsb-options.php';
 
 /**
  * Fired during plugin activation.
@@ -23,62 +24,37 @@
 class WSB_Integration_Activator {
     
     /**
-     * Short Description. (use period)
-     *
-     * Long Description.
+     * Adds required pages on the plugin activation if they are not added before
      *
      * @since    0.2.0
      */
     public static function activate() {
-        $options_array = [];
-        
-        $current_options = get_option( "wsb_internal_options" );
-        
-        // Check that we don't create again pages if we have created already before
-        if ( empty( $current_options['event_page_id'] ) && empty( $current_options['trainer_page_id'] ) ) {
-            $options_array['event_page_id'] = wp_insert_post( array(
-                'post_title'     => __( 'Event List', 'wsbintegration' ),
-                'post_content'   => '[wsb_events]',
-                'post_type'      => 'page',
-                'post_status'    => 'publish',
-                'comment_status' => 'closed'
-            ) );
-            
-            $options_array['event_detail_page_id'] = wp_insert_post( array(
-                'post_title'     => __( 'Event Details', 'wsbintegration' ),
-                'post_parent'    => $options_array['event_page_id'],
-                'post_content'   => '[wsb_event_details]',
-                'post_type'      => 'page',
-                'post_status'    => 'publish',
-                'comment_status' => 'closed'
-            ) );
-            
-            $options_array['trainer_page_id'] = wp_insert_post( array(
-                'post_title'     => __( 'Trainer List', 'wsbintegration' ),
-                'post_content'   => '[wsb_trainers]',
-                'post_type'      => 'page',
-                'post_status'    => 'publish',
-                'comment_status' => 'closed'
-            ) );
-            
-            $options_array['trainer_detail_page_id'] = wp_insert_post( array(
-                'post_title'     => __( 'Trainer Details', 'wsbintegration' ),
-                'post_parent'    => $options_array['trainer_page_id'],
-                'post_content'   => '[wsb_trainer_details]',
-                'post_type'      => 'page',
-                'post_status'    => 'publish',
-                'comment_status' => 'closed'
-            ) );
-    
-            WSB_Integration_Activator::set_option("wsb_internal_options", $options_array );
+        if (empty(WSB_Options::get_option(WSB_Options::EVENT_LIST_PAGE))) {
+            $self = new self();
+            $self->create_page( __( 'Event List', 'wsbintegration' ), WSB_Options::EVENT_LIST_PAGE, '[wsb_events]' );
+            $self->create_page( __( 'Event Details', 'wsbintegration' ), WSB_Options::EVENT_DETAILS_PAGE, '[wsb_event_details]' );
+            $self->create_page( __( 'Trainer List', 'wsbintegration' ), WSB_Options::TRAINER_LIST_PAGE, '[wsb_trainers]' );
+            $self->create_page( __( 'Trainer Profile', 'wsbintegration' ), WSB_Options::TRAINER_PROFILE_PAGE, '[wsb_trainer_details]' );
         }
     }
     
-    protected static function set_option( $name, $value ) {
-        if ( ! get_option( $name ) ) {
-            add_option( $name, $value );
-        } else {
-            update_option( $name, $value );
-        }
+    /**
+     * Adds a new post with a content
+     * @param $title           string Page title
+     * @param $id_opt_name     string Name of the option with a page ID
+     * @param $content         string content
+     *
+     * @since 0.3.0
+     */
+    private function create_page( $title, $id_opt_name, $content) {
+        $page_id = wp_insert_post( array(
+            'post_title'     => $title,
+            'post_content'   => $content,
+            'post_type'      => 'page',
+            'post_status'    => 'publish',
+            'comment_status' => 'closed'
+        ) );
+        WSB_Options::set_option( $id_opt_name, $page_id );
     }
+    
 }

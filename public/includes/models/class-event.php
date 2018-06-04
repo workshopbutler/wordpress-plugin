@@ -192,11 +192,11 @@ class Event {
     /**
      * Creates a new object
      *
-     * @param $json_data object JSON data from Workshop Butler API
-     * @param $eventPageUrl string Event page URL on the integrated website
-     * @param $trainerPageUrl string Trainer profile page URL on the integrated website
+     * @param $json_data object            JSON data from Workshop Butler API
+     * @param $event_page_url string|null  Event page URL on the integrated website
+     * @param $trainer_page_url string|null  Trainer profile page URL on the integrated website
      */
-    public function __construct( $json_data, $eventPageUrl, $trainerPageUrl ) {
+    public function __construct( $json_data, $event_page_url, $trainer_page_url ) {
         $this->id                 = $json_data->id;
         $this->hashed_id          = $json_data->hashed_id;
         $this->title              = $json_data->title;
@@ -217,14 +217,18 @@ class Event {
         $this->description        = $json_data->description;
         $this->sold_out           = $json_data->sold_out;
         
-        $this->url          = $eventPageUrl . '?id=' . $this->hashed_id;
+        if ($event_page_url) {
+            $this->url = $event_page_url . '?id=' . $this->hashed_id;
+        } else {
+            $this->url = 'https://workshopbutler.com/public/event/' . $this->hashed_id;
+        }
         $this->tickets      = $this->get_tickets( $this->free, $json_data->free_ticket_type, $json_data->paid_ticket_types );
         
         $this->instructions      = $json_data->instructions;
         $this->registration_form = $this->get_registration_form( $this->tickets, $json_data->registration_form );
         $this->registration_page = $json_data->registration_page;
         
-        $this->trainers= $this->get_trainers($json_data, $trainerPageUrl);
+        $this->trainers= $this->get_trainers($json_data, $trainer_page_url);
         $this->schedule = wsb_get_date_interval($this->start, $this->end, false);
         $this->location = wsb_get_event_location($json_data->country, $json_data->city);
     
@@ -369,8 +373,8 @@ class Event {
     /**
      * Returns a list of event trainers
      *
-     * @param $jsonData object  JSON representation of a trainer
-     * @param $trainer_page_url string Trainer profile page URL on the integrated website
+     * @param $jsonData object              JSON representation of a trainer
+     * @param $trainer_page_url string|null Trainer profile page URL on the integrated website
      * @return Trainer[]
      */
     private function get_trainers($jsonData, $trainer_page_url) {

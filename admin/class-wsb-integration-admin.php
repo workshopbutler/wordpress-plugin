@@ -15,7 +15,6 @@
  * enqueue the admin-specific stylesheet and JavaScript.
  *
  * @package    WSB_Integration
- * @subpackage WSB_Integration/admin
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Integration_Admin {
@@ -51,8 +50,35 @@ class WSB_Integration_Admin {
         $this->version         = $version;
         
         $this->load_dependencies();
+        $this->init();
     }
     
+    /**
+     * Initializes plugin options
+     *
+     * @since 0.2.0
+     */
+    public function init() {
+        $settings = new WSB_Settings( WSB_Options::PLUGIN_SETTINGS );
+        $settings->init();
+    }
+    
+    public function save_internal_settings() {
+        $configured = WSB_Options::get_internal_option(WSB_Options::INT_STATE);
+        if (!$configured) {
+            $this->update_state();
+        }
+    }
+    
+    /**
+     * Updates the state of the plugin
+     *
+     * @since 0.3.0
+     */
+    private function update_state() {
+        WSB_Options::set_internal_option( WSB_Options::INT_STATE, true );
+        WSB_Options::set_internal_option( WSB_Options::INT_VERSION, WSB_INTEGRATION_VERSION );
+    }
     
     /**
      * Load the required dependencies for this class.
@@ -65,9 +91,8 @@ class WSB_Integration_Admin {
              && file_exists( dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php' ) ) {
             require_once( dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php' );
         }
-        if ( !isset( $redux_demo ) && file_exists( dirname( __FILE__ ) . '/config.php' ) ) {
-            require_once( dirname( __FILE__ ) . '/config.php' );
-        }
+        require_once plugin_dir_path( __FILE__ ) . '/../includes/class-wsb-options.php';
+        require_once plugin_dir_path( __FILE__ ) . '/includes/class-wsb-settings.php';
     }
     
     /**
