@@ -29,7 +29,7 @@ class WSB_Integration_Activator {
      * @since    0.2.0
      */
     public static function activate() {
-        if (empty(WSB_Options::get_option(WSB_Options::EVENT_LIST_PAGE))) {
+        if (empty(WSB_Options::get_option(WSB_Options::EVENT_DETAILS_PAGE))) {
             $self = new self();
             $self->create_page( __( 'Event List', 'wsbintegration' ), WSB_Options::EVENT_LIST_PAGE, '[wsb_events]' );
             $self->create_page( __( 'Event Details', 'wsbintegration' ), WSB_Options::EVENT_DETAILS_PAGE, '[wsb_event_details]' );

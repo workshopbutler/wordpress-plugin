@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <a class="btn btn-primary wb-form__btn wb-contact-button" href="mailto:{{ trainer.email }}"
-                           title="Contact by email">{{ __('Contact by email', 'wsbintegration') }}</a>
+                           title="{{ __('Contact by email', 'wsbintegration') }}">{{ __('Contact by email', 'wsbintegration') }}</a>
                     </div>
                     <div class="wb-trainer__header-row">
                         <div class="wb-trainer-details-facts">
@@ -78,68 +78,26 @@
                     </div>
                 </div>
                 <div class="wb-right-col">
-                    <div class="wb-trainer-badges">
-                        {% for badge in trainer.badges %}
-                            <img alt="{{ badge.name }}" class="wb-trainer__badge" src="{{ badge.url }}">
-                        {% endfor %}
-                    </div>
+                    [wsb_trainer_badges]
                     <div class="wb-trainer-events">
-                        <div class="wb-workshops" id="upcoming-events">
-                            <div class="wb-workshops__title">
-                                {{ __('Upcoming events', 'wsbintegration') }}
-                            </div>
-                            <div data-events-list>
-                            </div>
-                        </div>
-                        <div class="wb-workshops" id="past-events">
-                            <div class="wb-workshops__title">
-                                {{ __('Past events', 'wsbintegration') }}
-                            </div>
-                            <div data-events-list>
-                            </div>
-                        </div>
+                        [wsb_trainer_upcoming_events]
+                        [wsb_trainer_past_events]
                     </div>
                 </div>
                 <div class="wb-left-col">
-                    <h3>{{ __('Bio', 'wsbintegration') }} </h3>
-                    <div class="wb-desc">
-                        {{ trainer.bio }}
-                    </div>
-                    {% if trainer.endorsements|length > 0 %}
+                    [wsb_trainer_bio]
+                    [wsb_trainer_endorsements]
                         <h3>{{ __('Attendees Feedback', 'wsbintegration') }}</h3>
                         <div class="wb-trainer-details-endorsements">
-                            {% for endorsement in trainer.endorsements %}
+                            [wsb_trainer_endorsement]
                                 <div class="wb-endorsement">
-                          <span class="wb-cite">
-                              <strong>{{ endorsement.name }}</strong>
-                              {% if endorsement.company %}
-                                  , {{ endorsement.company }}
-                              {% endif %}
-                          </span>
-                                    {% if endorsement.rating %}
-                                        <div class="wb-rating">
-                                            {% set rating = endorsement.rating %}
-                                            {% set stars = range(0, 4) %}
-                                            {% for item in stars %}
-                                                {% set index = item + 1 %}
-                                                {% if index * 2 <= rating %}
-                                                    <i class="fas fa-star"></i>
-                                                {% elseif index * 2 > rating + 1 %}
-                                                    <i class="far fa-star"></i>
-                                                {% else %}
-                                                    <div class="fa-stack">
-                                                        <i class="fas fa-star-half fa-stack-1x"></i>
-                                                        <i class="far fa-star-half fa-stack-1x fa-flip-horizontal"></i>
-                                                    </div>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                    {% endif %}
-                                    <p class="wb-endorsement-text">{{ endorsement.content }}</p>
+                                    [wsb_trainer_endorsement_author]
+                                    [wsb_trainer_endorsement_rating]
+                                    [wsb_trainer_endorsement_content]
                                 </div>
-                            {% endfor %}
+                            [/wsb_trainer_endorsement]
                         </div>
-                    {% endif %}
+                    [/wsb_trainer_endorsements]
                 </div>
             </div>
         </div>

@@ -85,10 +85,19 @@ class WSB_Trainer_Page extends WSB_Page {
         }
     
         $filename = 'trainer-page.twig';
-        $template_data = array('trainer' => new Trainer( $response->body ),
+        $trainer = new Trainer( $response->body );
+        $template_data = array('trainer' => $trainer,
                                'theme' => $this->get_theme());
     
-        return $this->engine->fetch($filename, $template_data);
+        $template = file_get_contents(plugin_dir_path( dirname(__FILE__) ) . '../views/' . $filename);
+        
+        $GLOBALS['wsb_trainer'] = $trainer;
+        
+        $updatedTemplate = do_shortcode($template);
+        
+        $content = $this->engine->compile_string($updatedTemplate, $template_data);
+        unset($GLOBALS['wsb_trainer']);
+        return $content;
     }
     
     static public function shortcode( $attrs = [], $content = null ) {

@@ -67,6 +67,8 @@ class WSB_Integration_Public {
         require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-trainer-page.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-event-list.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-event-page.php';
+        require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-endorsement.php';
+        require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-ajax.php';
     }
     
@@ -109,6 +111,17 @@ class WSB_Integration_Public {
     
         add_shortcode('wsb_trainers', array('WSB_Trainer_List', 'shortcode'));
         add_shortcode('wsb_trainer_details', array('WSB_Trainer_Page', 'shortcode'));
+    
+        add_shortcode('wsb_trainer_upcoming_events', array( 'WSB_Trainer', 'upcoming_events'));
+        add_shortcode('wsb_trainer_past_events', array( 'WSB_Trainer', 'past_events'));
+        add_shortcode('wsb_trainer_badges', array( 'WSB_Trainer', 'badges'));
+        add_shortcode('wsb_trainer_bio', array( 'WSB_Trainer', 'bio'));
+    
+        add_shortcode('wsb_trainer_endorsements', array( 'WSB_Endorsement', 'endorsements'));
+        add_shortcode('wsb_trainer_endorsement', array( 'WSB_Endorsement', 'endorsement'));
+        add_shortcode('wsb_trainer_endorsement_author', array( 'WSB_Endorsement', 'author'));
+        add_shortcode('wsb_trainer_endorsement_rating', array( 'WSB_Endorsement', 'rating'));
+        add_shortcode('wsb_trainer_endorsement_content', array( 'WSB_Endorsement', 'content'));
     }
     
     /**
