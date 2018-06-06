@@ -4,84 +4,34 @@
             <div class="wb-body wb-center">
                 <div class="wb-trainer-details__header">
                     <div class="wb-trainer__header-row">
-                        <div class="wb-trainer-details-image" style="background-image: url({{ trainer.photo }});"></div>
-                        <div class="wb-trainer-details-title-container">
-                            <h1 class="wb-trainer-details-title">{{ trainer.full_name }}</h1>
-                            <div class="wb-trainer-details-country">{{ __(trainer.country, 'wsbintegration') }}</div>
-                        </div>
+                        [wsb_trainer_photo]
+                        [wsb_trainer_name]
                         <div class="wb-trainer-details-subtitle-container">
                             <div class="wb-trainer__social-networks">
-                                {% if trainer.social_links.website %}
-                                    <a href="{{ trainer.social_links.website }}" target="_blank"><i
-                                                class="fas fa-external-link-alt"></i></a>
-                                {% endif %}
-                                {% if trainer.social_links.blog %}
-                                    <a href="{{ trainer.social_links.blog }}" target="_blank"><i class="fas fa-rss"></i></a>
-                                {% endif %}
-                                {% if trainer.social_links.twitter %}
-                                    <a href="{{ trainer.social_links.twitter }}" target="_blank"><i class="fab fa-twitter"></i></a>
-                                {% endif %}
-                                {% if trainer.social_links.facebook %}
-                                    <a href="{{ trainer.social_links.facebook }}" target="_blank"><i
-                                                class="fab fa-facebook"></i></a>
-                                {% endif %}
-                                {% if trainer.social_links.linked_in %}
-                                    <a href="{{ trainer.social_links.linked_in }}" target="_blank"><i
-                                                class="fab fa-linkedin"></i></a>
-                                {% endif %}
-                                {% if trainer.social_links.google_plus %}
-                                    <a href="{{ trainer.social_links.google_plus }}" target="_blank"><i
-                                                class="fab fa-google"></i></a>
-                                {% endif %}
+                                [wsb_trainer_social_link type='website']
+                                [wsb_trainer_social_link type='blog']
+                                [wsb_trainer_social_link type='twitter']
+                                [wsb_trainer_social_link type='facebook']
+                                [wsb_trainer_social_link type='linkedin']
+                                [wsb_trainer_social_link type='google-plus']
                             </div>
                         </div>
-                        <a class="btn btn-primary wb-form__btn wb-contact-button" href="mailto:{{ trainer.email }}"
-                           title="{{ __('Contact by email', 'wsbintegration') }}">{{ __('Contact by email', 'wsbintegration') }}</a>
+                        [wsb_trainer_email]
                     </div>
                     <div class="wb-trainer__header-row">
                         <div class="wb-trainer-details-facts">
-                            {% if trainer.years_of_experience %}
-                                <div class="wb-trainer-details-fact">
-                                    <span class="wb-big-number">{{ trainer.years_of_experience }}</span>
-                                    <span class="wb-descr">{{ __('Years as trainer', 'wsbintegration') }}</span>
-                                </div>
-                            {% endif %}
-                            {% if trainer.number_of_events %}
-                                <div class="wb-trainer-details-fact">
-                                    <span class="wb-big-number">{{ trainer.number_of_events }}</span>
-                                    <span class="wb-descr">{{ __('Events held', 'wsbintegration') }}</span>
-                                </div>
-                            {% endif %}
-                            {% if trainer.public_stats.number_of_evaluations %}
-                                <div class="wb-trainer-details-fact">
-                                    <span class="wb-big-number">{{ trainer.public_stats.rating|number_format(2) }}</span>&nbsp;<span
-                                            class="wb-small-number">/&nbsp;10</span>
-                                    <span class="wb-descr">{{ __('Rating for public events', 'wsbintegration') }}</span>
-                                    <span class="wb-descr__sub">
-                                {% set evalStr = __('based on %s&nbsp;evaluations', 'wsbintegration') %}
-                                {{ evalStr |format(trainer.public_stats.number_of_evaluations, evalStr) }}
-                            </span>
-                                </div>
-                            {% endif %}
-                            {% if trainer.private_stats.number_of_evaluations %}
-                                <div class="wb-trainer-details-fact">
-                                    <span class="wb-big-number">{{ trainer.private_stats.rating|number_format(2) }}</span>&nbsp;<span
-                                            class="wb-small-number">/&nbsp;10</span>
-                                    <span class="wb-descr">{{ __('Rating for private events', 'wsbintegration') }}</span>
-                                    <span class="wb-descr__sub">
-                                {% set evalStr = __('based on %s&nbsp;evaluations', 'wsbintegration') %}
-                                        {{ evalStr |format(trainer.private_stats.number_of_evaluations, evalStr) }}
-                            </span>
-                                </div>
-                            {% endif %}
+                            [wsb_trainer_stats type='years']
+                            [wsb_trainer_stats type='events']
+                            [wsb_trainer_stats type='public-rating']
+                            [wsb_trainer_stats type='private-rating']
                         </div>
                     </div>
                 </div>
                 <div class="wb-right-col">
                     [wsb_trainer_badges]
                     <div class="wb-trainer-events">
-                        [wsb_trainer_upcoming_events]
-                        [wsb_trainer_past_events]
+                        [wsb_trainer_events]
+                        [wsb_trainer_events future=false]
                     </div>
                 </div>
                 <div class="wb-left-col">

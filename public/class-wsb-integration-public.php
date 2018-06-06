@@ -112,8 +112,14 @@ class WSB_Integration_Public {
         add_shortcode('wsb_trainers', array('WSB_Trainer_List', 'shortcode'));
         add_shortcode('wsb_trainer_details', array('WSB_Trainer_Page', 'shortcode'));
     
-        add_shortcode('wsb_trainer_upcoming_events', array( 'WSB_Trainer', 'upcoming_events'));
-        add_shortcode('wsb_trainer_past_events', array( 'WSB_Trainer', 'past_events'));
+        add_shortcode('wsb_trainer_name', array( 'WSB_Trainer', 'name'));
+        add_shortcode('wsb_trainer_photo', array( 'WSB_Trainer', 'photo'));
+    
+        add_shortcode('wsb_trainer_stats', array( 'WSB_Trainer', 'statistics'));
+        add_shortcode('wsb_trainer_social_link', array( 'WSB_Trainer', 'social_link'));
+        add_shortcode('wsb_trainer_email', array( 'WSB_Trainer', 'email'));
+        
+        add_shortcode('wsb_trainer_events', array( 'WSB_Trainer', 'events'));
         add_shortcode('wsb_trainer_badges', array( 'WSB_Trainer', 'badges'));
         add_shortcode('wsb_trainer_bio', array( 'WSB_Trainer', 'bio'));
     
