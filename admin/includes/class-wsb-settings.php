@@ -138,7 +138,7 @@ class WSB_Settings {
                 'data'     => 'pages',
                 'title'    => 'Trainer Profile',
                 'required' => array( WSB_Options::TRAINER_MODULE, '=', true ),
-                'desc'     => 'To make it work, add [wsb_trainer_details] shortcode to the page when you complete the setup'
+                'desc'     => 'To make it work, add [wsb_trainer] shortcode to the page when you complete the setup'
             )
         );
     }

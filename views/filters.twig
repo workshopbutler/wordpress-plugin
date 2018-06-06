@@ -1,0 +1,8 @@
+{% from "common/filter.twig" import filter as filter %}
+{% if filters|length > 0 %}
+    <div class="wb-filters">
+        {% for item in filters %}
+            {{ filter(item.name, item.values) }}
+        {% endfor %}
+    </div>
+{% endif %}

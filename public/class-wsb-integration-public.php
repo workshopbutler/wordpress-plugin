@@ -63,8 +63,8 @@ class WSB_Integration_Public {
      */
     private function load_dependencies() {
         
-        require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-trainer-list.php';
-        require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-trainer-page.php';
+        require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer-list-page.php';
+        require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer-page.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-event-list.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-event-page.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-endorsement.php';
@@ -106,11 +106,19 @@ class WSB_Integration_Public {
      * Adds Workshop Butler shortcodes
      */
     public function add_shortcodes() {
+        //pages
         add_shortcode('wsb_events', array('WSB_Event_List', 'shortcode'));
         add_shortcode('wsb_event_details', array('WSB_Event_Page', 'shortcode'));
     
-        add_shortcode('wsb_trainers', array('WSB_Trainer_List', 'shortcode'));
-        add_shortcode('wsb_trainer_details', array('WSB_Trainer_Page', 'shortcode'));
+        add_shortcode('wsb_trainers', array( 'WSB_Trainer_List_Page', 'shortcode'));
+        add_shortcode('wsb_trainer', array('WSB_Trainer_Page', 'shortcode'));
+
+        //elements
+        add_shortcode('wsb_trainer_list_filters', array( 'WSB_Trainer_List_Page', 'list_filters'));
+        add_shortcode('wsb_trainer_list_item', array( 'WSB_Trainer_List_Page', 'trainer'));
+        add_shortcode('wsb_trainer_list_photo', array( 'WSB_Trainer_List_Page', 'photo'));
+        add_shortcode('wsb_trainer_list_name', array( 'WSB_Trainer_List_Page', 'name'));
+        
     
         add_shortcode('wsb_trainer_name', array( 'WSB_Trainer', 'name'));
         add_shortcode('wsb_trainer_photo', array( 'WSB_Trainer', 'photo'));

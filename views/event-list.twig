@@ -1,8 +1,7 @@
-{% from "common/filters.twig" import drawFilters as drawFilters %}
 {% from "event/list.twig" import list as drawEvents %}
 <div class="{{ theme }}">
     <div class="wb-content">
-        {{ drawFilters(filters) }}
+        [wsb_trainer_list_filters filters='location,language']
         {{ drawEvents(events, template) }}
     </div>
 </div>

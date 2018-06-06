@@ -1,8 +1,8 @@
-{% from "common/filters.twig" import drawFilters as drawFilters %}
-{% from "trainer/list.twig" import drawTrainers as drawTrainers %}
-<div class="{{ theme }}">
-    <div class="wb-content">
-        {{ drawFilters(filters) }}
-        {{ drawTrainers(trainers) }}
+<div class="wb-trainer-list">
+    <div class="wb-tiles" data-trainer-list>
+        {{ content }}
+    </div>
+    <div class="wb-no-trainers">
+        {{ __('No trainers were found', 'wsbintegration') }}
     </div>
 </div>

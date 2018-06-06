@@ -6,7 +6,7 @@
  *
  * @package    WSB_Integration
  */
-require_once plugin_dir_path(__FILE__) . 'class-wsb-page.php';
+require_once plugin_dir_path(dirname(__FILE__) ) . 'class-wsb-page.php';
 
 /**
  * Trainer Page class which handles the rendering and logic for the profile of trainer
@@ -37,8 +37,8 @@ class WSB_Trainer_Page extends WSB_Page {
      * @access   private
      */
     private function load_dependencies() {
-        require_once plugin_dir_path( __FILE__ ) . 'class-wsb-requests.php';
-        require_once plugin_dir_path(__FILE__) . 'models/class-trainer.php';
+        require_once plugin_dir_path( dirname(__FILE__ ) ) . 'class-wsb-requests.php';
+        require_once plugin_dir_path(dirname(__FILE__ ) ) . 'models/class-trainer.php';
     }
     
     
@@ -84,22 +84,29 @@ class WSB_Trainer_Page extends WSB_Page {
             return $html;
         }
     
-        $filename = 'trainer-page.twig';
         $trainer = new Trainer( $response->body );
         $template_data = array('trainer' => $trainer,
                                'theme' => $this->get_theme());
     
-        $template = file_get_contents(plugin_dir_path( dirname(__FILE__) ) . '../views/' . $filename);
+        $template = $this->get_template('trainer-page', null);
         
         $GLOBALS['wsb_trainer'] = $trainer;
         
-        $updatedTemplate = do_shortcode($template);
+        $processed_template = do_shortcode($template);
+        $content = $this->engine->compile_string($processed_template, $template_data);
         
-        $content = $this->engine->compile_string($updatedTemplate, $template_data);
         unset($GLOBALS['wsb_trainer']);
         return $content;
     }
     
+    /**
+     * Handles 'wsb_trainer' shortcode
+     *
+     * @param $attrs   array  Shortcode attributes
+     * @param $content string Shortcode content
+     * @since  0.2.0
+     * @return string
+     */
     static public function shortcode( $attrs = [], $content = null ) {
         $page = new WSB_Trainer_Page();
         
