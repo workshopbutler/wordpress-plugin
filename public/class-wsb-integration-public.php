@@ -65,7 +65,7 @@ class WSB_Integration_Public {
         
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer-list-page.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer-page.php';
-        require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-event-list.php';
+        require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-event-list-page.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-event-page.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-endorsement.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer.php';
@@ -107,13 +107,19 @@ class WSB_Integration_Public {
      */
     public function add_shortcodes() {
         //pages
-        add_shortcode('wsb_events', array('WSB_Event_List', 'shortcode'));
+        add_shortcode('wsb_events', array( 'WSB_Event_List_Page', 'page'));
         add_shortcode('wsb_event_details', array('WSB_Event_Page', 'shortcode'));
     
         add_shortcode('wsb_trainers', array( 'WSB_Trainer_List_Page', 'shortcode'));
         add_shortcode('wsb_trainer', array('WSB_Trainer_Page', 'shortcode'));
 
         //elements
+        add_shortcode('wsb_event_list_filters', array( 'WSB_Event_List_Page', 'list_filters'));
+        add_shortcode('wsb_event_list_item', array( 'WSB_Event_List_Page', 'event'));
+        add_shortcode('wsb_event_list_register', array( 'WSB_Event_List_Page', 'register'));
+        add_shortcode('wsb_event_list_title', array( 'WSB_Event_List_Page', 'title'));
+        add_shortcode('wsb_event_list_info', array( 'WSB_Event_List_Page', 'info'));
+    
         add_shortcode('wsb_trainer_list_filters', array( 'WSB_Trainer_List_Page', 'list_filters'));
         add_shortcode('wsb_trainer_list_item', array( 'WSB_Trainer_List_Page', 'trainer'));
         add_shortcode('wsb_trainer_list_photo', array( 'WSB_Trainer_List_Page', 'photo'));

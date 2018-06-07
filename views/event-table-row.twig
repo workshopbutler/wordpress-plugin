@@ -1,8 +1,7 @@
-{% macro drawRow(event) %}
-    <div class="wb-table__row" data-event-obj data-event-type="{{ event.type.id }}"
-         data-event-location="{{ event.country }}"
-         data-event-language="{{ event.spoken_languages | join(',') }}"
-         data-event-trainer="{{ event.names_of_trainers | join(',') }}">
+<div class="wb-table__row" data-event-obj data-event-type="{{ event.type.id }}"
+     data-event-location="{{ event.country }}"
+     data-event-language="{{ event.spoken_languages | join(',') }}"
+     data-event-trainer="{{ event.names_of_trainers | join(',') }}">
         <div class="wb-table__col">
             {{ event.schedule }}
         </div>
@@ -27,5 +26,4 @@
                 {{ __('Register', 'wsbintegration') }}
             </a>
         </div>
-    </div>
-{% endmacro %}
+</div>

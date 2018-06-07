@@ -109,6 +109,19 @@ abstract class WSB_Page {
     }
     
     /**
+     * Returns a currently-processed event
+     *
+     * @since  0.3.0
+     * @return Event|null
+     */
+    protected function get_event() {
+        if (!isset($GLOBALS['wsb_event']) || !is_a($GLOBALS['wsb_event'], 'Event')) {
+            return null;
+        }
+        return $GLOBALS['wsb_event'];
+    }
+    
+    /**
      * Returns a currently-processed endorsement
      *
      * @since  0.3.0

@@ -1,7 +1,8 @@
-{% from "event/list.twig" import list as drawEvents %}
-<div class="{{ theme }}">
-    <div class="wb-content">
-        [wsb_trainer_list_filters filters='location,language']
-        {{ drawEvents(events, template) }}
+<div class="wb-event-list">
+    <div class="wb-tiles" data-event-list>
+        {{ content }}
+    </div>
+    <div class="wb-no-events">
+        {{ __('No events were found', 'wsbintegration') }}
     </div>
 </div>

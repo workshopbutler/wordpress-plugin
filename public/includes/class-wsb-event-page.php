@@ -68,7 +68,9 @@ class WSB_Event_Page extends WSB_Page {
                 return $html;
             }
     
-            $event = $this->get_event( $response->body );
+            $event = new Event($response->body,
+                $this->settings->get_event_page_url(),
+                $this->settings->get_trainer_page_url());
     
             wp_localize_script( 'wsb-single-event-scripts', 'wsb_single_event', array(
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -99,16 +101,6 @@ class WSB_Event_Page extends WSB_Page {
         }
     
         return $html;
-    }
-    
-    /**
-     * Returns a new event from the given data
-     * @param $data object JSON event data
-     *
-     * @return Event
-     */
-    private function get_event( $data ) {
-        return new Event($data, $this->settings->get_event_page_url(), $this->settings->get_trainer_page_url());
     }
     
     /**

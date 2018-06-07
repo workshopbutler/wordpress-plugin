@@ -1,8 +1,14 @@
-{% from "common/filters.twig" import drawFilters as drawFilters %}
-{% from "event/table.twig" import table as drawTable %}
-<div class="{{ theme }}">
-    <div class="wb-content">
-        {{ drawFilters(filters) }}
-        {{ drawTable(events, template) }}
+<div class="wb-event-list">
+    <div class="wb-table" data-event-list>
+        <div class="wb-table__head">
+            <div class="wb-table__col">{{ __('When', 'wsbintegration') }}</div>
+            <div class="wb-table__col">{{ __('Where', 'wsbintegration') }}</div>
+            <div class="wb-table__col">{{ __('What', 'wsbintegration') }}</div>
+            <div class="wb-table__col"></div>
+        </div>
+        {{ content }}
+    </div>
+    <div class="wb-no-events">
+        {{ __('No events were found', 'wsbintegration') }}
     </div>
 </div>

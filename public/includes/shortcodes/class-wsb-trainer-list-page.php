@@ -71,10 +71,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
             $trainer = new Trainer( $json_trainer_data, $trainerUrl);
             array_push($trainers, $trainer );
         }
-        $trainer_filters = new Trainer_Filters($trainers, ['location', 'trainer', 'language']);
-        $template_data = array('trainers' => $trainers,
-                              'filters' => $trainer_filters->get_filters(),
-                              'theme' => $this->get_theme());
+        $template_data = array('trainers' => $trainers, 'theme' => $this->get_theme());
     
         $template = $this->get_template('trainer-list-page', null);
     
@@ -87,7 +84,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
     }
     
     /**
-     * Renders a social link of the trainer
+     * Renders filters on the page
      *
      * @param array  $attrs   Short code attributes
      *
@@ -114,7 +111,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
     }
     
     /**
-     * Renders a trainer
+     * Renders the list of trainers
      *
      * @param array       $attrs   Short code attributes
      * @param null|string $content Short code content

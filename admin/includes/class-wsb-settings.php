@@ -164,6 +164,17 @@ class WSB_Settings {
                 'title'    => __( 'Customize the text when no events to show', 'wsbintegration' ),
                 'default'  => __( 'No events found', 'wsbintegration')
             ),
+            array(
+                'id'       => WSB_Options::EVENT_LIST_LAYOUT,
+                'type'     => 'radio',
+                'title'    => __( 'Schedule Layout', 'wsbintegration' ),
+                'desc'     => __( 'This parameter defines how your events are presented on the schedule', 'wsbintegration' ),
+                'options'  => array(
+                    'table' => 'Table',
+                    'tile' => 'Tiles',
+                ),
+                'default'  => 'table'
+            )
         );
     }
     
