@@ -100,7 +100,7 @@ class WSB_Schedule_Page extends WSB_Page {
         $content = $this->engine->compile_string($processed_template, $template_data);
         unset($GLOBALS['wsb_events']);
     
-        return $content;
+        return $this->add_custom_styles($content);
     }
     
     /**

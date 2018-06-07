@@ -97,7 +97,7 @@ class WSB_Trainer_Page extends WSB_Page {
         $content = $this->engine->compile_string($processed_template, $template_data);
         
         unset($GLOBALS['wsb_trainer']);
-        return $content;
+        return $this->add_custom_styles($content);
     }
     
     /**

@@ -134,7 +134,8 @@ class WSB_Event_Page extends WSB_Page {
         $processed_template = do_shortcode($template);
         $content = $this->engine->compile_string($processed_template, $template_data);
         unset($GLOBALS['wsb_event']);
-        return $content;
+        
+        return $this->add_custom_styles($content);
     }
     
     static public function page( $attrs = [], $content = null ) {

@@ -60,7 +60,7 @@ class WSB_Settings {
     
         Redux::setSection( $this->opt_name, array(
             'title'            => __( 'General', 'wsbintegration' ),
-            'id'               => 'wsb_general_section',
+            'id'               => 'general',
             'customizer_width' => '400px',
             'icon'             => 'el el-home',
             'fields'           => $this->get_general_settings()
@@ -68,7 +68,7 @@ class WSB_Settings {
         
         Redux::setSection( $this->opt_name, array(
                 'title'            => __( 'Events', 'wsbintegration' ),
-                'id'               => 'wsb_events_section',
+                'id'               => 'events',
                 'customizer_width' => '400px',
                 'icon'             => 'el el-list-alt',
                 'fields'           => $this->get_event_settings()
@@ -76,7 +76,7 @@ class WSB_Settings {
         );
         Redux::setSection( $this->opt_name, array(
                 'title'            => __( 'Trainers', 'wsbintegration' ),
-                'id'               => 'wsb_trainers_section',
+                'id'               => 'trainers',
                 'customizer_width' => '400px',
                 'icon'             => 'el el-child',
                 'fields'           => $this->get_trainer_settings()
@@ -84,12 +84,32 @@ class WSB_Settings {
         );
         Redux::setSection( $this->opt_name, array(
             'title'            => __( 'Pages', 'wsbintegration' ),
-            'id'               => 'editor',
+            'id'               => 'pages',
             'customizer_width' => '500px',
             'icon'             => 'el el-edit',
         ) );
         
         $this->get_pages_settings();
+    
+        Redux::setSection( $this->opt_name, array(
+            'title'            => __( 'Custom CSS', 'wsbintegration' ),
+            'id'               => 'css-editor',
+            'customizer_width' => '500px',
+            'icon'             => 'el el-edit',
+            'fields' => array(
+                array (
+                    'id'       => WSB_Options::CUSTOM_CSS,
+                    'type'     => 'ace_editor',
+                    'mode'     => 'css',
+                    'full_width' => true,
+                    'theme'    => 'chrome',
+                    'options'  => array('minLines' => 20,
+                                        'enableBasicAutocompletion' => true,
+                                        'maxLines' => 60)
+                )
+            )
+        ) );
+    
     }
     
     protected function get_pages_settings() {
@@ -99,7 +119,7 @@ class WSB_Settings {
             'id'         => 'schedule',
             //'icon'  => 'el el-home'
             'subsection' => true,
-            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
+//            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
             'fields'     => array(
                 array(
                     'id'       => WSB_Options::SCHEDULE_TEMPLATE,
@@ -115,7 +135,7 @@ class WSB_Settings {
             'title'      => __( 'Event', 'wsbintegration' ),
             'id'         => 'event',
             'subsection' => true,
-            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
+//            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
             'fields'     => array(
                 array(
                     'id'       => WSB_Options::EVENT_TEMPLATE,
@@ -131,7 +151,7 @@ class WSB_Settings {
             'title'      => __( 'Trainer List', 'wsbintegration' ),
             'id'         => 'trainer-list',
             'subsection' => true,
-            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
+//            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
             'fields'     => array(
                 array(
                     'id'       => WSB_Options::TRAINER_LIST_TEMPLATE,
@@ -147,7 +167,7 @@ class WSB_Settings {
             'title'      => __( 'Trainer Profile', 'wsbintegration' ),
             'id'         => 'trainer',
             'subsection' => true,
-            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
+//            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
             'fields'     => array(
                 array(
                     'id'       => WSB_Options::TRAINER_TEMPLATE,

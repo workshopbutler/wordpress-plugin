@@ -174,4 +174,20 @@ abstract class WSB_Page {
         }
         return $content;
     }
+    
+    /**
+     * Adds custom CSS if it exists
+     * @param $content string Page content
+     *
+     * @since  0.3.0
+     * @return string
+     */
+    protected function add_custom_styles($content) {
+        $custom_styles = $this->settings->get(WSB_Options::CUSTOM_CSS);
+        if (!$custom_styles) {
+            return $content;
+        }
+        $styles = '<style>' . $custom_styles . '</style>';
+        return $styles . $content;
+    }
 }

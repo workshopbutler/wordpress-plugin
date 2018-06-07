@@ -34,6 +34,8 @@ class WSB_Options {
     const TRAINER_LIST_TEMPLATE = 'trainer-list-template';
     const TRAINER_TEMPLATE = 'trainer-template';
     
+    const CUSTOM_CSS   = 'custom-css';
+    
     const THEME        = 'theme';
     const CUSTOM_THEME = 'custom-theme';
     
