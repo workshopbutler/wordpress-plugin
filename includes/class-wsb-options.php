@@ -29,6 +29,11 @@ class WSB_Options {
     
     const API_KEY = 'api-key';
     
+    const SCHEDULE_TEMPLATE = 'schedule-template';
+    const EVENT_TEMPLATE    = 'event-template';
+    const TRAINER_LIST_TEMPLATE = 'trainer-list-template';
+    const TRAINER_TEMPLATE = 'trainer-template';
+    
     const THEME        = 'theme';
     const CUSTOM_THEME = 'custom-theme';
     

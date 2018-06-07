@@ -92,7 +92,8 @@ class WSB_Schedule_Page extends WSB_Page {
         }
     
         $template_data = array('events' => $events, 'theme' => $this->get_theme());
-        $template = $this->get_template('schedule-page', null);
+        $custom_template = $this->settings->get(WSB_Options::SCHEDULE_TEMPLATE);
+        $template = $this->get_template('schedule-page', $custom_template);
     
         $GLOBALS['wsb_events'] = $events;
         $processed_template = do_shortcode($template);

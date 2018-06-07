@@ -57,43 +57,13 @@ class WSB_Settings {
      */
     public function init () {
         Redux::setArgs( $this->opt_name, $this->get_arguments( true ) );
-        
+    
         Redux::setSection( $this->opt_name, array(
             'title'            => __( 'General', 'wsbintegration' ),
             'id'               => 'wsb_general_section',
             'customizer_width' => '400px',
             'icon'             => 'el el-home',
-            'fields'           => array(
-                array(
-                    'id'         => WSB_Options::API_KEY,
-                    'type'       => 'text',
-                    'title'      => __( 'Workshop Butler API Key', 'wsbintegration' ),
-                    'desc'       => __( 'Log in to <a href="https://app.workshopbutler.com" target="_blank">Workshop Butler</a> to get your API key', 'wsbintegration' ),
-                    'validation' => 'not_empty'
-                ),
-                array(
-                    'id'      => WSB_Options::THEME,
-                    'type'    => 'select',
-                    'title'   => __( 'Theme', 'wsbintegration' ),
-                    'desc'    => __( 'Choose a preferred theme. If you added your own theme, select <i>Custom</i> and type its name', 'wsbintegration' ),
-                    'options' => array(
-                        'alfred'  => 'Alfred',
-                        'britton' => 'Britton',
-                        'custom'  => 'Custom',
-                        'dacota'  => 'Dacota',
-                        'hayes'   => 'Hayes',
-                        'gatsby'  => 'Gatbsy',
-                    ),
-                    'default' => 'alfred'
-                ),
-                array(
-                    'id'       => WSB_Options::CUSTOM_THEME,
-                    'type'     => 'text',
-                    'title'    => __( 'Custom theme', 'wsbintegration' ),
-                    'desc'     => __( 'Enter the name of your theme', 'wsbintegration' ),
-                    'required' => array( WSB_Options::THEME, 'equals', 'custom' )
-                ),
-            )
+            'fields'           => $this->get_general_settings()
         ) );
         
         Redux::setSection( $this->opt_name, array(
@@ -108,12 +78,126 @@ class WSB_Settings {
                 'title'            => __( 'Trainers', 'wsbintegration' ),
                 'id'               => 'wsb_trainers_section',
                 'customizer_width' => '400px',
-                'icon'             => 'el el-list-alt',
+                'icon'             => 'el el-child',
                 'fields'           => $this->get_trainer_settings()
             )
         );
+        Redux::setSection( $this->opt_name, array(
+            'title'            => __( 'Pages', 'wsbintegration' ),
+            'id'               => 'editor',
+            'customizer_width' => '500px',
+            'icon'             => 'el el-edit',
+        ) );
+        
+        $this->get_pages_settings();
     }
     
+    protected function get_pages_settings() {
+    
+        Redux::setSection( $this->opt_name, array(
+            'title'      => __( 'Schedule', 'wsbintegration' ),
+            'id'         => 'schedule',
+            //'icon'  => 'el el-home'
+            'subsection' => true,
+            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
+            'fields'     => array(
+                array(
+                    'id'       => WSB_Options::SCHEDULE_TEMPLATE,
+                    'type'     => 'ace_editor',
+                    'mode'     => 'twig',
+                    'default'  => $this->get_template('schedule-page'),
+                    'full_width' => true,
+                    'theme'    => 'chrome',
+                ),
+            )
+        ) );
+        Redux::setSection( $this->opt_name, array(
+            'title'      => __( 'Event', 'wsbintegration' ),
+            'id'         => 'event',
+            'subsection' => true,
+            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
+            'fields'     => array(
+                array(
+                    'id'       => WSB_Options::EVENT_TEMPLATE,
+                    'type'     => 'ace_editor',
+                    'mode'     => 'twig',
+                    'default'  => $this->get_template('event-page'),
+                    'full_width' => true,
+                    'theme'    => 'chrome',
+                ),
+            )
+        ) );
+        Redux::setSection( $this->opt_name, array(
+            'title'      => __( 'Trainer List', 'wsbintegration' ),
+            'id'         => 'trainer-list',
+            'subsection' => true,
+            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
+            'fields'     => array(
+                array(
+                    'id'       => WSB_Options::TRAINER_LIST_TEMPLATE,
+                    'type'     => 'ace_editor',
+                    'mode'     => 'twig',
+                    'default'  => $this->get_template('trainer-list-page'),
+                    'full_width' => true,
+                    'theme'    => 'chrome',
+                ),
+            )
+        ) );
+        Redux::setSection( $this->opt_name, array(
+            'title'      => __( 'Trainer Profile', 'wsbintegration' ),
+            'id'         => 'trainer',
+            'subsection' => true,
+            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
+            'fields'     => array(
+                array(
+                    'id'       => WSB_Options::TRAINER_TEMPLATE,
+                    'type'     => 'ace_editor',
+                    'mode'     => 'twig',
+                    'default'  => $this->get_template('trainer-page'),
+                    'full_width' => true,
+                    'theme'    => 'chrome',
+                ),
+            )
+        ) );
+    }
+    
+    /**
+     * Returns the set of fields for General tab
+     * @return array
+     */
+    protected function get_general_settings() {
+        return array(
+            array(
+                'id'         => WSB_Options::API_KEY,
+                'type'       => 'text',
+                'title'      => __( 'Workshop Butler API Key', 'wsbintegration' ),
+                'desc'       => __( 'Log in to <a href="https://app.workshopbutler.com" target="_blank">Workshop Butler</a> to get your API key', 'wsbintegration' ),
+                'validation' => 'not_empty'
+            ),
+            array(
+                'id'      => WSB_Options::THEME,
+                'type'    => 'select',
+                'title'   => __( 'Theme', 'wsbintegration' ),
+                'desc'    => __( 'Choose a preferred theme. If you added your own theme, select <i>Custom</i> and type its name', 'wsbintegration' ),
+                'options' => array(
+                    'alfred'  => 'Alfred',
+                    'britton' => 'Britton',
+                    'custom'  => 'Custom',
+                    'dacota'  => 'Dacota',
+                    'hayes'   => 'Hayes',
+                    'gatsby'  => 'Gatbsy',
+                ),
+                'default' => 'alfred'
+            ),
+            array(
+                'id'       => WSB_Options::CUSTOM_THEME,
+                'type'     => 'text',
+                'title'    => __( 'Custom theme', 'wsbintegration' ),
+                'desc'     => __( 'Enter the name of your theme', 'wsbintegration' ),
+                'required' => array( WSB_Options::THEME, 'equals', 'custom' )
+            ),
+        );
+    }
     
     private function get_trainer_settings() {
         return $this->get_trainer_page_settings();
@@ -338,4 +422,22 @@ class WSB_Settings {
         
         return $args;
     }
+    
+    /**
+     * Returns the named template or an empty string if it doesn't exist
+     *
+     * @param $name    string       Name of the template
+     *
+     * @since  0.3.0
+     * @return null|string
+     */
+    protected function get_template($name) {
+        $filename = plugin_dir_path( dirname(__FILE__) ) . '../views/' . $name . '.twig';
+        $content = file_get_contents($filename);
+        if (!$content) {
+            return '';
+        }
+        return $content;
+    }
+    
 }

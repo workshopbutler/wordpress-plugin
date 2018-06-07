@@ -123,7 +123,8 @@ class WSB_Event_Page extends WSB_Page {
         $countries = wsb_get_countries();
         sort($countries);
     
-        $template = $this->get_template('event-page', null);
+        $custom_template = $this->settings->get(WSB_Options::EVENT_TEMPLATE);
+        $template = $this->get_template('event-page', $custom_template);
     
         $GLOBALS['wsb_event'] = $event;
         $template_data = array('event' => $event,

@@ -73,7 +73,8 @@ class WSB_Trainer_List_Page extends WSB_Page {
         }
         $template_data = array('trainers' => $trainers, 'theme' => $this->get_theme());
     
-        $template = $this->get_template('trainer-list-page', null);
+        $custom_template = $this->settings->get(WSB_Options::TRAINER_LIST_TEMPLATE);
+        $template = $this->get_template('trainer-list-page', $custom_template);
     
         $GLOBALS['wsb_trainers'] = $trainers;
         $processed_template = do_shortcode($template);

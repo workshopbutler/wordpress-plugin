@@ -88,7 +88,8 @@ class WSB_Trainer_Page extends WSB_Page {
         $template_data = array('trainer' => $trainer,
                                'theme' => $this->get_theme());
     
-        $template = $this->get_template('trainer-page', null);
+        $custom_template = $this->settings->get(WSB_Options::TRAINER_TEMPLATE);
+        $template = $this->get_template('trainer-page', $custom_template);
         
         $GLOBALS['wsb_trainer'] = $trainer;
         
