@@ -67,6 +67,27 @@ abstract class WSB_Page {
     }
     
     /**
+     * Retrieves a currently-processed event and sends it to a related template
+     *
+     * @param $name    string      Name of the template
+     * @param $content string|null Optional template content
+     * @param $handler Closure     Function to pre-process data before sending it to the template
+     *
+     * @return string
+     */
+    protected function process_event_shortcode( $name, $content, $handler ) {
+        $event = $this->get_event();
+        if (is_null($event)) {
+            return '';
+        }
+        $template = $this->get_template($name, $content);
+        if (is_null($template)) {
+            return '';
+        }
+        return $handler->call($this, $event, $template);
+    }
+    
+    /**
      * @param $name
      * @param $content
      * @param $handler Closure

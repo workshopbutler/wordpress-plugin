@@ -219,7 +219,7 @@ EOD;
      * @since  0.2.0
      * @return string
      */
-    static public function shortcode( $attrs = [], $content = null ) {
+    static public function page( $attrs = [], $content = null ) {
         $page = new WSB_Trainer_List_Page();
         return $page->render_page($attrs, $content);
     }

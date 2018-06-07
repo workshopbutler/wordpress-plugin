@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The public-facing functionality of the plugin.
  *
@@ -65,10 +64,11 @@ class WSB_Integration_Public {
         
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer-list-page.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer-page.php';
-        require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-event-list-page.php';
-        require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-event-page.php';
+        require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-schedule-page.php';
+        require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-event-page.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-endorsement.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer.php';
+        require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-event.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-ajax.php';
     }
     
@@ -107,24 +107,35 @@ class WSB_Integration_Public {
      */
     public function add_shortcodes() {
         //pages
-        add_shortcode('wsb_events', array( 'WSB_Event_List_Page', 'page'));
-        add_shortcode('wsb_event_details', array('WSB_Event_Page', 'shortcode'));
+        add_shortcode('wsb_schedule', array( 'WSB_Schedule_Page', 'page'));
+        add_shortcode('wsb_event', array('WSB_Event_Page', 'page'));
     
-        add_shortcode('wsb_trainers', array( 'WSB_Trainer_List_Page', 'shortcode'));
-        add_shortcode('wsb_trainer', array('WSB_Trainer_Page', 'shortcode'));
+        add_shortcode('wsb_trainer_list', array( 'WSB_Trainer_List_Page', 'page'));
+        add_shortcode('wsb_trainer', array('WSB_Trainer_Page', 'page'));
 
         //elements
-        add_shortcode('wsb_event_list_filters', array( 'WSB_Event_List_Page', 'list_filters'));
-        add_shortcode('wsb_event_list_item', array( 'WSB_Event_List_Page', 'event'));
-        add_shortcode('wsb_event_list_register', array( 'WSB_Event_List_Page', 'register'));
-        add_shortcode('wsb_event_list_title', array( 'WSB_Event_List_Page', 'title'));
-        add_shortcode('wsb_event_list_info', array( 'WSB_Event_List_Page', 'info'));
+        add_shortcode('wsb_schedule_filters', array( 'WSB_Schedule_Page', 'list_filters'));
+        add_shortcode('wsb_schedule_item', array( 'WSB_Schedule_Page', 'event'));
+        add_shortcode('wsb_schedule_register', array( 'WSB_Schedule_Page', 'register'));
+        add_shortcode('wsb_schedule_title', array( 'WSB_Schedule_Page', 'title'));
+        add_shortcode('wsb_schedule_info', array( 'WSB_Schedule_Page', 'info'));
     
         add_shortcode('wsb_trainer_list_filters', array( 'WSB_Trainer_List_Page', 'list_filters'));
         add_shortcode('wsb_trainer_list_item', array( 'WSB_Trainer_List_Page', 'trainer'));
         add_shortcode('wsb_trainer_list_photo', array( 'WSB_Trainer_List_Page', 'photo'));
         add_shortcode('wsb_trainer_list_name', array( 'WSB_Trainer_List_Page', 'name'));
-        
+    
+        add_shortcode('wsb_event_title', array( 'WSB_Event', 'title'));
+        add_shortcode('wsb_event_registration_form', array( 'WSB_Event', 'registration_form'));
+        add_shortcode('wsb_event_registration_button', array( 'WSB_Event', 'registration_button'));
+        add_shortcode('wsb_event_dates', array( 'WSB_Event', 'dates'));
+        add_shortcode('wsb_event_location', array( 'WSB_Event', 'location'));
+        add_shortcode('wsb_event_social_links', array( 'WSB_Event', 'social_links'));
+        add_shortcode('wsb_event_events', array( 'WSB_Event', 'events'));
+        add_shortcode('wsb_event_description', array( 'WSB_Event', 'description'));
+        add_shortcode('wsb_event_trainers', array( 'WSB_Event', 'trainers'));
+        add_shortcode('wsb_event_tickets', array( 'WSB_Event', 'tickets'));
+    
     
         add_shortcode('wsb_trainer_name', array( 'WSB_Trainer', 'name'));
         add_shortcode('wsb_trainer_photo', array( 'WSB_Trainer', 'photo'));

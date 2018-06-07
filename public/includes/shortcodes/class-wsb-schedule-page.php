@@ -1,6 +1,6 @@
 <?php
 /**
- * The file that defines the event list class
+ * The file that defines the Schedule class
  * @link       https://workshopbutler.com
  * @since      0.2.0
  *
@@ -9,13 +9,13 @@
 require_once plugin_dir_path( dirname(__FILE__) ) . 'class-wsb-page.php';
 
 /**
- * Event List page class which handles the rendering and logic for the list of events
+ * Schedule page class which handles the rendering and logic for the list of events
  *
  * @since      0.2.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
-class WSB_Event_List_Page extends WSB_Page {
+class WSB_Schedule_Page extends WSB_Page {
     
     private $requests;
     
@@ -262,11 +262,11 @@ EOD;
      * @return string
      */
     private function get_list_type() {
-        return $this->settings->get( WSB_Options::EVENT_LIST_LAYOUT, 'table' );
+        return $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' );
     }
     
     /**
-     * Handles 'wsb_event_list_item' shortcode
+     * Handles 'wsb_schedule_item' shortcode
      *
      * @param $attrs   array  Shortcode attributes
      * @param $content string Shortcode content
@@ -274,12 +274,12 @@ EOD;
      * @return string
      */
     static public function event( $attrs = [], $content = null ) {
-        $page = new WSB_Event_List_Page();
+        $page = new WSB_Schedule_Page();
         return $page->render_event($attrs, $content);
     }
     
     /**
-     * Handles 'wsb_event_list_register' shortcode
+     * Handles 'wsb_schedule_register' shortcode
      *
      * @param $attrs   array  Shortcode attributes
      * @param $content string Shortcode content
@@ -287,12 +287,12 @@ EOD;
      * @return string
      */
     static public function register( $attrs = [], $content = null ) {
-        $page = new WSB_Event_List_Page();
+        $page = new WSB_Schedule_Page();
         return $page->render_register($attrs);
     }
     
     /**
-     * Handles 'wsb_event_list_title' shortcode
+     * Handles 'wsb_schedule_title' shortcode
      *
      * @param $attrs   array  Shortcode attributes
      * @param $content string Shortcode content
@@ -300,12 +300,12 @@ EOD;
      * @return string
      */
     static public function title( $attrs = [], $content = null ) {
-        $page = new WSB_Event_List_Page();
+        $page = new WSB_Schedule_Page();
         return $page->render_title($attrs);
     }
     
     /**
-     * Handles 'wsb_event_list_info' shortcode
+     * Handles 'wsb_schedule_info' shortcode
      *
      * @param $attrs   array  Shortcode attributes
      * @param $content string Shortcode content
@@ -313,13 +313,13 @@ EOD;
      * @return string
      */
     static public function info( $attrs = [], $content = null ) {
-        $page = new WSB_Event_List_Page();
+        $page = new WSB_Schedule_Page();
         return $page->render_info($attrs, $content);
     }
     
     
     /**
-     * Handles 'wsb_event_list_filters' shortcode
+     * Handles 'wsb_schedule_filters' shortcode
      *
      * @param $attrs   array  Shortcode attributes
      * @param $content string Shortcode content
@@ -327,7 +327,7 @@ EOD;
      * @return string
      */
     static public function list_filters( $attrs = [], $content = null ) {
-        $page = new WSB_Event_List_Page();
+        $page = new WSB_Schedule_Page();
         return $page->render_list_filters($attrs);
     }
     
@@ -340,7 +340,7 @@ EOD;
      * @return string
      */
     static public function page( $attrs = [], $content = null ) {
-        $page = new WSB_Event_List_Page();
+        $page = new WSB_Schedule_Page();
         return $page->render_page($attrs, $content);
     }
 }

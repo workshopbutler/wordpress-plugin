@@ -107,7 +107,7 @@ class WSB_Trainer_Page extends WSB_Page {
      * @since  0.2.0
      * @return string
      */
-    static public function shortcode( $attrs = [], $content = null ) {
+    static public function page( $attrs = [], $content = null ) {
         $page = new WSB_Trainer_Page();
         
         return $page->render( $attrs, $content );

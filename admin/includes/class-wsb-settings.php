@@ -165,7 +165,7 @@ class WSB_Settings {
                 'default'  => __( 'No events found', 'wsbintegration')
             ),
             array(
-                'id'       => WSB_Options::EVENT_LIST_LAYOUT,
+                'id'       => WSB_Options::SCHEDULE_LAYOUT,
                 'type'     => 'radio',
                 'title'    => __( 'Schedule Layout', 'wsbintegration' ),
                 'desc'     => __( 'This parameter defines how your events are presented on the schedule', 'wsbintegration' ),
@@ -192,7 +192,7 @@ class WSB_Settings {
                 'default'  => true,
             ),
             array(
-                'id'       => WSB_Options::EVENT_DETAILS_PAGE,
+                'id'       => WSB_Options::EVENT_PAGE,
                 'type'     => 'select',
                 'data'     => 'pages',
                 'title'    => 'Event Page',

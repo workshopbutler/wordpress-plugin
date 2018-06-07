@@ -1,0 +1,33 @@
+<div class="wb-trainers">
+    {% for trainer in event.trainers %}
+        <div class="wb-trainer">
+            <div class="wb-profile">
+                {% if trainer.url %}
+                    <a class="wb-profile_img" href="{{ trainer.url }}" style="background-image: url({{ trainer.photo }});"></a>
+                {% else %}
+                    <div class="wb-profile_img" style="background-image: url({{ trainer.photo }});"></div>
+                {% endif %}
+                <div class="wb-profile__name">
+                    <div class="inner">
+                        <h3>
+                            {{ trainer.first_name }}
+                            <br/>
+                            {{ trainer.last_name }}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            {% if trainer.bio %}
+                <div class="wb-profile__text b-flip js-text-flip" data-max-height="80">
+                    <div class="b-flip__inner" data-flip-helper>
+                        {{ trainer.bio }}
+                    </div>
+                    <a href="#" class="b-flip__link" data-flip-link>
+                        <span class="b-flip__show">Show bio</span>
+                        <span class="b-flip__hide">Hide</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>

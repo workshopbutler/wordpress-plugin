@@ -29,11 +29,11 @@ class WSB_Integration_Activator {
      * @since    0.2.0
      */
     public static function activate() {
-        if (empty(WSB_Options::get_option(WSB_Options::EVENT_DETAILS_PAGE))) {
+        if (empty(WSB_Options::get_option(WSB_Options::EVENT_PAGE))) {
             $self = new self();
-            $self->create_page( __( 'Event List', 'wsbintegration' ), WSB_Options::EVENT_LIST_PAGE, '[wsb_events]' );
-            $self->create_page( __( 'Event Details', 'wsbintegration' ), WSB_Options::EVENT_DETAILS_PAGE, '[wsb_event_details]' );
-            $self->create_page( __( 'Trainer List', 'wsbintegration' ), WSB_Options::TRAINER_LIST_PAGE, '[wsb_trainers]' );
+            $self->create_page( __( 'Event List', 'wsbintegration' ), WSB_Options::SCHEDULE_PAGE, '[wsb_schedule]' );
+            $self->create_page( __( 'Event Details', 'wsbintegration' ), WSB_Options::EVENT_PAGE, '[wsb_event]' );
+            $self->create_page( __( 'Trainer List', 'wsbintegration' ), WSB_Options::TRAINER_LIST_PAGE, '[wsb_trainer_list]' );
             $self->create_page( __( 'Trainer Profile', 'wsbintegration' ), WSB_Options::TRAINER_PROFILE_PAGE, '[wsb_trainer]' );
         }
     }

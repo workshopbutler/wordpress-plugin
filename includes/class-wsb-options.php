@@ -33,20 +33,12 @@ class WSB_Options {
     const CUSTOM_THEME = 'custom-theme';
     
     const CUSTOM_EVENT_DETAILS = 'custom-event-page';
-    const EVENT_LIST_LAYOUT = 'event-list-layout';
-    const EVENT_LIST_TYPE = 'event-list-page-type';
-    const EVENT_LIST_TITLE = 'event-list-page-title';
-    const EVENT_LIST_PAGE = 'event-list-page-id';
-    const EVENT_DETAILS_TYPE = 'event-page-type';
-    const EVENT_DETAILS_TITLE = 'event-page-title';
-    const EVENT_DETAILS_PAGE = 'event-page-id';
+    const SCHEDULE_LAYOUT = 'event-list-layout';
+    const SCHEDULE_PAGE = 'event-list-page-id';
+    const EVENT_PAGE = 'event-page-id';
     
     const TRAINER_MODULE = 'trainer-module';
-    const TRAINER_LIST_TYPE = 'trainer-list-page-type';
-    const TRAINER_LIST_TITLE = 'trainer-list-page-title';
     const TRAINER_LIST_PAGE = 'trainer-list-page-id';
-    const TRAINER_PROFILE_TYPE = 'trainer-page-type';
-    const TRAINER_PROFILE_TITLE = 'trainer-page-title';
     const TRAINER_PROFILE_PAGE = 'trainer-page-id';
     
     /**
@@ -141,7 +133,7 @@ class WSB_Options {
      * @return string|null
      */
     public function get_event_page_url() {
-        $page_id = $this->get( WSB_Options::EVENT_DETAILS_PAGE );
+        $page_id = $this->get( WSB_Options::EVENT_PAGE );
         $integrated_event_page = $this->get ( WSB_Options::CUSTOM_EVENT_DETAILS );
         if ($integrated_event_page && $page_id) {
             return get_permalink( $page_id );
