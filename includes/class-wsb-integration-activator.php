@@ -31,29 +31,40 @@ class WSB_Integration_Activator {
     public static function activate() {
         if (empty(WSB_Options::get_option(WSB_Options::EVENT_PAGE))) {
             $self = new self();
-            $self->create_page( __( 'Event List', 'wsbintegration' ), WSB_Options::SCHEDULE_PAGE, '[wsb_schedule]' );
-            $self->create_page( __( 'Event Details', 'wsbintegration' ), WSB_Options::EVENT_PAGE, '[wsb_event]' );
+            $self->create_page( __( 'Schedule', 'wsbintegration' ), WSB_Options::SCHEDULE_PAGE, '[wsb_schedule]' );
+            $self->create_page( __( 'Event', 'wsbintegration' ),
+                WSB_Options::EVENT_PAGE,
+                '[wsb_event]' ,
+                WSB_Options::get_option( WSB_Options::SCHEDULE_PAGE ));
             $self->create_page( __( 'Trainer List', 'wsbintegration' ), WSB_Options::TRAINER_LIST_PAGE, '[wsb_trainer_list]' );
-            $self->create_page( __( 'Trainer Profile', 'wsbintegration' ), WSB_Options::TRAINER_PROFILE_PAGE, '[wsb_trainer]' );
+            $self->create_page( __( 'Trainer Profile', 'wsbintegration' ),
+                WSB_Options::TRAINER_PROFILE_PAGE,
+                '[wsb_trainer]',
+                WSB_Options::get_option( WSB_Options::TRAINER_LIST_PAGE ));
         }
     }
     
     /**
      * Adds a new post with a content
-     * @param $title           string Page title
-     * @param $id_opt_name     string Name of the option with a page ID
-     * @param $content         string content
+     * @param $title           string      Page title
+     * @param $id_opt_name     string      Name of the option with a page ID
+     * @param $content         string      Page Content
+     * @param $parent_id       string|null ID of the parent page
      *
      * @since 0.3.0
      */
-    private function create_page( $title, $id_opt_name, $content) {
-        $page_id = wp_insert_post( array(
+    private function create_page( $title, $id_opt_name, $content, $parent_id = null) {
+        $options = array(
             'post_title'     => $title,
             'post_content'   => $content,
             'post_type'      => 'page',
             'post_status'    => 'publish',
             'comment_status' => 'closed'
-        ) );
+        );
+        if ($parent_id) {
+            $options['post_parent'] = $parent_id;
+        }
+        $page_id = wp_insert_post( $options );
         WSB_Options::set_option( $id_opt_name, $page_id );
     }
     

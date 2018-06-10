@@ -8,7 +8,7 @@
  * @wordpress-plugin
  * Plugin Name:       Workshop Butler
  * Plugin URI:        https://workshopbutler.com/plugin-name-uri/
- * Description:       This plugin helps you integrate Workshop Butler Events and Trainers to your WordPress website.
+ * Description:       This plugin integrates Workshop Butler Events and Trainers to your WordPress website.
  * Version:           0.3.0
  * Author:            Workshop Butler
  * Author URI:        https://workshopbutler.com/
