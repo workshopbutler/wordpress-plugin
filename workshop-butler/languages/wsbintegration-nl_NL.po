@@ -1,0 +1,1156 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2018-09-10T11:03:24.384Z\n"
+"PO-Revision-Date: 2018-09-10T11:03:24.384Z\n"
+"Language: nl\n"
+
+msgid "filter.locations"
+msgstr "Alle locaties"
+
+msgid "filter.languages"
+msgstr "Alle talen"
+
+msgid "filter.types"
+msgstr "Alle typen"
+
+msgid "filter.trainers"
+msgstr "Alle trainers"
+
+msgid "country.00"
+msgstr "online"
+
+msgid "country.AF"
+msgstr "Afghanistan"
+
+msgid "country.AL"
+msgstr "Albanië"
+
+msgid "country.DZ"
+msgstr "Algerije"
+
+msgid "country.AS"
+msgstr "Amerikaans Samoa"
+
+msgid "country.AD"
+msgstr "Andorra"
+
+msgid "country.AO"
+msgstr "Angola"
+
+msgid "country.AI"
+msgstr "Anguilla"
+
+msgid "country.AQ"
+msgstr "Antarctica"
+
+msgid "country.AG"
+msgstr "Antigua en Barbuda"
+
+msgid "country.AR"
+msgstr "Argentinië"
+
+msgid "country.AM"
+msgstr "Armenië"
+
+msgid "country.AW"
+msgstr "Aruba"
+
+msgid "country.AC"
+msgstr "Ascension Island"
+
+msgid "country.AU"
+msgstr "Australië"
+
+msgid "country.AT"
+msgstr "Oostenrijk"
+
+msgid "country.AZ"
+msgstr "Azerbeidzjan"
+
+msgid "country.BS"
+msgstr "Bahama's"
+
+msgid "country.BH"
+msgstr "Bahrain"
+
+msgid "country.BD"
+msgstr "Bangladesh"
+
+msgid "country.BB"
+msgstr "Barbados"
+
+msgid "country.BY"
+msgstr "Wit-Rusland"
+
+msgid "country.BE"
+msgstr "België"
+
+msgid "country.BZ"
+msgstr "Belize"
+
+msgid "country.BJ"
+msgstr "Benin"
+
+msgid "country.BM"
+msgstr "Bermuda"
+
+msgid "country.BT"
+msgstr "Bhutan"
+
+msgid "country.BO"
+msgstr "Bolivia"
+
+msgid "country.BQ"
+msgstr "Bonaire, Sint Eustatius en Saba"
+
+msgid "country.BA"
+msgstr "Bosnië en Herzegovina"
+
+msgid "country.BW"
+msgstr "Botswana"
+
+msgid "country.BV"
+msgstr "Bouvet Island"
+
+msgid "country.BR"
+msgstr "Brazilië"
+
+msgid "country.IO"
+msgstr "British Indian Ocean Territory"
+
+msgid "country.VG"
+msgstr "Britse Maagdeneilanden"
+
+msgid "country.BN"
+msgstr "Brunei"
+
+msgid "country.BG"
+msgstr "Bulgarije"
+
+msgid "country.BF"
+msgstr "Burkina Faso"
+
+msgid "country.BI"
+msgstr "Burundi"
+
+msgid "country.KH"
+msgstr "Cambodja"
+
+msgid "country.CM"
+msgstr "Kameroen"
+
+msgid "country.CA"
+msgstr "Canada"
+
+msgid "country.IC"
+msgstr "Canarische Eilanden"
+
+msgid "country.CT"
+msgstr "Canton and Enderbury Islands"
+
+msgid "country.CV"
+msgstr "Kaapverdië"
+
+msgid "country.KY"
+msgstr "Kaaimaneilanden"
+
+msgid "country.CF"
+msgstr "Centraal-Afrikaanse Republiek"
+
+msgid "country.EA"
+msgstr "Ceuta en Melilla"
+
+msgid "country.TD"
+msgstr "Tsjaad"
+
+msgid "country.CL"
+msgstr "Chili"
+
+msgid "country.CN"
+msgstr "China"
+
+msgid "country.CX"
+msgstr "Christmas Island"
+
+msgid "country.CP"
+msgstr "Clipperton Island"
+
+msgid "country.CC"
+msgstr "Cocos [Keeling] -eilanden"
+
+msgid "country.CO"
+msgstr "Colombia"
+
+msgid "country.KM"
+msgstr "Comoren"
+
+msgid "country.CG"
+msgstr "Congo - Brazzaville"
+
+msgid "country.CD"
+msgstr "Congo - Kinshasa"
+
+msgid "country.CK"
+msgstr "Cook Eilanden"
+
+msgid "country.CR"
+msgstr "Costa Rica"
+
+msgid "country.HR"
+msgstr "Kroatië"
+
+msgid "country.CU"
+msgstr "Cuba"
+
+msgid "country.CW"
+msgstr "Curaçao"
+
+msgid "country.CY"
+msgstr "Cyprus"
+
+msgid "country.CZ"
+msgstr "Tsjechië"
+
+msgid "country.CI"
+msgstr "Ivoorkust"
+
+msgid "country.DK"
+msgstr "Denemarken"
+
+msgid "country.DG"
+msgstr "Diego Garcia"
+
+msgid "country.DJ"
+msgstr "Djibouti"
+
+msgid "country.DM"
+msgstr "Dominica"
+
+msgid "country.DO"
+msgstr "Dominicaanse Republiek"
+
+msgid "country.NQ"
+msgstr "Dronning Maud Land"
+
+msgid "country.EC"
+msgstr "Ecuador"
+
+msgid "country.EG"
+msgstr "Egypte"
+
+msgid "country.SV"
+msgstr "El Salvador"
+
+msgid "country.GQ"
+msgstr "Equatoriaal-Guinea"
+
+msgid "country.ER"
+msgstr "Eritrea"
+
+msgid "country.EE"
+msgstr "Estland"
+
+msgid "country.ET"
+msgstr "Ethiopië"
+
+msgid "country.FK"
+msgstr "Falkland Eilanden"
+
+msgid "country.FO"
+msgstr "Faeröer"
+
+msgid "country.FJ"
+msgstr "Fiji"
+
+msgid "country.FI"
+msgstr "Finland"
+
+msgid "country.FR"
+msgstr "Frankrijk"
+
+msgid "country.GF"
+msgstr "Frans Guyana"
+
+msgid "country.PF"
+msgstr "Frans-Polynesië"
+
+msgid "country.GA"
+msgstr "Gabon"
+
+msgid "country.GM"
+msgstr "Gambia"
+
+msgid "country.GE"
+msgstr "Georgia"
+
+msgid "country.DE"
+msgstr "Duitsland"
+
+msgid "country.GH"
+msgstr "Ghana"
+
+msgid "country.GI"
+msgstr "Gibraltar"
+
+msgid "country.GR"
+msgstr "Griekenland"
+
+msgid "country.GL"
+msgstr "Groenland"
+
+msgid "country.GD"
+msgstr "Grenada"
+
+msgid "country.GP"
+msgstr "Guadeloupe"
+
+msgid "country.GU"
+msgstr "Guam"
+
+msgid "country.GT"
+msgstr "Guatemala"
+
+msgid "country.GG"
+msgstr "Guernsey"
+
+msgid "country.GN"
+msgstr "Guinee"
+
+msgid "country.GW"
+msgstr "Guinee-Bissau"
+
+msgid "country.GY"
+msgstr "Guyana"
+
+msgid "country.HT"
+msgstr "Haïti"
+
+msgid "country.HM"
+msgstr "Heard Island en McDonaldeilanden"
+
+msgid "country.HN"
+msgstr "Honduras"
+
+msgid "country.HK"
+msgstr "Hong Kong SAR China"
+
+msgid "country.HU"
+msgstr "Hongarije"
+
+msgid "country.IS"
+msgstr "IJsland"
+
+msgid "country.IN"
+msgstr "India"
+
+msgid "country.ID"
+msgstr "Indonesië"
+
+msgid "country.IR"
+msgstr "Iran"
+
+msgid "country.IQ"
+msgstr "Irak"
+
+msgid "country.IE"
+msgstr "Ierland"
+
+msgid "country.IM"
+msgstr "Isle of Man"
+
+msgid "country.IL"
+msgstr "Israël"
+
+msgid "country.IT"
+msgstr "Italië"
+
+msgid "country.JM"
+msgstr "Jamaica"
+
+msgid "country.JP"
+msgstr "Japan"
+
+msgid "country.JE"
+msgstr "Jersey"
+
+msgid "country.JT"
+msgstr "Johnston Island"
+
+msgid "country.JO"
+msgstr "Jordan"
+
+msgid "country.KZ"
+msgstr "Kazachstan"
+
+msgid "country.KE"
+msgstr "Kenia"
+
+msgid "country.KI"
+msgstr "Kiribati"
+
+msgid "country.KW"
+msgstr "Koeweit"
+
+msgid "country.KG"
+msgstr "Kirgizië"
+
+msgid "country.LA"
+msgstr "Laos"
+
+msgid "country.LV"
+msgstr "Letland"
+
+msgid "country.LB"
+msgstr "Lebanon"
+
+msgid "country.LS"
+msgstr "Lesotho"
+
+msgid "country.LR"
+msgstr "Liberia"
+
+msgid "country.LY"
+msgstr "Libië"
+
+msgid "country.LI"
+msgstr "Liechtenstein"
+
+msgid "country.LT"
+msgstr "Litouwen"
+
+msgid "country.LU"
+msgstr "Luxemburg"
+
+msgid "country.MO"
+msgstr "Macau SAR China"
+
+msgid "country.MK"
+msgstr "Macedonië"
+
+msgid "country.MG"
+msgstr "Madagascar"
+
+msgid "country.MW"
+msgstr "Malawi"
+
+msgid "country.MY"
+msgstr "Maleisië"
+
+msgid "country.MV"
+msgstr "Malediven"
+
+msgid "country.ML"
+msgstr "Mali"
+
+msgid "country.MT"
+msgstr "Malta"
+
+msgid "country.MH"
+msgstr "Marshalleilanden"
+
+msgid "country.MQ"
+msgstr "Martinique"
+
+msgid "country.MR"
+msgstr "Mauritania"
+
+msgid "country.MU"
+msgstr "Mauritius"
+
+msgid "country.YT"
+msgstr "Mayotte"
+
+msgid "country.MX"
+msgstr "Mexico"
+
+msgid "country.FM"
+msgstr "Micronesia"
+
+msgid "country.MD"
+msgstr "Moldova"
+
+msgid "country.MC"
+msgstr "Monaco"
+
+msgid "country.MN"
+msgstr "Mongolia"
+
+msgid "country.ME"
+msgstr "Montenegro"
+
+msgid "country.MS"
+msgstr "Montserrat"
+
+msgid "country.MA"
+msgstr "Marokko"
+
+msgid "country.MZ"
+msgstr "Mozambique"
+
+msgid "country.MM"
+msgstr "Myanmar [Burma]"
+
+msgid "country.NA"
+msgstr "Namibia"
+
+msgid "country.NR"
+msgstr "Nauru"
+
+msgid "country.NP"
+msgstr "Nepal"
+
+msgid "country.NL"
+msgstr "Nederland"
+
+msgid "country.AN"
+msgstr "Nederlandse Antillen"
+
+msgid "country.NC"
+msgstr "Nieuw-Caledonië"
+
+msgid "country.NZ"
+msgstr "Nieuw-Zeeland"
+
+msgid "country.NI"
+msgstr "Nicaragua"
+
+msgid "country.NE"
+msgstr "Niger"
+
+msgid "country.NG"
+msgstr "Nigeria"
+
+msgid "country.NU"
+msgstr "Niue"
+
+msgid "country.NF"
+msgstr "Norfolk Island"
+
+msgid "country.KP"
+msgstr "Noord-Korea"
+
+msgid "country.MP"
+msgstr "Noordelijke Marianen"
+
+msgid "country.NO"
+msgstr "Noorwegen"
+
+msgid "country.OM"
+msgstr "Oman"
+
+msgid "country.PK"
+msgstr "Pakistan"
+
+msgid "country.PW"
+msgstr "Palau"
+
+msgid "country.PS"
+msgstr "Palestijnse gebieden"
+
+msgid "country.PA"
+msgstr "Panama"
+
+msgid "country.PG"
+msgstr "Papoea-Nieuw-Guinea"
+
+msgid "country.PY"
+msgstr "Paraguay"
+
+msgid "country.YD"
+msgstr "People's Democratic Republic of Yemen"
+
+msgid "country.PE"
+msgstr "Peru"
+
+msgid "country.PH"
+msgstr "Filippijnen"
+
+msgid "country.PN"
+msgstr "Pitcairn Islands"
+
+msgid "country.PL"
+msgstr "Polen"
+
+msgid "country.PT"
+msgstr "Portugal"
+
+msgid "country.PR"
+msgstr "Puerto Rico"
+
+msgid "country.QA"
+msgstr "Qatar"
+
+msgid "country.RO"
+msgstr "Roemenië"
+
+msgid "country.RU"
+msgstr "Rusland"
+
+msgid "country.RW"
+msgstr "Rwanda"
+
+msgid "country.RE"
+msgstr "Réunion"
+
+msgid "country.BL"
+msgstr "Saint Barthélemy"
+
+msgid "country.SH"
+msgstr "Sint-Helena"
+
+msgid "country.KN"
+msgstr "Saint Kitts en Nevis"
+
+msgid "country.LC"
+msgstr "Saint Lucia"
+
+msgid "country.MF"
+msgstr "Sint Maarten"
+
+msgid "country.PM"
+msgstr "Saint Pierre en Miquelon"
+
+msgid "country.VC"
+msgstr "Saint Vincent en de Grenadines"
+
+msgid "country.WS"
+msgstr "Samoa"
+
+msgid "country.SM"
+msgstr "San Marino"
+
+msgid "country.SA"
+msgstr "Saoedi-Arabië"
+
+msgid "country.SN"
+msgstr "Senegal"
+
+msgid "country.RS"
+msgstr "Servië"
+
+msgid "country.CS"
+msgstr "Servië en Montenegro"
+
+msgid "country.SC"
+msgstr "Seychellen"
+
+msgid "country.SL"
+msgstr "Sierra Leone"
+
+msgid "country.SG"
+msgstr "Singapore"
+
+msgid "country.SX"
+msgstr "Sint Maarten"
+
+msgid "country.SK"
+msgstr "Slowakije"
+
+msgid "country.SI"
+msgstr "Slovenië"
+
+msgid "country.SB"
+msgstr "Salomonseilanden"
+
+msgid "country.SO"
+msgstr "Somalië"
+
+msgid "country.ZA"
+msgstr "Zuid-Afrika"
+
+msgid "country.GS"
+msgstr "South Georgia en de South Sandwich Islands"
+
+msgid "country.KR"
+msgstr "Zuid-Korea"
+
+msgid "country.ES"
+msgstr "Spanje"
+
+msgid "country.LK"
+msgstr "Sri Lanka"
+
+msgid "country.SD"
+msgstr "Sudan"
+
+msgid "country.SR"
+msgstr "Suriname"
+
+msgid "country.SJ"
+msgstr "Svalbard en Jan Mayen"
+
+msgid "country.SZ"
+msgstr "Swaziland"
+
+msgid "country.SE"
+msgstr "Zweden"
+
+msgid "country.CH"
+msgstr "Zwitserland"
+
+msgid "country.SY"
+msgstr "Syrië"
+
+msgid "country.ST"
+msgstr "São Tomé en Principe"
+
+msgid "country.TW"
+msgstr "Taiwan"
+
+msgid "country.TJ"
+msgstr "Tadzjikistan"
+
+msgid "country.TZ"
+msgstr "Tanzania"
+
+msgid "country.TH"
+msgstr "Thailand"
+
+msgid "country.TL"
+msgstr "Oost-Timor"
+
+msgid "country.TG"
+msgstr "Togo"
+
+msgid "country.TK"
+msgstr "Tokelau"
+
+msgid "country.TO"
+msgstr "Tonga"
+
+msgid "country.TT"
+msgstr "Trinidad en Tobago"
+
+msgid "country.TA"
+msgstr "Tristan da Cunha"
+
+msgid "country.TN"
+msgstr "Tunesië"
+
+msgid "country.TR"
+msgstr "Turkije"
+
+msgid "country.TM"
+msgstr "Turkmenistan"
+
+msgid "country.TC"
+msgstr "Turks- en Caicoseilanden"
+
+msgid "country.TV"
+msgstr "Tuvalu"
+
+msgid "country.UG"
+msgstr "Uganda"
+
+msgid "country.UA"
+msgstr "Oekraïne"
+
+msgid "country.AE"
+msgstr "Verenigde Arabische Emiraten"
+
+msgid "country.GB"
+msgstr "Verenigd Koninkrijk"
+
+msgid "country.US"
+msgstr "Verenigde Staten"
+
+msgid "country.UY"
+msgstr "Uruguay"
+
+msgid "country.UZ"
+msgstr "Oezbekistan"
+
+msgid "country.VU"
+msgstr "Vanuatu"
+
+msgid "country.VE"
+msgstr "Venezuela"
+
+msgid "country.VN"
+msgstr "Vietnam"
+
+msgid "country.WF"
+msgstr "Wallis en Futuna"
+
+msgid "country.EH"
+msgstr "Westelijke Sahara"
+
+msgid "country.YE"
+msgstr "Jemen"
+
+msgid "country.ZM"
+msgstr "Zambia"
+
+msgid "country.ZW"
+msgstr "Zimbabwe"
+
+msgid "country.AX"
+msgstr "Åland-eilanden"
+
+msgid "language.AR"
+msgstr "Arabisch"
+
+msgid "language.BG"
+msgstr "Bulgaars"
+
+msgid "language.ZH"
+msgstr "Chinees"
+
+msgid "language.HR"
+msgstr "Kroatisch"
+
+msgid "language.CS"
+msgstr "Tsjechisch"
+
+msgid "language.DA"
+msgstr "Deens"
+
+msgid "language.NL"
+msgstr "Nederlands"
+
+msgid "language.EN"
+msgstr "Engels"
+
+msgid "language.FI"
+msgstr "Fins"
+
+msgid "language.FR"
+msgstr "Frans"
+
+msgid "language.DE"
+msgstr "Duits"
+
+msgid "language.IT"
+msgstr "Italiaans"
+
+msgid "language.SL"
+msgstr "Slovenian"
+
+msgid "language.JA"
+msgstr "Japans"
+
+msgid "language.NO"
+msgstr "Noors"
+
+msgid "language.PL"
+msgstr "Pools"
+
+msgid "language.PT"
+msgstr "Portugees"
+
+msgid "language.RO"
+msgstr "Roemeens"
+
+msgid "language.RU"
+msgstr "Russisch"
+
+msgid "language.ES"
+msgstr "Spaans"
+
+msgid "language.SV"
+msgstr "Zweeds"
+
+msgid "language.SR"
+msgstr "Servisch"
+
+msgid "language.TR"
+msgstr "Turks"
+
+msgid "language.VI"
+msgstr "Vietnamees"
+
+msgid "schedule.noEvents"
+msgstr "Er zijn geen evenementen gevonden"
+
+msgid "schedule.when"
+msgstr "Wanneer"
+
+msgid "schedule.where"
+msgstr "Waar"
+
+msgid "schedule.what"
+msgstr "Wat"
+
+msgid "schedule.event.register"
+msgstr "Registreren"
+
+msgid "schedule.event.soldOut"
+msgstr "Uitverkocht"
+
+msgid "schedule.event.free"
+msgstr "Gratis"
+
+msgid "trainers.noTrainers"
+msgstr "Er zijn geen trainers gevonden"
+
+msgid "event.register"
+msgstr "Registreer nu"
+
+msgid "event.soldOut"
+msgstr "Uitverkocht"
+
+msgid "event.free"
+msgstr "Gratis"
+
+msgid "event.info.date"
+msgstr "Datum"
+
+msgid "event.info.loc"
+msgstr "Locatie"
+
+msgid "event.info.oneLang"
+msgstr "Evenement is in %s"
+
+msgid "event.info.twoLangs"
+msgstr "Evenement is in %s en %s"
+
+msgid "event.info.materials"
+msgstr ", alle materialen en handouts staan in %s"
+
+msgid "event.info.now"
+msgstr "Huidige tijd in %s"
+
+msgid "event.info.tickets"
+msgstr "Tickets"
+
+msgid "event.state.ended"
+msgstr "Dit evenement is afgelopen"
+
+msgid "event.state.private"
+msgstr "Dit evenement is privé"
+
+msgid "event.state.soldOut"
+msgstr "Uitverkocht"
+
+msgid "event.ticket.free"
+msgstr "Gratis"
+
+msgid "event.ticket.freeDescr"
+msgstr "Registratie is verplicht."
+
+msgid "event.ticket.endedOn"
+msgstr "Bedichteigd op %s"
+
+msgid "event.ticket.endsOn"
+msgstr "Eindigt op %s"
+
+msgid "event.ticket.onSaleFrom"
+msgstr "Te koop vanaf %s"
+
+msgid "event.ticket.soldOut"
+msgstr "Uitverkocht"
+
+msgid "event.ticket.ended"
+msgstr "Ended"
+
+msgid "event.ticket.left"
+msgid_plural "event.ticket.left"
+msgstr[0] "1 ticket over"
+msgstr[1] "%s tickets over"
+
+msgid "event.share"
+msgstr "Deel evenement"
+
+msgid "event.form.title"
+msgstr "Registreer voor het evenement"
+
+msgid "event.form.button"
+msgstr "Registreren"
+
+msgid "trainer.email"
+msgstr "Contact per e-mail"
+
+msgid "trainer.experience.years"
+msgstr "Jaren als trainer"
+
+msgid "trainer.experience.events"
+msgstr "Gebeurtenissen gehouden"
+
+msgid "trainer.experience.rating.public"
+msgstr "Beoordeling voor openbare evenementen"
+
+msgid "trainer.experience.rating.private"
+msgstr "Beoordeling voor privé-evenementen"
+
+msgid "trainer.experience.rating.basedOn"
+msgid_plural "trainer.experience.rating.basedOn"
+msgstr[0] "op basis van 1&nbsp;evaluatie"
+msgstr[1] "gebaseerd op %s&nbsp;evaluaties"
+
+msgid "trainer.experience.rating.review"
+msgid_plural "trainer.experience.rating.review"
+msgstr[0] "van 1 beoordeling"
+msgstr[1] "van %s beoordelingen"
+
+msgid "trainer.bio"
+msgstr "Bio"
+
+msgid "trainer.feedback"
+msgstr "Reacties van de deelnemers"
+
+msgid "tax.excluded_all"
+msgstr "Alle prijzen zijn exclusief BTW"
+
+msgid "tax.included_all"
+msgstr "Alle prijzen zijn inclusief BTW"
+
+msgid "form.country"
+msgstr "Kies een land"
+
+msgid "form.error.required"
+msgstr "Dit veld is verplicht"
+
+msgid "form.error.email"
+msgstr "Ongeldig e-mailadres"
+
+msgid "form.error.url"
+msgstr "Ongeldige url"
+
+msgid "form.error.date"
+msgstr "Ongeldige datum, het moet in het volgende formaat yyyy-mm-dd"
+
+msgid "form.error.number"
+msgstr "Het nummer is te lang en niet geldig"
+
+msgid "form.error.digits"
+msgstr "Alleen cijfers"
+
+msgid "form.field.first_name"
+msgstr "Voornaam"
+
+msgid "form.field.last_name"
+msgstr "Achternaam"
+
+msgid "form.field.email"
+msgstr "Email"
+
+msgid "form.field.organisation"
+msgstr "Organisatie"
+
+msgid "form.field.city"
+msgstr "Stad"
+
+msgid "form.field.province"
+msgstr "Provincie / Staat"
+
+msgid "form.field.country"
+msgstr "Land"
+
+msgid "form.field.postcode"
+msgstr "Postcode"
+
+msgid "form.field.tax_name"
+msgstr "Btw-naam"
+
+msgid "form.field.tax_number"
+msgstr "Btw-nummer"
+
+msgid "form.field.phone"
+msgstr "Telefoon"
+
+msgid "form.field.date_of_birth"
+msgstr "Geboortedatum"
+
+msgid "form.field.role"
+msgstr "Hoe beschrijf je het beste wat je doet?"
+
+msgid "form.field.job_title"
+msgstr "Functietitel"
+
+msgid "form.field.website"
+msgstr "Website"
+
+msgid "form.field.blog"
+msgstr "Blog"
+
+msgid "form.field.ticket"
+msgstr "Ticket"
+
+msgid "form.field.comment"
+msgstr "Commentaar"
+
+msgid "form.field.promo_code"
+msgstr "Promotiecode"
+
+msgid "form.field.member_id"
+msgstr "Gebruikers ID"
+
+msgid "form.field.billing.city"
+msgstr "Stad"
+
+msgid "form.field.billing.province"
+msgstr "Provincie / Staat"
+
+msgid "form.field.billing.postcode"
+msgstr "Postcode"
+
+msgid "form.field.billing.country"
+msgstr "Land"
+
+msgid "form.field.billing.street_first"
+msgstr "Straat 1"
+
+msgid "form.field.billing.street_second"
+msgstr "Straat 2"
+
+msgid "form.field.work.city"
+msgstr "Stad"
+
+msgid "form.field.work.province"
+msgstr "Provincie / Staat"
+
+msgid "form.field.work.postcode"
+msgstr "Postcode"
+
+msgid "form.field.work.country"
+msgstr "Land"
+
+msgid "form.field.work.street_first"
+msgstr "Straat 1"
+
+msgid "form.field.work.street_second"
+msgstr "Straat 2"
+
+msgid "form.field.street_first"
+msgstr "Straat 1"
+
+msgid "form.field.street_second"
+msgstr "Straat 2"
+
+msgid "form.section.home address"
+msgstr "Thuisadres"
+
+msgid "form.section.billing address"
+msgstr "Facturatie adres"
+
+msgid "form.section.work info"
+msgstr "Werkinfo"
+
+msgid "form.section.billing info"
+msgstr "Betaal informatie"
+
+msgid "form.section.additional information"
+msgstr "Extra informatie"
+
+msgid "form.section.ticket"
+msgstr "Ticket"
+
+msgid "registration.successTitle"
+msgstr "Bedankt voor de registratie"
+
+msgid "registration.successMsg"
+msgstr "Verdere details en uw toetredingsinstructies volgen binnenkort per e-mail."
+
+msgid "sidebar.future"
+msgstr "Aankomende evenementen"
+
+msgid "sidebar.past"
+msgstr "Afgelopen evenementen"
+
+msgid "sidebar.noEvents"
+msgstr "Geen evenementen"

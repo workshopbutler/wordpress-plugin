@@ -1,0 +1,11 @@
+{% if filters|length > 0 %}
+    <div class="wsb-filters">
+        {% for filter in filters %}
+            <select class="wsb-filter" data-filter data-name="{{ filter.name }}">
+                {% for item in filter.values %}
+                    <option class="wsb-filter" value="{{ item.value }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        {% endfor %}
+    </div>
+{% endif %}

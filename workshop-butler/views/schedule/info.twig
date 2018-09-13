@@ -1,0 +1,12 @@
+<div class="wsb-tile-info">
+    {% if event.schedule.at_one_day() %}
+        {{ wsb_f(event.schedule, 'full_long') }}
+        {% if event.location.online and event.schedule.timezone %}
+            {{ wsb_f(event.schedule, 'timezone_short') }}
+        {% endif %}
+    {% else %}
+        {{ wsb_f(event.schedule, 'full_short') }}
+    {% endif %}
+    <br/>
+    {{ wsb_f(event.location) }}
+</div>

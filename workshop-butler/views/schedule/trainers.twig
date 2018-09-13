@@ -1,0 +1,12 @@
+<div class="wsb-tile-content">
+    {% for trainer in event.trainers %}
+        <div class="wsb-trainer">
+            {% if trainer.url %}
+                <a class="wsb-photo" href="{{ trainer.url }}" style="background-image: url({{ trainer.photo }});"></a>
+                <a class="wsb-name" href="{{ trainer.url }}"> {{ trainer.full_name }}</a>
+            {% else %}
+                <img class="wsb-photo" src="{{ trainer.photo }}"/>{{ trainer.full_name }}
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>

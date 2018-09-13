@@ -1,0 +1,8 @@
+<div class="wsb-trainer-tile" data-trainer-obj
+     data-trainer-location="{{ trainer.country_code }}"
+     data-trainer-language="{{ trainer.language.spoken |join(',') }}"
+     data-trainer-trainer="{{ trainer.full_name }}">
+    <div class="wsb-trainer-tile__box">
+        {{ content | raw }}
+    </div>
+</div>

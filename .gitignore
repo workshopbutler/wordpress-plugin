@@ -1,1 +1,10 @@
 .DS_Store
+.idea/
+akismet/
+hello.php
+index.php
+wordpress-integration.iml
+workshop-butler/vendor/bin/
+workshop-butler/utils/converted/*.json
+workshop-butler/composer.lock
+TODO

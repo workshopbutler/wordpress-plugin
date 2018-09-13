@@ -1,0 +1,7 @@
+{% if trainer.url %}
+    <a href="{{ trainer.url }}">
+        <div class="wsb-trainer-tile_img" style="background-image: url({{ trainer.photo }});"></div>
+    </a>
+{% else %}
+    <div class="wsb-trainer-tile_img" style="background-image: url({{ trainer.photo }});"></div>
+{% endif %}

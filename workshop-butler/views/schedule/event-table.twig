@@ -1,0 +1,14 @@
+<div class="wsb-schedule">
+    <div class="wsb-table" data-event-list>
+        <div class="wsb-table__head">
+            <div class="wsb-table__col">{{ __('schedule.when', 'wsbintegration') }}</div>
+            <div class="wsb-table__col">{{ __('schedule.where', 'wsbintegration') }}</div>
+            <div class="wsb-table__col">{{ __('schedule.what', 'wsbintegration') }}</div>
+            <div class="wsb-table__col"></div>
+        </div>
+        {{ content | raw }}
+    </div>
+    <div class="wsb-no-events">
+        {{ __('schedule.noEvents', 'wsbintegration') }}
+    </div>
+</div>

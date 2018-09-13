@@ -1,0 +1,4 @@
+{% if event.free %}
+    <div class="wsb-free">{{ __('event.free', 'wsbintegration') }}</div>
+{% endif %}
+<a href="{{ event.url }}" class="wsb-tile-title">{{ event.title|truncate(60) }}</a>

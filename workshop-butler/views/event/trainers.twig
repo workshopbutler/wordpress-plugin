@@ -1,0 +1,42 @@
+<div class="wsb-trainers">
+    {% for trainer in event.trainers %}
+        <div class="wsb-trainer">
+            <div class="wsb-profile">
+                {% if trainer.url %}
+                    <a class="wsb-profile_img" href="{{ trainer.url }}" style="background-image: url({{ trainer.photo }});"></a>
+                {% else %}
+                    <div class="wsb-profile_img"><img src="{{ trainer.photo }}"/></div>
+                {% endif %}
+                <div class="wsb-profile__name">
+                    {% if trainer.url %}
+                        <a href="{{ trainer.url }}">{{ trainer.full_name() }}</a>
+                    {% else %}
+                        {{ trainer.full_name() }}
+                    {% endif %}
+                    <div class="wsb-profile__rating">
+                        {% if trainer.public_stats.rating > 0 %}
+                            {% set rating = trainer.public_stats.rating | round(0, 'floor')%}
+                            {% set stars = range(0, 4) %}
+                            {% for i in stars %}
+                                {% set index = i + 1 %}
+                                {% if index * 2 <= rating %}
+                                    <i class="fas fa-star"></i>
+                                {% else %}
+                                    {% if not index * 2 > rating + 1 %}
+                                        <div class="fa-stack">
+                                            <i class="fas fa-star-half fa-stack-1x"></i>
+                                            <i class="far fa-star-half fa-stack-1x fa-flip-horizontal"></i>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {{ wsb_f(trainer.public_stats.rating) }}
+                                <span></span>
+                        {% endif  %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,12 @@
+<div class="wsb-tile-button">
+        {% if event.state.closed() %}
+            <button disabled class="wsb-btn wsb-btn-primary wsb-tile-btn">
+                {{ __('schedule.event.soldOut', 'wsbintegration') }}
+            </button>
+        {% else %}
+            <a href="{% if registration == 'true' %} {{ event.registration_page.url }} {% else %} {{ event.url }} {% endif %}"
+               class="wsb-btn wsb-btn-primary wsb-tile-btn">
+                {{ __('schedule.event.register', 'wsbintegration') }}
+            </a>
+        {% endif %}
+</div>

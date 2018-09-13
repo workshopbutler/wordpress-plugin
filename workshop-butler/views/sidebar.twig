@@ -1,0 +1,9 @@
+{% for event in events %}
+    <div class="wsb-workshop">
+        {{ wsb_f(event.schedule) }}, {{ wsb_f(event.location) }}
+        <br>
+        <a href="{{ event.url }}">
+            {{ event.title }}
+        </a>
+    </div>
+{% endfor %}

@@ -1,0 +1,106 @@
+<div class="wsb-congratulation" id="wsb-success">
+    <h2 class="wsb-congratulation__title">
+        {{ wsb_t('registration.successTitle') }}
+    </h2>
+    <div class="wsb-congratulation__p">
+        {{ wsb_t('registration.successMsg') }}
+    </div>
+</div>
+
+<form action="#" class="wsb-form" id="wsb-form">
+    <div class="wsb-form__body">
+        <div class="wsb-form__instructions">{{ event.registration_form.instructions }}</div>
+        {% for section in event.registration_form.sections %}
+            {% if section.name %}
+                <div class="wsb-form__section-title">{{ wsb_t("form.section.#{section.name}" | lower) }}</div>
+            {% endif %}
+            <section>
+                {% for field in section.fields %}
+                {#
+                    This is a quite dirty hack. In 'converter.php' we replace 'street_1' and 'street_2' with
+                    'street_first/street_second' to prevent i18next-conv transform them as plurals.
+
+                    As a result, our translation files contain several keys not in line with Workshop Butler backend.
+                    To make the translation work, we need to convert the keys again.
+                #}
+                {% set label = wsb_t("form.field.#{field.name}" | replace({'street_1': 'street_first', 'street_2': 'street_second'})) %}
+                <div class="wsb-form__field {{ field.type }}">
+                    {% if field.type is not same as("checkbox") %}
+                        <label for="{{ field.name }}">
+                            {{ label }}
+                            {% if field.required %}
+                                <span class="wsb-form__required">*</span>
+                            {% endif %}
+                        </label>
+                    {% endif %}
+                    {% if field.type is same as("textarea") %}
+                        <textarea name="{{ field.name }}" data-control title="{{ field.label }}"
+                            {% if field.required %} required {% endif %}
+                            {% if event.state.closed() %} disabled {% endif %}
+                            style="height : 90px ;" cols="30" rows="10"></textarea>
+                    {% elseif field.type is same as ("select") %}
+                        <select name="{{ field.name }}" title="{{ field.label }}" data-control
+                                {% if field.required %} required {% endif %}
+                                {% if event.state.closed() %} disabled {% endif %}
+                        >
+                            {% for option in field.options %}
+                                <option value="{{ option.value }}">{{ option.label }}</option>
+                            {% endfor %}
+                        </select>
+                    {% elseif field.type is same as("country") %}
+                        <select name="{{ field.name }}" title="{{ field.label }}"
+                                {% if field.required %} required {% endif %}
+                                {% if event.state.closed() %} disabled {% endif %}
+                                data-control
+                        >
+                            <option value="" selected disabled>{{ wsb_t('form.country') }}</option>
+                            {% for code, name in countries %}
+                                <option value="{{ code }}">{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    {% elseif field.type is same as("checkbox") %}
+                        <label class="wsb-label" for="{{ field.name }}">
+                            <input name="{{ field.name }}" id="{{ field.name }}" type="checkbox"
+                                    {% if field.required %} required {% endif %}
+                                    {% if event.state.closed() %} disabled {% endif %}
+                                   value="yes" data-control/>
+                            {{ field.label | raw }}
+                        </label>
+                    {% elseif field.type is same as("ticket") %}
+                        {% for ticket in field.tickets.paid %}
+                            {% if ticket.active() %}
+                                {% set name = wsb_f(ticket, 'price') ~ ' - ' ~ ticket.name %}
+                                <label for="{{ ticket.id }}" class="wsb-label">
+                                    <input id="{{ ticket.id }}" name="{{ field.name }}" title="{{ field.label }}" type="radio"
+                                           data-control required value="{{ ticket.id }}"
+                                            {% if event.state.closed() %} disabled {% endif %} />
+                                    {{ name }}
+                                </label>
+                            {% endif %}
+                        {% endfor %}
+                        {% if field.excluded_tax %}
+                            {{ wsb_t("tax.excluded_all") }}
+                        {% else %}
+                            {{ wsb_t("tax.included_all") }}
+                        {% endif %}
+                    {% else %}
+                        <input name="{{ field.name }}" title="{{ label }}"
+                               type="{{ field.type }}" data-control
+                                {% if field.required %} required {% endif %}
+                                {% if event.state.closed() %} disabled {% endif %}
+                        />
+                    {% endif %}
+                </div>
+            {% endfor %}
+            </section>
+        {% endfor %}
+        <div class="wsb-form__error" data-form-major-error></div>
+        {% if event.state.closed() %}
+            <button class="wsb-form__btn" disabled>{{ wsb_f(event.state) }}</button>
+        {% else %}
+            <button type="submit" class="wsb-form__btn">
+                {{ wsb_t('event.form.button') }}
+            </button>
+        {% endif %}
+    </div>
+</form>
