@@ -98,7 +98,6 @@ class WSB_Event_Page extends WSB_Page {
     
         $processed_template = do_shortcode($template);
         $content = $this->compile_string($processed_template, $template_data);
-        
         return $this->add_custom_styles($content);
     }
     

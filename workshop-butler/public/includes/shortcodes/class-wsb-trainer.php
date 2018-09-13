@@ -16,18 +16,6 @@ require_once plugin_dir_path(dirname(__FILE__) ) . 'class-wsb-page.php';
  */
 class WSB_Trainer extends WSB_Page {
     
-    protected function trainer_shortcode( $name, $content ) {
-        $handler = function($trainer, $template) use ($name) {
-            if (empty($trainer->$name)) {
-                return '';
-            }
-            $html = do_shortcode($template);
-            return $this->compile_string($html, array($name => $trainer->$name));
-        };
-    
-        return parent::handle_trainer_shortcode( $name, $content, $handler );
-    }
-    
     /**
      * Renders the trainer's badges
      *
@@ -37,7 +25,17 @@ class WSB_Trainer extends WSB_Page {
      * @return string
      */
     public function render_badges( $attrs = []) {
-        return $this->trainer_shortcode('badges', null);
+        $trainer = $this->dict->get_trainer();
+        if (!is_a($trainer, 'Trainer')) {
+            return '';
+        }
+        $template = $this->get_template('badges', null);
+        if (is_null($template)) {
+            return '';
+        }
+        $html = do_shortcode($template);
+        $attrs['trainer'] = $trainer;
+        return $this->compile_string($html, $attrs);
     }
     
     
@@ -86,16 +84,17 @@ EOD;
         );
         $attrs = shortcode_atts($default_attrs, $attrs);
     
-        $content = $this->get_statistics_tmpl($attrs['type']);
-        $handler = function($trainer, $template) use($attrs) {
-            $data = $this->get_stat_parameter($attrs['type'], $trainer);
-            if ($attrs['show_if_zero'] != 'true' && !$data['parameter']) {
-                return '';
-            }
-            $html = do_shortcode($template);
-            return $this->compile_string($html, $data);
-        };
-        return $this->handle_trainer_shortcode('statistics', $content, $handler);
+        $template = $this->get_statistics_tmpl($attrs['type']);
+        $trainer = $this->dict->get_trainer();
+        if (!is_a($trainer, 'Trainer')) {
+            return '';
+        }
+        $data = $this->get_stat_parameter($attrs['type'], $trainer);
+        if ($attrs['show_if_zero'] != 'true' && !$data['parameter']) {
+            return '';
+        }
+        $html = do_shortcode($template);
+        return $this->compile_string($html, $data);
     }
     
     /**
@@ -110,16 +109,19 @@ EOD;
         $default_attrs = array( 'type' => 'twitter' );
         $attrs = shortcode_atts($default_attrs, $attrs);
         
-        $content = $this->get_social_link_tmpl();
-        $handler = function($trainer, $template) use($attrs) {
-            $data = $this->get_social_link_data($attrs['type'], $trainer);
-            if (!$data['link']) {
-                return '';
-            }
-            $html = do_shortcode($template);
-            return $this->compile_string($html, $data);
-        };
-        return $this->handle_trainer_shortcode('statistics', $content, $handler);
+        $template = $this->get_social_link_tmpl();
+        $trainer = $this->dict->get_trainer();
+        if (!is_a($trainer, 'Trainer')) {
+            return '';
+        }
+    
+        $data = $this->get_social_link_data($attrs['type'], $trainer);
+        if (!$data['link']) {
+            return '';
+        }
+        $html = do_shortcode($template);
+        return $this->compile_string($html, $data);
+    
     }
     
     /**
@@ -136,10 +138,10 @@ EOD;
                 return array('description' => 'trainer.experience.events',
                              'parameter' => $trainer->number_of_events);
             case 'public-rating':
-                return array('parameter' => 1, //used only for visibility check
+                return array('parameter' => $trainer->public_stats->number_of_evaluations, //used only for visibility check
                              'description' => 'trainer.experience.rating.public',
                              'rating' => $trainer->public_stats->rating,
-                             'number_of_evaluations' => 1);
+                             'number_of_evaluations' => $trainer->public_stats->number_of_evaluations);
             case 'private-rating':
                 return array('parameter' => $trainer->private_stats->number_of_evaluations, //used only for visibility check
                             'description' => 'trainer.experience.rating.private',
@@ -237,19 +239,6 @@ EOD;
     </div>
 EOD;
 
-    }
-    
-    /**
-     * Handles 'wsb_trainer_badges' shortcode
-     *
-     * @param $attrs   array  Shortcode attributes
-     * @param $content string Shortcode content
-     * @since  0.3.0
-     * @return string
-     */
-    static public function badges( $attrs = [], $content = null) {
-        $page = new WSB_Trainer();
-        return $page->render_badges($attrs);
     }
     
     /**

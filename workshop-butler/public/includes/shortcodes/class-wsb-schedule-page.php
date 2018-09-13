@@ -54,9 +54,9 @@ class WSB_Schedule_Page extends WSB_Page {
      */
     public function render_page( $attrs = [], $content = null ) {
         // Load styles and scripts only on demand.
-        wp_enqueue_script("wsb-helper-scripts");
-        wp_enqueue_script("wsb-dateformat");
         wp_enqueue_script("wsb-all-events-scripts");
+        wp_enqueue_style('wsb-font-arapey');
+        wp_enqueue_style('wsb-font-montserrat');
     
         
         $method = 'events';

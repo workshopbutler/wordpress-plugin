@@ -26,56 +26,42 @@ class WSB_Endorsement extends WSB_Page {
      * @return string
      */
     public function render_endorsements( $attrs = [], $content = null ) {
-        $handler_endorsements = function($trainer, $template) {
-            if (count($trainer->endorsements) == 0) {
-                return '';
-            }
-            $with_data = $this->compile_string($template);
-            $html = do_shortcode($with_data);
-    
-            return $html;
-        };
-        
-        return $this->handle_trainer_shortcode('endorsements', $content, $handler_endorsements);
-    }
-    
-    /**
-     * @param $name
-     * @param $content
-     * @param $handler Closure
-     *
-     * @return string
-     */
-    protected function handle_trainer_shortcode( $name, $content, $handler ) {
         $trainer = $this->dict->get_trainer();
         if (!is_a($trainer, 'Trainer')) {
             return '';
         }
-        $template = $this->get_template($name, $content);
+        if (count($trainer->endorsements) == 0) {
+            return '';
+        }
+        $template = $this->get_template('endorsements', $content);
         if (is_null($template)) {
             return '';
         }
-        return $handler->call($this, $trainer, $template);
+        $with_data = $this->compile_string($template);
+        $html = do_shortcode($with_data);
+    
+        return $html;
     }
     
     /**
-     * Retrieves a currently-processed endorsement, related template and compiles an html
-     * @param $name    string       Name of the template
-     * @param $content string|null  Template content
-     * @param $handler Closure      Callback
+     * Renders a simple shortcode with no additional logic
+     * @param string       $name Name of the shortcode (like 'title', 'register')
+     * @param array        $attrs  Attributes
+     * @param null|string  $content Replaceable content
      *
-     * @return string
+     * @return bool|string
      */
-    protected function handle_endorsement_shortcode( $name, $content, $handler ) {
+    protected function render_simple_shortcode($name, $attrs = [], $content = null) {
         $endorsement = $this->dict->get_endorsement();
         if (is_null($endorsement)) {
             return '';
         }
-        $template = $this->get_template($name, $content);
-        if (is_null($template)) {
-            return '';
+        $template = $this->get_template('endorsement/' . $name, null);
+        if (!$template) {
+            return '[wsb_endorsement_' . $name . ']';
         }
-        return $handler->call($this, $endorsement, $template);
+        $attrs['endorsement'] = $endorsement;
+        return $this->compile_string($template, $attrs);
     }
     
     /**
@@ -88,82 +74,24 @@ class WSB_Endorsement extends WSB_Page {
      * @return string
      */
     public function render_endorsement( $attrs = [], $content = null ) {
-        $handler = function($trainer, $template) {
-            $html = '';
-    
-            foreach ($trainer->endorsements as $endorsement) {
-                $GLOBALS['wsb_endorsement'] = $endorsement;
-                $with_data = $this->compile_string($template, array('endorsement' => $endorsement));
-                $html .= do_shortcode($with_data);
-                unset($GLOBALS['wsb_endorsement']);
-            }
-    
-            return $html;
-        };
+        $trainer = $this->dict->get_trainer();
+        if (!is_a($trainer, 'Trainer')) {
+            return '';
+        }
+        $template = $this->get_template('endorsement', $content);
+        if (is_null($template)) {
+            return '';
+        }
+        $html = '';
         
-        return $this->handle_trainer_shortcode('endorsement', $content, $handler);
-    }
+        foreach ($trainer->endorsements as $endorsement) {
+            $GLOBALS['wsb_endorsement'] = $endorsement;
+            $with_data = $this->compile_string($template, array('endorsement' => $endorsement));
+            $html .= do_shortcode($with_data);
+            unset($GLOBALS['wsb_endorsement']);
+        }
     
-    /**
-     * Renders a rating of an endorsement
-     *
-     * @param array       $attrs   Short code attributes
-     * @param null|string $content Short code content
-     *
-     * @since  0.3.0
-     * @return string
-     */
-    public function render_rating( $attrs = [], $content = null ) {
-        $handler = function($endorsement, $template) {
-            if (empty($endorsement->rating)) {
-                return '';
-            }
-            $endorsement_html = do_shortcode($template);
-            return $this->compile_string($endorsement_html, array('rating' => $endorsement->rating));
-        };
-        
-        return $this->handle_endorsement_shortcode('rating', $content, $handler);
-    }
-    
-    /**
-     * Renders a content of an endorsement
-     *
-     * @param array  $attrs   Short code attributes
-     *
-     * @since  0.3.0
-     * @return string
-     */
-    public function render_content( $attrs = []) {
-        $handler = function($endorsement, $template) {
-            if (empty($endorsement->content)) {
-                return '';
-            }
-            $html = do_shortcode($template);
-            return $this->compile_string($html, array('content' => $endorsement->content));
-        };
-    
-        $content = '<p class="wsb-endorsement-text">{{ content }}</p>';
-        return $this->handle_endorsement_shortcode('content', $content, $handler);
-    }
-    
-    /**
-     * Renders an author of an endorsement
-     *
-     * @param array  $attrs   Short code attributes
-     *
-     * @since  0.3.0
-     * @return string
-     */
-    public function render_author( $attrs = []) {
-        $handler = function($endorsement, $template) {
-            if (empty($endorsement->content)) {
-                return '';
-            }
-            $html = do_shortcode($template);
-            return $this->compile_string($html, array('endorsement' => $endorsement));
-        };
-        
-        return $this->handle_endorsement_shortcode('author', null, $handler);
+        return $html;
     }
     
     
@@ -175,20 +103,5 @@ class WSB_Endorsement extends WSB_Page {
     static public function endorsement( $attrs = [], $content = null ) {
         $page = new WSB_Endorsement();
         return $page->render_endorsement($attrs, $content);
-    }
-    
-    static public function author( $attrs = [], $content = null) {
-        $page = new WSB_Endorsement();
-        return $page->render_author($attrs);
-    }
-    
-    static public function content( $attrs = [], $content = null) {
-        $page = new WSB_Endorsement();
-        return $page->render_content($attrs);
-    }
-    
-    static public function rating( $attrs = [], $content = null) {
-        $page = new WSB_Endorsement();
-        return $page->render_rating($attrs, $content);
     }
 }

@@ -31,7 +31,7 @@
                                 {% endif %}
                             {% endfor %}
                             {{ wsb_f(trainer.public_stats.rating) }}
-                                <span></span>
+                                <span>{{ wsb_pt('trainer.experience.rating.review', trainer.public_stats.number_of_evaluations) | raw }}</span>
                         {% endif  %}
                     </div>
 

@@ -63,23 +63,6 @@ class WSB_Integration_Admin {
         $settings->init();
     }
     
-    public function save_internal_settings() {
-        $configured = WSB_Options::get_internal_option(WSB_Options::INT_STATE);
-        if (!$configured) {
-            $this->update_state();
-        }
-    }
-    
-    /**
-     * Updates the state of the plugin
-     *
-     * @since 0.3.0
-     */
-    private function update_state() {
-        WSB_Options::set_internal_option( WSB_Options::INT_STATE, true );
-        WSB_Options::set_internal_option( WSB_Options::INT_VERSION, WSB_INTEGRATION_VERSION );
-    }
-    
     /**
      * Load the required dependencies for this class.
      *

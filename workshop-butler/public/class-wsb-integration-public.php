@@ -81,6 +81,13 @@ class WSB_Integration_Public {
     public function enqueue_styles() {
         wp_register_style("wsb-fontawesome-styles", plugin_dir_url( __FILE__ ) . 'css/fontawesome-all.min.css', array(), $this->version);
         wp_register_style("wsb-themes", plugin_dir_url( __FILE__ ) . 'css/styles.1.0.1-beta.2.min.css', array(), $this->version);
+        
+        wp_register_style('wsb-font-arapey', 'https://fonts.googleapis.com/css?family=Arapey');
+        wp_register_style('wsb-font-montserrat', 'https://fonts.googleapis.com/css?family=Montserrat');
+        wp_register_style('wsb-font-droid-sans', 'https://fonts.googleapis.com/css?family=Droid+Sans');
+        wp_register_style('wsb-font-open-sans', 'https://fonts.googleapis.com/css?family=Open+Sans');
+        wp_register_style('wsb-font-raleway', 'https://fonts.googleapis.com/css?family=Raleway');
+        
         wp_enqueue_style( 'wsb-themes');
         wp_enqueue_style( 'wsb-fontawesome-styles');
     }
@@ -99,8 +106,6 @@ class WSB_Integration_Public {
     
         wp_register_script("wsb-dateformat", plugin_dir_url( __FILE__ ) . 'js/jquery-dateFormat.min.js', array( "jquery" ), $this->version, true);
         wp_register_script("wsb-all-events-scripts", plugin_dir_url( __FILE__ ) . 'js/all-events-scripts.js', array( "jquery" ), $this->version, true);
-    
-        wp_enqueue_script( $this->WSB_Integration, plugin_dir_url( __FILE__ ) . 'js/plugin-name-public.js', array( 'jquery' ), $this->version, false );
     }
     
     /**
@@ -228,14 +233,14 @@ class WSB_Integration_Public {
         add_shortcode('wsb_trainer_email', array( 'WSB_Trainer_Page', 'tag'));
         
         add_shortcode('wsb_trainer_events', array( 'WSB_Trainer', 'events'));
-        add_shortcode('wsb_trainer_badges', array( 'WSB_Trainer', 'badges'));
+        add_shortcode('wsb_trainer_badges', array( 'WSB_Trainer', 'tag'));
         add_shortcode('wsb_trainer_bio', array( 'WSB_Trainer_Page', 'tag'));
     
         add_shortcode('wsb_trainer_endorsements', array( 'WSB_Endorsement', 'endorsements'));
-        add_shortcode('wsb_trainer_endorsement', array( 'WSB_Endorsement', 'endorsement'));
-        add_shortcode('wsb_trainer_endorsement_author', array( 'WSB_Endorsement', 'author'));
-        add_shortcode('wsb_trainer_endorsement_rating', array( 'WSB_Endorsement', 'rating'));
-        add_shortcode('wsb_trainer_endorsement_content', array( 'WSB_Endorsement', 'content'));
+        add_shortcode('wsb_endorsement', array( 'WSB_Endorsement', 'endorsement'));
+        add_shortcode('wsb_endorsement_author', array( 'WSB_Endorsement', 'tag'));
+        add_shortcode('wsb_endorsement_rating', array( 'WSB_Endorsement', 'tag'));
+        add_shortcode('wsb_endorsement_content', array( 'WSB_Endorsement', 'tag'));
     }
     
     /**

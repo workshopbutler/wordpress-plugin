@@ -17,26 +17,6 @@ require_once plugin_dir_path(dirname(__FILE__) ) . 'class-wsb-page.php';
 class WSB_Event extends WSB_Page {
     
     /**
-     * Handles a shortcode for only one event attribute
-     * @param $name
-     * @param $content
-     *
-     * @since  0.3.0
-     * @return string
-     */
-    protected function event_named_shortcode( $name, $content ) {
-        $handler = function($event, $template) use ($name) {
-            if (empty($event->$name)) {
-                return '';
-            }
-            $html = do_shortcode($template);
-            return $this->compile_string($html, array($name => $event->$name));
-        };
-    
-        return parent::process_event_shortcode( $name, $content, $handler );
-    }
-    
-    /**
      * Returns default attributes for the shortcodes
      * @param string $shortcode_name Name of the shortcode (only the meaningful part)
      *

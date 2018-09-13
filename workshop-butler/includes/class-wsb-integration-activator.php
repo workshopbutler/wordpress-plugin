@@ -33,6 +33,7 @@ class WSB_Integration_Activator {
         if (empty(WSB_Options::get_option(WSB_Options::API_KEY))) {
             $self->transfer_settings();
         }
+        $self->save_internal_settings();
         if (empty(WSB_Options::get_option(WSB_Options::EVENT_PAGE))) {
             $self->create_page( __( 'Schedule', 'wsbintegration' ), WSB_Options::SCHEDULE_PAGE, '[wsb_schedule]' );
             $self->create_page( __( 'Event', 'wsbintegration' ),
@@ -50,6 +51,29 @@ class WSB_Integration_Activator {
                 WSB_Options::get_option( WSB_Options::REGISTRATION_PAGE ));
         }
     }
+    
+    /**
+     * Saves the internal state settings
+     *
+     * @since 2.0.0
+     */
+    protected function save_internal_settings() {
+        $configured = WSB_Options::get_internal_option(WSB_Options::INT_STATE);
+        if (!$configured) {
+            $this->update_state();
+        }
+    }
+    
+    /**
+     * Updates the state of the plugin
+     *
+     * @since 0.3.0
+     */
+    private function update_state() {
+        WSB_Options::set_internal_option( WSB_Options::INT_STATE, true );
+        WSB_Options::set_internal_option( WSB_Options::INT_VERSION, WSB_INTEGRATION_VERSION );
+    }
+    
     
     /**
      * Transfers the API key to a new storage place

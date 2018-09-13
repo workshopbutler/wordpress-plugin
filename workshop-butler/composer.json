@@ -1,5 +1,5 @@
 {
   "require": {
-    "ext-intl": "~1"
+    "twig/twig": "1.34.4"
   }
 }

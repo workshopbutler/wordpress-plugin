@@ -19,15 +19,6 @@
  */
 abstract class WSB_Page {
     /**
-     * Template engine
-     *
-     * @since    0.2.0
-     * @access   protected
-     * @var      \Timber\Timber $engine Template engine.
-     */
-    protected $engine;
-    
-    /**
      * Plugin settings
      *
      * @access  protected
@@ -55,8 +46,6 @@ abstract class WSB_Page {
      */
     public function __construct() {
         require_once plugin_dir_path(__FILE__) . '../../vendor/autoload.php';
-        \Timber\Timber::$locations = plugin_dir_path(__FILE__) . '../../views';
-        $this->engine = new Timber\Timber();
         $this->load_dependencies();
     }
     
@@ -186,46 +175,6 @@ abstract class WSB_Page {
     }
     
     /**
-     * Retrieves a currently-processed event and sends it to a related template
-     *
-     * @param $name    string      Name of the template
-     * @param $content string|null Optional template content
-     * @param $handler Closure     Function to pre-process data before sending it to the template
-     *
-     * @return string
-     */
-    protected function process_event_shortcode( $name, $content, $handler ) {
-        $event = $this->dict->get_event();
-        if (!is_a($event, 'Event')) {
-            return '';
-        }
-        $template = $this->get_template($name, $content);
-        if (is_null($template)) {
-            return '';
-        }
-        return $handler->call($this, $event, $template);
-    }
-    
-    /**
-     * @param $name
-     * @param $content
-     * @param $handler Closure
-     *
-     * @return string
-     */
-    protected function handle_trainer_shortcode( $name, $content, $handler ) {
-        $trainer = $this->dict->get_trainer();
-        if (!is_a($trainer, 'Trainer')) {
-            return '';
-        }
-        $template = $this->get_template($name, $content);
-        if (is_null($template)) {
-            return '';
-        }
-        return $handler->call($this, $trainer, $template);
-    }
-    
-    /**
      * Returns an active theme for the integration
      *
      * @since  0.2.0
@@ -233,6 +182,30 @@ abstract class WSB_Page {
      */
     protected function get_theme() {
         return $this->settings->get( WSB_Options::THEME, 'alfred' );
+    }
+    
+    /**
+     * Loads additional Google fonts for default themes
+     * @since 2.0.0
+     */
+    protected function add_theme_fonts() {
+        $theme = $this->get_theme();
+        switch ($theme) {
+            case 'britton':
+                wp_enqueue_style('wsb-font-droid-sans');
+                break;
+            case 'dacota':
+                wp_enqueue_style('wsb-font-arapey');
+                wp_enqueue_style('wsb-font-montserrat');
+                break;
+            case 'gatsby':
+                wp_enqueue_style('wsb-font-montserrat');
+                wp_enqueue_style('wsb-font-raleway');
+                break;
+            case 'hayes':
+                wp_enqueue_style('wsb-font-montserrat');
+                wp_enqueue_style('wsb-font-open-sans');
+        }
     }
     
     /**

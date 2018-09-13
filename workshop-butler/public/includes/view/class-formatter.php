@@ -42,8 +42,12 @@ class Formatter {
             return Event_State_Formatter::format($object);
         }
         if (is_numeric($object)) {
-            $number = number_format_i18n($object,  2);
-            return trim($number, '0.,');
+            if (intval($object) == $object) {
+                return number_format_i18n($object, 0);
+            } else {
+                $number = number_format_i18n($object,  2);
+                return trim($number, '0.,');
+            }
         }
         return "";
     }
