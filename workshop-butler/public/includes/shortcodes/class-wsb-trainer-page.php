@@ -65,6 +65,7 @@ class WSB_Trainer_Page extends WSB_Page {
         }
     
         wp_enqueue_script( "wsb-single-trainer-scripts" );
+        $this->add_theme_fonts();
         $wsb_nonce = wp_create_nonce( 'wsb-nonce' );
     
         wp_localize_script( 'wsb-single-trainer-scripts', 'wsb_single_trainer', array(

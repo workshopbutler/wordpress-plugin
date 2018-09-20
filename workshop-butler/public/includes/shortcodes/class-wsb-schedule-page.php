@@ -55,27 +55,45 @@ class WSB_Schedule_Page extends WSB_Page {
     public function render_page( $attrs = [], $content = null ) {
         // Load styles and scripts only on demand.
         wp_enqueue_script("wsb-all-events-scripts");
-        wp_enqueue_style('wsb-font-arapey');
-        wp_enqueue_style('wsb-font-montserrat');
+        $this->add_theme_fonts();
     
-        
+        $attrs = $this->get_widget_attrs($attrs);
+    
         $method = 'events';
         $fields = 'title,location,hashed_id,schedule,free,type,registration_page,spoken_languages,sold_out,facilitators,free_ticket_type,paid_ticket_types';
         $query  = array('future' => true, 'public' => true, 'fields' => $fields);
-    
+        if (!is_null($attrs['category'])) {
+            $query['categoryId'] = $attrs['category'];
+        }
+        $this->dict->set_schedule_attrs($attrs);
         $response = $this->requests->get( $method, $query );
-        return $this->render_list($response);
+        
+        return $this->render_list($response, $attrs, $content);
+    }
+    
+    /**
+     * Returns widget's attributes
+     * @param $attrs array User attributes
+     *
+     * @return array
+     */
+    private function get_widget_attrs($attrs) {
+        $defaults = array('category' => null,
+                          'layout' => $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' ));
+        return shortcode_atts($defaults, $attrs);
     }
     
     /**
      * Renders the list of events
      *
      * @param $response WSB_Response
+     * @param $attrs array Widget's attributes
+     * @param $content string | null Content of the wsb_schedule shortcode
      *
      * @since  0.2.0
      * @return string
      */
-    private function render_list( $response ) {
+    private function render_list( $response, $attrs, $content ) {
         if ( $response->is_error()) {
             return $this->format_error($response->error);
         }
@@ -88,10 +106,18 @@ class WSB_Schedule_Page extends WSB_Page {
                 $this->settings->get_registration_page_url());
             array_push($events, $event );
         }
+        
+        if (count($events) == 0) {
+            return $this->settings->get(WSB_Options::SCHEDULE_NO_EVENTS);
+        }
     
         $template_data = array('events' => $events, 'theme' => $this->get_theme());
-        $custom_template = $this->settings->get(WSB_Options::SCHEDULE_TEMPLATE);
-        $template = $this->get_template('schedule-page', $custom_template);
+        if ($content) {
+            $template = $content;
+        } else {
+            $custom_template = $this->settings->get( WSB_Options::SCHEDULE_TEMPLATE );
+            $template        = $this->get_template( 'schedule-page', $custom_template );
+        }
     
         $this->dict->set_events($events);
         $processed_template = do_shortcode($template);
@@ -110,9 +136,6 @@ class WSB_Schedule_Page extends WSB_Page {
      * @return string
      */
     protected function render_filters( $attrs = []) {
-        $default_attrs = array('filters' => 'location,trainer,language,type');
-        $attrs = shortcode_atts($default_attrs, $attrs);
-        
         $events = $this->dict->get_events();
         if ($events === null) {
             return '';
@@ -137,6 +160,8 @@ class WSB_Schedule_Page extends WSB_Page {
      */
     protected function get_default_attrs($shortcode_name) {
         switch ($shortcode_name) {
+            case 'filters':
+                return array('filters' => 'location,trainer,language,type');
             case 'register':
                 return array('registration' => 'false');
             default:
@@ -155,7 +180,7 @@ class WSB_Schedule_Page extends WSB_Page {
      */
     protected function render_item( $attrs = [], $content = null ) {
         $events = $this->dict->get_events();
-        if ($events === null) {
+        if (is_null( $events )) {
             return '';
         }
         switch($this->get_list_type()) {
@@ -226,12 +251,16 @@ class WSB_Schedule_Page extends WSB_Page {
      * @return string
      */
     private function get_list_type() {
-        return $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' );
+        $attrs = $this->dict->get_schedule_attrs();
+        if (is_null($attrs) || is_null($attrs['layout'])) {
+            return 'table';
+        }
+        return $attrs['layout'];
     }
     
     
     /**
-     * Handles 'wsb_events' shortcode
+     * Handles 'wsb_schedule' shortcode
      *
      * @param $attrs   array  Shortcode attributes
      * @param $content string Shortcode content

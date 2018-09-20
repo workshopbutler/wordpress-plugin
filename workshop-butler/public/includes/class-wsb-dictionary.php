@@ -81,6 +81,29 @@ class WSB_Dictionary {
     }
     
     /**
+     * Returns the attributes for a currently-processed event or null
+     *
+     * @since 2.0.0
+     * @return array|null
+     */
+    function get_schedule_attrs() {
+        if (!isset($GLOBALS['wsb_schedule_attrs'])) {
+            return null;
+        }
+        return $GLOBALS['wsb_schedule_attrs'];
+    }
+    
+    /**
+     * Sets new schedule attributes
+     *
+     * @param $attrs array New schedule attrs
+     * @since 2.0.0
+     */
+    function set_schedule_attrs($attrs) {
+        $GLOBALS['wsb_schedule_attrs'] = $attrs;
+    }
+    
+    /**
      * Returns a list of processed events
      *
      * @since  2.0.0

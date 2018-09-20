@@ -41,7 +41,8 @@ class WSB_Trainer_List_Page extends WSB_Page {
     public function render_page( $attrs = [], $content = null ) {
         // Load styles and scripts only on demand.
         wp_enqueue_script( "wsb-all-trainers-scripts" );
-        
+        $this->add_theme_fonts();
+    
         $method = 'facilitators';
         $query  = array();
     

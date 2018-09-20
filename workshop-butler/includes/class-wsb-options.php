@@ -47,6 +47,7 @@ class WSB_Options {
     const CUSTOM_EVENT_DETAILS = 'custom-event-page';
     const SHOW_EXPIRED_TICKETS = 'show-expired-tickets';
     const SHOW_NUMBER_OF_TICKETS = 'show-number-of-tickets';
+    const SCHEDULE_NO_EVENTS = 'no-events-caption';
     const SCHEDULE_LAYOUT = 'event-list-layout';
     const SCHEDULE_PAGE = 'event-list-page-id';
     const EVENT_PAGE = 'event-page-id';

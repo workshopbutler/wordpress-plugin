@@ -278,7 +278,7 @@ class WSB_Settings {
     private function get_event_list_settings() {
         return array(
             array(
-                'id'       => 'no-events-caption',
+                'id'       => WSB_Options::SCHEDULE_NO_EVENTS,
                 'type'     => 'text',
                 'title'    => __( 'Customize the text when no events to show', 'wsbintegration' ),
                 'default'  => __( 'No events found', 'wsbintegration')

@@ -64,6 +64,7 @@ class WSB_Event_Page extends WSB_Page {
             return $this->format_error($may_be_event->get_error_message());
         }
         wp_enqueue_script("wsb-event-page");
+        $this->add_theme_fonts();
         $this->add_localized_script($may_be_event);
     
         return $this->render_page( $may_be_event );
