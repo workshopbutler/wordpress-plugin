@@ -40,7 +40,7 @@ class Trainer {
     public $private_stats;
     public $recent_public_stats;
     public $recent_private_stats;
-    public $endorsements;
+    public $testimonials;
     
     /**
      * Creates a new object
@@ -64,7 +64,7 @@ class Trainer {
         $this->private_stats        = $this->get_statistics( $json_data, false, false );
         $this->recent_public_stats  = $this->get_statistics( $json_data, true, true );
         $this->recent_private_stats = $this->get_statistics( $json_data, false, true );
-        $this->endorsements         = $json_data->endorsements;
+        $this->testimonials         = $json_data->endorsements;
         
         if ($trainer_url) {
             $this->url = $trainer_url . '?id=' . $this->id;

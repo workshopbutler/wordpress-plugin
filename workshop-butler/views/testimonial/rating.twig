@@ -1,6 +1,6 @@
-{% if endorsement.rating %}
+{% if testimonial.rating %}
 <div class="wsb-rating">
-    {% set rating = endorsement.rating %}
+    {% set rating = testimonial.rating %}
     {% set stars = range(0, 4) %}
     {% for item in stars %}
         {% set index = item + 1 %}

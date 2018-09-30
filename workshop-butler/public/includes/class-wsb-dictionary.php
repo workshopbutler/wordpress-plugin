@@ -138,16 +138,16 @@ class WSB_Dictionary {
     }
     
     /**
-     * Returns a currently-processed endorsement
+     * Returns a currently-processed testimonial
      *
      * @since  2.0.0
      * @return object|null
      */
-    function get_endorsement() {
-        if (!isset($GLOBALS['wsb_endorsement']) || !is_object($GLOBALS['wsb_endorsement'])) {
+    function get_testimonial() {
+        if ( !isset($GLOBALS['wsb_testimonial']) || !is_object($GLOBALS['wsb_testimonial'])) {
             return null;
         }
-        return $GLOBALS['wsb_endorsement'];
+        return $GLOBALS['wsb_testimonial'];
     }
     
     /**

@@ -67,7 +67,7 @@ class WSB_Integration_Public {
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-schedule-page.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-event-page.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-registration-page.php';
-        require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-endorsement.php';
+        require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-testimonial.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-event.php';
         require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-ajax.php';
@@ -239,11 +239,11 @@ class WSB_Integration_Public {
         add_shortcode('wsb_trainer_badges', array( 'WSB_Trainer', 'tag'));
         add_shortcode('wsb_trainer_bio', array( 'WSB_Trainer_Page', 'tag'));
     
-        add_shortcode('wsb_trainer_endorsements', array( 'WSB_Endorsement', 'endorsements'));
-        add_shortcode('wsb_endorsement', array( 'WSB_Endorsement', 'endorsement'));
-        add_shortcode('wsb_endorsement_author', array( 'WSB_Endorsement', 'tag'));
-        add_shortcode('wsb_endorsement_rating', array( 'WSB_Endorsement', 'tag'));
-        add_shortcode('wsb_endorsement_content', array( 'WSB_Endorsement', 'tag'));
+        add_shortcode('wsb_trainer_testimonials', array( 'WSB_Testimonial', 'testimonials'));
+        add_shortcode('wsb_testimonial', array( 'WSB_Testimonial', 'testimonial'));
+        add_shortcode('wsb_testimonial_author', array( 'WSB_Testimonial', 'tag'));
+        add_shortcode('wsb_testimonial_rating', array( 'WSB_Testimonial', 'tag'));
+        add_shortcode('wsb_testimonial_content', array( 'WSB_Testimonial', 'tag'));
     }
     
     /**
