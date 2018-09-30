@@ -70,7 +70,9 @@ class WSB_Requests {
      */
     public function get( $method, $query ) {
         $query["api_key"] = $this->settings->get ( WSB_Options::API_KEY );
+        $this->add_stats_parameter($query);
         $url = WSB_API_END_POINT . $method . '?' . http_build_query($query);
+        error_log($url);
         return new WSB_Response(wp_remote_get($url));
     }
     
@@ -83,11 +85,13 @@ class WSB_Requests {
      * @return WSB_Response
      */
     public function post( $method, $data ) {
-        $api_key = $this->settings->get ( WSB_Options::API_KEY );
-    
+        $query = [];
+        $query['api_key'] = $this->settings->get ( WSB_Options::API_KEY );
+        $this->add_stats_parameter($query);
+        
         $data_string = json_encode($data);
-    
-        $url = WSB_API_END_POINT . $method . '?api_key=' . $api_key;
+        
+        $url = WSB_API_END_POINT . $method . '?' . http_build_query($query);
     
         $headers = array(
             'content-type' => 'application/json',
@@ -100,6 +104,18 @@ class WSB_Requests {
         );
     
         return new WSB_Response($resp);
+    }
+    
+    /**
+     * Adds a properly formatted parameter which contains an information about plugin settings
+     * @param array $query List of query parameters for API request
+     */
+    protected function add_stats_parameter(&$query) {
+        $parameters = [];
+        array_push($parameters, 'w');
+        array_push($parameters, WSB_INTEGRATION_VERSION);
+        array_push($parameters, $this->settings->get( WSB_Options::THEME, 'alfred' ));
+        $query['t'] = implode(';', $parameters);
     }
     
     /**
