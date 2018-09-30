@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-09-14T07:36:08.534Z\n"
-"PO-Revision-Date: 2018-09-14T07:36:08.534Z\n"
+"POT-Creation-Date: 2018-09-30T09:52:17.559Z\n"
+"PO-Revision-Date: 2018-09-30T09:52:17.559Z\n"
 "Language: de\n"
 
 msgid "filter.locations"
@@ -20,6 +20,12 @@ msgstr "Alle Arten"
 
 msgid "filter.trainers"
 msgstr "Alle Trainer"
+
+msgid "filter.rating"
+msgstr "Alle Bewertungen"
+
+msgid "filter.badge"
+msgstr "Alle Abzeichen"
 
 msgid "country.AF"
 msgstr "Afghanistan"
@@ -863,6 +869,33 @@ msgstr "Türkisch"
 
 msgid "language.VI"
 msgstr "Vietnamesisch"
+
+msgid "rating.one"
+msgstr "Mehr als 1"
+
+msgid "rating.two"
+msgstr "Mehr als 2"
+
+msgid "rating.three"
+msgstr "Mehr als 3"
+
+msgid "rating.four"
+msgstr "Mehr als 4"
+
+msgid "rating.five"
+msgstr "Mehr als 5"
+
+msgid "rating.six"
+msgstr "Mehr als 6"
+
+msgid "rating.seven"
+msgstr "Mehr als 7"
+
+msgid "rating.eight"
+msgstr "Mehr als 8"
+
+msgid "rating.nine"
+msgstr "Mehr als 9"
 
 msgid "schedule.noEvents"
 msgstr "Es wurden keine Ereignisse gefunden"

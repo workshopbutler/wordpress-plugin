@@ -80,7 +80,7 @@ class WSB_Integration_Public {
      */
     public function enqueue_styles() {
         wp_register_style("wsb-fontawesome-styles", plugin_dir_url( __FILE__ ) . 'css/fontawesome-all.min.css', array(), $this->version);
-        wp_register_style("wsb-themes", plugin_dir_url( __FILE__ ) . 'css/styles.1.0.1-beta.2.min.css', array(), $this->version);
+        wp_register_style("wsb-themes", plugin_dir_url( __FILE__ ) . 'css/styles.1.0.1-beta.4.min.css', array(), $this->version);
         
         wp_register_style('wsb-font-arapey', 'https://fonts.googleapis.com/css?family=Arapey');
         wp_register_style('wsb-font-montserrat', 'https://fonts.googleapis.com/css?family=Montserrat');
@@ -212,6 +212,9 @@ class WSB_Integration_Public {
         add_shortcode('wsb_trainer_list_item', array( 'WSB_Trainer_List_Page', 'trainer'));
         add_shortcode('wsb_trainer_list_photo', array( 'WSB_Trainer_List_Page', 'tag'));
         add_shortcode('wsb_trainer_list_name', array( 'WSB_Trainer_List_Page', 'tag'));
+        add_shortcode('wsb_trainer_list_country', array( 'WSB_Trainer_List_Page', 'tag'));
+        add_shortcode('wsb_trainer_list_badges', array( 'WSB_Trainer_List_Page', 'tag'));
+        add_shortcode('wsb_trainer_list_rating', array( 'WSB_Trainer_List_Page', 'tag'));
     
         add_shortcode('wsb_event_title', array( 'WSB_Event', 'tag'));
         add_shortcode('wsb_event_registration_button', array( 'WSB_Event', 'tag'));

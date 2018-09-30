@@ -90,10 +90,10 @@ class WSB_Trainer_List_Page extends WSB_Page {
      * @return string
      */
     protected function render_filters( $attrs = []) {
-        $default_attrs = array('filters' => 'location,trainer,language');
-        $attrs = shortcode_atts($default_attrs, $attrs);
+        $attrs = shortcode_atts($this->get_default_attrs('filter'), $attrs);
         
-        if (!isset($GLOBALS['wsb_trainers']) || !is_array($GLOBALS['wsb_trainers'])) {
+        $trainers = $this->dict->get_trainers();
+        if (is_null($trainers)) {
             return '';
         }
         $template = $this->get_template('filters', null);
@@ -104,8 +104,26 @@ class WSB_Trainer_List_Page extends WSB_Page {
             return trim($name);
         }, explode(',', $attrs['filters']));
         
-        $trainer_filters = new Trainer_Filters($GLOBALS['wsb_trainers'], $available_filters);
+        $trainer_filters = new Trainer_Filters($trainers, $available_filters);
         return $this->compile_string($template, array('filters' => $trainer_filters->get_filters()));
+    }
+    
+    /**
+     * Retrieves the name of Workshop Butler shortcode
+     *
+     * @param string $tag Full shortcode tag
+     *
+     * @since 2.0.0
+     * @return string
+     */
+    protected static function get_shortcode_name( $tag ) {
+        $parts    = explode( '_', $tag );
+        $emptyTag = '[' . $tag . ']';
+        if ( count( $parts ) < 4 ) {
+            return $emptyTag;
+        }
+        
+        return implode( '_', array_slice( $parts, 3 ) );
     }
     
     /**
@@ -118,10 +136,10 @@ class WSB_Trainer_List_Page extends WSB_Page {
      * @return string
      */
     protected function render_trainer( $attrs = [], $content = null ) {
-        if (!isset($GLOBALS['wsb_trainers']) || !is_array($GLOBALS['wsb_trainers'])) {
+        $trainers = $this->dict->get_trainers();
+        if (is_null($trainers)) {
             return '';
         }
-        $trainers = $GLOBALS['wsb_trainers'];
         $item_template = $this->get_template('trainer-list-item', null);
         if (!$item_template) {
             return '';
@@ -129,12 +147,12 @@ class WSB_Trainer_List_Page extends WSB_Page {
         
         $html = '';
         foreach ($trainers as $trainer) {
-            $GLOBALS['wsb_trainer'] = $trainer;
+            $this->dict->set_trainer($trainer);
             $item_content = $this->compile_string($content, array('trainer' => $trainer));
             $processed_item_content = do_shortcode($item_content);
             $html .= $this->compile_string($item_template,
                 array('trainer' => $trainer, 'content' => $processed_item_content));
-            unset($GLOBALS['wsb_trainer']);
+            $this->dict->clear_trainer();
         }
         
         $list_template = $this->get_template('trainer-list', null);
@@ -146,27 +164,19 @@ class WSB_Trainer_List_Page extends WSB_Page {
     }
     
     /**
-     * Handles 'wsb_event_x' shortcodes
+     * Returns default attributes for the shortcodes
+     * @param string $shortcode_name Name of the shortcode (only the meaningful part)
      *
-     * @param $attrs   array  Shortcode attributes
-     * @param $content string Shortcode content
-     * @param $tag     string Shortcode's tag
-     * @since  2.0.0
-     * @return string
+     * @return array
      */
-    static public function tag($attrs, $content, $tag) {
-        $parts = explode('_', $tag);
-        $emptyTag = '['. $tag . ']';
-        if (count($parts) < 4) {
-            return $emptyTag;
-        }
-        $shortCodeName = implode('_', array_slice($parts, 3));
-        $method = 'render_'. $shortCodeName;
-        $page = new WSB_Trainer_List_Page();
-        if (method_exists($page, $method)) {
-            return $page->$method($attrs, $content);
-        } else {
-            return $page->render_simple_shortcode($shortCodeName, $attrs, $content);
+    protected function get_default_attrs($shortcode_name) {
+        switch ($shortcode_name) {
+            case 'name':
+                return array('with_country' => true);
+            case 'filter':
+                return array('filters' => 'location,trainer,language,rating,badge');
+            default:
+                return array();
         }
     }
     

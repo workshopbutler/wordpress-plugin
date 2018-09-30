@@ -376,7 +376,7 @@ fieldset[disabled] .wsb-content .wsb-btn {
   overflow: hidden;
   display: inline-block;
   vertical-align: top;
-  height: 17em;
+  min-height: 17em;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   padding: 21px 26px 0;
@@ -436,14 +436,8 @@ fieldset[disabled] .wsb-content .wsb-btn {
   display: block;
   float: left;
   margin-right: 13px;
-  width: 35px;
   height: 35px;
   border-radius: 10px;
-  overflow: hidden;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-color: #f5f5f5;
 }
 .wsb-content .wsb-tile-button {
   height: 70px;
@@ -480,7 +474,7 @@ fieldset[disabled] .wsb-content .wsb-btn {
     -webkit-box-flex: 0;
         -ms-flex: 0 1 48%;
             flex: 0 1 48%;
-    height: 17em;
+    min-height: 17em;
     margin-right: 2% !important;
     margin-bottom: 20px;
   }
@@ -1200,10 +1194,10 @@ fieldset[disabled] .wsb-content .wsb-btn {
   margin-top: 15px;
   line-height: 1.3;
 }
-.wsb-content .wsb-workshops {
+.wsb-content .wsb-events {
   margin-bottom: 30px;
 }
-.wsb-content .wsb-workshops__title {
+.wsb-content .wsb-events__title {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 10px;
@@ -1588,7 +1582,7 @@ fieldset[disabled] .britton .wsb-content .wsb-btn-primary {
 .britton .wsb-content .wsb-profile__name h3,
 .britton .wsb-content .wsb-form__title,
 .britton .wsb-content .wsb-form__label,
-.britton .wsb-content .wsb-workshops__title,
+.britton .wsb-content .wsb-events__title,
 .britton .wsb-content .wsb-trainer__name h3 {
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
@@ -1750,7 +1744,7 @@ fieldset[disabled] .gatsby .wsb-content .wsb-btn-primary {
 .gatsby .wsb-content .wsb-title,
 .gatsby .wsb-content .wsb-ticket__val,
 .gatsby .wsb-content .wsb-ticket__name,
-.gatsby .wsb-content .wsb-workshops__title,
+.gatsby .wsb-content .wsb-events__title,
 .gatsby .wsb-content .wsb-profile__name h3,
 .gatsby .wsb-content .wsb-form__title,
 .gatsby .wsb-content .wsb-form__label,
@@ -1758,7 +1752,7 @@ fieldset[disabled] .gatsby .wsb-content .wsb-btn-primary {
 .gatsby .wsb-content .wsb-trainer__name h3,
 .gatsby .wsb-content .wsb-trainer-details-title,
 .gatsby .wsb-content .wsb-descr,
-.gatsby .wsb-content .wsb-workshops__title {
+.gatsby .wsb-content .wsb-events__title {
   -webkit-font-smoothing: antialiased;
   font-weight: bold;
   font-family: 'Montserrat', "SFNS Display", "Helvetica Neue", Arial, sans-serif;
@@ -1767,7 +1761,7 @@ fieldset[disabled] .gatsby .wsb-content .wsb-btn-primary {
   padding-top: 5em;
   padding-bottom: 1em;
   background-color: #a36c1f;
-  color: #fff;
+  color: #fff !important;
 }
 .gatsby .wsb-content .wsb-title {
   margin-bottom: 14px;
@@ -1802,7 +1796,7 @@ fieldset[disabled] .gatsby .wsb-content .wsb-btn-primary {
   color: #9a1200;
   font-weight: 400;
 }
-.gatsby .wsb-content .wsb-workshops__title,
+.gatsby .wsb-content .wsb-events__title,
 .gatsby .wsb-content .wsb-info__title {
   color: #333;
   font-weight: bold;
@@ -1988,7 +1982,7 @@ fieldset[disabled] .hayes .wsb-content .wsb-btn-primary {
 .hayes .wsb-content .wsb-form__btn,
 .hayes .wsb-content .wsb-trainer-details-title,
 .hayes .wsb-content .wsb-descr,
-.hayes .wsb-content .wsb-workshops__title {
+.hayes .wsb-content .wsb-events__title {
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
   font-family: 'Montserrat', Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -2004,7 +1998,7 @@ fieldset[disabled] .hayes .wsb-content .wsb-btn-primary {
 }
 .hayes .wsb-content .wsb-subtitle,
 .hayes .wsb-content .wsb-page,
-.hayes .wsb-content .wsb-workshops__title {
+.hayes .wsb-content .wsb-events__title {
   font-size: 14px;
 }
 .hayes .wsb-content .wsb-body {
@@ -2079,11 +2073,11 @@ fieldset[disabled] .hayes .wsb-content .wsb-btn-primary {
 .hayes .wsb-content .wsb-sharing a {
   border-radius: 0;
 }
-.hayes .wsb-content .wsb-workshops {
+.hayes .wsb-content .wsb-events {
   font-size: 14px;
   color: #7A7A7A;
 }
-.hayes .wsb-content .wsb-workshops__title {
+.hayes .wsb-content .wsb-events__title {
   color: #888;
   font-size: 15.4px;
 }
@@ -2223,7 +2217,7 @@ fieldset[disabled] .dacota .wsb-content .wsb-btn-primary {
 .dacota .wsb-content .wsb-form__label,
 .dacota .wsb-content .wsb-trainer-details-title,
 .dacota .wsb-content .wsb-descr,
-.dacota .wsb-content .wsb-workshops__title,
+.dacota .wsb-content .wsb-events__title,
 .dacota .wsb-content .wsb-big-number,
 .dacota .wsb-content .wsb-cite,
 .dacota .wsb-content .wsb-info__title,
@@ -2242,7 +2236,7 @@ fieldset[disabled] .dacota .wsb-content .wsb-btn-primary {
   padding-top: 5em;
   padding-bottom: 1em;
   background-color: #1c3f7f;
-  color: #FFF;
+  color: #FFF !important;
 }
 .dacota .wsb-content .wsb-title {
   margin-bottom: 9px;

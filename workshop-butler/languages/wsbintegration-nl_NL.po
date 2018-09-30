@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-09-14T07:36:09.765Z\n"
-"PO-Revision-Date: 2018-09-14T07:36:09.765Z\n"
+"POT-Creation-Date: 2018-09-30T09:52:18.813Z\n"
+"PO-Revision-Date: 2018-09-30T09:52:18.813Z\n"
 "Language: nl\n"
 
 msgid "filter.locations"
@@ -20,6 +20,12 @@ msgstr "Alle typen"
 
 msgid "filter.trainers"
 msgstr "Alle trainers"
+
+msgid "filter.rating"
+msgstr "Alle beoordelingen"
+
+msgid "filter.badge"
+msgstr "Alle badges"
 
 msgid "country.00"
 msgstr "online"
@@ -863,6 +869,33 @@ msgstr "Turks"
 
 msgid "language.VI"
 msgstr "Vietnamees"
+
+msgid "rating.one"
+msgstr "Meer dan 1"
+
+msgid "rating.two"
+msgstr "Meer dan 2"
+
+msgid "rating.three"
+msgstr "Meer dan 3"
+
+msgid "rating.four"
+msgstr "Meer dan 4"
+
+msgid "rating.five"
+msgstr "Meer dan 5"
+
+msgid "rating.six"
+msgstr "Meer dan 6"
+
+msgid "rating.seven"
+msgstr "Meer dan 7"
+
+msgid "rating.eight"
+msgstr "Meer dan 8"
+
+msgid "rating.nine"
+msgstr "Meer dan 9"
 
 msgid "schedule.noEvents"
 msgstr "Er zijn geen evenementen gevonden"

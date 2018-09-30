@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-09-14T07:36:08.950Z\n"
-"PO-Revision-Date: 2018-09-14T07:36:08.950Z\n"
+"POT-Creation-Date: 2018-09-30T09:52:17.995Z\n"
+"PO-Revision-Date: 2018-09-30T09:52:17.995Z\n"
 "Language: es\n"
 
 msgid "filter.locations"
@@ -20,6 +20,12 @@ msgstr "Todos los tipos"
 
 msgid "filter.trainers"
 msgstr "Todos los entrenadores"
+
+msgid "filter.rating"
+msgstr "Todas las calificaciones"
+
+msgid "filter.badge"
+msgstr "Todas las insignias"
 
 msgid "country.00"
 msgstr "En línea"
@@ -863,6 +869,33 @@ msgstr "Turco"
 
 msgid "language.VI"
 msgstr "Vietnamita"
+
+msgid "rating.one"
+msgstr "Más de 1"
+
+msgid "rating.two"
+msgstr "Más de 2"
+
+msgid "rating.three"
+msgstr "Más de 3"
+
+msgid "rating.four"
+msgstr "Más de 4"
+
+msgid "rating.five"
+msgstr "Más de 5"
+
+msgid "rating.six"
+msgstr "Más de 6"
+
+msgid "rating.seven"
+msgstr "Más de 7"
+
+msgid "rating.eight"
+msgstr "Más de 8"
+
+msgid "rating.nine"
+msgstr "Más de 9"
 
 msgid "schedule.noEvents"
 msgstr "No se encontraron eventos"

@@ -81,10 +81,29 @@ class Trainer {
         }
     }
     
+    /**
+     * Returns the full name of the trainer
+     * @since  2.0.0
+     * @return string
+     */
     public function full_name() {
         return $this->first_name . ' ' . $this->last_name;
     }
     
+    /**
+     * Returns the list of badge's name
+     * @since 2.0.0
+     * @return string[]
+     */
+    public function name_of_badges() {
+        $names = [];
+        foreach ($this->badges as $badge) {
+            array_push($names, $badge->name);
+        }
+        return $names;
+    }
+
+
     /**
      * Returns a correct trainer country code
      *

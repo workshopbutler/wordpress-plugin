@@ -41,6 +41,14 @@ class WSB_Dictionary {
     }
     
     /**
+     * Removes all trainers from the dictionary
+     * @since 2.0.0
+     */
+    function clear_trainers() {
+        unset($GLOBALS['wsb_trainers']);
+    }
+    
+    /**
      * Returns a currently-processed trainer or WP_Error if an API request failed
      *
      * @since  2.0.0
@@ -117,6 +125,19 @@ class WSB_Dictionary {
     }
     
     /**
+     * Returns a list of processed trainers
+     *
+     * @since  2.0.0
+     * @return Trainer[]|null
+     */
+    function get_trainers() {
+        if (!isset($GLOBALS['wsb_trainers']) || !is_array($GLOBALS['wsb_trainers'])) {
+            return null;
+        }
+        return $GLOBALS['wsb_trainers'];
+    }
+    
+    /**
      * Returns a currently-processed endorsement
      *
      * @since  2.0.0
@@ -159,6 +180,17 @@ class WSB_Dictionary {
      */
     function set_events($events) {
         $GLOBALS['wsb_events']  = $events;
+    }
+    
+    /**
+     * Adds loaded trainers to the dictionary
+     *
+     * @param Trainer[] $trainers Retrieved trainers
+     *
+     * @since 2.0.0
+     */
+    function set_trainers( $trainers) {
+        $GLOBALS['wsb_trainers'] = $trainers;
     }
     
 }

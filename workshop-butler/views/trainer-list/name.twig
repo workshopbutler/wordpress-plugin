@@ -3,9 +3,3 @@
 {% else %}
     <div>{{ trainer.full_name() }}</div>
 {% endif %}
-        {{ 'country.' . trainer.country_code }}
-{% if with_country %}
-    <div class="wsb-trainer-tile__country">
-        {{ __("country.#{trainer.country_code}", 'wsbintegration') }}
-    </div>
-{% endif %}

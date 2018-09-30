@@ -1,25 +1,7 @@
-+ Add configuration options for
-  + schedule
-  + event page
-  + list of trainers
-  + trainer profile
-+ Add translations
-  + add conversion script
-  + add compiler script (?)
-+ Add registration form
-+ Add sidebar widget
-+ Translation issue (multiples)
-+ Improve styles
-  + text links
-  + registration fields
-  + tiles
-  + paddings
++ Support for categories
++ Support for multiple schedules
+- Badge filter
+- Rating filter
 - Titles
-  + Event page
-  + Registration page
-  + Trainer Page
   - Improve the design of trainer profile
-- Migration script
-+ Set PHP limitation
-- Correct fonts for different themes
 - Automatic deployment
