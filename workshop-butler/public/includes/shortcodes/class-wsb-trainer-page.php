@@ -112,21 +112,6 @@ class WSB_Trainer_Page extends WSB_Page {
     }
     
     /**
-     * Returns default attributes for the shortcodes
-     * @param string $shortcode_name Name of the shortcode (only the meaningful part)
-     *
-     * @return array
-     */
-    protected function get_default_attrs($shortcode_name) {
-        switch ($shortcode_name) {
-            case 'name':
-                return array('with_country' => true);
-            default:
-                return array();
-        }
-    }
-    
-    /**
      * Renders a simple shortcode with no additional logic
      * @param string       $name Name of the shortcode (like 'title', 'register'
      * @param array        $attrs  Attributes

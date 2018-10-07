@@ -163,18 +163,33 @@ EOD;
      */
     protected function get_social_link_data($type, $trainer) {
         switch ($type) {
-            case 'website':
-                return array('class' => 'fas fa-external-link-alt', 'link' => $trainer->social_links->website);
-            case 'blog':
-                return array('class' => 'fas fa-rss', 'link' => $trainer->social_links->blog);
             case 'facebook':
-                return array('class' => 'fab fa-facebook', 'link' => $trainer->social_links->facebook);
+                $class = 'fab fa-facebook';
+                break;
             case 'linkedin':
-                return array('class' => 'fab fa-linkedin', 'link' => $trainer->social_links->linked_in);
+                $class = 'fab fa-linkedin';
+                break;
             case 'google-plus':
-                return array('class' => 'fab fa-google', 'link' => $trainer->social_links->google_plus);
+                $class = 'fab fa-google';
+                break;
             default:
-                return array('class' => 'fab fa-twitter', 'link' => $trainer->social_links->twitter);
+                $class = 'fab fa-twitter';
+            
+        }
+        $content = '<i class="' . $class . '"></i>';
+        switch ($type) {
+            case 'website':
+                return array('content' => 'Website', 'link' => $trainer->social_links->website);
+            case 'blog':
+                return array('content' => 'Blog', 'link' => $trainer->social_links->blog);
+            case 'facebook':
+                return array('content' => $content, 'link' => $trainer->social_links->facebook);
+            case 'linkedin':
+                return array('content' => $content, 'link' => $trainer->social_links->linked_in);
+            case 'google-plus':
+                return array('content' => $content, 'link' => $trainer->social_links->google_plus);
+            default:
+                return array('content' => $content, 'link' => $trainer->social_links->twitter);
         }
     }
     
@@ -186,7 +201,7 @@ EOD;
      * @return string
      */
     protected function get_social_link_tmpl() {
-        return '<a href="{{ link }}" target="_blank"><i class="{{ class }}"></i></a>';
+        return '<a href="{{ link }}" target="_blank">{{ content | raw }}</a>';
     }
     
     /**
