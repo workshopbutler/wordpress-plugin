@@ -33,11 +33,12 @@ class WSB_Options {
 
 	const API_KEY = 'api-key';
 
-	const SCHEDULE_TEMPLATE     = 'schedule-template';
-	const EVENT_TEMPLATE        = 'event-template';
-	const REGISTRATION_TEMPLATE = 'registration-template';
-	const TRAINER_LIST_TEMPLATE = 'trainer-list-template';
-	const TRAINER_TEMPLATE      = 'trainer-template';
+	const SCHEDULE_TILE_TEMPLATE  = 'schedule-tile-template';
+	const SCHEDULE_TABLE_TEMPLATE = 'schedule-table-template';
+	const EVENT_TEMPLATE          = 'event-template';
+	const REGISTRATION_TEMPLATE   = 'registration-template';
+	const TRAINER_LIST_TEMPLATE   = 'trainer-list-template';
+	const TRAINER_TEMPLATE        = 'trainer-template';
 
 	const CUSTOM_CSS = 'custom-css';
 

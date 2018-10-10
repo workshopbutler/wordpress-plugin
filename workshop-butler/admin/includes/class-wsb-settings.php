@@ -18,7 +18,7 @@ class WSB_Settings {
 	/**
 	 * Name of the element in WordPress $options array
 	 *
-	 * @since 0.3.0
+	 * @since 2.0.0
 	 * @var   $opt_name string Name of the element in WordPress $options array
 	 */
 	protected $opt_name;
@@ -28,17 +28,18 @@ class WSB_Settings {
 	 *
 	 * @param $opt_name string   Name of the element in WordPress $options array
 	 *
-	 * @since 0.3.0
+	 * @since 2.0.0
 	 */
 	public function __construct( $opt_name ) {
 		$this->opt_name = $opt_name;
 		$this->load_dependencies();
+//		WSB_Options::destroy_options();
 	}
 
 	/**
 	 * Load the required dependencies
 	 *
-	 * @since    0.3.0
+	 * @since    2.0.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -132,16 +133,35 @@ class WSB_Settings {
 		Redux::setSection(
 			$this->opt_name,
 			array(
-				'title'      => __( 'Schedule', 'wsbintegration' ),
-				'id'         => 'schedule',
+				'title'      => __( 'Schedule (tiles)', 'wsbintegration' ),
+				'id'         => 'schedule-tile',
 				// 'icon'  => 'el el-home'
 				'subsection' => true,
 				'fields'     => array(
 					array(
-						'id'         => WSB_Options::SCHEDULE_TEMPLATE,
+						'id'         => WSB_Options::SCHEDULE_TILE_TEMPLATE,
 						'type'       => 'ace_editor',
 						'mode'       => 'WSB_Twig',
-						'default'    => $this->get_template( 'schedule-page' ),
+						'default'    => $this->get_template( 'schedule-tile-page' ),
+						'full_width' => true,
+						'theme'      => 'chrome',
+					),
+				),
+			)
+		);
+		Redux::setSection(
+			$this->opt_name,
+			array(
+				'title'      => __( 'Schedule (table)', 'wsbintegration' ),
+				'id'         => 'schedule-table',
+				// 'icon'  => 'el el-home'
+				'subsection' => true,
+				'fields'     => array(
+					array(
+						'id'         => WSB_Options::SCHEDULE_TABLE_TEMPLATE,
+						'type'       => 'ace_editor',
+						'mode'       => 'WSB_Twig',
+						'default'    => $this->get_template( 'schedule-table-page' ),
 						'full_width' => true,
 						'theme'      => 'chrome',
 					),
@@ -381,7 +401,7 @@ class WSB_Settings {
 	 *
 	 * @param $save_ajax boolean True when the changes should be saved via Ajax
 	 *
-	 * @since 0.3.0
+	 * @since 2.0.0
 	 * @return array
 	 */
 	protected function get_arguments( $save_ajax ) {
@@ -514,7 +534,7 @@ class WSB_Settings {
 	 *
 	 * @param $name    string       Name of the template
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return null|string
 	 */
 	protected function get_template( $name ) {

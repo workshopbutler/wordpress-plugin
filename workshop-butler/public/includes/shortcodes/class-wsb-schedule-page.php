@@ -128,7 +128,11 @@ class WSB_Schedule_Page extends WSB_Page {
 		if ( $content ) {
 			$template = $content;
 		} else {
-			$custom_template = $this->settings->get( WSB_Options::SCHEDULE_TEMPLATE );
+			if ($this->get_list_type() == 'table') {
+				$custom_template = $this->settings->get(WSB_Options::SCHEDULE_TABLE_TEMPLATE);
+			} else {
+				$custom_template = $this->settings->get(WSB_Options::SCHEDULE_TILE_TEMPLATE);
+			}
 			$template        = $this->get_template( 'schedule-page', $custom_template );
 		}
 
