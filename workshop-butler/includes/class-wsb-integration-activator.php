@@ -30,11 +30,14 @@ class WSB_Integration_Activator {
 	 */
 	public static function activate() {
 		$self = new self();
-		if ( empty( WSB_Options::get_option( WSB_Options::API_KEY ) ) ) {
+		$newKey = WSB_Options::get_option( WSB_Options::API_KEY );
+		if ( empty( $newKey ) ) {
 			$self->transfer_settings();
 		}
 		$self->save_internal_settings();
-		if ( empty( WSB_Options::get_option( WSB_Options::EVENT_PAGE ) ) ) {
+
+		$eventPage = WSB_Options::get_option( WSB_Options::EVENT_PAGE );
+		if ( empty( $eventPage ) ) {
 			$self->create_page( __( 'Schedule', 'wsbintegration' ), WSB_Options::SCHEDULE_PAGE, '[wsb_schedule]' );
 			$self->create_page(
 				__( 'Event', 'wsbintegration' ),

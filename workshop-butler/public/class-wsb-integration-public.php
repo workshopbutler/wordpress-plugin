@@ -65,6 +65,7 @@ class WSB_Integration_Public {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer-list-page.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer-page.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-schedule-page.php';
+		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-old-schedule-page.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-event-page.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-registration-page.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-testimonial.php';
@@ -192,6 +193,9 @@ class WSB_Integration_Public {
 	 * Adds Workshop Butler shortcodes
 	 */
 	public function add_shortcodes() {
+		//old version support
+		add_shortcode('wb_content', array('WSB_Old_Schedule_Page', 'page'));
+
 		// pages
 		add_shortcode( 'wsb_schedule', array( 'WSB_Schedule_Page', 'page' ) );
 		add_shortcode( 'wsb_event', array( 'WSB_Event_Page', 'page' ) );

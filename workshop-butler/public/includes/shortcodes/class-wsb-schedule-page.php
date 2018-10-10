@@ -3,7 +3,7 @@
  * The file that defines the Schedule class
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -12,7 +12,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 /**
  * Schedule page class which handles the rendering and logic for the list of events
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
@@ -23,7 +23,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    0.2.0
+	 * @since    2.0.0
 	 */
 	public function __construct() {
 		parent::__construct();
@@ -34,7 +34,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Load the required dependencies for this class.
 	 *
-	 * @since    0.2.0
+	 * @since    2.0.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -50,7 +50,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	 * @param array $attrs
 	 * @param null  $content
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	public function render_page( $attrs = [], $content = null ) {
@@ -98,7 +98,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	 * @param $attrs array Widget's attributes
 	 * @param $content string | null Content of the wsb_schedule shortcode
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	private function render_list( $response, $attrs, $content ) {
@@ -273,7 +273,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Returns the type of event list
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	private function get_list_type() {
@@ -290,7 +290,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	 *
 	 * @param $attrs   array  Shortcode attributes
 	 * @param $content string Shortcode content
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	static public function page( $attrs, $content, $tag ) {
