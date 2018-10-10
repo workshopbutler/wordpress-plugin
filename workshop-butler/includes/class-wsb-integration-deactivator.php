@@ -21,17 +21,17 @@ require_once plugin_dir_path( __FILE__ ) . 'class-wsb-options.php';
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Integration_Deactivator {
-    
-    /**
-     * Removes the plugin settings on deactivation.
-     *
-     * Cleans all public plugins settings and stores only the internal ones to support a correct version migration
-     *
-     * @since    2.0.0
-     */
-    public static function deactivate() {
-        delete_option(WSB_Options::PLUGIN_SETTINGS);
-        WSB_Options::set_internal_option(WSB_Options::INT_STATE, false);
-    }
-    
+
+	/**
+	 * Removes the plugin settings on deactivation.
+	 *
+	 * Cleans all public plugins settings and stores only the internal ones to support a correct version migration
+	 *
+	 * @since    2.0.0
+	 */
+	public static function deactivate() {
+		delete_option( WSB_Options::PLUGIN_SETTINGS );
+		WSB_Options::set_internal_option( WSB_Options::INT_STATE, false );
+	}
+
 }

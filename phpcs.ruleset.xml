@@ -7,4 +7,6 @@
 
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>workshop-butler/views/*</exclude-pattern>
+    <exclude-pattern>workshop-butler/lib/*</exclude-pattern>
 </ruleset>

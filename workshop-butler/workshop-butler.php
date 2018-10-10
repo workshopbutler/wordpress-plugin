@@ -20,7 +20,7 @@
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
-    die;
+	die;
 }
 
 /**
@@ -33,8 +33,8 @@ define( 'WSB_INTEGRATION_VERSION', '2.0.0' );
  * This action is documented in includes/class-wsb-integration-activator.php
  */
 function activate_WSB_Integration() {
-    require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-integration-activator.php';
-    WSB_Integration_Activator::activate();
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-integration-activator.php';
+	WSB_Integration_Activator::activate();
 }
 
 /**
@@ -42,8 +42,8 @@ function activate_WSB_Integration() {
  * This action is documented in includes/class-wsb-integration-deactivator.php
  */
 function deactivate_WSB_Integration() {
-    require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-integration-deactivator.php';
-    WSB_Integration_Deactivator::deactivate();
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-integration-deactivator.php';
+	WSB_Integration_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_WSB_Integration' );
@@ -65,10 +65,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wsb-integration.php';
  * @since    0.2.0
  */
 function run_WSB_Integration() {
-    
-    $plugin = new WSB_Integration();
-    $plugin->run();
-    
+
+	$plugin = new WSB_Integration();
+	$plugin->run();
+
 }
 
 run_WSB_Integration();

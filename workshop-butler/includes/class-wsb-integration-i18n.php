@@ -43,5 +43,4 @@ class WSB_Integration_i18n {
 	}
 
 
-
 }
