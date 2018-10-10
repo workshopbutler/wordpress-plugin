@@ -1,12 +1,30 @@
-<div class="wsb-tile-button">
+{% if layout == 'tile' %}
+    <div class="wsb-tile-button">
+            {% if event.state.closed() %}
+                <button disabled class="wsb-btn wsb-btn-primary wsb-tile-btn">
+                    {{ wsb_t('schedule.event.soldOut') }}
+                </button>
+            {% else %}
+                <a href="{% if registration == 'true' %} {{ event.registration_page.url }} {% else %} {{ event.url }} {% endif %}"
+                   class="wsb-btn wsb-btn-primary wsb-tile-btn">
+                    {{ wsb_t('schedule.event.register') }}
+                </a>
+            {% endif %}
+    </div>
+{% else %}
+    <div class="wsb-table__col">
+        {% if event.free %}
+            <div class="wsb-free">{{ wsb_t('schedule.event.free') }}</div>
+        {% endif %}
         {% if event.state.closed() %}
-            <button disabled class="wsb-btn wsb-btn-primary wsb-tile-btn">
-                {{ __('schedule.event.soldOut', 'wsbintegration') }}
-            </button>
+            <a disabled class="wsb-table__btn">
+                {{ wsb_t('schedule.event.soldOut') }}
+            </a>
         {% else %}
             <a href="{% if registration == 'true' %} {{ event.registration_page.url }} {% else %} {{ event.url }} {% endif %}"
-               class="wsb-btn wsb-btn-primary wsb-tile-btn">
-                {{ __('schedule.event.register', 'wsbintegration') }}
+               class="wsb-table__btn">
+                {{ wsb_t('schedule.event.register') }}
             </a>
         {% endif %}
-</div>
+    </div>
+{% endif %}

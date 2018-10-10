@@ -80,7 +80,7 @@ class WSB_Integration_Public {
      */
     public function enqueue_styles() {
         wp_register_style("wsb-fontawesome-styles", plugin_dir_url( __FILE__ ) . 'css/fontawesome-all.min.css', array(), $this->version);
-        wp_register_style("wsb-themes", plugin_dir_url( __FILE__ ) . 'css/styles.1.0.1.min.css', array(), $this->version);
+        wp_register_style("wsb-themes", plugin_dir_url( __FILE__ ) . 'css/styles.1.0.2.min.css', array(), $this->version);
         
         wp_register_style('wsb-font-arapey', 'https://fonts.googleapis.com/css?family=Arapey');
         wp_register_style('wsb-font-montserrat', 'https://fonts.googleapis.com/css?family=Montserrat');
@@ -205,8 +205,9 @@ class WSB_Integration_Public {
         add_shortcode('wsb_schedule_item', array( 'WSB_Schedule_Page', 'tag'));
         add_shortcode('wsb_schedule_register', array( 'WSB_Schedule_Page', 'tag'));
         add_shortcode('wsb_schedule_title', array( 'WSB_Schedule_Page', 'tag'));
-        add_shortcode('wsb_schedule_info', array( 'WSB_Schedule_Page', 'tag'));
         add_shortcode('wsb_schedule_trainers', array( 'WSB_Schedule_Page', 'tag'));
+        add_shortcode('wsb_schedule_schedule', array( 'WSB_Schedule_Page', 'tag'));
+        add_shortcode('wsb_schedule_location', array( 'WSB_Schedule_Page', 'tag'));
     
         add_shortcode('wsb_trainer_list_filters', array( 'WSB_Trainer_List_Page', 'tag'));
         add_shortcode('wsb_trainer_list_item', array( 'WSB_Trainer_List_Page', 'trainer'));

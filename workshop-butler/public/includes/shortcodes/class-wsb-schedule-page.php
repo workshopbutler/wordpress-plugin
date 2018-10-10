@@ -160,9 +160,13 @@ class WSB_Schedule_Page extends WSB_Page {
      */
     protected function get_default_attrs($shortcode_name) {
         switch ($shortcode_name) {
+            case 'item':
+                return array('cols' => 'schedule,location,title,register');
             case 'filters':
                 return array('filters' => 'location,trainer,language,type');
             case 'register':
+                return array('registration' => 'false');
+            case 'table_register':
                 return array('registration' => 'false');
             default:
                 return array();
@@ -183,15 +187,7 @@ class WSB_Schedule_Page extends WSB_Page {
         if (is_null( $events )) {
             return '';
         }
-        switch($this->get_list_type()) {
-            case 'tile':
-                $template_name = 'event-list-item';
-                break;
-            default:
-                $template_name = 'event-table-row';
-        }
-    
-        $item_template = $this->get_template('schedule/'. $template_name, null);
+        $item_template = $this->get_template('schedule/item', null);
         if (!$item_template) {
             return '';
         }
@@ -202,29 +198,29 @@ class WSB_Schedule_Page extends WSB_Page {
             $item_content = $this->compile_string($content, array('event' => $event));
             $processed_item_content = do_shortcode($item_content);
             $html .= $this->compile_string($item_template,
-                array('event' => $event, 'content' => $processed_item_content));
+                array('event' => $event, 'content' => $processed_item_content, 'layout' => $this->get_list_type()));
             $this->dict->clear_event();
         }
     
-        switch($this->get_list_type()) {
-            case 'tile':
-                $template_name = 'event-list';
-                break;
-            default:
-                $template_name = 'event-table';
-        }
-        
-        $list_template = $this->get_template('schedule/' . $template_name, null);
+        $list_template = $this->get_template('schedule/layout', null);
         if (!$list_template) {
             return '';
         }
-        
-        return $this->compile_string($list_template, array('content' => $html));
+    
+        $attrs = shortcode_atts($this->get_default_attrs('item'), $attrs);
+        $columns = array_map(function($name) {
+            return trim($name);
+        }, explode(',', $attrs['cols']));
+    
+        $attrs['content'] = $html;
+        $attrs['cols'] = $columns;
+        $attrs['layout'] = $this->get_list_type();
+        return $this->compile_string($list_template, $attrs);
     }
     
     /**
      * Renders a simple shortcode with no additional logic
-     * @param string       $name Name of the shortcode (like 'title', 'register'
+     * @param string       $name Name of the shortcode (like 'title', 'register')
      * @param array        $attrs  Attributes
      * @param null|string  $content Replaceable content
      *
@@ -241,7 +237,10 @@ class WSB_Schedule_Page extends WSB_Page {
             return '[wsb_schedule_' . $name . ']';
         }
         $attrs['event'] = $event;
-        return $this->compile_string($template, $attrs);
+        $attrs['layout'] = $this->get_list_type();
+        $processed_template = do_shortcode($template);
+    
+        return $this->compile_string($processed_template, $attrs);
     }
     
     /**

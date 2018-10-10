@@ -72,7 +72,6 @@ class WSB_Requests {
         $query["api_key"] = $this->settings->get ( WSB_Options::API_KEY );
         $this->add_stats_parameter($query);
         $url = WSB_API_END_POINT . $method . '?' . http_build_query($query);
-        error_log($url);
         return new WSB_Response(wp_remote_get($url));
     }
     

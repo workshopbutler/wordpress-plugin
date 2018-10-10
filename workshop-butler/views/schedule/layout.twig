@@ -1,0 +1,29 @@
+<div class="wsb-schedule">
+    {% if layout == 'tile' %}
+        <div class="wsb-tiles" data-event-list>
+            {{ content | raw }}
+        </div>
+    {% else %}
+        <div class="wsb-table" data-event-list>
+            {% if cols is not empty %}
+                <div class="wsb-table__head">
+                    {% for col in cols %}
+                        <div class="wsb-table__col">
+                            {% if col == 'schedule' %}
+                                {{ wsb_t('schedule.when') }}
+                            {% elseif col == 'location' %}
+                                {{ wsb_t('schedule.where') }}
+                            {% elseif col == 'title' %}
+                                {{ wsb_t('schedule.what') }}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {{ content | raw }}
+        </div>
+    {% endif %}
+    <div class="wsb-no-events">
+        {{ wsb_t('schedule.noEvents') }}
+    </div>
+</div>

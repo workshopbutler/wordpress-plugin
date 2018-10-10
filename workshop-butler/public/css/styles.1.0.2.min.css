@@ -410,7 +410,6 @@ fieldset[disabled] .wsb-content .wsb-btn {
   top: -0.1em;
 }
 .wsb-content .wsb-tile-info {
-  margin-bottom: 15px;
   font-size: 16px;
   line-height: 23px;
 }
@@ -418,16 +417,25 @@ fieldset[disabled] .wsb-content .wsb-btn {
   font-size: 16px;
   line-height: 26px;
   max-height: 182px;
+  margin-top: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.wsb-content .wsb-tile-content .wsb-trainer {
+  margin: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
-.wsb-content .wsb-tile-content .wsb-trainer {
-  margin: 0;
-  padding-right: 1em;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.wsb-content .wsb-tile-content .wsb-trainer a {
+  margin-right: 0.4em;
+}
+.wsb-content .wsb-tile-content .wsb-trainer a:last-child {
+  margin-right: 0;
 }
 .wsb-content .wsb-tile-content .wsb-name {
   margin-top: 0.4em;
@@ -495,6 +503,9 @@ fieldset[disabled] .wsb-content .wsb-btn {
   border-bottom: 1px solid;
   display: block;
   zoom: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 .wsb-content .wsb-table__head:after {
   content: " ";
@@ -518,6 +529,9 @@ fieldset[disabled] .wsb-content .wsb-btn {
   padding-top: 13px;
   padding-bottom: 15px;
   border-bottom: 1px solid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 .wsb-content .wsb-table__row:after {
   content: " ";
@@ -536,7 +550,6 @@ fieldset[disabled] .wsb-content .wsb-btn {
   visibility: hidden;
 }
 .wsb-content .wsb-table__col {
-  float: left;
   margin-right: 3%;
   font-size: 16px;
   text-align: left;
@@ -550,16 +563,24 @@ fieldset[disabled] .wsb-content .wsb-btn {
   margin-right: 0;
 }
 .wsb-content .wsb-table__col:nth-child(1) {
-  width: 15%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 15%;
+          flex: 1 1 15%;
 }
 .wsb-content .wsb-table__col:nth-child(2) {
-  width: 14%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 14%;
+          flex: 1 1 14%;
 }
 .wsb-content .wsb-table__col:nth-child(3) {
-  width: 38%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 38%;
+          flex: 1 1 38%;
 }
 .wsb-content .wsb-table__col:nth-child(4) {
-  width: 24%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 24%;
+          flex: 1 1 24%;
   height: 20px;
 }
 .wsb-content .wsb-table .wsb-free {
@@ -612,17 +633,25 @@ fieldset[disabled] .wsb-content .wsb-btn {
     margin-right: 2%;
   }
   .wsb-content .wsb-table__col:nth-child(1) {
-    width: 17%;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 17%;
+            flex: 1 1 17%;
   }
   .wsb-content .wsb-table__col:nth-child(2) {
-    width: 19%;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 19%;
+            flex: 1 1 19%;
   }
   .wsb-content .wsb-table__col:nth-child(3) {
-    width: 30%;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 30%;
+            flex: 1 1 30%;
   }
   .wsb-content .wsb-table__col:nth-child(4) {
     margin-right: 0;
-    width: 28%;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 28%;
+            flex: 1 1 28%;
     position: relative;
   }
 }
@@ -650,14 +679,12 @@ fieldset[disabled] .wsb-content .wsb-btn {
   }
   .wsb-content .wsb-table__col:nth-child(1),
   .wsb-content .wsb-table__col:nth-child(2) {
-    float: none;
     display: inline-block;
     margin-right: 10px;
     margin-bottom: 2px;
     width: auto;
   }
   .wsb-content .wsb-table__col:nth-child(3) {
-    float: none;
     width: auto;
   }
   .wsb-content .wsb-table__col:nth-child(4) {
@@ -1213,7 +1240,7 @@ fieldset[disabled] .wsb-content .wsb-btn {
 .wsb-content .wsb-before-registration {
   display: none;
 }
-.wsb-content .wsb-trainer-details__header {
+.wsb-content .wsb-trainer__header {
   background-color: #FBFBFB;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1226,42 +1253,50 @@ fieldset[disabled] .wsb-content .wsb-btn {
 }
 .wsb-content .wsb-trainer__header-row {
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 100px;
-          flex: 0 0 100px;
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   padding-bottom: 10px;
 }
-.wsb-content .wsb-trainer-details-image {
-  background-size: cover;
-  background-position: center;
-  width: 150px;
+.wsb-content .wsb-trainer__header-row img {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 150px;
+          flex: 0 0 150px;
   height: 150px;
-  display: inline-block;
-  margin-right: 20px;
-  position: absolute;
 }
-.wsb-content .wsb-trainer-details-title-container,
-.wsb-content .wsb-trainer-details-subtitle-container {
-  margin-bottom: 2rem;
-  vertical-align: top;
-  position: relative;
-  margin-left: 170px;
+.wsb-content .wsb-trainer__header-col {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 20%;
+          flex: 1 0 20%;
+  padding: 1em;
 }
-.wsb-content .wsb-trainer-details-title {
+.wsb-content .wsb-trainer-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.wsb-content .wsb-trainer-name {
   font-weight: bold;
   font-size: 36px;
   margin-bottom: 0;
   margin-top: 0;
 }
-.wsb-content .wsb-trainer-details-country {
+.wsb-content .wsb-trainer-country {
   margin-top: 0;
+  padding-bottom: 1em;
   font-size: 16px;
   line-height: 1.3;
   color: #888;
 }
 .wsb-content .wsb-contact-button {
-  float: right;
   width: 150px;
-  margin-right: 10px;
 }
 .wsb-content .wsb-trainer__social-networks {
   display: inline-block;
@@ -1270,11 +1305,17 @@ fieldset[disabled] .wsb-content .wsb-btn {
 .wsb-content .wsb-trainer__social-networks a {
   padding-left: 10px;
 }
+.wsb-content .wsb-trainer__social-networks a:first-child {
+  padding-left: 0;
+}
 .wsb-content .wsb-trainer__badge {
   width: 100px;
   padding-bottom: 20px;
 }
 .wsb-content .wsb-trainer-details-facts {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 100%;
+          flex: 1 0 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1331,29 +1372,23 @@ fieldset[disabled] .wsb-content .wsb-btn {
   }
 }
 @media screen and (max-width: 40em) {
-  .wsb-content .wsb-trainer-details-title {
+  .wsb-content .wsb-trainer-name {
     font-size: 24px;
   }
-  .wsb-content .wsb-trainer-details-image {
-    width: 100px;
+  .wsb-content .wsb-trainer__header-row img {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 100px;
+            flex: 0 0 100px;
     height: 100px;
-  }
-  .wsb-content .wsb-trainer-details-title-container {
-    margin-left: 120px;
-  }
-  .wsb-content .wsb-trainer-details-subtitle-container {
-    margin-left: 0;
-    margin-top: 70px;
   }
   .wsb-content .wsb-trainer__social-networks a:first-child {
     padding-left: 0;
   }
+  .wsb-content .wsb-contact-button {
+    margin-bottom: 10px;
+  }
 }
 @media screen and (max-width: 30em) {
-  .wsb-content .wsb-trainer-details-subtitle-container {
-    margin-left: 0;
-    margin-top: 50px;
-  }
   .wsb-content .wsb-trainer__social-networks {
     display: block;
   }
@@ -1750,7 +1785,7 @@ fieldset[disabled] .gatsby .wsb-content .wsb-btn-primary {
 .gatsby .wsb-content .wsb-form__label,
 .gatsby .wsb-content .wsb-header h1,
 .gatsby .wsb-content .wsb-trainer__name h3,
-.gatsby .wsb-content .wsb-trainer-details-title,
+.gatsby .wsb-content .wsb-trainer-name,
 .gatsby .wsb-content .wsb-descr,
 .gatsby .wsb-content .wsb-events__title {
   -webkit-font-smoothing: antialiased;
@@ -1980,7 +2015,7 @@ fieldset[disabled] .hayes .wsb-content .wsb-btn-primary {
 .hayes .wsb-content .wsb-form__label,
 .hayes .wsb-content .wsb-sidebar__register,
 .hayes .wsb-content .wsb-form__btn,
-.hayes .wsb-content .wsb-trainer-details-title,
+.hayes .wsb-content .wsb-trainer-name,
 .hayes .wsb-content .wsb-descr,
 .hayes .wsb-content .wsb-events__title {
   font-weight: bold;
@@ -2215,7 +2250,7 @@ fieldset[disabled] .dacota .wsb-content .wsb-btn-primary {
 .dacota .wsb-content .wsb-ticket__footer,
 .dacota .wsb-content .wsb-form__title,
 .dacota .wsb-content .wsb-form__label,
-.dacota .wsb-content .wsb-trainer-details-title,
+.dacota .wsb-content .wsb-trainer-name,
 .dacota .wsb-content .wsb-descr,
 .dacota .wsb-content .wsb-events__title,
 .dacota .wsb-content .wsb-big-number,

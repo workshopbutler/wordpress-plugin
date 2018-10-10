@@ -1,4 +1,15 @@
-{% if event.free %}
-    <div class="wsb-free">{{ __('event.free', 'wsbintegration') }}</div>
+{% if layout == 'tile' %}
+    {% if event.free %}
+        <div class="wsb-free">{{ __('event.free', 'wsbintegration') }}</div>
+    {% endif %}
+    <a href="{{ event.url }}" class="wsb-tile-title">{{ event.title|truncate(60) }}</a>
+{% else %}
+    <div class="wsb-table__col {% if event.type.badge %} with-badge {% endif %} ">
+        {% if event.type.badge %}
+            <img class="wsb-table__img" src="{{ event.type.badge }}">
+        {% endif %}
+        <a href="{{ event.url }}" class="wsb-table__link">
+            {{ event.title }}
+        </a>
+    </div>
 {% endif %}
-<a href="{{ event.url }}" class="wsb-tile-title">{{ event.title|truncate(60) }}</a>

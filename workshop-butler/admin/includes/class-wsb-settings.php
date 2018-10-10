@@ -2,14 +2,14 @@
 /**
  * This file contains a class for admin Redux panel
  *
- * @since   0.3.0
+ * @since   2.0.0
  * @package WSB_Integration
  */
 
 /**
  * General plugin settings
  *
- * @since   0.3.0
+ * @since   2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
@@ -119,7 +119,6 @@ class WSB_Settings {
             'id'         => 'schedule',
             //'icon'  => 'el el-home'
             'subsection' => true,
-//            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
             'fields'     => array(
                 array(
                     'id'       => WSB_Options::SCHEDULE_TEMPLATE,
@@ -135,7 +134,6 @@ class WSB_Settings {
             'title'      => __( 'Event Page', 'wsbintegration' ),
             'id'         => 'event',
             'subsection' => true,
-//            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
             'fields'     => array(
                 array(
                     'id'       => WSB_Options::EVENT_TEMPLATE,
@@ -166,7 +164,6 @@ class WSB_Settings {
             'title'      => __( 'Trainer List', 'wsbintegration' ),
             'id'         => 'trainer-list',
             'subsection' => true,
-//            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
             'fields'     => array(
                 array(
                     'id'       => WSB_Options::TRAINER_LIST_TEMPLATE,
@@ -182,7 +179,6 @@ class WSB_Settings {
             'title'      => __( 'Trainer Profile', 'wsbintegration' ),
             'id'         => 'trainer',
             'subsection' => true,
-//            'desc'       => __( 'For full documentation on the this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/ace-editor/" target="_blank">docs.reduxframework.com/core/fields/ace-editor/</a>',
             'fields'     => array(
                 array(
                     'id'       => WSB_Options::TRAINER_TEMPLATE,
@@ -316,7 +312,7 @@ class WSB_Settings {
                 'data'     => 'pages',
                 'title'    => 'Event Page',
                 'required' => array( WSB_Options::CUSTOM_EVENT_DETAILS, '=', true ),
-                'desc'     => 'To make it work, add [wsb_event_details] shortcode to the page when you complete the setup'
+                'desc'     => 'To make it work, add [wsb_event] shortcode to the page when you complete the setup'
             ),
             array(
                 'id'       => WSB_Options::REGISTRATION_PAGE,
