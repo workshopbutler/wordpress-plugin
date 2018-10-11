@@ -128,6 +128,11 @@ class WSB_Integration {
 		 * The class responsible rendering and configuring a sidebar
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/includes/class-wsb-sidebar.php';
+
+		/**
+		 * The class responsible for orchestrating the upgrade plugin process
+		 */
+		require_once plugin_dir_path( __FILE__ ) . 'class-wsb-integration-upgrade.php';
 	}
 
 	/**
@@ -162,6 +167,9 @@ class WSB_Integration {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'redux/options/wsb-settings/saved', $plugin_admin, 'save_internal_settings' );
 		$this->loader->add_action( 'init', $plugin_admin, 'init' );
+
+		$upgrader = new WSB_Integration_Upgrade();
+		$this->loader->add_action('admin_init', $upgrader, 'upgrade');
 	}
 
 	/**
