@@ -20,7 +20,7 @@ class WSB_Schedule_Page extends WSB_Page {
 
 	private $requests;
 
-	/**
+	/**A
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    2.0.0
@@ -149,7 +149,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	 *
 	 * @param array $attrs Short code attributes
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	protected function render_filters( $attrs = [] ) {
@@ -200,7 +200,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	 * @param array       $attrs Short code attributes
 	 * @param null|string $content Short code content
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	protected function render_item( $attrs = [], $content = null ) {

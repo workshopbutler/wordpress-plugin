@@ -3,7 +3,7 @@
  * The file that defines Trainer_Filters class
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -13,7 +13,7 @@ require_once plugin_dir_path( __FILE__ ) . 'class-filter-value.php';
 /**
  * This class contains the logic for producing various filters for trainers
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */

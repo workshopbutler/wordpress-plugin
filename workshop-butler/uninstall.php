@@ -20,7 +20,7 @@
  * https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate/pull/123#issuecomment-28541913
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */

@@ -150,7 +150,7 @@ class wsb_sidebar extends WP_Widget {
 	 *
 	 * @param array $instance Settings for the current instance of the widget
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	public function render( $instance ) {
@@ -172,7 +172,7 @@ class wsb_sidebar extends WP_Widget {
 	 * @param WSB_Response $response
 	 * @param array        $instance Settings for the current instance of the widget
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	private function render_list( $response, $instance ) {

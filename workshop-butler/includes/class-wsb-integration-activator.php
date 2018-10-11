@@ -4,7 +4,7 @@
  * Fired during plugin activation
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  * @subpackage WSB_Integration/includes
@@ -16,7 +16,7 @@ require_once plugin_dir_path( __FILE__ ) . 'class-wsb-options.php';
  *
  * This class defines all code necessary to run during the plugin's activation.
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @subpackage WSB_Integration/includes
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
@@ -26,7 +26,7 @@ class WSB_Integration_Activator {
 	/**
 	 * Adds required pages on the plugin activation if they are not added before
 	 *
-	 * @since    0.2.0
+	 * @since    2.0.0
 	 */
 	public static function activate() {
 		$self = new self();
@@ -76,7 +76,7 @@ class WSB_Integration_Activator {
 	/**
 	 * Updates the state of the plugin
 	 *
-	 * @since 0.3.0
+	 * @since 2.0.0
 	 */
 	private function update_state() {
 		WSB_Options::set_internal_option( WSB_Options::INT_STATE, true );
@@ -106,7 +106,7 @@ class WSB_Integration_Activator {
 	 * @param $content         string      Page Content
 	 * @param $parent_id       string|null ID of the parent page
 	 *
-	 * @since 0.3.0
+	 * @since 2.0.0
 	 */
 	private function create_page( $title, $id_opt_name, $content, $parent_id = null ) {
 		$options = array(

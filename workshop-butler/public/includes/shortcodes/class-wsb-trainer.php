@@ -3,7 +3,7 @@
  * The file that defines the class with trainer-related shortcodes
  *
  * @link       https://workshopbutler.com
- * @since      0.3.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -12,7 +12,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 /**
  * Handles the execution of the shortcodes related to trainers
  *
- * @since      0.3.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
@@ -23,7 +23,7 @@ class WSB_Trainer extends WSB_Page {
 	 *
 	 * @param array $attrs Short code attributes
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	public function render_badges( $attrs = [] ) {
@@ -46,7 +46,7 @@ class WSB_Trainer extends WSB_Page {
 	 *
 	 * @param array $attrs Short code attributes
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	public function render_events( $attrs = [] ) {
@@ -76,7 +76,7 @@ EOD;
 	 *
 	 * @param array $attrs Short code attributes
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	public function render_statistics( $attrs = [] ) {
@@ -104,7 +104,7 @@ EOD;
 	 *
 	 * @param array $attrs Short code attributes
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	public function render_social_link( $attrs = [] ) {
@@ -132,7 +132,7 @@ EOD;
 	 * @param $type    string   Type of the statistical parameter
 	 * @param $trainer Trainer
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return array
 	 */
 	protected function get_stat_parameter( $type, $trainer ) {
@@ -170,7 +170,7 @@ EOD;
 	 * @param $type    string   Type of the social link
 	 * @param $trainer Trainer
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return array
 	 */
 	protected function get_social_link_data( $type, $trainer ) {
@@ -227,7 +227,7 @@ EOD;
 	/**
 	 * Returns a social link template
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	protected function get_social_link_tmpl() {
@@ -239,7 +239,7 @@ EOD;
 	 *
 	 * @param $type string Type of the statistical parameter
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	protected function get_statistics_tmpl( $type ) {
@@ -255,7 +255,7 @@ EOD;
 	/**
 	 * Returns a Twig template for a single statistical number
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	protected function get_number_tmpl() {
@@ -270,7 +270,7 @@ EOD;
 	/**
 	 * Returns a Twig template for a rating
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	protected function get_rating_tmpl() {
@@ -292,7 +292,7 @@ EOD;
 	 *
 	 * @param $attrs   array  Shortcode attributes
 	 * @param $content string Shortcode content
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	static public function events( $attrs = [], $content = null ) {
@@ -305,7 +305,7 @@ EOD;
 	 *
 	 * @param $attrs   array  Shortcode attributes
 	 * @param $content string Shortcode content
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	static public function statistics( $attrs = [], $content = null ) {
@@ -318,7 +318,7 @@ EOD;
 	 *
 	 * @param $attrs   array  Shortcode attributes
 	 * @param $content string Shortcode content
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	static public function social_link( $attrs = [], $content = null ) {

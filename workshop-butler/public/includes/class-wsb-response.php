@@ -3,7 +3,7 @@
  * This file defines the response wrapper class
  *
  * @link       https://workshopbutler.com
- * @since      0.3.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -15,7 +15,7 @@
  *
  * It's used to make requests to Workshop Butler API in a correct way.
  *
- * @since      0.3.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
@@ -24,7 +24,7 @@ class WSB_Response {
 	/**
 	 * HTTP code
 	 *
-	 * @since 0.3.0
+	 * @since 2.0.0
 	 * @var   $http_code int HTTP code
 	 */
 	public $http_code;
@@ -32,7 +32,7 @@ class WSB_Response {
 	/**
 	 * Response body
 	 *
-	 * @since 0.3.0
+	 * @since 2.0.0
 	 * @var   $body  null|string Response body
 	 */
 	public $body;
@@ -40,7 +40,7 @@ class WSB_Response {
 	/**
 	 * Error message
 	 *
-	 * @since 0.3.0
+	 * @since 2.0.0
 	 * @var   $error null|string  Error message
 	 */
 	public $error;
@@ -48,7 +48,7 @@ class WSB_Response {
 	/**
 	 * Creates a new object from the response of wp_remote_get/wp_remote_post functions
 	 *
-	 * @since 0.3.0
+	 * @since 2.0.0
 	 * @param $response array|WP_Error
 	 */
 	public function __construct( $response ) {
@@ -76,7 +76,7 @@ class WSB_Response {
 	/**
 	 * Returns true if the request resulted in failure
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return bool
 	 */
 	public function is_error() {

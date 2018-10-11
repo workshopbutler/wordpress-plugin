@@ -3,7 +3,7 @@
  * The file that defines WSB_Page class
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  * @subpackage WSB_Integration/includes
@@ -12,7 +12,7 @@
 /**
  * Represents an integrated page
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @subpackage WSB_Integration/includes
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
@@ -22,7 +22,7 @@ abstract class WSB_Page {
 	 * Plugin settings
 	 *
 	 * @access  protected
-	 * @since   0.3.0
+	 * @since   2.0.0
 	 * @var     WSB_Options $settings Plugin settings
 	 */
 	protected $settings;
@@ -42,7 +42,7 @@ abstract class WSB_Page {
 	/**
 	 * Creates a template engine entity
 	 *
-	 * @since 0.2.0
+	 * @since 2.0.0
 	 */
 	public function __construct() {
 		require_once plugin_dir_path( __FILE__ ) . '../../vendor/autoload.php';
@@ -148,7 +148,7 @@ abstract class WSB_Page {
 	/**
 	 * Load the required dependencies
 	 *
-	 * @since    0.3.0
+	 * @since    2.0.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -179,7 +179,7 @@ abstract class WSB_Page {
 	/**
 	 * Returns an active theme for the integration
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @return mixed
 	 */
 	protected function get_theme() {
@@ -217,7 +217,7 @@ abstract class WSB_Page {
 	 * @param $name    string       Name of the template
 	 * @param $content null|string  Template content
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return null|string
 	 */
 	protected function get_template( $name, $content ) {
@@ -249,7 +249,7 @@ abstract class WSB_Page {
 	 *
 	 * @param $content string Page content
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	protected function add_custom_styles( $content ) {

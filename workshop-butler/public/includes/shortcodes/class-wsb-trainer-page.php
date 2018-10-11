@@ -3,7 +3,7 @@
  * The file that defines the trainer page class
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -12,7 +12,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 /**
  * Trainer Page class which handles the rendering and logic for the profile of trainer
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
@@ -23,7 +23,7 @@ class WSB_Trainer_Page extends WSB_Page {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    0.2.0
+	 * @since    2.0.0
 	 */
 	public function __construct() {
 		parent::__construct();
@@ -34,7 +34,7 @@ class WSB_Trainer_Page extends WSB_Page {
 	/**
 	 * Load the required dependencies for this class.
 	 *
-	 * @since    0.2.0
+	 * @since    2.0.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -48,7 +48,7 @@ class WSB_Trainer_Page extends WSB_Page {
 	 * @param array  $attrs Shortcode attributes
 	 * @param string $content Shortcode content
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 *
 	 * @return string
 	 */
@@ -109,7 +109,7 @@ class WSB_Trainer_Page extends WSB_Page {
 	 *
 	 * @param $attrs   array  Shortcode attributes
 	 * @param $content string Shortcode content
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @return string
 	 */
 	static public function page( $attrs = [], $content = null ) {

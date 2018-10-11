@@ -3,7 +3,7 @@
  * The file that defines the class with event-related shortcodes
  *
  * @link       https://workshopbutler.com
- * @since      0.3.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -12,7 +12,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 /**
  * Handles the execution of the shortcodes related to events
  *
- * @since      0.3.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */

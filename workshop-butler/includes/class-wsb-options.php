@@ -3,7 +3,7 @@
  * The file that defines the class for managing plugin options
  *
  * @link       https://workshopbutler.com
- * @since      0.3.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -16,7 +16,7 @@ if ( ! class_exists( 'ReduxFramework' )
 /**
  * This class helps to manage plugin options
  *
- * @since      0.3.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
@@ -61,7 +61,7 @@ class WSB_Options {
 	/**
 	 * Removes plugin options
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return void
 	 */
 	static public function destroy_options() {
@@ -73,7 +73,7 @@ class WSB_Options {
 	 * Returns the value of the option, or false if the option is not set
 	 *
 	 * @param  $name string Name of the option
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return bool|mixed
 	 */
 	static public function get_option( $name ) {
@@ -88,7 +88,7 @@ class WSB_Options {
 	 * Returns the value of the option, or false if the option is not set
 	 *
 	 * @param  $name string Name of the option
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return bool|mixed
 	 */
 	static public function get_internal_option( $name ) {
@@ -106,7 +106,7 @@ class WSB_Options {
 	 * @param $name  string Name of the option
 	 * @param $value mixed  Value of the option
 	 *
-	 * @since 0.3.0
+	 * @since 2.0.0
 	 */
 	static public function set_option( $name, $value ) {
 		Redux::setOption( WSB_Options::PLUGIN_SETTINGS, $name, $value );
@@ -118,7 +118,7 @@ class WSB_Options {
 	 * @param $name  string Name of the option
 	 * @param $value mixed  Value of the option
 	 *
-	 * @since 0.3.0
+	 * @since 2.0.0
 	 */
 	static public function set_internal_option( $name, $value ) {
 		$settings          = get_option( WSB_Options::INTERNAL_SETTINGS, array() );
@@ -132,7 +132,7 @@ class WSB_Options {
 	 *
 	 * @param  $name    string Name of the option
 	 * @param  $default mixed  Default value if the option does not exist
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return bool|mixed
 	 */
 	public function get( $name, $default = null ) {
@@ -146,7 +146,7 @@ class WSB_Options {
 	/**
 	 * Returns the url to an event page
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string|null
 	 */
 	public function get_event_page_url() {
@@ -178,7 +178,7 @@ class WSB_Options {
 	/**
 	 * Returns the url to a trainer profile
 	 *
-	 * @since  0.3.0
+	 * @since  2.0.0
 	 * @return string|null
 	 */
 	public function get_trainer_page_url() {

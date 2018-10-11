@@ -2,7 +2,7 @@
 
 /**
  * @link              https://workshopbutler.com
- * @since             0.2.0
+ * @since             2.0.0
  * @package           WSB_Integration
  *
  * @wordpress-plugin
@@ -62,7 +62,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wsb-integration.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    0.2.0
+ * @since    2.0.0
  */
 function run_WSB_Integration() {
 

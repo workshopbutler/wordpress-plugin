@@ -3,7 +3,7 @@
  * The file that defines the trainer class, used later in templates
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -14,7 +14,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'utils/language.php';
 /**
  * Trainer class which represents a trainer profile in Workshop Butler
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
@@ -29,7 +29,7 @@ class Trainer {
 	public $country_code;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     string[] $languages Languages the trainer speaks to
 	 */
 	public $languages;

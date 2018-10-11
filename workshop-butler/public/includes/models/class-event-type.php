@@ -3,7 +3,7 @@
  * The file that defines Event_Type class
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -11,7 +11,7 @@
 /**
  * This class represents a type of a Workshop Butler event
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
@@ -19,7 +19,7 @@ class Event_Type {
 	/**
 	 * ID of the type
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @var    int $id ID of the type
 	 */
 	public $id;
@@ -27,7 +27,7 @@ class Event_Type {
 	/**
 	 * Name of the type
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @var    string $name Name of the type
 	 */
 	public $name;
@@ -35,7 +35,7 @@ class Event_Type {
 	/**
 	 * URL to the badge of the type
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @var    string $badge URL to the badge of the type
 	 */
 	public $badge;

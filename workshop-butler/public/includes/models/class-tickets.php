@@ -3,7 +3,7 @@
  * The file that defines Tickets class
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -11,20 +11,20 @@
 /**
  * This class represents all available event tickets
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Tickets {
 
 	/**
-	 * @since 0.2.0
+	 * @since 2.0.0
 	 * @var   Paid_Ticket_Type[] $paid Paid tickets if the event is paid
 	 */
 	public $paid;
 
 	/**
-	 * @since 0.2.0
+	 * @since 2.0.0
 	 * @var   Free_Ticket_Type $free Free tickets if the event is free
 	 */
 	public $free;

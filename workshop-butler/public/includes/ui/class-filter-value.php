@@ -3,7 +3,7 @@
  * The file that defines Filter_Value class
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -11,20 +11,20 @@
 /**
  * Represents a value in a filter
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Filter_Value {
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     string $name Name of the value
 	 */
 	public $name;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     string $value Value
 	 */
 	public $value;

@@ -3,7 +3,7 @@
  * The file that defines the request wrapper class
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -15,7 +15,7 @@ require_once plugin_dir_path( __FILE__ ) . 'class-wsb-response.php';
  *
  * It's used to make requests to Workshop Butler API in a correct way
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
@@ -25,7 +25,7 @@ class WSB_Requests {
 	 * Plugin settings
 	 *
 	 * @access  protected
-	 * @since   0.3.0
+	 * @since   2.0.0
 	 * @var     WSB_Options $settings Plugin settings
 	 */
 	protected $settings;
@@ -33,7 +33,7 @@ class WSB_Requests {
 	/**
 	 * Initialises a new object
 	 *
-	 * @since 0.3.0
+	 * @since 2.0.0
 	 */
 	public function __construct() {
 		$this->load_dependencies();
@@ -42,7 +42,7 @@ class WSB_Requests {
 	/**
 	 * Load the required dependencies
 	 *
-	 * @since    0.3.0
+	 * @since    2.0.0
 	 * @access   private
 	 */
 	private function load_dependencies() {

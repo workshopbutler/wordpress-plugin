@@ -3,7 +3,7 @@
  * The file that defines the event class, used later in templates
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -22,31 +22,31 @@ require_once plugin_dir_path( __FILE__ ) . 'form/class-form.php';
 /**
  * Trainer class which represents an event in Workshop Butler
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Event {
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     int $id ID of the event
 	 */
 	public $id;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     string $hashed_id Hashed ID of the event
 	 */
 	public $hashed_id;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     Event_Type $type Type of the event
 	 */
 	public $type;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     string $title
 	 */
 	public $title;
@@ -70,67 +70,67 @@ class Event {
 	public $location;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     float $rating
 	 */
 	public $rating;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     boolean $confirmed
 	 */
 	public $confirmed;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     boolean $private
 	 */
 	public $private;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     boolean $free
 	 */
 	public $free;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     boolean $sold_out
 	 */
 	public $sold_out;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     string $url
 	 */
 	public $url;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     Tickets|null $tickets
 	 */
 	public $tickets;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     Trainer[] $trainers
 	 */
 	public $trainers;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     string $description
 	 */
 	public $description;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     Form $registration_form
 	 */
 	public $registration_form;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     Registration_Page $registration_page
 	 */
 	public $registration_page;
@@ -190,7 +190,7 @@ class Event {
 	 *
 	 * This method is used in templates
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @return string[]
 	 */
 	public function names_of_trainers() {

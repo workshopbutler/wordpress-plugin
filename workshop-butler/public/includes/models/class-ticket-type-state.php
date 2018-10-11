@@ -3,7 +3,7 @@
  * The file that defines Ticket_Type_State class
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -11,38 +11,38 @@
 /**
  * This class represents a state of the ticket (sold out, ended, etc) in Workshop Butler
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Ticket_Type_State {
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     boolean $sold_out
 	 */
 	public $sold_out;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     boolean $ended
 	 */
 	public $ended;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     boolean $started
 	 */
 	public $started;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     boolean $in_future
 	 */
 	public $in_future;
 
 	/**
-	 * @since   0.2.0
+	 * @since   2.0.0
 	 * @var     boolean $valid
 	 */
 	public $valid;

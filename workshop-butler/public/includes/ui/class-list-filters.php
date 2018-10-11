@@ -3,7 +3,7 @@
  * The file that defines List_Filters class
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -13,7 +13,7 @@ require_once plugin_dir_path( __FILE__ ) . 'class-filter-value.php';
 /**
  * This class contains a common logic for filters on different pages
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
@@ -22,7 +22,7 @@ abstract class List_Filters {
 	/**
 	 * Available objects which we use to build filters
 	 *
-	 * @since    0.2.0
+	 * @since    2.0.0
 	 * @access   private
 	 * @var      object[] $objects Available objects which we use to build filters
 	 */
@@ -31,7 +31,7 @@ abstract class List_Filters {
 	/**
 	 * Names of visible filters
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @var    string[] $filters Names of visible filters
 	 */
 	protected $filters;

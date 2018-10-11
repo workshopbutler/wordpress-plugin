@@ -4,7 +4,7 @@
  * Fired during plugin deactivation
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  * @subpackage WSB_Integration/includes
@@ -16,7 +16,7 @@ require_once plugin_dir_path( __FILE__ ) . 'class-wsb-options.php';
  *
  * This class defines all code necessary to run during the plugin's deactivation.
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */

@@ -7,7 +7,7 @@ require_once plugin_dir_path( __FILE__ ) . 'class-wsb-requests.php';
  * The file that defines the Ajax-related logic
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */

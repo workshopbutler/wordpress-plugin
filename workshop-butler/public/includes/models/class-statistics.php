@@ -3,7 +3,7 @@
  * The file that defines the statistics class which a trainer can have
  *
  * @link       https://workshopbutler.com
- * @since      0.2.0
+ * @since      2.0.0
  *
  * @package    WSB_Integration
  */
@@ -11,7 +11,7 @@
 /**
  * Statistics class contains a trainer statistics of one type
  *
- * @since      0.2.0
+ * @since      2.0.0
  * @package    WSB_Integration
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
