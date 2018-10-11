@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: workshopbutlers
 Tags: event management, training management, event schedule, workshop crm, online registrations
-Requires at least: 4.7
+Requires at least: 4.6
 Tested up to: 4.9.8
 Requires PHP: 5.3
 License: GPLv2 or later
@@ -30,12 +30,13 @@ of course and license management fast and easy.
 After the activation, go to *Settings -> Workshop Butler*, enter your *API key* and click *Save*.
 Then you can open *yourwebsite.com/schedule* to see the list of events.
 
-During the activation, the plugin adds four pages:
+During the activation, the plugin adds five pages:
 
 * Schedule (/schedule) contains the event schedule
 * Event (/schedule/event) hosts the detailed information of each event
 * Trainer List (/trainer-list, containing the list of all trainers
 * Trainer (/trainer-list/profile) for the trainer profiles
+* Registration (/registration) for the event registration
 
 You can change them later.
 
@@ -68,8 +69,7 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
 = 2.0.0 =
-**WARNING:** This release comes with breaking changes. Before proceed, read the article How to migrate from version 1.x
-to version 2.0.
+**Attention:** The changes in this release are substantial and an additional manual setup is needed. Before proceed, read the article [How to migrate from to a new WordPress plugin](https://support.workshopbutler.com/article/110-how-to-migrate-to-new-wordpress-plugin)
 
 Meet a completely new version of our website integration widgets. It includes a huge number of modifications, and makes
 the process of customisation very simple. Here's just a short list of what we added:
