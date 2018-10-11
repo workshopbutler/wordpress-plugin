@@ -2,7 +2,7 @@
 Contributors: workshopbutlers
 Tags: event management, training management, event schedule, workshop crm, online registrations
 Requires at least: 4.7
-Tested up to: 4.9.6
+Tested up to: 4.9.8
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
