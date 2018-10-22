@@ -9,7 +9,7 @@
  * Plugin Name:       Workshop Butler
  * Plugin URI:        https://github.com/workshopbutler/wordpress-plugin
  * Description:       This plugin integrates Workshop Butler Events, Trainers and Testimonials to your WordPress website.
- * Version:           2.0.0
+ * Version:           2.0.1
  * Author:            Workshop Butler
  * Author URI:        https://workshopbutler.com/
  * License:           GPL-2.0+
@@ -26,7 +26,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'WSB_INTEGRATION_VERSION', '2.0.0' );
+define( 'WSB_INTEGRATION_VERSION', '2.0.1' );
 
 /**
  * The code that runs during plugin activation.

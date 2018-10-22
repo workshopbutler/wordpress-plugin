@@ -26,9 +26,9 @@ class WSB_Integration_Public {
 	 *
 	 * @since    2.0.0
 	 * @access   private
-	 * @var      string $WSB_Integration The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
-	private $WSB_Integration;
+	private $plugin_name;
 
 	/**
 	 * The version of this plugin.
@@ -44,13 +44,13 @@ class WSB_Integration_Public {
 	 *
 	 * @since    2.0.0
 	 *
-	 * @param      string $WSB_Integration The name of the plugin.
-	 * @param      string $version The version of this plugin.
+	 * @param      string $plugin_name The name of the plugin.
+	 * @param      string $version     The version of this plugin.
 	 */
-	public function __construct( $WSB_Integration, $version ) {
+	public function __construct( $plugin_name, $version ) {
 
-		$this->WSB_Integration = $WSB_Integration;
-		$this->version         = $version;
+		$this->plugin_name = $plugin_name;
+		$this->version     = $version;
 		$this->load_dependencies();
 	}
 
@@ -112,33 +112,66 @@ class WSB_Integration_Public {
 	/**
 	 * Updates the title of the page
 	 *
+	 * @param string $title Current page title.
+	 * @param int    $id    ID of the page.
 	 * @since 2.0.0
 	 * @return string
 	 */
-	public function set_title() {
+	public function set_title( $title, $id ) {
+		$options      = new WSB_Options();
+		$reserved_ids = array(
+			$options->get( WSB_Options::EVENT_PAGE ),
+			$options->get( WSB_Options::REGISTRATION_PAGE ),
+			$options->get( WSB_Options::TRAINER_PROFILE_PAGE ),
+		);
+
+		if ( in_array( $id, $reserved_ids ) ) {
+			return $this->get_title( $title );
+		} else {
+			return $title;
+		}
+	}
+
+	/**
+	 * Updates the document title
+	 *
+	 * @param string $title Current title.
+	 * @return string
+	 */
+	public function set_document_title( $title ) {
+		return $this->get_title( $title );
+	}
+
+	/**
+	 * Returns the title of the page based on its url
+	 *
+	 * @param string $title Current page title.
+	 * @since 2.0.0
+	 * @return string
+	 */
+	protected function get_title( $title ) {
 		global $post;
 		require_once plugin_dir_path( __FILE__ ) . '../includes/class-wsb-options.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-dictionary.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-requests.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/models/class-event.php';
 
-		$default_title = $post->post_title;
-		$options       = new WSB_Options();
+		$options = new WSB_Options();
 
 		$post_url = get_permalink( $post );
 		if ( $post_url == $options->get_event_page_url() || $post_url == $options->get_registration_page_url() ) {
-			return $this->get_event_title( $default_title );
+			return $this->get_event_title( $title );
 		} elseif ( $post_url == $options->get_trainer_page_url() ) {
-			return $this->get_trainer_name( $default_title );
+			return $this->get_trainer_name( $title );
 		} else {
-			return $default_title;
+			return $title;
 		}
 	}
 
 	/**
 	 * Retrieves a trainer and returns its full name
 	 *
-	 * @param string $default_title Default page title
+	 * @param string $default_title Default page title.
 	 *
 	 * @return string
 	 */
@@ -165,7 +198,7 @@ class WSB_Integration_Public {
 	/**
 	 * Retrieves an event and returns its title
 	 *
-	 * @param string $default_title Default page title
+	 * @param string $default_title Default page title.
 	 *
 	 * @return string
 	 */
@@ -193,10 +226,10 @@ class WSB_Integration_Public {
 	 * Adds Workshop Butler shortcodes
 	 */
 	public function add_shortcodes() {
-		//old version support
-		add_shortcode('wb_content', array('WSB_Old_Schedule_Page', 'page'));
+		// Old version support.
+		add_shortcode( 'wb_content', array( 'WSB_Old_Schedule_Page', 'page' ) );
 
-		// pages
+		// Pages.
 		add_shortcode( 'wsb_schedule', array( 'WSB_Schedule_Page', 'page' ) );
 		add_shortcode( 'wsb_event', array( 'WSB_Event_Page', 'page' ) );
 		add_shortcode( 'wsb_registration', array( 'WSB_Registration_Page', 'page' ) );
@@ -204,7 +237,7 @@ class WSB_Integration_Public {
 		add_shortcode( 'wsb_trainer_list', array( 'WSB_Trainer_List_Page', 'page' ) );
 		add_shortcode( 'wsb_trainer', array( 'WSB_Trainer_Page', 'page' ) );
 
-		// elements
+		// Elements.
 		add_shortcode( 'wsb_schedule_filters', array( 'WSB_Schedule_Page', 'tag' ) );
 		add_shortcode( 'wsb_schedule_item', array( 'WSB_Schedule_Page', 'tag' ) );
 		add_shortcode( 'wsb_schedule_register', array( 'WSB_Schedule_Page', 'tag' ) );

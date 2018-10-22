@@ -4,10 +4,14 @@
  *
  * @link              https://workshopbutler.com
  * @since             2.0.0
+ * @package           WSB_Integration
  */
 
 run();
 
+/**
+ * The main function, which executes the conversion of locales
+ */
 function run() {
 	$converted_dir_name = 'converted';
 	$src_dir_name       = 'locales';
@@ -16,6 +20,12 @@ function run() {
 	convert_files( $src_dir_name, $converted_dir_name );
 }
 
+/**
+ * Converts one translation file
+ *
+ * @param string $file               Name of the file.
+ * @param string $converted_dir_name Name of the directory to store the converted files.
+ */
 function convert_file( $file, $converted_dir_name ) {
 	print 'Converting file ' . $file . "\n";
 	$translations = json_decode( file_get_contents( $file ), true );
@@ -30,7 +40,9 @@ function convert_file( $file, $converted_dir_name ) {
 }
 
 /**
- * @param array $translation Associative array, containing the translated strings and tokens
+ * Converts the keys of existing translation to a format, suitable for WordPress
+ *
+ * @param array $translation Associative array, containing the translated strings and tokens.
  *
  * @return array
  */
@@ -53,15 +65,15 @@ function convert_translation( $translation ) {
 /**
  * Replaces the keys 'street_1' and 'street_2' because the i18next-conv thinks these are plural forms
  *
- * @param string $key
+ * @param string $key Translation key.
  *
  * @return string
  */
 function replace_key( $key ) {
-	if ( $key !== 'street_1' && $key !== 'street_2' ) {
+	if ( 'street_1' !== $key && 'street_2' !== $key ) {
 		return $key;
 	} else {
-		return $key === 'street_1' ? 'street_first' : 'street_second';
+		return 'street_1' === $key ? 'street_first' : 'street_second';
 	}
 }
 
@@ -69,7 +81,7 @@ function replace_key( $key ) {
  * Replaces tokens like {{count}}, {{date}} or references like $t(language.{{count}}) with %s, making the string
  * a correctly-formed string pattern
  *
- * @param string $value Initial translation
+ * @param string $value Initial translation.
  *
  * @return string
  */
@@ -83,8 +95,8 @@ function replace_tokens( $value ) {
 /**
  * Replaces the matched tokens with %s
  *
- * @param string $pattern Matching pattern
- * @param string $value Translation
+ * @param string $pattern Matching pattern.
+ * @param string $value   Translation.
  *
  * @return string
  */
@@ -104,8 +116,8 @@ function replace_matches( $pattern, $value ) {
 /**
  * Converts all translations from $src_dir_name directory ands saves them to $converted_dir_name directory
  *
- * @param string $src_dir_name Name of the directory with original translations
- * @param string $converted_dir_name Name of the directory with converted translations
+ * @param string $src_dir_name       Name of the directory with original translations.
+ * @param string $converted_dir_name Name of the directory with converted translations.
  */
 function convert_files( $src_dir_name, $converted_dir_name ) {
 	$dir = dir( $src_dir_name );
@@ -125,7 +137,7 @@ function convert_files( $src_dir_name, $converted_dir_name ) {
 /**
  * Removes all converted files
  *
- * @param string $dir_name Name of the directory with converted JSON files
+ * @param string $dir_name Name of the directory with converted JSON files.
  */
 function clean_converted_dir( $dir_name ) {
 	$dir = dir( $dir_name );

@@ -44,9 +44,9 @@ class WSB_Integration {
 	 *
 	 * @since    2.0.0
 	 * @access   protected
-	 * @var      string $WSB_Integration The string used to uniquely identify this plugin.
+	 * @var      string $plugin_name The string used to uniquely identify this plugin.
 	 */
-	protected $WSB_Integration;
+	protected $plugin_name;
 
 	/**
 	 * The current version of the plugin.
@@ -72,7 +72,7 @@ class WSB_Integration {
 		} else {
 			$this->version = '2.0.0';
 		}
-		$this->WSB_Integration = 'plugin-name';
+		$this->plugin_name = 'workshop-butler-plugin';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -161,7 +161,7 @@ class WSB_Integration {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new WSB_Integration_Admin( $this->get_WSB_Integration(), $this->get_version() );
+		$plugin_admin = new WSB_Integration_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -169,7 +169,7 @@ class WSB_Integration {
 		$this->loader->add_action( 'init', $plugin_admin, 'init' );
 
 		$upgrader = new WSB_Integration_Upgrade();
-		$this->loader->add_action('admin_init', $upgrader, 'upgrade');
+		$this->loader->add_action( 'admin_init', $upgrader, 'upgrade' );
 	}
 
 	/**
@@ -192,14 +192,14 @@ class WSB_Integration {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new WSB_Integration_Public( $this->get_WSB_Integration(), $this->get_version() );
+		$plugin_public = new WSB_Integration_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-		if ( ! is_admin() ) {
+		if ( !is_admin() ) {
 			$this->loader->add_action( 'init', $plugin_public, 'add_shortcodes' );
-			$this->loader->add_filter( 'pre_get_document_title', $plugin_public, 'set_title' );
-			$this->loader->add_filter( 'the_title', $plugin_public, 'set_title' );
+			$this->loader->add_filter( 'pre_get_document_title', $plugin_public, 'set_document_title' );
+			$this->loader->add_filter( 'the_title', $plugin_public, 'set_title', 10, 2 );
 		}
 		$this->loader->add_action( 'init', $plugin_public, 'add_ajax_handlers' );
 	}
@@ -220,8 +220,8 @@ class WSB_Integration {
 	 * @since     2.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_WSB_Integration() {
-		return $this->WSB_Integration;
+	public function get_plugin_name() {
+		return $this->plugin_name;
 	}
 
 	/**

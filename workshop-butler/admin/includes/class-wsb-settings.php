@@ -33,7 +33,6 @@ class WSB_Settings {
 	public function __construct( $opt_name ) {
 		$this->opt_name = $opt_name;
 		$this->load_dependencies();
-//		WSB_Options::destroy_options();
 	}
 
 	/**

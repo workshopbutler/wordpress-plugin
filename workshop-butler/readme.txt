@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.0.1 =
+Fixes a bug which caused a repetitive menu item
+
 = 2.0.0 =
 **Attention:** The changes in this release are substantial and an additional manual setup is needed. Before proceed, read the article [How to migrate from to a new WordPress plugin](https://support.workshopbutler.com/article/110-how-to-migrate-to-new-wordpress-plugin)
 
