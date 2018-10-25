@@ -5,15 +5,18 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 
 /**
  * Handles the execution of the shortcodes related to events
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Event extends WSB_Page {
@@ -21,7 +24,7 @@ class WSB_Event extends WSB_Page {
 	/**
 	 * Returns default attributes for the shortcodes
 	 *
-	 * @param string $shortcode_name Name of the shortcode (only the meaningful part)
+	 * @param string $shortcode_name Name of the shortcode (only the meaningful part).
 	 *
 	 * @return array
 	 */
@@ -43,15 +46,15 @@ class WSB_Event extends WSB_Page {
 	/**
 	 * Renders a simple shortcode with no additional logic
 	 *
-	 * @param string      $name Name of the shortcode (like 'title', 'register'
-	 * @param array       $attrs Attributes
-	 * @param null|string $content Replaceable content
+	 * @param string      $name    Name of the shortcode (like 'title', 'register').
+	 * @param array       $attrs   Attributes.
+	 * @param null|string $content Replaceable content.
 	 *
 	 * @return bool|string
 	 */
 	protected function render_simple_shortcode( $name, $attrs = [], $content = null ) {
 		$event = $this->dict->get_event();
-		if ( ! is_a( $event, 'Event' ) ) {
+		if ( ! is_a( $event, 'WorkshopButler\Event' ) ) {
 			return '';
 		}
 		$template = $this->get_template( 'event/' . $name, null );

@@ -1,11 +1,22 @@
 <?php
 /**
+ * The file contains helper functions for language
+ *
+ * @link       https://workshopbutler.com
+ * @since      2.0.0
+ *
+ * @package    WorkshopButler
+ */
+
+namespace WorkshopButler;
+
+/**
  * Returns 2-letter language code from the name of the language. If the language code is unknown,
  *  the language itself is returned
  *
  * We have to do it as API returns full names of the languages right now
  *
- * @param string $lang Language
+ * @param string $lang Language.
  * @return string
  */
 function get_lang_code( $lang ) {

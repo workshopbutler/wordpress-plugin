@@ -5,19 +5,27 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 
 /**
  * Schedule page class which handles the rendering and logic for the list of events
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Schedule_Page extends WSB_Page {
 
+	/**
+	 * Request entity
+	 *
+	 * @var WSB_Requests
+	 */
 	private $requests;
 
 	/**A
@@ -47,8 +55,8 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Retrieves the page data and renders it
 	 *
-	 * @param array $attrs
-	 * @param null  $content
+	 * @param array       $attrs   Short code attributes.
+	 * @param null|string $content Short code content.
 	 *
 	 * @since  2.0.0
 	 * @return string
@@ -79,7 +87,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Returns widget's attributes
 	 *
-	 * @param $attrs array User attributes
+	 * @param array $attrs User attributes.
 	 *
 	 * @return array
 	 */
@@ -94,9 +102,9 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Renders the list of events
 	 *
-	 * @param $response WSB_Response
-	 * @param $attrs array Widget's attributes
-	 * @param $content string | null Content of the wsb_schedule shortcode
+	 * @param WSB_Response  $response Workshop Butler API response.
+	 * @param array         $attrs    Widget's attributes.
+	 * @param string | null $content  Content of the wsb_schedule shortcode.
 	 *
 	 * @since  2.0.0
 	 * @return string
@@ -117,7 +125,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			array_push( $events, $event );
 		}
 
-		if ( count( $events ) == 0 ) {
+		if ( 0 === count( $events ) ) {
 			return $this->settings->get( WSB_Options::SCHEDULE_NO_EVENTS );
 		}
 
@@ -128,12 +136,12 @@ class WSB_Schedule_Page extends WSB_Page {
 		if ( $content ) {
 			$template = $content;
 		} else {
-			if ($this->get_list_type() == 'table') {
-				$custom_template = $this->settings->get(WSB_Options::SCHEDULE_TABLE_TEMPLATE);
+			if ( 'table' === $this->get_list_type() ) {
+				$custom_template = $this->settings->get( WSB_Options::SCHEDULE_TABLE_TEMPLATE );
 			} else {
-				$custom_template = $this->settings->get(WSB_Options::SCHEDULE_TILE_TEMPLATE);
+				$custom_template = $this->settings->get( WSB_Options::SCHEDULE_TILE_TEMPLATE );
 			}
-			$template        = $this->get_template( 'schedule-page', $custom_template );
+			$template = $this->get_template( 'schedule-page', $custom_template );
 		}
 
 		$this->dict->set_events( $events );
@@ -175,7 +183,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Returns default attributes for the shortcodes
 	 *
-	 * @param string $shortcode_name Name of the shortcode (only the meaningful part)
+	 * @param string $shortcode_name Name of the shortcode (only the meaningful part).
 	 *
 	 * @return array
 	 */
@@ -197,8 +205,8 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Renders the list of events
 	 *
-	 * @param array       $attrs Short code attributes
-	 * @param null|string $content Short code content
+	 * @param array       $attrs   Short code attributes.
+	 * @param null|string $content Short code content.
 	 *
 	 * @since  2.0.0
 	 * @return string
@@ -218,7 +226,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			$this->dict->set_event( $event );
 			$item_content           = $this->compile_string( $content, array( 'event' => $event ) );
 			$processed_item_content = do_shortcode( $item_content );
-			$html                  .= $this->compile_string(
+			$html                   .= $this->compile_string(
 				$item_template,
 				array(
 					'event'   => $event,
@@ -251,16 +259,16 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Renders a simple shortcode with no additional logic
 	 *
-	 * @param string      $name Name of the shortcode (like 'title', 'register')
-	 * @param array       $attrs Attributes
-	 * @param null|string $content Replaceable content
+	 * @param string      $name    Name of the shortcode (like 'title', 'register').
+	 * @param array       $attrs   Attributes.
+	 * @param null|string $content Replaceable content.
 	 *
 	 * @since 2.0.0
 	 * @return string
 	 */
 	protected function render_simple_shortcode( $name, $attrs = [], $content = null ) {
 		$event = $this->dict->get_event();
-		if ( ! is_a( $event, 'Event' ) ) {
+		if ( ! is_a( $event, 'WorkshopButler\Event' ) ) {
 			return '';
 		}
 		$template = $this->get_template( 'schedule/' . $name, null );
@@ -292,12 +300,12 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Handles 'wsb_schedule' shortcode
 	 *
-	 * @param $attrs   array  Shortcode attributes
-	 * @param $content string Shortcode content
+	 * @param array  $attrs   Shortcode attributes.
+	 * @param string $content Shortcode content.
 	 * @since  2.0.0
 	 * @return string
 	 */
-	static public function page( $attrs, $content, $tag ) {
+	public static function page( $attrs, $content ) {
 		$page = new WSB_Schedule_Page();
 		return $page->render_page( $attrs, $content );
 	}

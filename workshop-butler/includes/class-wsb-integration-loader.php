@@ -1,14 +1,14 @@
 <?php
-
 /**
  * Register all actions and filters for the plugin
  *
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
- * @subpackage WSB_Integration/includes
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * Register all actions and filters for the plugin.
@@ -17,7 +17,7 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @subpackage WSB_Integration/includes
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */

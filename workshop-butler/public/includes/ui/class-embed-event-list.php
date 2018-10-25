@@ -5,19 +5,28 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( __FILE__ ) . '../class-wsb-page.php';
 
 /**
  * Represents a list of events in a sidebar, either on an event page or a trainer profile
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Embed_Event_List extends WSB_Page {
 
+	/**
+	 * Request entity
+	 *
+	 * @since 2.0.0
+	 * @var WSB_Requests $requests
+	 */
 	private $requests;
 
 	/**
@@ -46,8 +55,8 @@ class Embed_Event_List extends WSB_Page {
 	/**
 	 * Retrieves the page data and renders it
 	 *
-	 * @param $method string Workshop Butler API method
-	 * @param $query  array  API parameters
+	 * @param string $method Workshop Butler API method.
+	 * @param array  $query  API parameters.
 	 *
 	 * @since  2.0.0
 	 * @return string
@@ -60,7 +69,7 @@ class Embed_Event_List extends WSB_Page {
 	/**
 	 * Renders the list of trainers
 	 *
-	 * @param $response WSB_Response
+	 * @param WSB_Response $response Response.
 	 *
 	 * @since  2.0.0
 	 * @return string

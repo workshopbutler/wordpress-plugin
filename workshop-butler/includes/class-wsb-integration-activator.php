@@ -5,9 +5,11 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
- * @subpackage WSB_Integration/includes
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( __FILE__ ) . 'class-wsb-integration-upgrade.php';
 
 /**
@@ -16,8 +18,7 @@ require_once plugin_dir_path( __FILE__ ) . 'class-wsb-integration-upgrade.php';
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      2.0.0
- * @package    WSB_Integration
- * @subpackage WSB_Integration/includes
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Integration_Activator {

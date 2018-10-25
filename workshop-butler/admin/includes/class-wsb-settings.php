@@ -6,11 +6,13 @@
  * @package WSB_Integration
  */
 
+namespace WorkshopButler;
+
 /**
  * General plugin settings
  *
- * @since   2.0.0
- * @package    WSB_Integration
+ * @since      2.0.0
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Settings {
@@ -26,7 +28,7 @@ class WSB_Settings {
 	/**
 	 * Initialises a new object
 	 *
-	 * @param $opt_name string   Name of the element in WordPress $options array
+	 * @param string $opt_name Name of the element in WordPress $options array.
 	 *
 	 * @since 2.0.0
 	 */
@@ -56,9 +58,9 @@ class WSB_Settings {
 	 * @return mixed
 	 */
 	public function init() {
-		Redux::setArgs( $this->opt_name, $this->get_arguments( true ) );
+		\Redux::setArgs( $this->opt_name, $this->get_arguments( true ) );
 
-		Redux::setSection(
+		\Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'            => __( 'General', 'wsbintegration' ),
@@ -69,7 +71,7 @@ class WSB_Settings {
 			)
 		);
 
-		Redux::setSection(
+		\Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'            => __( 'Events', 'wsbintegration' ),
@@ -79,7 +81,7 @@ class WSB_Settings {
 				'fields'           => $this->get_event_settings(),
 			)
 		);
-		Redux::setSection(
+		\Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'            => __( 'Trainers', 'wsbintegration' ),
@@ -89,7 +91,7 @@ class WSB_Settings {
 				'fields'           => $this->get_trainer_settings(),
 			)
 		);
-		Redux::setSection(
+		\Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'            => __( 'Pages', 'wsbintegration' ),
@@ -101,7 +103,7 @@ class WSB_Settings {
 
 		$this->get_pages_settings();
 
-		Redux::setSection(
+		\Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'            => __( 'Custom CSS', 'wsbintegration' ),
@@ -127,14 +129,15 @@ class WSB_Settings {
 
 	}
 
+	/**
+	 * Returns plugin settings
+	 */
 	protected function get_pages_settings() {
-
-		Redux::setSection(
+		\Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'      => __( 'Schedule (tiles)', 'wsbintegration' ),
 				'id'         => 'schedule-tile',
-				// 'icon'  => 'el el-home'
 				'subsection' => true,
 				'fields'     => array(
 					array(
@@ -148,12 +151,11 @@ class WSB_Settings {
 				),
 			)
 		);
-		Redux::setSection(
+		\Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'      => __( 'Schedule (table)', 'wsbintegration' ),
 				'id'         => 'schedule-table',
-				// 'icon'  => 'el el-home'
 				'subsection' => true,
 				'fields'     => array(
 					array(
@@ -167,7 +169,7 @@ class WSB_Settings {
 				),
 			)
 		);
-		Redux::setSection(
+		\Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'      => __( 'Event Page', 'wsbintegration' ),
@@ -185,7 +187,7 @@ class WSB_Settings {
 				),
 			)
 		);
-		Redux::setSection(
+		\Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'      => __( 'Registration Page', 'wsbintegration' ),
@@ -203,7 +205,7 @@ class WSB_Settings {
 				),
 			)
 		);
-		Redux::setSection(
+		\Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'      => __( 'Trainer List', 'wsbintegration' ),
@@ -221,7 +223,7 @@ class WSB_Settings {
 				),
 			)
 		);
-		Redux::setSection(
+		\Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'      => __( 'Trainer Profile', 'wsbintegration' ),
@@ -280,6 +282,11 @@ class WSB_Settings {
 		);
 	}
 
+	/**
+	 * Returns settings for the Trainer page
+	 *
+	 * @return array
+	 */
 	private function get_trainer_settings() {
 		return $this->get_trainer_page_settings();
 	}
@@ -396,9 +403,9 @@ class WSB_Settings {
 	}
 
 	/**
-	 * Returns list of arguments for Redux::setArgs method
+	 * Returns list of arguments for \Redux::setArgs method
 	 *
-	 * @param $save_ajax boolean True when the changes should be saved via Ajax
+	 * @param boolean $save_ajax True when the changes should be saved via Ajax.
 	 *
 	 * @since 2.0.0
 	 * @return array
@@ -406,68 +413,68 @@ class WSB_Settings {
 	protected function get_arguments( $save_ajax ) {
 
 		$args = array(
-			// TYPICAL -> Change these values as you need/desire
 			'opt_name'             => $this->opt_name,
 			// This is where your data is stored in the database and also becomes your global variable name.
 			'display_name'         => 'Workshop Butler',
-			// Name that appears at the top of your panel
+			// Name that appears at the top of your panel.
 			'display_version'      => WSB_INTEGRATION_VERSION,
-			// Version that appears at the top of your panel
+			// Version that appears at the top of your panel.
 			'menu_type'            => 'submenu',
-			// Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
+			// Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only).
 			'allow_sub_menu'       => false,
-			// Show the sections below the admin menu item or not
+			// Show the sections below the admin menu item or not.
 			'menu_title'           => __( 'Workshop Butler', 'wsbintegration' ),
 			'page_title'           => __( 'Workshop Butler', 'wsbintegration' ),
 			// Set it you want google fonts to update weekly. A google_api_key value is required.
 			'google_update_weekly' => false,
-			// Must be defined to add google fonts to the typography module
+			// Must be defined to add google fonts to the typography module.
 			'async_typography'     => true,
 			// Use a asynchronous font on the front end or font string
-			// 'disable_google_fonts_link' => true,                    // Disable this in case you want to create your own google fonts loader
+			// 'disable_google_fonts_link' => true,
+			// Disable this in case you want to create your own google fonts loader.
 			'admin_bar'            => false,
-			// Show the panel pages on the admin bar
+			// Show the panel pages on the admin bar.
 			'admin_bar_icon'       => 'dashicons-portfolio',
-			// Choose an icon for the admin bar menu
+			// Choose an icon for the admin bar menu.
 			'admin_bar_priority'   => 50,
-			// Choose an priority for the admin bar menu
+			// Choose an priority for the admin bar menu.
 			'global_variable'      => '',
-			// Set a different name for your global variable other than the opt_name
+			// Set a different name for your global variable other than the opt_name.
 			'dev_mode'             => false,
-			// Show the time the page took to load, etc
+			// Show the time the page took to load, etc.
 			'update_notice'        => true,
-			// If dev_mode is enabled, will notify developer of updated versions available in the GitHub Repo
+			// If dev_mode is enabled, will notify developer of updated versions available in the GitHub Repo.
 			'customizer'           => true,
 			// Enable basic customizer support
 			// 'open_expanded'     => true,                    // Allow you to start the panel in an expanded way initially.
 			// 'disable_save_warn' => true,                    // Disable the save warning when a user changes a field
-			// OPTIONAL -> Give you extra features
+			// OPTIONAL -> Give you extra features.
 			'page_priority'        => null,
 			// Order where the menu appears in the admin area. If there is any conflict, something will not show. Warning.
 			'page_parent'          => 'options-general.php',
-			// For a full list of options, visit: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters
+			// For a full list of options, visit: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters.
 			'page_permissions'     => 'manage_options',
 			// Permissions needed to access the options panel.
 			'menu_icon'            => '',
-			// Specify a custom URL to an icon
+			// Specify a custom URL to an icon.
 			'last_tab'             => '',
-			// Force your panel to always open to a specific tab (by id)
+			// Force your panel to always open to a specific tab (by id).
 			'page_icon'            => 'icon-themes',
-			// Icon displayed in the admin panel next to your menu_title
+			// Icon displayed in the admin panel next to your menu_title.
 			'page_slug'            => '',
-			// Page slug used to denote the panel, will be based off page title then menu title then opt_name if not provided
+			// Page slug used to denote the panel, will be based off page title then menu title then opt_name if not provided.
 			'save_defaults'        => true,
-			// On load save the defaults to DB before user clicks save or not
+			// On load save the defaults to DB before user clicks save or not.
 			'default_show'         => false,
 			// If true, shows the default value next to each field that is not the default value.
 			'default_mark'         => '',
-			// What to print by the field's title if the value shown is default. Suggested: *
+			// What to print by the field's title if the value shown is default. Suggested: *.
 			'show_import_export'   => false,
 			// Shows the Import/Export panel when not used as a field.
-			// CAREFUL -> These options are for advanced use only
+			// CAREFUL -> These options are for advanced use only.
 			'transient_time'       => 60 * MINUTE_IN_SECONDS,
 			'output'               => true,
-			// Global shut-off for dynamic CSS output by the framework. Will also disable google fonts output
+			// Global shut-off for dynamic CSS output by the framework. Will also disable google fonts output.
 			'output_tag'           => true,
 			// Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head
 			// 'footer_credit'     => '',                   // Disable the footer credit of Redux. Please leave if you can help it.
@@ -477,7 +484,7 @@ class WSB_Settings {
 			'use_cdn'              => true,
 			// If you prefer not to use the CDN for Select2, Ace Editor, and others, you may download the Redux Vendor Support plugin yourself and run locally or embed it in your code.
 			'ajax_save'            => $save_ajax,
-			// HINTS
+			// HINTS.
 			'hints'                => array(
 				'icon'          => 'el el-question-sign',
 				'icon_position' => 'right',
@@ -531,7 +538,7 @@ class WSB_Settings {
 	/**
 	 * Returns the named template or an empty string if it doesn't exist
 	 *
-	 * @param $name    string       Name of the template
+	 * @param string $name Name of the template.
 	 *
 	 * @since  2.0.0
 	 * @return null|string

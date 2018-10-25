@@ -5,9 +5,16 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
 
+namespace WorkshopButler;
+
+/**
+ * Type of the field
+ *
+ * @package WorkshopButler
+ */
 abstract class FieldType {
 	const CHECKBOX  = 'checkbox';
 	const TEXT_AREA = 'textarea';
@@ -23,30 +30,38 @@ abstract class FieldType {
  * Represents a form field
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Field {
 	/**
-	 * @var string $type Type of the field
+	 * Type of the field
+	 *
+	 * @var string $type
 	 * @since 2.0.0
 	 */
 	public $type;
 
 	/**
-	 * @var string $name Name of the field
+	 * Name of the field
+	 *
+	 * @var string $name
 	 * @since 2.0.0
 	 */
 	public $name;
 
 	/**
-	 * @var string $label Label of the field
+	 * Label of the field
+	 *
+	 * @var string $label
 	 * @since 2.0.0
 	 */
 	public $label;
 
 	/**
-	 * @var boolean $required True if the field is required
+	 * True if the field is required
+	 *
+	 * @var boolean $required
 	 * @since 2.0.0
 	 */
 	public $required;
@@ -54,7 +69,7 @@ class Field {
 	/**
 	 * Field constructor
 	 *
-	 * @param object $json_data JSON field data
+	 * @param object $json_data JSON field data.
 	 */
 	public function __construct( $json_data ) {
 		$this->type     = $json_data->type;

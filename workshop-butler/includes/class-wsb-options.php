@@ -5,11 +5,14 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 if ( ! class_exists( 'ReduxFramework' )
 	&& file_exists( dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php' ) ) {
-	require_once( dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php' );
+	require_once dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php';
 }
 
 
@@ -17,7 +20,7 @@ if ( ! class_exists( 'ReduxFramework' )
  * This class helps to manage plugin options
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Options {
@@ -64,21 +67,21 @@ class WSB_Options {
 	 * @since  2.0.0
 	 * @return void
 	 */
-	static public function destroy_options() {
-		delete_option( WSB_Options::PLUGIN_SETTINGS );
-		delete_option( WSB_Options::INTERNAL_SETTINGS );
+	public static function destroy_options() {
+		delete_option( self::PLUGIN_SETTINGS );
+		delete_option( self::INTERNAL_SETTINGS );
 	}
 
 	/**
 	 * Returns the value of the option, or false if the option is not set
 	 *
-	 * @param  $name string Name of the option
+	 * @param  string $name Name of the option.
 	 * @since  2.0.0
 	 * @return bool|mixed
 	 */
-	static public function get_option( $name ) {
-		$option = Redux::getOption( WSB_Options::PLUGIN_SETTINGS, $name );
-		if ( $option === null ) {
+	public static function get_option( $name ) {
+		$option = \Redux::getOption( self::PLUGIN_SETTINGS, $name );
+		if ( null === $option ) {
 			return false;
 		}
 		return $option;
@@ -87,12 +90,12 @@ class WSB_Options {
 	/**
 	 * Returns the value of the option, or false if the option is not set
 	 *
-	 * @param  $name string Name of the option
+	 * @param  string $name Name of the option.
 	 * @since  2.0.0
 	 * @return bool|mixed
 	 */
-	static public function get_internal_option( $name ) {
-		$settings = get_option( WSB_Options::INTERNAL_SETTINGS, array() );
+	public static function get_internal_option( $name ) {
+		$settings = get_option( self::INTERNAL_SETTINGS, array() );
 		if ( array_key_exists( $name, $settings ) ) {
 			return $settings[ $name ];
 		} else {
@@ -103,41 +106,41 @@ class WSB_Options {
 	/**
 	 * Updates the option
 	 *
-	 * @param $name  string Name of the option
-	 * @param $value mixed  Value of the option
+	 * @param string $name  Name of the option.
+	 * @param mixed  $value Value of the option.
 	 *
 	 * @since 2.0.0
 	 */
-	static public function set_option( $name, $value ) {
-		Redux::setOption( WSB_Options::PLUGIN_SETTINGS, $name, $value );
+	public static function set_option( $name, $value ) {
+		\Redux::setOption( self::PLUGIN_SETTINGS, $name, $value );
 	}
 
 	/**
 	 * Updates the option
 	 *
-	 * @param $name  string Name of the option
-	 * @param $value mixed  Value of the option
+	 * @param string $name  Name of the option.
+	 * @param mixed  $value Value of the option.
 	 *
 	 * @since 2.0.0
 	 */
-	static public function set_internal_option( $name, $value ) {
-		$settings          = get_option( WSB_Options::INTERNAL_SETTINGS, array() );
+	public static function set_internal_option( $name, $value ) {
+		$settings          = get_option( self::INTERNAL_SETTINGS, array() );
 		$settings[ $name ] = $value;
-		update_option( WSB_Options::INTERNAL_SETTINGS, $settings );
+		update_option( self::INTERNAL_SETTINGS, $settings );
 	}
 
 
 	/**
 	 * Returns the value of the option, or false if the option is not set
 	 *
-	 * @param  $name    string Name of the option
-	 * @param  $default mixed  Default value if the option does not exist
+	 * @param  string $name    Name of the option.
+	 * @param  mixed  $default Default value if the option does not exist.
 	 * @since  2.0.0
 	 * @return bool|mixed
 	 */
 	public function get( $name, $default = null ) {
-		$option = Redux::getOption( WSB_Options::PLUGIN_SETTINGS, $name );
-		if ( $option === null ) {
+		$option = \Redux::getOption( self::PLUGIN_SETTINGS, $name );
+		if ( null === $option ) {
 			return $default;
 		}
 		return $option;
@@ -150,8 +153,8 @@ class WSB_Options {
 	 * @return string|null
 	 */
 	public function get_event_page_url() {
-		$page_id               = $this->get( WSB_Options::EVENT_PAGE );
-		$integrated_event_page = $this->get( WSB_Options::CUSTOM_EVENT_DETAILS );
+		$page_id               = $this->get( self::EVENT_PAGE );
+		$integrated_event_page = $this->get( self::CUSTOM_EVENT_DETAILS );
 		if ( $integrated_event_page && $page_id ) {
 			return get_permalink( $page_id );
 		} else {
@@ -166,7 +169,7 @@ class WSB_Options {
 	 * @return string|null
 	 */
 	public function get_registration_page_url() {
-		$page_id = $this->get( WSB_Options::REGISTRATION_PAGE );
+		$page_id = $this->get( self::REGISTRATION_PAGE );
 		if ( $page_id ) {
 			return get_permalink( $page_id );
 		} else {
@@ -182,8 +185,8 @@ class WSB_Options {
 	 * @return string|null
 	 */
 	public function get_trainer_page_url() {
-		$page_id       = $this->get( WSB_Options::TRAINER_PROFILE_PAGE );
-		$active_module = $this->get( WSB_Options::TRAINER_MODULE );
+		$page_id       = $this->get( self::TRAINER_PROFILE_PAGE );
+		$active_module = $this->get( self::TRAINER_MODULE );
 		if ( $active_module && $page_id ) {
 			return get_permalink( $page_id );
 		} else {

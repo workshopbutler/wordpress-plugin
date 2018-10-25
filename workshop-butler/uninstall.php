@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Fired when the plugin is uninstalled.
  *
@@ -22,7 +21,7 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
 
 // If uninstall not called from WordPress, then exit.
@@ -32,4 +31,4 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-options.php';
 
-WSB_Options::destroy_options();
+WorkshopButler\WSB_Options::destroy_options();

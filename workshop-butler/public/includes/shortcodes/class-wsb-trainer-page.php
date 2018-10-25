@@ -5,19 +5,27 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 
 /**
  * Trainer Page class which handles the rendering and logic for the profile of trainer
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Trainer_Page extends WSB_Page {
 
+	/**
+	 * Request entity
+	 *
+	 * @var WSB_Requests
+	 */
 	private $requests;
 
 	/**
@@ -45,8 +53,8 @@ class WSB_Trainer_Page extends WSB_Page {
 	/**
 	 * Renders the trainer page
 	 *
-	 * @param array  $attrs Shortcode attributes
-	 * @param string $content Shortcode content
+	 * @param array  $attrs   Shortcode attributes.
+	 * @param string $content Shortcode content.
 	 *
 	 * @since  2.0.0
 	 *
@@ -85,7 +93,7 @@ class WSB_Trainer_Page extends WSB_Page {
 	/**
 	 * Renders the profile of trainer
 	 *
-	 * @param Trainer $trainer Current trainer
+	 * @param Trainer $trainer Current trainer.
 	 *
 	 * @return string
 	 */
@@ -107,12 +115,12 @@ class WSB_Trainer_Page extends WSB_Page {
 	/**
 	 * Handles 'wsb_trainer' shortcode
 	 *
-	 * @param $attrs   array  Shortcode attributes
-	 * @param $content string Shortcode content
+	 * @param array  $attrs   Shortcode attributes.
+	 * @param string $content Shortcode content.
 	 * @since  2.0.0
 	 * @return string
 	 */
-	static public function page( $attrs = [], $content = null ) {
+	public static function page( $attrs = [], $content = null ) {
 		$page = new WSB_Trainer_Page();
 
 		return $page->render( $attrs, $content );
@@ -121,15 +129,15 @@ class WSB_Trainer_Page extends WSB_Page {
 	/**
 	 * Renders a simple shortcode with no additional logic
 	 *
-	 * @param string      $name Name of the shortcode (like 'title', 'register'
-	 * @param array       $attrs Attributes
-	 * @param null|string $content Replaceable content
+	 * @param string      $name    Name of the shortcode (like 'title', 'register').
+	 * @param array       $attrs   Attributes.
+	 * @param null|string $content Replaceable content.
 	 *
 	 * @return string
 	 */
 	protected function render_simple_shortcode( $name, $attrs = [], $content = null ) {
 		$trainer = $this->dict->get_trainer();
-		if ( ! is_a( $trainer, 'Trainer' ) ) {
+		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
 		}
 		$template = $this->get_template( 'trainer/' . $name, null );

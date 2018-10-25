@@ -5,8 +5,10 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * Formats a location
@@ -14,11 +16,13 @@
 class Location_Formatter {
 
 	/**
-	 * @param Location $location Workshop location
+	 * Formats the location
+	 *
+	 * @param Location $location Workshop location.
 	 * @since 2.0.0
 	 * @return string
 	 */
-	static function format( $location ) {
+	public static function format( $location ) {
 		if ( $location->online ) {
 			return __( 'country.00', 'wsbintegration' );
 		} else {

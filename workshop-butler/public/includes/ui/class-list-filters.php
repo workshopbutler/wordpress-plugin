@@ -5,8 +5,11 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( __FILE__ ) . 'class-filter.php';
 require_once plugin_dir_path( __FILE__ ) . 'class-filter-value.php';
 
@@ -14,7 +17,7 @@ require_once plugin_dir_path( __FILE__ ) . 'class-filter-value.php';
  * This class contains a common logic for filters on different pages
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 abstract class List_Filters {
@@ -39,11 +42,11 @@ abstract class List_Filters {
 	/**
 	 * Returns the values of the filter based on its name
 	 *
-	 * @param $name string Name of the filter
+	 * @param string $name Name of the filter.
 	 *
 	 * @return Filter_Value[]
 	 */
-	protected abstract function get_filter_values( $name);
+	abstract protected function get_filter_values( $name );
 
 	/**
 	 * Returns filters which should be added to the page
@@ -65,19 +68,19 @@ abstract class List_Filters {
 	/**
 	 * Returns values for the filter, which can be added to the page
 	 *
-	 * @param $defaultName string Caption of the first, default item
-	 * @param $values Filter_Value[] All available filter values
+	 * @param string         $default_name Caption of the first, default item.
+	 * @param Filter_Value[] $values       All available filter values.
 	 * @return Filter_Value[]
 	 */
-	protected function get_filter_data( $defaultName, $values ) {
+	protected function get_filter_data( $default_name, $values ) {
 		$filtered = array_filter(
 			$values,
 			function ( $object ) {
-				return $object->value !== null;
+				return null !== $object->value;
 			}
 		);
 		$filtered = array_unique( $filtered );
-		if ( count( $filtered ) == 0 ) {
+		if ( 0 === count( $filtered ) ) {
 			return [];
 		}
 		usort(
@@ -86,8 +89,8 @@ abstract class List_Filters {
 				return $left->name > $right->name;
 			}
 		);
-		$defaultValue = new Filter_Value( $defaultName, 'all' );
-		array_unshift( $filtered, $defaultValue );
+		$default_value = new Filter_Value( $default_name, 'all' );
+		array_unshift( $filtered, $default_value );
 		return $filtered;
 	}
 }

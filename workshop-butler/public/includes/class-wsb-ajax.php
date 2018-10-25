@@ -1,4 +1,14 @@
 <?php
+/**
+ * The file that defines WSB_Ajax class
+ *
+ * @link       https://workshopbutler.com
+ * @since      2.0.0
+ *
+ * @package    WorkshopButler
+ */
+
+namespace WorkshopButler;
 
 require_once plugin_dir_path( __FILE__ ) . 'ui/class-embed-event-list.php';
 require_once plugin_dir_path( __FILE__ ) . 'class-wsb-requests.php';
@@ -9,13 +19,16 @@ require_once plugin_dir_path( __FILE__ ) . 'class-wsb-requests.php';
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
 class WSB_Ajax {
 
-	static public function get_values() {
+	/**
+	 * Makes a GET request to Workshop Butler API
+	 */
+	public static function get_values() {
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			// Nonce check
+			// Nonce check.
 			check_ajax_referer( 'wsb-nonce' );
 
 			$type = $_GET['type'];
@@ -48,7 +61,10 @@ class WSB_Ajax {
 		}
 	}
 
-	static public function register_to_event() {
+	/**
+	 * Makes a POST Register request to Workshop Butler API
+	 */
+	public static function register_to_event() {
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			check_ajax_referer( 'wsb-nonce' );
 

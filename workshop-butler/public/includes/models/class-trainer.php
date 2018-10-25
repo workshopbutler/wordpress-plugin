@@ -5,17 +5,21 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-social-links.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-statistics.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'utils/language.php';
+
 
 /**
  * Trainer class which represents a trainer profile in Workshop Butler
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Trainer {
@@ -46,8 +50,8 @@ class Trainer {
 	/**
 	 * Creates a new object
 	 *
-	 * @param $json_data object          JSON data from Workshop Butler API
-	 * @param $trainer_url string|null   Trainer profile page URL
+	 * @param object      $json_data   JSON data from Workshop Butler API
+	 * @param string|null $trainer_url Trainer profile page URL
 	 */
 	public function __construct( $json_data, $trainer_url = null ) {
 		$this->id                  = $json_data->id;
@@ -110,15 +114,15 @@ class Trainer {
 	/**
 	 * Returns a correct trainer country code
 	 *
-	 * @param $jsonData object JSON data from Workshop Butler API
+	 * @param object $json_data JSON data from Workshop Butler API.
 	 *
 	 * @return string
 	 */
-	private function get_country_code( $jsonData ) {
-		if ( $jsonData->country ) { // from Trainers API
-			return $jsonData->country;
-		} elseif ( $jsonData->address && $jsonData->address->country ) { // from Trainer API
-			return $jsonData->address->country;
+	private function get_country_code( $json_data ) {
+		if ( $json_data->country ) { // from Trainers API.
+			return $json_data->country;
+		} elseif ( $json_data->address && $json_data->address->country ) { // from Trainer API.
+			return $json_data->address->country;
 		} else {
 			return '';
 		}
@@ -127,17 +131,17 @@ class Trainer {
 	/**
 	 * Returns a specific type of statistics
 	 *
-	 * @param $jsonData object JSON data from Workshop Butler API
-	 * @param $publicWorkshops boolean True if the statistics is from public workshops
-	 * @param $recentWorkshops boolean True if the statistic is from recent workshops
+	 * @param object  $json_data        JSON data from Workshop Butler API.
+	 * @param boolean $public_workshops True if the statistics is from public workshops.
+	 * @param boolean $recent_workshops True if the statistic is from recent workshops.
 	 *
 	 * @return Statistics
 	 */
-	private function get_statistics( $jsonData, $publicWorkshops, $recentWorkshops ) {
-		if ( $jsonData->statistics ) {
-			$stats = $jsonData->statistics;
-			if ( $publicWorkshops ) {
-				if ( $recentWorkshops ) {
+	private function get_statistics( $json_data, $public_workshops, $recent_workshops ) {
+		if ( $json_data->statistics ) {
+			$stats = $json_data->statistics;
+			if ( $public_workshops ) {
+				if ( $recent_workshops ) {
 					return new Statistics(
 						$stats->recent_number_of_public_evaluations,
 						$stats->recent_public_median,
@@ -153,7 +157,7 @@ class Trainer {
 					);
 				}
 			} else {
-				if ( $recentWorkshops ) {
+				if ( $recent_workshops ) {
 					return new Statistics(
 						$stats->recent_number_of_private_evaluations,
 						$stats->recent_private_median,

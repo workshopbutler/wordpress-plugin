@@ -5,15 +5,18 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 
 /**
  * Handles the execution of the shortcodes related testimonials
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Testimonial extends WSB_Page {
@@ -21,8 +24,8 @@ class WSB_Testimonial extends WSB_Page {
 	/**
 	 * Renders the list of testimonials
 	 *
-	 * @param array       $attrs Short code attributes
-	 * @param null|string $content Short code content
+	 * @param array       $attrs   Short code attributes.
+	 * @param null|string $content Short code content.
 	 *
 	 * @since  2.0.0
 	 * @return string
@@ -38,8 +41,8 @@ class WSB_Testimonial extends WSB_Page {
 	/**
 	 * Renders the list of testimonials on a trainer's page
 	 *
-	 * @param int         $trainer_id Trainer ID who owns the testimonials
-	 * @param null|string $content Content of the shortcode
+	 * @param int         $trainer_id Trainer ID who owns the testimonials.
+	 * @param null|string $content    Content of the shortcode.
 	 *
 	 * @return string
 	 */
@@ -54,7 +57,7 @@ class WSB_Testimonial extends WSB_Page {
 			return $this->format_error( $may_be_trainer->get_error_message() );
 		}
 
-		if ( count( $may_be_trainer->testimonials ) == 0 ) {
+		if ( 0 === count( $may_be_trainer->testimonials ) ) {
 			return '';
 		}
 		$template = $this->get_template( 'testimonial/standalone-list', $content );
@@ -70,16 +73,16 @@ class WSB_Testimonial extends WSB_Page {
 	/**
 	 * Renders the list of testimonials on a trainer's page
 	 *
-	 * @param null|string $content Content of the shortcode
+	 * @param null|string $content Content of the shortcode.
 	 *
 	 * @return string
 	 */
 	protected function render_builtin_testimonials( $content = null ) {
 		$trainer = $this->dict->get_trainer();
-		if ( ! is_a( $trainer, 'Trainer' ) ) {
+		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
 		}
-		if ( count( $trainer->testimonials ) == 0 ) {
+		if ( 0 === count( $trainer->testimonials ) ) {
 			return '';
 		}
 		$template = $this->get_template( 'testimonial/builtin-list', $content );
@@ -95,9 +98,9 @@ class WSB_Testimonial extends WSB_Page {
 	/**
 	 * Renders a simple shortcode with no additional logic
 	 *
-	 * @param string      $name Name of the shortcode (like 'title', 'register')
-	 * @param array       $attrs Attributes
-	 * @param null|string $content Replaceable content
+	 * @param string      $name    Name of the shortcode (like 'title', 'register').
+	 * @param array       $attrs   Attributes.
+	 * @param null|string $content Replaceable content.
 	 *
 	 * @return bool|string
 	 */
@@ -115,17 +118,17 @@ class WSB_Testimonial extends WSB_Page {
 	}
 
 	/**
-	 * Renders an endorsement
+	 * Renders a testimonial
 	 *
-	 * @param array       $attrs Short code attributes
-	 * @param null|string $content Short code content
+	 * @param array       $attrs   Short code attributes.
+	 * @param null|string $content Short code content.
 	 *
 	 * @since  2.0.0
 	 * @return string
 	 */
 	public function render_testimonial( $attrs = [], $content = null ) {
 		$trainer = $this->dict->get_trainer();
-		if ( ! is_a( $trainer, 'Trainer' ) ) {
+		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
 		}
 		$template = $this->get_template( 'testimonial/item', $content );
@@ -137,20 +140,37 @@ class WSB_Testimonial extends WSB_Page {
 		foreach ( $trainer->testimonials as $testimonial ) {
 			$GLOBALS['wsb_testimonial'] = $testimonial;
 			$with_data                  = $this->compile_string( $template, array( 'testimonial' => $testimonial ) );
-			$html                      .= do_shortcode( $with_data );
+			$html                       .= do_shortcode( $with_data );
 			unset( $GLOBALS['wsb_testimonial'] );
 		}
 
 		return $html;
 	}
 
-
-	static public function testimonials( $attrs = [], $content = null ) {
+	/**
+	 * Renders the list of testimonials
+	 *
+	 * @param array       $attrs   Short code attributes.
+	 * @param null|string $content Short code content.
+	 *
+	 * @since  2.0.0
+	 * @return string
+	 */
+	public static function testimonials( $attrs = [], $content = null ) {
 		$page = new WSB_Testimonial();
 		return $page->render_testimonials( $attrs, $content );
 	}
 
-	static public function testimonial( $attrs = [], $content = null ) {
+	/**
+	 * Renders a testimonial
+	 *
+	 * @param array       $attrs   Short code attributes.
+	 * @param null|string $content Short code content.
+	 *
+	 * @since  2.0.0
+	 * @return string
+	 */
+	public static function testimonial( $attrs = [], $content = null ) {
 		$page = new WSB_Testimonial();
 		return $page->render_testimonial( $attrs, $content );
 	}

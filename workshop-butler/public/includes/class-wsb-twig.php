@@ -5,8 +5,10 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * Handle TwigFunction among Twig versions
@@ -41,15 +43,22 @@ if ( version_compare( \Twig_Environment::VERSION, '2.4.0', '>=' ) ) {
  */
 class WSB_Twig {
 	/**
-	 * @var Twig_Loader_Array $loader Template loader
+	 * Template loader
+	 *
+	 * @var \Twig_Loader_Array $loader
 	 */
 	public $loader;
 
 	/**
-	 * @var Twig_Environment $twig Template environemnt
+	 * Template environment
+	 *
+	 * @var \Twig_Environment $twig
 	 */
 	public $twig;
 
+	/**
+	 * WSB_Twig constructor
+	 */
 	public function __construct() {
 		$this->loader = new \Twig_Loader_Array();
 		$this->twig   = new \Twig_Environment( $this->loader );
@@ -57,6 +66,9 @@ class WSB_Twig {
 		$this->initialise_filters();
 	}
 
+	/**
+	 * Initialises different functions
+	 */
 	protected function initialise_functions() {
 		$this->twig->addFunction(
 			new Twig_Function(
@@ -105,7 +117,7 @@ class WSB_Twig {
 
 	protected function initialise_filters() {
 		$this->twig->addFilter(
-			new Twig_SimpleFilter(
+			new \Twig_SimpleFilter(
 				'truncate',
 				function ( $text, $len ) {
 					$text = wp_strip_all_tags( $text );

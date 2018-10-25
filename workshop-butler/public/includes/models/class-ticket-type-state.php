@@ -5,43 +5,55 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * This class represents a state of the ticket (sold out, ended, etc) in Workshop Butler
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Ticket_Type_State {
 
 	/**
+	 * True if the ticket type is sold out
+	 *
 	 * @since   2.0.0
 	 * @var     boolean $sold_out
 	 */
 	public $sold_out;
 
 	/**
+	 * True if the sales period has ended
+	 *
 	 * @since   2.0.0
 	 * @var     boolean $ended
 	 */
 	public $ended;
 
 	/**
+	 * True if the sales period has started
+	 *
 	 * @since   2.0.0
 	 * @var     boolean $started
 	 */
 	public $started;
 
 	/**
+	 * True if the sales period is in the future
+	 *
 	 * @since   2.0.0
 	 * @var     boolean $in_future
 	 */
 	public $in_future;
 
 	/**
+	 * True if it's allowed to sell the tickets of this ticket type
+	 *
 	 * @since   2.0.0
 	 * @var     boolean $valid
 	 */
@@ -50,13 +62,13 @@ class Ticket_Type_State {
 	/**
 	 * Initialises a new ticket state
 	 *
-	 * @param $jsonData object JSON for a ticket state
+	 * @param object $json_data JSON for a ticket state.
 	 */
-	public function __construct( $jsonData ) {
-		$this->sold_out  = $jsonData->sold_out;
-		$this->ended     = $jsonData->ended;
-		$this->started   = $jsonData->started;
-		$this->in_future = $jsonData->in_future;
-		$this->valid     = $jsonData->valid;
+	public function __construct( $json_data ) {
+		$this->sold_out  = $json_data->sold_out;
+		$this->ended     = $json_data->ended;
+		$this->started   = $json_data->started;
+		$this->in_future = $json_data->in_future;
+		$this->valid     = $json_data->valid;
 	}
 }

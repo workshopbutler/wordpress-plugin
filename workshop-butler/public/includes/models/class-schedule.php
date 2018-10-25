@@ -5,35 +5,43 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * Represents a schedule for a workshop
  */
 class Schedule {
 	/**
+	 * The start date and time of a workshop
+	 *
 	 * @since 2.0.0
-	 * @var DateTime $start The start date and time of a workshop
+	 * @var \DateTime $start
 	 */
 	public $start;
 
 	/**
+	 * The end date and time of a workshop
+	 *
 	 * @since 2.0.0
-	 * @var DateTime $end The end date and time of a workshop
+	 * @var \DateTime $end
 	 */
 	public $end;
 
 	/**
+	 * Timezone of a workshop
+	 *
 	 * @since 2.0.0
-	 * @var string|null $timezone Timezone of a workshop
+	 * @var string|null $timezone
 	 */
 	public $timezone;
 
 	/**
 	 * Initialises a new schedule
 	 *
-	 * @param object $json_data JSON data from Workshop Butler API
+	 * @param object $json_data JSON data from Workshop Butler API.
 	 */
 	public function __construct( $json_data ) {
 		if ( $json_data->timezone ) {
@@ -41,8 +49,8 @@ class Schedule {
 		} else {
 			$this->timezone = null;
 		}
-		$this->start = new DateTime( $json_data->start, $this->default_timezone() );
-		$this->end   = new DateTime( $json_data->end, $this->default_timezone() );
+		$this->start = new \DateTime( $json_data->start, $this->default_timezone() );
+		$this->end   = new \DateTime( $json_data->end, $this->default_timezone() );
 	}
 
 	/**
@@ -51,7 +59,7 @@ class Schedule {
 	 * @since 2.0.0
 	 */
 	public function ended() {
-		$now = new DateTime( 'now', $this->default_timezone() );
+		$now = new \DateTime( 'now', $this->default_timezone() );
 		return $this->end < $now;
 	}
 
@@ -61,7 +69,7 @@ class Schedule {
 	 * @since 2.0.0
 	 */
 	public function default_timezone() {
-		return $this->timezone ? new DateTimeZone( $this->timezone ) : new DateTimeZone( 'UTC' );
+		return $this->timezone ? new \DateTimeZone( $this->timezone ) : new \DateTimeZone( 'UTC' );
 	}
 
 	/**
@@ -71,7 +79,7 @@ class Schedule {
 	 * @return boolean
 	 */
 	public function at_one_day() {
-		return $this->start->format( 'yyyy-MM-dd' ) == $this->end->format( 'yyyy-MM-dd' );
+		return $this->start->format( 'yyyy-MM-dd' ) === $this->end->format( 'yyyy-MM-dd' );
 	}
 
 }

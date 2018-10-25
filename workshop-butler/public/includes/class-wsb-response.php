@@ -5,8 +5,10 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * The response wrapper class
@@ -16,7 +18,7 @@
  * It's used to make requests to Workshop Butler API in a correct way.
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Response {
@@ -49,7 +51,7 @@ class WSB_Response {
 	 * Creates a new object from the response of wp_remote_get/wp_remote_post functions
 	 *
 	 * @since 2.0.0
-	 * @param $response array|WP_Error
+	 * @param array|\WP_Error $response Raw response data.
 	 */
 	public function __construct( $response ) {
 		if ( is_wp_error( $response ) ) {
@@ -60,7 +62,7 @@ class WSB_Response {
 			$this->error     = 'Response does not contain `body` attribute';
 		} else {
 			$body = json_decode( $response['body'] );
-			if ( $body === null ) {
+			if ( null === $body ) {
 				$this->http_code = 422;
 				$this->error     = 'Unprocessable Entity';
 			} else {

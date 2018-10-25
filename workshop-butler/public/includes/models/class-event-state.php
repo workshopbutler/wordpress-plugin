@@ -5,16 +5,20 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * Represents an event's state
  *
- * @since 2.0
+ * @since 2.0.0
  */
 class Event_State {
 	/**
+	 * Related event
+	 *
 	 * @var Event $event
 	 * @since 2.0.0
 	 */
@@ -23,7 +27,7 @@ class Event_State {
 	/**
 	 * Initialises a new state
 	 *
-	 * @param Event $event
+	 * @param Event $event Related event.
 	 */
 	public function __construct( $event ) {
 		$this->event = $event;
@@ -35,7 +39,7 @@ class Event_State {
 	 * @return boolean
 	 * @since 2.0.0
 	 */
-	function open() {
+	public function open() {
 		return ! $this->closed();
 	}
 
@@ -45,7 +49,7 @@ class Event_State {
 	 * @return boolean
 	 * @since 2.0.0
 	 */
-	function closed() {
+	public function closed() {
 		if ( $this->event->schedule->ended() ) {
 			return true;
 		} elseif ( $this->event->private ) {
@@ -78,7 +82,7 @@ class Event_State {
 	 * @return string | null
 	 * @since 2.0.0
 	 */
-	function reason() {
+	public function reason() {
 		if ( $this->event->schedule->ended() ) {
 			return 'event.state.ended';
 		} elseif ( $this->event->private ) {

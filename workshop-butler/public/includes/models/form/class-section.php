@@ -5,8 +5,11 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( __FILE__ ) . 'class-field.php';
 require_once plugin_dir_path( __FILE__ ) . 'class-select.php';
 require_once plugin_dir_path( __FILE__ ) . 'class-country.php';
@@ -16,18 +19,22 @@ require_once plugin_dir_path( __FILE__ ) . 'class-ticket.php';
  * Represents a form section, which contains a number of fields
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Section {
 	/**
-	 * @var Field[] $fields Section's fields
+	 * Section's fields
+	 *
+	 * @var Field[] $fields
 	 * @since 2.0.0
 	 */
 	public $fields;
 
 	/**
-	 * @var string $name Section's name
+	 * Section's name
+	 *
+	 * @var string $name
 	 * @since 2.0.0
 	 */
 	public $name;
@@ -35,15 +42,15 @@ class Section {
 	/**
 	 * Section constructor.
 	 *
-	 * @param string $name Name of the section
-	 * @param object $json_data Section's field in JSON
-	 * @param Event  $event
+	 * @param string $name      Name of the section.
+	 * @param object $json_data Section's field in JSON.
+	 * @param Event  $event     Related event.
 	 */
 	public function __construct( $name, $json_data, $event ) {
 		$this->name = $name;
 		$fields     = [];
 		foreach ( $json_data as $field_data ) {
-			array_push( $fields, Section::create_any_field( $field_data, $event ) );
+			array_push( $fields, self::create_any_field( $field_data, $event ) );
 		}
 		$this->fields = [];
 		foreach ( $fields as $field ) {
@@ -57,8 +64,8 @@ class Section {
 	/**
 	 * Creates any field, including tickets
 	 *
-	 * @param object $field_data JSON field data
-	 * @param Event  $event Form's event
+	 * @param object $field_data JSON field data.
+	 * @param Event  $event      Form's event.
 	 * @return Field
 	 */
 	protected static function create_any_field( $field_data, $event ) {

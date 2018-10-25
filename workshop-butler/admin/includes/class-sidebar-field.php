@@ -5,33 +5,41 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @subpackage WSB_Integration/includes
  */
+
+namespace WorkshopButler;
 
 /**
  * Field on a sidebar settings form
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @subpackage WSB_Integration/includes
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Sidebar_Field {
 	/**
-	 * @var string $type Type of the field
+	 * Type of the field
+	 *
+	 * @var string $type
 	 * @since 2.0.0
 	 */
 	public $type;
 
 	/**
-	 * @var string $description Description of the field
+	 * Description of the field
+	 *
+	 * @var string $description
 	 * @since 2.0.0
 	 */
 	public $description;
 
 	/**
-	 * @var string|boolean|int|null $default_value Default value of the field
+	 * Default value of the field
+	 *
+	 * @var string|boolean|int|null $default_value
 	 * @since 2.0.0
 	 */
 	public $default_value;
@@ -39,9 +47,9 @@ class Sidebar_Field {
 	/**
 	 * Sidebar_Field constructor
 	 *
-	 * @param string                  $type Type of the field
-	 * @param string                  $description Description of the field
-	 * @param string|boolean|int|null $default_value Default value of the field
+	 * @param string                  $type          Type of the field.
+	 * @param string                  $description   Description of the field.
+	 * @param string|boolean|int|null $default_value Default value of the field.
 	 */
 	public function __construct( $type, $description, $default_value = null ) {
 		$this->type          = $type;

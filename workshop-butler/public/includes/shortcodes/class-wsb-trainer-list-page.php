@@ -5,21 +5,34 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 
 /**
  * Trainer List page class which handles the rendering and logic for the list of trainers
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Trainer_List_Page extends WSB_Page {
 
+	/**
+	 * Request entity
+	 *
+	 * @var WSB_Requests
+	 */
 	private $requests;
 
+	/**
+	 * WSB_Trainer_List_Page constructor
+	 *
+	 * @since 2.0.0
+	 */
 	public function __construct() {
 		parent::__construct();
 		$this->load_dependencies();
@@ -39,6 +52,16 @@ class WSB_Trainer_List_Page extends WSB_Page {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-trainer.php';
 	}
 
+	/**
+	 * Renders the list of trainers
+	 *
+	 * @param array  $attrs   Shortcode attributes.
+	 * @param string $content Shortcode content.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @return string
+	 */
 	public function render_page( $attrs = [], $content = null ) {
 		// Load styles and scripts only on demand.
 		wp_enqueue_script( 'wsb-all-trainers-scripts' );
@@ -54,19 +77,19 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	/**
 	 * Renders the list of trainers
 	 *
-	 * @param $response WSB_Response
-	 * @param $trainerUrl string Trainer profile page URL
+	 * @param WSB_Response $response    Workshop Butler API response.
+	 * @param string       $trainer_url Trainer profile page URL.
 	 *
 	 * @return string
 	 */
-	protected function render_list( $response, $trainerUrl ) {
+	protected function render_list( $response, $trainer_url ) {
 		if ( $response->is_error() ) {
 			return $this->format_error( $response->error );
 		}
 
 		$trainers = [];
 		foreach ( $response->body as $json_trainer_data ) {
-			$trainer = new Trainer( $json_trainer_data, $trainerUrl );
+			$trainer = new Trainer( $json_trainer_data, $trainer_url );
 			array_push( $trainers, $trainer );
 		}
 		$template_data = array(
@@ -88,7 +111,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	/**
 	 * Renders filters on the page
 	 *
-	 * @param array $attrs Short code attributes
+	 * @param array $attrs Short code attributes.
 	 *
 	 * @since  2.0.0
 	 * @return string
@@ -118,16 +141,16 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	/**
 	 * Retrieves the name of Workshop Butler shortcode
 	 *
-	 * @param string $tag Full shortcode tag
+	 * @param string $tag Full shortcode tag.
 	 *
 	 * @since 2.0.0
 	 * @return string
 	 */
 	protected static function get_shortcode_name( $tag ) {
-		$parts    = explode( '_', $tag );
-		$emptyTag = '[' . $tag . ']';
+		$parts     = explode( '_', $tag );
+		$empty_tag = '[' . $tag . ']';
 		if ( count( $parts ) < 4 ) {
-			return $emptyTag;
+			return $empty_tag;
 		}
 
 		return implode( '_', array_slice( $parts, 3 ) );
@@ -136,8 +159,8 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	/**
 	 * Renders the list of trainers
 	 *
-	 * @param array       $attrs Short code attributes
-	 * @param null|string $content Short code content
+	 * @param array       $attrs   Short code attributes.
+	 * @param null|string $content Short code content.
 	 *
 	 * @since  2.0.0
 	 * @return string
@@ -157,7 +180,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 			$this->dict->set_trainer( $trainer );
 			$item_content           = $this->compile_string( $content, array( 'trainer' => $trainer ) );
 			$processed_item_content = do_shortcode( $item_content );
-			$html                  .= $this->compile_string(
+			$html                   .= $this->compile_string(
 				$item_template,
 				array(
 					'trainer' => $trainer,
@@ -178,7 +201,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	/**
 	 * Returns default attributes for the shortcodes
 	 *
-	 * @param string $shortcode_name Name of the shortcode (only the meaningful part)
+	 * @param string $shortcode_name Name of the shortcode (only the meaningful part).
 	 *
 	 * @return array
 	 */
@@ -196,15 +219,15 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	/**
 	 * Renders a simple shortcode with no additional logic
 	 *
-	 * @param string      $name Name of the shortcode (like 'title', 'register'
-	 * @param array       $attrs Attributes
-	 * @param null|string $content Replaceable content
+	 * @param string      $name    Name of the shortcode (like 'title', 'register').
+	 * @param array       $attrs   Attributes.
+	 * @param null|string $content Replaceable content.
 	 *
 	 * @return bool|string
 	 */
 	protected function render_simple_shortcode( $name, $attrs = [], $content = null ) {
 		$trainer = $this->dict->get_trainer();
-		if ( ! is_a( $trainer, 'Trainer' ) ) {
+		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
 		}
 		$template = $this->get_template( 'trainer-list/' . $name, null );
@@ -218,12 +241,12 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	/**
 	 * Handles 'wsb_trainer_list' shortcode
 	 *
-	 * @param $attrs   array  Shortcode attributes
-	 * @param $content string Shortcode content
+	 * @param array  $attrs   Shortcode attributes.
+	 * @param string $content Shortcode content.
 	 * @since  2.0.0
 	 * @return string
 	 */
-	static public function page( $attrs = [], $content = null ) {
+	public static function page( $attrs = [], $content = null ) {
 		$page = new WSB_Trainer_List_Page();
 		return $page->render_page( $attrs, $content );
 	}
@@ -231,12 +254,12 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	/**
 	 * Handles 'wsb_trainer_list_item' shortcode
 	 *
-	 * @param $attrs   array  Shortcode attributes
-	 * @param $content string Shortcode content
+	 * @param array  $attrs   Shortcode attributes.
+	 * @param string $content Shortcode content.
 	 * @since  2.0.0
 	 * @return string
 	 */
-	static public function trainer( $attrs = [], $content = null ) {
+	public static function trainer( $attrs = [], $content = null ) {
 		$page = new WSB_Trainer_List_Page();
 		return $page->render_trainer( $attrs, $content );
 	}

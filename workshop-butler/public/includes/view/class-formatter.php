@@ -5,8 +5,11 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once dirname( __FILE__ ) . '/class-location-formatter.php';
 require_once dirname( __FILE__ ) . '/class-schedule-formatter.php';
 require_once dirname( __FILE__ ) . '/class-language-formatter.php';
@@ -21,12 +24,12 @@ class Formatter {
 	/**
 	 * Formats the given object
 	 *
-	 * @param object $object Object to format
-	 * @param string $type Additional format type
+	 * @param object $object Object to format.
+	 * @param string $type Additional format type.
 	 *
 	 * @return string
 	 */
-	static function format( $object, $type = null ) {
+	public static function format( $object, $type = null ) {
 		if ( $object instanceof Location ) {
 			return Location_Formatter::format( $object );
 		}
@@ -43,7 +46,7 @@ class Formatter {
 			return Event_State_Formatter::format( $object );
 		}
 		if ( is_numeric( $object ) ) {
-			if ( intval( $object ) == $object ) {
+			if ( intval( $object ) === $object ) {
 				return number_format_i18n( $object, 0 );
 			} else {
 				$number = number_format_i18n( $object, 2 );

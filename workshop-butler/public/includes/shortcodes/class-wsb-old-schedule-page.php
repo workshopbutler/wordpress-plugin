@@ -5,67 +5,56 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 
 /**
  * Old Schedule page class which handles the rendering and logic for the list of events
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Old_Schedule_Page extends WSB_Page {
 
 	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since    2.0.0
-	 */
-	public function __construct() {
-		parent::__construct();
-	}
-
-	/**
 	 * Retrieves the page data and renders it
 	 *
-	 * @param array $attrs
-	 * @param null  $content
+	 * @param array       $attrs   Shortcode attributes.
+	 * @param string|null $content Shortcode content.
 	 *
 	 * @since  2.0.0
 	 * @return string
 	 */
 	public function render_page( $attrs = [], $content = null ) {
 
-		wp_deregister_script('jquery');
-		wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js", false, null);
-		wp_enqueue_script('jquery');
-
-
-		$token = get_option('wb_token');
-		if (empty($token)) {
+		$token = get_option( 'wb_token' );
+		if ( empty( $token ) ) {
 			return '';
 		}
 
-		if (!is_array($attrs)) {
+		if ( ! is_array( $attrs ) ) {
 			$attrs = array();
 		}
-		extract(shortcode_atts(array(
+		extract( shortcode_atts( array(
 			'theme' => '',
-			'url'   => ''
-		), $attrs));
+			'url'   => '',
+		), $attrs ) );
 		$params = '';
-		foreach($attrs as $key => $value){
-			if ($key == 'widget_id') {
+		foreach ( $attrs as $key => $value ) {
+			if ( 'widget_id' === $key ) {
 				$params .= 'widgetId: "' . $value . '", ';
 			} else {
 				$params .= $key . ': "' . $value . '", ';
 			}
 		}
 
-		$title = get_option('wb_title');
-		$file = 'https://integrations.workshopbutler.com/?api_key='. $token;
+		$title = get_option( 'wb_title' );
+		$file  = 'https://integrations.workshopbutler.com/?api_key=' . $token;
 
 		$str = '
         <div id="hmt_widget_content"></div>
@@ -76,7 +65,7 @@ class WSB_Old_Schedule_Page extends WSB_Page {
                 ' . $params . '                
             };
             (function(){var script = document.createElement(\'script\');script.type = \'text/javascript\';script.async = true;
-                script.src = "' . $file . '&v=' . rand() .'";
+                script.src = "' . $file . '&v=' . rand() . '";
                 document.getElementsByTagName(\'head\')[0].appendChild(script);})();
         </script>
     ';
@@ -87,8 +76,8 @@ class WSB_Old_Schedule_Page extends WSB_Page {
 	/**
 	 * Handles 'wb_content' shortcode
 	 *
-	 * @param $attrs   array  Shortcode attributes
-	 * @param $content string Shortcode content
+	 * @param array  $attrs   Shortcode attributes.
+	 * @param string $content Shortcode content.
 	 * @since  2.0.0
 	 * @return string
 	 */

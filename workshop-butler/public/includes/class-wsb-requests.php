@@ -5,8 +5,11 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 define( 'WSB_API_END_POINT', 'https://api.workshopbutler.com/' );
 require_once plugin_dir_path( __FILE__ ) . 'class-wsb-response.php';
 
@@ -16,7 +19,7 @@ require_once plugin_dir_path( __FILE__ ) . 'class-wsb-response.php';
  * It's used to make requests to Workshop Butler API in a correct way
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Requests {
@@ -64,8 +67,8 @@ class WSB_Requests {
 	/**
 	 * Makes GET request
 	 *
-	 * @param $method string API method
-	 * @param $query array API query parameters
+	 * @param string $method API method.
+	 * @param array  $query  API query parameters.
 	 *
 	 * @return WSB_Response
 	 */
@@ -79,8 +82,8 @@ class WSB_Requests {
 	/**
 	 * Makes POST request
 	 *
-	 * @param $method string API method
-	 * @param $data array Post data
+	 * @param string $method API method.
+	 * @param array  $data   Post data.
 	 *
 	 * @return WSB_Response
 	 */
@@ -113,7 +116,7 @@ class WSB_Requests {
 	/**
 	 * Adds a properly formatted parameter which contains an information about plugin settings
 	 *
-	 * @param array $query List of query parameters for API request
+	 * @param array $query List of query parameters for API request.
 	 */
 	protected function add_stats_parameter( &$query ) {
 		$parameters = [];
@@ -126,17 +129,17 @@ class WSB_Requests {
 	/**
 	 * Retrieves the event from API and adds it to the dictionary
 	 *
-	 * @param string $id Event ID
-	 * @return WP_Error|Event
+	 * @param string $id Event ID.
+	 * @return \WP_Error|Event
 	 */
 	public function retrieve_event( $id ) {
 		$method   = 'events/';
-		$method  .= rawurlencode( $id );
+		$method   .= rawurlencode( $id );
 		$query    = array( 'fields' => 'trainer.rating' );
 		$response = $this->get( $method, $query );
 		$dict     = new WSB_Dictionary();
 		if ( $response->is_error() ) {
-			$error = new WP_Error( $response->http_code, $response->error );
+			$error = new \WP_Error( $response->http_code, $response->error );
 			$dict->set_event( $error );
 			return $error;
 		} else {
@@ -154,8 +157,8 @@ class WSB_Requests {
 	/**
 	 * Retrieves the trainer from API and adds it to the dictionary
 	 *
-	 * @param string $id Trainer ID
-	 * @return WP_Error|Trainer
+	 * @param string $id Trainer ID.
+	 * @return \WP_Error|Trainer
 	 */
 	public function retrieve_trainer( $id ) {
 		$method   = 'facilitators/';
@@ -164,7 +167,7 @@ class WSB_Requests {
 		$response = $this->get( $method, $query );
 		$dict     = new WSB_Dictionary();
 		if ( $response->is_error() ) {
-			$error = new WP_Error( $response->http_code, $response->error );
+			$error = new \WP_Error( $response->http_code, $response->error );
 			$dict->set_trainer( $error );
 			return $error;
 		} else {

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Define the internationalization functionality
  *
@@ -9,9 +8,10 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
- * @subpackage WSB_Integration/includes
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * Define the internationalization functionality.
@@ -20,12 +20,10 @@
  * so that it is ready for translation.
  *
  * @since      2.0.0
- * @package    WSB_Integration
- * @subpackage WSB_Integration/includes
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Integration_i18n {
-
 
 	/**
 	 * Load the plugin text domain for translation.
@@ -41,6 +39,4 @@ class WSB_Integration_i18n {
 		);
 
 	}
-
-
 }

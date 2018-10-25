@@ -5,8 +5,11 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'view/class-date-formatter.php';
 
 /**
@@ -18,12 +21,12 @@ class Ticket_Formatter {
 	/**
 	 * Formats different parts of the ticket type
 	 *
-	 * @param Ticket_Type $ticket_type Type to format
-	 * @param string      $part Name of the part to format
+	 * @param Ticket_Type $ticket_type Type to format.
+	 * @param string      $part        Name of the part to format.
 	 *
 	 * @return string
 	 */
-	static function format( $ticket_type, $part ) {
+	public static function format( $ticket_type, $part ) {
 		switch ( $part ) {
 			case 'desc':
 				if ( $ticket_type instanceof Paid_Ticket_Type ) {
@@ -46,12 +49,12 @@ class Ticket_Formatter {
 	 * Returns correctly-formatted price
 	 *
 	 * @since 2.0.0
-	 * @param Paid_Ticket_Type $ticket_type Ticket type to format
+	 * @param Paid_Ticket_Type $ticket_type Ticket type to format.
 	 * @return string
 	 */
 	protected static function format_price( $ticket_type ) {
 		if ( class_exists( 'NumberFormatter' ) ) {
-			$formatter = new NumberFormatter( get_locale(), NumberFormatter::CURRENCY );
+			$formatter = new \NumberFormatter( get_locale(), \NumberFormatter::CURRENCY );
 			$formatter->formatCurrency( $ticket_type->price->amount, $ticket_type->price->currency );
 		} else {
 			$without_fraction = ( $ticket_type->price->amount - floor( $ticket_type->price->amount ) ) < 0.001;
@@ -65,7 +68,7 @@ class Ticket_Formatter {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @param Ticket_Type $ticket_type Ticket type to format
+	 * @param Ticket_Type $ticket_type Ticket type to format.
 	 *
 	 * @return string
 	 */
@@ -88,7 +91,7 @@ class Ticket_Formatter {
 	 * Returns correctly-formatted ticket description
 	 *
 	 * @since 2.0.0
-	 * @param Paid_Ticket_Type $ticket_type Ticket type to format
+	 * @param Paid_Ticket_Type $ticket_type Ticket type to format.
 	 * @return string
 	 */
 	protected static function format_description( $ticket_type ) {

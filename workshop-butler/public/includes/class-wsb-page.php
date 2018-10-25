@@ -5,36 +5,39 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
- * @subpackage WSB_Integration/includes
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * Represents an integrated page
  *
  * @since      2.0.0
- * @package    WSB_Integration
- * @subpackage WSB_Integration/includes
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 abstract class WSB_Page {
 	/**
 	 * Plugin settings
 	 *
-	 * @access  protected
 	 * @since   2.0.0
 	 * @var     WSB_Options $settings Plugin settings
 	 */
 	protected $settings;
 
 	/**
-	 * @var WSB_Twig $twig Template engine
+	 * Template engine
+	 *
+	 * @var WSB_Twig $twig
 	 * @since 2.0.0
 	 */
 	protected $twig;
 
 	/**
-	 * @var WSB_Dictionary $dict Plugin dictionary
+	 * Plugin dictionary
+	 *
+	 * @var WSB_Dictionary $dict
 	 * @since 2.0.0
 	 */
 	protected $dict;
@@ -52,21 +55,28 @@ abstract class WSB_Page {
 	/**
 	 * Retrieves the name of Workshop Butler shortcode
 	 *
-	 * @param string $tag Full shortcode tag
+	 * @param string $tag Full shortcode tag.
 	 *
 	 * @since 2.0.0
 	 * @return string
 	 */
 	protected static function get_shortcode_name( $tag ) {
-		$parts    = explode( '_', $tag );
-		$emptyTag = '[' . $tag . ']';
+		$parts     = explode( '_', $tag );
+		$empty_tag = '[' . $tag . ']';
 		if ( count( $parts ) < 3 ) {
-			return $emptyTag;
+			return $empty_tag;
 		}
 
 		return implode( '_', array_slice( $parts, 2 ) );
 	}
 
+	/**
+	 * Compiles the template
+	 *
+	 * @param string $template Template.
+	 * @param array  $data     Template paratemeters.
+	 * @return string
+	 */
 	public function compile_string( $template, $data = array() ) {
 		$key = base64_encode( $template );
 		if ( ! $this->twig->loader->exists( $key ) ) {
@@ -78,13 +88,13 @@ abstract class WSB_Page {
 	/**
 	 * Handles 'wsb_x_*' shortcodes
 	 *
-	 * @param $attrs   array  Shortcode attributes
-	 * @param $content string Shortcode content
-	 * @param $tag     string Shortcode's tag
+	 * @param array  $attrs   Shortcode attributes.
+	 * @param string $content Shortcode content.
+	 * @param string $tag     Shortcode's tag.
 	 * @since  2.0.0
 	 * @return string
 	 */
-	static public function tag( $attrs, $content, $tag ) {
+	public static function tag( $attrs, $content, $tag ) {
 		$shortcode_name      = static::get_shortcode_name( $tag );
 		$method              = 'render_' . $shortcode_name;
 		$page                = new static();
@@ -100,7 +110,7 @@ abstract class WSB_Page {
 	/**
 	 * Converts boolean values in string format to real boolean values
 	 *
-	 * @param array $attrs Shortcode attributes
+	 * @param array $attrs Shortcode attributes.
 	 *
 	 * @return array
 	 */
@@ -123,9 +133,9 @@ abstract class WSB_Page {
 	/**
 	 * Renders a simple shortcode with no additional logic
 	 *
-	 * @param string      $name Name of the shortcode (like 'title', 'register')
-	 * @param array       $attrs Attributes
-	 * @param null|string $content Replaceable content
+	 * @param string      $name    Name of the shortcode (like 'title', 'register').
+	 * @param array       $attrs   Attributes.
+	 * @param null|string $content Replaceable content.
 	 *
 	 * @return string
 	 */
@@ -137,7 +147,7 @@ abstract class WSB_Page {
 	/**
 	 * Returns default attributes for the shortcodes. Must be redefined in subclasses
 	 *
-	 * @param string $shortcode_name Name of the shortcode (only the meaningful part)
+	 * @param string $shortcode_name Name of the shortcode (only the meaningful part).
 	 *
 	 * @return array
 	 */
@@ -214,8 +224,8 @@ abstract class WSB_Page {
 	/**
 	 * Returns the named template or 'null' if it doesn't exist
 	 *
-	 * @param $name    string       Name of the template
-	 * @param $content null|string  Template content
+	 * @param string      $name    Name of the template.
+	 * @param null|string $content Template content.
 	 *
 	 * @since  2.0.0
 	 * @return null|string
@@ -234,12 +244,12 @@ abstract class WSB_Page {
 	/**
 	 * Returns the error message in an appropriate format
 	 *
-	 * @param string $error Error message
+	 * @param string $error Error message.
 	 *
 	 * @return string
 	 */
 	protected function format_error( $error ) {
-		$message  = '<h2> Workshop Butler API: Request failed</h2>';
+		$message = '<h2> Workshop Butler API: Request failed</h2>';
 		$message .= '<p>Reason : ' . $error . '</p>';
 		return $message;
 	}
@@ -247,7 +257,7 @@ abstract class WSB_Page {
 	/**
 	 * Adds custom CSS if it exists
 	 *
-	 * @param $content string Page content
+	 * @param string $content Page content.
 	 *
 	 * @since  2.0.0
 	 * @return string

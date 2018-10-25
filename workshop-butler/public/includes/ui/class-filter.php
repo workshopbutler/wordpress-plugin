@@ -5,14 +5,16 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * Represents a list filter
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Filter {
@@ -42,9 +44,11 @@ class Filter {
 	public $visible;
 
 	/**
-	 * @param $name string
-	 * @param $values Filter_Value[]
-	 * @param $visible boolean
+	 * Filter constructor
+	 *
+	 * @param string         $name    Name of the filter.
+	 * @param Filter_Value[] $values  Filter's values.
+	 * @param boolean        $visible True if the filter is visible.
 	 */
 	public function __construct( $name, $values, $visible ) {
 		$this->name    = $name;

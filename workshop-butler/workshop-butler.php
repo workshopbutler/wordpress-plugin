@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @link              https://workshopbutler.com
  * @since             2.0.0
@@ -9,7 +8,7 @@
  * Plugin Name:       Workshop Butler
  * Plugin URI:        https://github.com/workshopbutler/wordpress-plugin
  * Description:       This plugin integrates Workshop Butler Events, Trainers and Testimonials to your WordPress website.
- * Version:           2.0.1
+ * Version:           2.0.2
  * Author:            Workshop Butler
  * Author URI:        https://workshopbutler.com/
  * License:           GPL-2.0+
@@ -26,28 +25,28 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'WSB_INTEGRATION_VERSION', '2.0.1' );
+define( 'WSB_INTEGRATION_VERSION', '2.0.2' );
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wsb-integration-activator.php
  */
-function activate_WSB_Integration() {
+function activate_wsb_integration() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-integration-activator.php';
-	WSB_Integration_Activator::activate();
+	WorkshopButler\WSB_Integration_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-wsb-integration-deactivator.php
  */
-function deactivate_WSB_Integration() {
+function deactivate_wsb_integration() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-integration-deactivator.php';
-	WSB_Integration_Deactivator::deactivate();
+	WorkshopButler\WSB_Integration_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_WSB_Integration' );
-register_deactivation_hook( __FILE__, 'deactivate_WSB_Integration' );
+register_activation_hook( __FILE__, 'activate_wsb_integration' );
+register_deactivation_hook( __FILE__, 'deactivate_wsb_integration' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -64,11 +63,11 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wsb-integration.php';
  *
  * @since    2.0.0
  */
-function run_WSB_Integration() {
+function run_wsb_integration() {
 
-	$plugin = new WSB_Integration();
+	$plugin = new WorkshopButler\WSB_Integration();
 	$plugin->run();
 
 }
 
-run_WSB_Integration();
+run_wsb_integration();

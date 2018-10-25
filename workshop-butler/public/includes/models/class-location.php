@@ -5,30 +5,38 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * Represents a location of an event
  *
- * @since 2.0.0
+ * @since   2.0.0
  * @package WSB_Integration
  */
 class Location {
 	/**
-	 * @var boolean $online True if an event is online
+	 * True if an event is online
+	 *
+	 * @var boolean $online
 	 * @since 2.0.0
 	 */
 	public $online;
 
 	/**
-	 * @var string $country_code Country code
+	 * 2-letter country code
+	 *
+	 * @var string $country_code
 	 * @since 2.0.0
 	 */
 	public $country_code;
 
 	/**
-	 * @var string|null $city City
+	 * City
+	 *
+	 * @var string|null $city
 	 * @since 2.0.0
 	 */
 	public $city;
@@ -36,7 +44,7 @@ class Location {
 	/**
 	 * Initialises a new location
 	 *
-	 * @param object $json_data JSON data from Workshop Butler API
+	 * @param object $json_data JSON data from Workshop Butler API.
 	 */
 	public function __construct( $json_data ) {
 		$this->online       = $json_data->online;

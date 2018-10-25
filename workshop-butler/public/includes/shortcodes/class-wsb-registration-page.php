@@ -5,19 +5,27 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 
 /**
  * Event Page class which handles the rendering and logic for the event page
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Registration_Page extends WSB_Page {
 
+	/**
+	 * Request entity
+	 *
+	 * @var WSB_Requests
+	 */
 	private $requests;
 
 	/**
@@ -46,8 +54,8 @@ class WSB_Registration_Page extends WSB_Page {
 	/**
 	 * Renders the registration page
 	 *
-	 * @param array  $attrs Shortcode attributes
-	 * @param string $content Shortcode content
+	 * @param array  $attrs   Shortcode attributes.
+	 * @param string $content Shortcode content.
 	 *
 	 * @since  2.0.0
 	 *
@@ -74,7 +82,7 @@ class WSB_Registration_Page extends WSB_Page {
 	/**
 	 * Adds a localized version of JS script on the page
 	 *
-	 * @param $event      Event  Event
+	 * @param Event $event Event.
 	 */
 	protected function add_localized_script( $event ) {
 		$wsb_nonce = wp_create_nonce( 'wsb-nonce' );
@@ -102,7 +110,7 @@ class WSB_Registration_Page extends WSB_Page {
 	/**
 	 * Renders the event page
 	 *
-	 * @param $event Event
+	 * @param Event $event Event.
 	 *
 	 * @return string
 	 */
@@ -384,16 +392,16 @@ class WSB_Registration_Page extends WSB_Page {
 	/**
 	 * Renders a simple shortcode with no additional logic
 	 *
-	 * @param string      $name Name of the shortcode (like 'title', 'register')
-	 * @param array       $attrs Attributes
-	 * @param null|string $content Replaceable content
+	 * @param string      $name    Name of the shortcode (like 'title', 'register').
+	 * @param array       $attrs   Attributes.
+	 * @param null|string $content Replaceable content.
 	 *
 	 * @since 2.0.0
 	 * @return string
 	 */
 	protected function render_simple_shortcode( $name, $attrs = [], $content = null ) {
 		$event = $this->dict->get_event();
-		if ( ! is_a( $event, 'Event' ) ) {
+		if ( ! is_a( $event, 'WorkshopButler\Event' ) ) {
 			return '';
 		}
 		$template = $this->get_template( 'registration/' . $name, null );
@@ -405,7 +413,17 @@ class WSB_Registration_Page extends WSB_Page {
 		return $this->compile_string( $template, $attrs );
 	}
 
-	static public function page( $attrs = [], $content = null ) {
+	/**
+	 * Renders the registration page
+	 *
+	 * @param array  $attrs   Shortcode attributes.
+	 * @param string $content Shortcode content.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @return string
+	 */
+	public static function page( $attrs = [], $content = null ) {
 		$page = new WSB_Registration_Page();
 
 		return $page->render( $attrs, $content );

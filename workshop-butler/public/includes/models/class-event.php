@@ -5,8 +5,11 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-event-type.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-free-ticket-type.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-paid-ticket-type.php';
@@ -19,124 +22,163 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-event-state.
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-registration-page.php';
 require_once plugin_dir_path( __FILE__ ) . 'form/class-form.php';
 
+
 /**
  * Trainer class which represents an event in Workshop Butler
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Event {
 	/**
+	 * ID of the event
+	 *
 	 * @since   2.0.0
 	 * @var     int $id ID of the event
 	 */
 	public $id;
 
 	/**
+	 * Hashed ID of the event
+	 *
 	 * @since   2.0.0
 	 * @var     string $hashed_id Hashed ID of the event
 	 */
 	public $hashed_id;
 
 	/**
+	 * Type of the event
+	 *
 	 * @since   2.0.0
 	 * @var     Event_Type $type Type of the event
 	 */
 	public $type;
 
 	/**
+	 * Title of the event
+	 *
 	 * @since   2.0.0
 	 * @var     string $title
 	 */
 	public $title;
 
 	/**
+	 * Languages of the event
+	 *
 	 * @since   2.0.0
 	 * @var     Language $language
 	 */
 	public $language;
 
 	/**
+	 * Schedule of the event
+	 *
 	 * @since   2.0.0
 	 * @var     Schedule $schedule
 	 */
 	public $schedule;
 
 	/**
+	 * Location of the event
+	 *
 	 * @since   2.0.0
 	 * @var     Location $location Location of the workshop
 	 */
 	public $location;
 
 	/**
+	 * Event's rating
+	 *
 	 * @since   2.0.0
 	 * @var     float $rating
 	 */
 	public $rating;
 
 	/**
+	 * True if the event is confirmed
+	 *
 	 * @since   2.0.0
 	 * @var     boolean $confirmed
 	 */
 	public $confirmed;
 
 	/**
+	 * True if the event is private
+	 *
 	 * @since   2.0.0
 	 * @var     boolean $private
 	 */
 	public $private;
 
 	/**
+	 * True if the event is free
+	 *
 	 * @since   2.0.0
 	 * @var     boolean $free
 	 */
 	public $free;
 
 	/**
+	 * True if there is no tickets left
+	 *
 	 * @since   2.0.0
 	 * @var     boolean $sold_out
 	 */
 	public $sold_out;
 
 	/**
+	 * The url to the event
+	 *
 	 * @since   2.0.0
 	 * @var     string $url
 	 */
 	public $url;
 
 	/**
+	 * Tickets to the event
+	 *
 	 * @since   2.0.0
 	 * @var     Tickets|null $tickets
 	 */
 	public $tickets;
 
 	/**
+	 * Trainers who run the workshop
+	 *
 	 * @since   2.0.0
 	 * @var     Trainer[] $trainers
 	 */
 	public $trainers;
 
 	/**
+	 * Description
+	 *
 	 * @since   2.0.0
 	 * @var     string $description
 	 */
 	public $description;
 
 	/**
+	 * Registration form
+	 *
 	 * @since   2.0.0
 	 * @var     Form $registration_form
 	 */
 	public $registration_form;
 
 	/**
+	 * Url to the registration page
+	 *
 	 * @since   2.0.0
 	 * @var     Registration_Page $registration_page
 	 */
 	public $registration_page;
 
 	/**
-	 * @var Event_State $state State of the workshop
+	 * State of the workshop
+	 *
+	 * @var Event_State $state
 	 * @since 2.0.0
 	 */
 	public $state;
@@ -144,16 +186,16 @@ class Event {
 	/**
 	 * Creates a new object
 	 *
-	 * @param $json_data object            JSON data from Workshop Butler API
-	 * @param $event_page_url string|null  Event page URL on the integrated website
-	 * @param $trainer_page_url string|null  Trainer profile page URL on the integrated website
-	 * @param $registration_page_url string|null Registration page URL on the integrated website
+	 * @param object      $json_data             JSON data from Workshop Butler API.
+	 * @param string|null $event_page_url        Event page URL on the integrated website.
+	 * @param string|null $trainer_page_url      Trainer profile page URL on the integrated website.
+	 * @param string|null $registration_page_url Registration page URL on the integrated website.
 	 */
 	public function __construct( $json_data, $event_page_url, $trainer_page_url, $registration_page_url ) {
 		$this->id          = $json_data->id;
 		$this->hashed_id   = $json_data->hashed_id;
 		$this->title       = $json_data->title;
-		$this->type        = $json_data->type ? new Event_Type( $json_data->type ) : Event_Type::createEmpty();
+		$this->type        = $json_data->type ? new Event_Type( $json_data->type ) : Event_Type::create_empty();
 		$this->language    = new Language( $json_data->spoken_languages, $json_data->materials_language );
 		$this->rating      = $json_data->rating;
 		$this->confirmed   = $json_data->confirmed;
@@ -205,9 +247,9 @@ class Event {
 	/**
 	 * Returns Tickets object
 	 *
-	 * @param $free boolean True if the event is free
-	 * @param $free_ticket_type Free_Ticket_Type
-	 * @param $paid_ticket_types Paid_Ticket_Type[]
+	 * @param boolean            $free              True if the event is free.
+	 * @param Free_Ticket_Type   $free_ticket_type  Free tickets.
+	 * @param Paid_Ticket_Type[] $paid_ticket_types Paid tickets.
 	 *
 	 * @return null|Tickets
 	 */
@@ -230,14 +272,14 @@ class Event {
 	/**
 	 * Returns a list of event trainers
 	 *
-	 * @param $jsonData object              JSON representation of a trainer
-	 * @param $trainer_page_url string|null Trainer profile page URL on the integrated website
+	 * @param object      $json_data        JSON representation of a trainer.
+	 * @param string|null $trainer_page_url Trainer profile page URL on the integrated website.
 	 * @return Trainer[]
 	 */
-	private function get_trainers( $jsonData, $trainer_page_url ) {
-		if ( $jsonData->facilitators ) {
+	private function get_trainers( $json_data, $trainer_page_url ) {
+		if ( $json_data->facilitators ) {
 			$trainers = [];
-			foreach ( $jsonData->facilitators as $trainer ) {
+			foreach ( $json_data->facilitators as $trainer ) {
 				array_push( $trainers, new Trainer( $trainer, $trainer_page_url ) );
 			}
 			return $trainers;

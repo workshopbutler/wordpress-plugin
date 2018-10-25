@@ -5,8 +5,10 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -14,7 +16,7 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Integration_Admin {
@@ -24,9 +26,9 @@ class WSB_Integration_Admin {
 	 *
 	 * @since    2.0.0
 	 * @access   private
-	 * @var      string $WSB_Integration The ID of this plugin.
+	 * @var      string $integration The ID of this plugin.
 	 */
-	private $WSB_Integration;
+	private $integration;
 
 	/**
 	 * The version of this plugin.
@@ -42,12 +44,12 @@ class WSB_Integration_Admin {
 	 *
 	 * @since    2.0.0
 	 *
-	 * @param      string $WSB_Integration The name of this plugin.
-	 * @param      string $version The version of this plugin.
+	 * @param      string $integration The name of this plugin.
+	 * @param      string $version     The version of this plugin.
 	 */
-	public function __construct( $WSB_Integration, $version ) {
-		$this->WSB_Integration = $WSB_Integration;
-		$this->version         = $version;
+	public function __construct( $integration, $version ) {
+		$this->integration = $integration;
+		$this->version     = $version;
 
 		$this->load_dependencies();
 		$this->init();
@@ -72,7 +74,7 @@ class WSB_Integration_Admin {
 	private function load_dependencies() {
 		if ( ! class_exists( 'ReduxFramework' )
 			&& file_exists( dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php' ) ) {
-			require_once( dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php' );
+			require_once dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php';
 		}
 		require_once plugin_dir_path( __FILE__ ) . '/../includes/class-wsb-options.php';
 		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wsb-settings.php';
@@ -84,7 +86,7 @@ class WSB_Integration_Admin {
 	 * @since    2.0.0
 	 */
 	public function enqueue_styles() {
-		// empty
+		// empty.
 	}
 
 	/**
@@ -93,7 +95,7 @@ class WSB_Integration_Admin {
 	 * @since 2.0.0
 	 */
 	public function enqueue_scripts() {
-		// empty
+		// empty.
 	}
 
 }

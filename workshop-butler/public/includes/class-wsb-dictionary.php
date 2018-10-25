@@ -5,14 +5,16 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * Dictionary class which provides an access to entities, loaded from API
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Dictionary {
@@ -22,7 +24,7 @@ class WSB_Dictionary {
 	 *
 	 * @since 2.0.0
 	 */
-	function clear_event() {
+	public function clear_event() {
 		unset( $GLOBALS['wsb_event'] );
 	}
 
@@ -31,7 +33,7 @@ class WSB_Dictionary {
 	 *
 	 * @since 2.0.0
 	 */
-	function clear_events() {
+	public function clear_events() {
 		unset( $GLOBALS['wsb_events'] );
 	}
 
@@ -40,7 +42,7 @@ class WSB_Dictionary {
 	 *
 	 * @since 2.0.0
 	 */
-	function clear_trainer() {
+	public function clear_trainer() {
 		unset( $GLOBALS['wsb_trainer'] );
 	}
 
@@ -49,7 +51,7 @@ class WSB_Dictionary {
 	 *
 	 * @since 2.0.0
 	 */
-	function clear_trainers() {
+	public function clear_trainers() {
 		unset( $GLOBALS['wsb_trainers'] );
 	}
 
@@ -57,9 +59,9 @@ class WSB_Dictionary {
 	 * Returns a currently-processed trainer or WP_Error if an API request failed
 	 *
 	 * @since  2.0.0
-	 * @return Trainer|null|WP_Error
+	 * @return Trainer|null|\WP_Error
 	 */
-	function get_trainer() {
+	public function get_trainer() {
 		if ( ! isset( $GLOBALS['wsb_trainer'] ) ) {
 			return null;
 		}
@@ -67,7 +69,7 @@ class WSB_Dictionary {
 		if ( is_wp_error( $may_be_trainer ) ) {
 			return $may_be_trainer;
 		}
-		if ( ! is_a( $may_be_trainer, 'Trainer' ) ) {
+		if ( ! is_a( $may_be_trainer, 'WorkshopButler\Trainer' ) ) {
 			return null;
 		}
 		return $may_be_trainer;
@@ -77,9 +79,9 @@ class WSB_Dictionary {
 	 * Returns a currently-processed event or WP_Error if an API request failed
 	 *
 	 * @since  2.0.0
-	 * @return Event|WP_Error|null
+	 * @return Event|\WP_Error|null
 	 */
-	function get_event() {
+	public function get_event() {
 		if ( ! isset( $GLOBALS['wsb_event'] ) ) {
 			return null;
 		}
@@ -87,7 +89,7 @@ class WSB_Dictionary {
 		if ( is_wp_error( $may_be_event ) ) {
 			return $may_be_event;
 		}
-		if ( ! is_a( $may_be_event, 'Event' ) ) {
+		if ( ! is_a( $may_be_event, 'WorkshopButler\Event' ) ) {
 			return null;
 		}
 		return $may_be_event;
@@ -99,7 +101,7 @@ class WSB_Dictionary {
 	 * @since 2.0.0
 	 * @return array|null
 	 */
-	function get_schedule_attrs() {
+	public function get_schedule_attrs() {
 		if ( ! isset( $GLOBALS['wsb_schedule_attrs'] ) ) {
 			return null;
 		}
@@ -109,10 +111,10 @@ class WSB_Dictionary {
 	/**
 	 * Sets new schedule attributes
 	 *
-	 * @param $attrs array New schedule attrs
+	 * @param array $attrs New schedule attrs.
 	 * @since 2.0.0
 	 */
-	function set_schedule_attrs( $attrs ) {
+	public function set_schedule_attrs( $attrs ) {
 		$GLOBALS['wsb_schedule_attrs'] = $attrs;
 	}
 
@@ -122,7 +124,7 @@ class WSB_Dictionary {
 	 * @since  2.0.0
 	 * @return Event[]|null
 	 */
-	function get_events() {
+	public function get_events() {
 		if ( ! isset( $GLOBALS['wsb_events'] ) || ! is_array( $GLOBALS['wsb_events'] ) ) {
 			return null;
 		}
@@ -135,7 +137,7 @@ class WSB_Dictionary {
 	 * @since  2.0.0
 	 * @return Trainer[]|null
 	 */
-	function get_trainers() {
+	public function get_trainers() {
 		if ( ! isset( $GLOBALS['wsb_trainers'] ) || ! is_array( $GLOBALS['wsb_trainers'] ) ) {
 			return null;
 		}
@@ -148,7 +150,7 @@ class WSB_Dictionary {
 	 * @since  2.0.0
 	 * @return object|null
 	 */
-	function get_testimonial() {
+	public function get_testimonial() {
 		if ( ! isset( $GLOBALS['wsb_testimonial'] ) || ! is_object( $GLOBALS['wsb_testimonial'] ) ) {
 			return null;
 		}
@@ -158,43 +160,43 @@ class WSB_Dictionary {
 	/**
 	 * Adds a loaded event to the dictionary
 	 *
-	 * @param Event|WP_Error $event Retrieved event or an error if an API request failed
+	 * @param Event|\WP_Error $event Retrieved event or an error if an API request failed.
 	 *
 	 * @since 2.0.0
 	 */
-	function set_event( $event ) {
+	public function set_event( $event ) {
 		$GLOBALS['wsb_event'] = $event;
 	}
 
 	/**
 	 * Adds a loaded trainer to the dictionary
 	 *
-	 * @param Trainer|WP_Error $trainer Retrieved trainer or an error if an API request failed
+	 * @param Trainer|\WP_Error $trainer Retrieved trainer or an error if an API request failed.
 	 *
 	 * @since 2.0.0
 	 */
-	function set_trainer( $trainer ) {
+	public function set_trainer( $trainer ) {
 		$GLOBALS['wsb_trainer'] = $trainer;
 	}
 
 	/**
 	 * Adds loaded events to the dictionary
 	 *
-	 * @param Event[] $events Retrieved events
+	 * @param Event[] $events Retrieved events.
 	 * @since 2.0.0
 	 */
-	function set_events( $events ) {
+	public function set_events( $events ) {
 		$GLOBALS['wsb_events'] = $events;
 	}
 
 	/**
 	 * Adds loaded trainers to the dictionary
 	 *
-	 * @param Trainer[] $trainers Retrieved trainers
+	 * @param Trainer[] $trainers Retrieved trainers.
 	 *
 	 * @since 2.0.0
 	 */
-	function set_trainers( $trainers ) {
+	public function set_trainers( $trainers ) {
 		$GLOBALS['wsb_trainers'] = $trainers;
 	}
 

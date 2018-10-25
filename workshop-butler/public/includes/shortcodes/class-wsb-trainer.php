@@ -5,15 +5,18 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 
 /**
  * Handles the execution of the shortcodes related to trainers
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Trainer extends WSB_Page {
@@ -21,14 +24,14 @@ class WSB_Trainer extends WSB_Page {
 	/**
 	 * Renders the trainer's badges
 	 *
-	 * @param array $attrs Short code attributes
+	 * @param array $attrs Short code attributes.
 	 *
 	 * @since  2.0.0
 	 * @return string
 	 */
 	public function render_badges( $attrs = [] ) {
 		$trainer = $this->dict->get_trainer();
-		if ( ! is_a( $trainer, 'Trainer' ) ) {
+		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
 		}
 		$template = $this->get_template( 'badges', null );
@@ -44,7 +47,7 @@ class WSB_Trainer extends WSB_Page {
 	/**
 	 * Renders a list of past events for a trainer
 	 *
-	 * @param array $attrs Short code attributes
+	 * @param array $attrs Short code attributes.
 	 *
 	 * @since  2.0.0
 	 * @return string
@@ -53,11 +56,11 @@ class WSB_Trainer extends WSB_Page {
 		$default_attrs = array( 'future' => true );
 		$attrs         = shortcode_atts( $default_attrs, $attrs );
 
-		$caption = $attrs['future'] === 'false' ?
+		$caption = 'false' === $attrs['future'] ?
 			__( 'sidebar.past', 'wsbintegration' ) :
 			__( 'sidebar.future', 'wsbintegration' );
 
-		$id = $attrs['future'] === 'false' ? 'past-events' : 'upcoming-events';
+		$id = 'false' === $attrs['future'] ? 'past-events' : 'upcoming-events';
 
 		$html = <<<EOD
 <div class="wsb-workshops" id="$id">
@@ -74,7 +77,7 @@ EOD;
 	/**
 	 * Renders the statistical parameter
 	 *
-	 * @param array $attrs Short code attributes
+	 * @param array $attrs Short code attributes.
 	 *
 	 * @since  2.0.0
 	 * @return string
@@ -88,11 +91,11 @@ EOD;
 
 		$template = $this->get_statistics_tmpl( $attrs['type'] );
 		$trainer  = $this->dict->get_trainer();
-		if ( ! is_a( $trainer, 'Trainer' ) ) {
+		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
 		}
 		$data = $this->get_stat_parameter( $attrs['type'], $trainer );
-		if ( $attrs['show_if_zero'] != 'true' && ! $data['parameter'] ) {
+		if ( 'true' !== $attrs['show_if_zero'] && ! $data['parameter'] ) {
 			return '';
 		}
 		$html = do_shortcode( $template );
@@ -102,7 +105,7 @@ EOD;
 	/**
 	 * Renders a social link of the trainer
 	 *
-	 * @param array $attrs Short code attributes
+	 * @param array $attrs Short code attributes.
 	 *
 	 * @since  2.0.0
 	 * @return string
@@ -113,7 +116,7 @@ EOD;
 
 		$template = $this->get_social_link_tmpl();
 		$trainer  = $this->dict->get_trainer();
-		if ( ! is_a( $trainer, 'Trainer' ) ) {
+		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
 		}
 
@@ -129,8 +132,8 @@ EOD;
 	/**
 	 * Returns one or two numbers needed to render the parameters
 	 *
-	 * @param $type    string   Type of the statistical parameter
-	 * @param $trainer Trainer
+	 * @param string  $type    Type of the statistical parameter.
+	 * @param Trainer $trainer Trainer to render.
 	 *
 	 * @since  2.0.0
 	 * @return array
@@ -144,14 +147,14 @@ EOD;
 				);
 			case 'public-rating':
 				return array(
-					'parameter'             => $trainer->public_stats->number_of_evaluations, // used only for visibility check
+					'parameter'             => $trainer->public_stats->number_of_evaluations, // used only for visibility check.
 					'description'           => 'trainer.experience.rating.public',
 					'rating'                => $trainer->public_stats->rating,
 					'number_of_evaluations' => $trainer->public_stats->number_of_evaluations,
 				);
 			case 'private-rating':
 				return array(
-					'parameter'             => $trainer->private_stats->number_of_evaluations, // used only for visibility check
+					'parameter'             => $trainer->private_stats->number_of_evaluations, // used only for visibility check.
 					'description'           => 'trainer.experience.rating.private',
 					'rating'                => $trainer->private_stats->rating,
 					'number_of_evaluations' => $trainer->private_stats->number_of_evaluations,
@@ -167,8 +170,8 @@ EOD;
 	/**
 	 * Returns data needed to render a social link
 	 *
-	 * @param $type    string   Type of the social link
-	 * @param $trainer Trainer
+	 * @param string  $type    Type of the social link.
+	 * @param Trainer $trainer Trainer to render.
 	 *
 	 * @since  2.0.0
 	 * @return array
@@ -237,7 +240,7 @@ EOD;
 	/**
 	 * Returns a template based on the type of the requested parameter
 	 *
-	 * @param $type string Type of the statistical parameter
+	 * @param string $type Type of the statistical parameter.
 	 *
 	 * @since  2.0.0
 	 * @return string
@@ -290,12 +293,12 @@ EOD;
 	/**
 	 * Handles 'wsb_trainer_events' shortcode
 	 *
-	 * @param $attrs   array  Shortcode attributes
-	 * @param $content string Shortcode content
+	 * @param array  $attrs   Shortcode attributes.
+	 * @param string $content Shortcode content.
 	 * @since  2.0.0
 	 * @return string
 	 */
-	static public function events( $attrs = [], $content = null ) {
+	public static function events( $attrs = [], $content = null ) {
 		$page = new WSB_Trainer();
 		return $page->render_events( $attrs );
 	}
@@ -303,12 +306,12 @@ EOD;
 	/**
 	 * Handles 'wsb_trainer_stats' shortcode
 	 *
-	 * @param $attrs   array  Shortcode attributes
-	 * @param $content string Shortcode content
+	 * @param array  $attrs   Shortcode attributes.
+	 * @param string $content Shortcode content.
 	 * @since  2.0.0
 	 * @return string
 	 */
-	static public function statistics( $attrs = [], $content = null ) {
+	public static function statistics( $attrs = [], $content = null ) {
 		$page = new WSB_Trainer();
 		return $page->render_statistics( $attrs );
 	}
@@ -316,12 +319,12 @@ EOD;
 	/**
 	 * Handles 'wsb_trainer_social_link' shortcode
 	 *
-	 * @param $attrs   array  Shortcode attributes
-	 * @param $content string Shortcode content
+	 * @param array  $attrs   Shortcode attributes.
+	 * @param string $content Shortcode content.
 	 * @since  2.0.0
 	 * @return string
 	 */
-	static public function social_link( $attrs = [], $content = null ) {
+	public static function social_link( $attrs = [], $content = null ) {
 		$page = new WSB_Trainer();
 		return $page->render_social_link( $attrs );
 	}

@@ -5,15 +5,18 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-ticket-type.php';
 
 /**
  * This class represents a free ticket type in a Workshop Butler event
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Free_Ticket_Type extends Ticket_Type {
@@ -30,7 +33,7 @@ class Free_Ticket_Type extends Ticket_Type {
 	 * Date when the tickets of this type go on sale
 	 *
 	 * @since  2.0.0
-	 * @var    DateTime $start Date when the tickets of this type go on sale
+	 * @var    \DateTime $start Date when the tickets of this type go on sale
 	 */
 	public $start;
 
@@ -38,7 +41,7 @@ class Free_Ticket_Type extends Ticket_Type {
 	 * Date when sales of the tickets of this type end
 	 *
 	 * @since  2.0.0
-	 * @var    DateTime $end Date when sales of the tickets of this type end
+	 * @var    \DateTime $end Date when sales of the tickets of this type end
 	 */
 	public $end;
 
@@ -61,13 +64,13 @@ class Free_Ticket_Type extends Ticket_Type {
 	/**
 	 * Creates a new paid ticket type from JSON
 	 *
-	 * @param $json_data object JSON for a ticket type
+	 * @param object $json_data JSON for a ticket type.
 	 */
-	public function __construct($json_data ) {
+	public function __construct( $json_data ) {
 		$this->number_of_tickets      = $json_data->amount;
 		$this->number_of_tickets_left = $json_data->left;
-		$this->start                  = new DateTime( $json_data->start );
-		$this->end                    = new DateTime( $json_data->end );
+		$this->start                  = new \DateTime( $json_data->start );
+		$this->end                    = new \DateTime( $json_data->end );
 		$this->unlimited              = $json_data->unlimited;
 		$this->sold_out               = $json_data->state->sold_out;
 	}

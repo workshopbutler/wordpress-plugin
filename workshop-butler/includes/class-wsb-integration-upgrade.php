@@ -5,8 +5,11 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( __FILE__ ) . 'class-wsb-options.php';
 
 /**
@@ -15,7 +18,7 @@ require_once plugin_dir_path( __FILE__ ) . 'class-wsb-options.php';
  * This class defines all code necessary to run during the plugin's upgrade.
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Integration_Upgrade {
@@ -27,17 +30,17 @@ class WSB_Integration_Upgrade {
 	 */
 	public function upgrade() {
 		$self = new self();
-		if ($self->get_version() == WSB_INTEGRATION_VERSION) {
+		if ( WSB_INTEGRATION_VERSION === $self->get_version() ) {
 			return;
 		}
-		$newKey = WSB_Options::get_option( WSB_Options::API_KEY );
-		if ( empty( $newKey ) ) {
+		$new_key = WSB_Options::get_option( WSB_Options::API_KEY );
+		if ( empty( $new_key ) ) {
 			$self->transfer_settings();
 		}
-		$self->save_internal_settings($self->get_version());
+		$self->save_internal_settings( $self->get_version() );
 
-		$eventPage = WSB_Options::get_option( WSB_Options::EVENT_PAGE );
-		if ( empty( $eventPage ) ) {
+		$event_page = WSB_Options::get_option( WSB_Options::EVENT_PAGE );
+		if ( empty( $event_page ) ) {
 			$self->create_page( __( 'Schedule', 'wsbintegration' ), WSB_Options::SCHEDULE_PAGE, '[wsb_schedule]' );
 			$self->create_page(
 				__( 'Event', 'wsbintegration' ),
@@ -67,7 +70,7 @@ class WSB_Integration_Upgrade {
 	 * @return bool|string
 	 */
 	protected function get_version() {
-		return WSB_Options::get_internal_option(WSB_Options::INT_VERSION);
+		return WSB_Options::get_internal_option( WSB_Options::INT_VERSION );
 	}
 
 	/**
@@ -79,16 +82,16 @@ class WSB_Integration_Upgrade {
 
 	/**
 	 * Saves the internal state settings
-
-	 * @param $previous_version string Previous version of the plugin
+	 *
+	 * @param string $previous_version Previous version of the plugin.
 	 * @since 2.0.0
 	 */
-	protected function save_internal_settings($previous_version) {
+	protected function save_internal_settings( $previous_version ) {
 		$configured = WSB_Options::get_internal_option( WSB_Options::INT_STATE );
 		if ( ! $configured ) {
 			$this->update_state();
 		}
-		if ($previous_version != WSB_INTEGRATION_VERSION) {
+		if ( WSB_INTEGRATION_VERSION !== $previous_version ) {
 			$this->set_version();
 		}
 	}
@@ -120,10 +123,10 @@ class WSB_Integration_Upgrade {
 	/**
 	 * Adds a new post with a content
 	 *
-	 * @param $title           string      Page title
-	 * @param $id_opt_name     string      Name of the option with a page ID
-	 * @param $content         string      Page Content
-	 * @param $parent_id       string|null ID of the parent page
+	 * @param string      $title       Page title.
+	 * @param string      $id_opt_name Name of the option with a page ID.
+	 * @param string      $content     Page Content.
+	 * @param string|null $parent_id   ID of the parent page.
 	 *
 	 * @since 2.0.0
 	 */

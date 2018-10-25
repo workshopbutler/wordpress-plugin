@@ -5,8 +5,11 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( __FILE__ ) . 'class-list-filters.php';
 require_once plugin_dir_path( __FILE__ ) . 'class-filter-value.php';
 
@@ -14,7 +17,7 @@ require_once plugin_dir_path( __FILE__ ) . 'class-filter-value.php';
  * This class contains the logic for producing various filters for events
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Event_Filters extends List_Filters {
@@ -22,18 +25,18 @@ class Event_Filters extends List_Filters {
 	/**
 	 * Initialises a new object
 	 *
-	 * @param $events Event[] Available events which we use to build filters
-	 * @param $visibleFilters string[] List of filters to render on the page
+	 * @param Event[]  $events          Available events which we use to build filters.
+	 * @param string[] $visible_filters List of filters to render on the page.
 	 */
-	public function __construct( $events, $visibleFilters ) {
+	public function __construct( $events, $visible_filters ) {
 		$this->objects = $events;
-		$this->filters = $visibleFilters;
+		$this->filters = $visible_filters;
 	}
 
 	/**
 	 * Returns the values of the filter based on its name
 	 *
-	 * @param $name string Name of the filter
+	 * @param string $name Name of the filter.
 	 *
 	 * @return Filter_Value[]
 	 */
@@ -55,12 +58,12 @@ class Event_Filters extends List_Filters {
 	/**
 	 * Returns values for Language filter
 	 *
-	 * @param $defaultName string Name of the default filter value
-	 * @param $events Event[] Available events to filter
+	 * @param string  $default_name Name of the default filter value.
+	 * @param Event[] $events       Available events to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
-	private function get_language_filter_data( $defaultName, $events ) {
+	private function get_language_filter_data( $default_name, $events ) {
 		$languages = [];
 		foreach ( $events as $event ) {
 			$event_languages = $event->language->spoken;
@@ -70,18 +73,18 @@ class Event_Filters extends List_Filters {
 				array_push( $languages, $value );
 			}
 		}
-		return $this->get_filter_data( $defaultName, $languages );
+		return $this->get_filter_data( $default_name, $languages );
 	}
 
 	/**
 	 * Returns values for Location filter
 	 *
-	 * @param $defaultName string Name of the default filter value
-	 * @param $events Event[] Available events to filter
+	 * @param string  $default_name Name of the default filter value.
+	 * @param Event[] $events       Available events to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
-	private function get_location_filter_data( $defaultName, $events ) {
+	private function get_location_filter_data( $default_name, $events ) {
 		$values = [];
 		foreach ( $events as $event ) {
 			$country_name = __( 'country.' . $event->location->country_code, 'wsbintegration' );
@@ -89,18 +92,18 @@ class Event_Filters extends List_Filters {
 			array_push( $values, $value );
 		}
 
-		return $this->get_filter_data( $defaultName, $values );
+		return $this->get_filter_data( $default_name, $values );
 	}
 
 	/**
 	 * Returns values for Trainer filter
 	 *
-	 * @param $defaultName string Name of the default filter value
-	 * @param $events Event[] Available events to filter
+	 * @param string  $default_name Name of the default filter value.
+	 * @param Event[] $events       Available events to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
-	private function get_trainer_filter_data( $defaultName, $events ) {
+	private function get_trainer_filter_data( $default_name, $events ) {
 		$values = [];
 		foreach ( $events as $event ) {
 			foreach ( $event->trainers as $trainer ) {
@@ -108,25 +111,25 @@ class Event_Filters extends List_Filters {
 				array_push( $values, $value );
 			}
 		}
-		return $this->get_filter_data( $defaultName, $values );
+		return $this->get_filter_data( $default_name, $values );
 	}
 
 	/**
 	 * Returns values for Event Type filter
 	 *
-	 * @param $defaultName string Name of the default filter value
-	 * @param $events Event[] Available events to filter
+	 * @param string  $default_name Name of the default filter value.
+	 * @param Event[] $events       Available events to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
-	private function get_type_filter_data( $defaultName, $events ) {
+	private function get_type_filter_data( $default_name, $events ) {
 		$values = [];
 		foreach ( $events as $event ) {
 			$value = new Filter_Value( $event->type->name, $event->type->id );
 			array_push( $values, $value );
 		}
 
-		return $this->get_filter_data( $defaultName, $values );
+		return $this->get_filter_data( $default_name, $values );
 	}
 
 }

@@ -5,8 +5,11 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( __FILE__ ) . 'class-list-filters.php';
 require_once plugin_dir_path( __FILE__ ) . 'class-filter-value.php';
 
@@ -14,7 +17,7 @@ require_once plugin_dir_path( __FILE__ ) . 'class-filter-value.php';
  * This class contains the logic for producing various filters for trainers
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Trainer_Filters extends List_Filters {
@@ -22,8 +25,8 @@ class Trainer_Filters extends List_Filters {
 	/**
 	 * Initialises a new object
 	 *
-	 * @param $trainers Trainer[] Available trainers which we use to build filters
-	 * @param $visible_filters string[] List of filters to render on the page
+	 * @param Trainer[] $trainers        Available trainers which we use to build filters.
+	 * @param string[]  $visible_filters List of filters to render on the page.
 	 */
 	public function __construct( $trainers, $visible_filters ) {
 		$this->objects = $trainers;
@@ -33,7 +36,7 @@ class Trainer_Filters extends List_Filters {
 	/**
 	 * Returns the values of the filter based on its name
 	 *
-	 * @param $name string Name of the filter
+	 * @param string $name Name of the filter.
 	 *
 	 * @return Filter_Value[]
 	 */
@@ -57,8 +60,8 @@ class Trainer_Filters extends List_Filters {
 	/**
 	 * Returns values for Badge filter
 	 *
-	 * @param $default_name string Name of the default filter value
-	 * @param $trainers Trainer[] Available trainers to filter
+	 * @param string    $default_name Name of the default filter value.
+	 * @param Trainer[] $trainers     Available trainers to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
@@ -76,22 +79,22 @@ class Trainer_Filters extends List_Filters {
 	/**
 	 * Returns values for Rating filter
 	 *
-	 * @param $default_name string Name of the default filter value
-	 * @param $trainers Trainer[] Available trainers to filter
+	 * @param string    $default_name Name of the default filter value.
+	 * @param Trainer[] $trainers     Available trainers to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
 	private function get_rating_filter_data( $default_name, $trainers ) {
 		$ratings = array(
-			'one'   => 1,
-			'two'   => 2,
+			'one' => 1,
+			'two' => 2,
 			'three' => 3,
-			'four'  => 4,
-			'five'  => 5,
-			'six'   => 6,
+			'four' => 4,
+			'five' => 5,
+			'six' => 6,
 			'seven' => 7,
 			'eight' => 8,
-			'nine'  => 9,
+			'nine' => 9,
 		);
 		$values  = [];
 		foreach ( $ratings as $key => $value ) {
@@ -103,8 +106,8 @@ class Trainer_Filters extends List_Filters {
 	/**
 	 * Returns values for Language filter
 	 *
-	 * @param $default_name string Name of the default filter value
-	 * @param $trainers Trainer[] Available trainers to filter
+	 * @param string    $default_name Name of the default filter value.
+	 * @param Trainer[] $trainers     Available trainers to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
@@ -125,8 +128,8 @@ class Trainer_Filters extends List_Filters {
 	/**
 	 * Returns values for Location filter
 	 *
-	 * @param $default_name string Name of the default filter value
-	 * @param $trainers Trainer[] Available trainers to filter
+	 * @param string    $default_name Name of the default filter value.
+	 * @param Trainer[] $trainers     Available trainers to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
@@ -145,19 +148,19 @@ class Trainer_Filters extends List_Filters {
 	/**
 	 * Returns values for Trainer filter
 	 *
-	 * @param $defaultName string Name of the default filter value
-	 * @param $trainers Trainer[] Available trainers to filter
+	 * @param string    $default_name Name of the default filter value.
+	 * @param Trainer[] $trainers     Available trainers to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
-	private function get_trainer_filter_data( $defaultName, $trainers ) {
+	private function get_trainer_filter_data( $default_name, $trainers ) {
 		$values = [];
 		foreach ( $trainers as $trainer ) {
-			$fullName = $trainer->first_name . ' ' . $trainer->last_name;
-			$value    = new Filter_Value( $fullName, $fullName );
+			$full_name = $trainer->first_name . ' ' . $trainer->last_name;
+			$value     = new Filter_Value( $full_name, $full_name );
 			array_push( $values, $value );
 		}
 
-		return $this->get_filter_data( $defaultName, $values );
+		return $this->get_filter_data( $default_name, $values );
 	}
 }

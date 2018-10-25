@@ -5,26 +5,33 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( __FILE__ ) . 'class-section.php';
 
 /**
  * Registration or evaluation form
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Form {
 	/**
-	 * @var Section[] $sections Sections
+	 * Sections
+	 *
+	 * @var Section[] $sections
 	 * @since 2.0.0
 	 */
 	public $sections;
 
 	/**
-	 * @var string|null $instructions Fill-in instructions
+	 * Fill-in instructions
+	 *
+	 * @var string|null $instructions
 	 * @since 2.0.0
 	 */
 	public $instructions;
@@ -32,9 +39,9 @@ class Form {
 	/**
 	 * Form constructor.
 	 *
-	 * @param string|null $instructions Fill-in instructions
-	 * @param object[]    $sections_data Sections in JSON
-	 * @param Event       $event
+	 * @param string|null $instructions  Fill-in instructions.
+	 * @param object[]    $sections_data Sections in JSON.
+	 * @param Event       $event         Related event.
 	 */
 	public function __construct( $instructions, $sections_data, $event ) {
 		$this->instructions = $instructions;

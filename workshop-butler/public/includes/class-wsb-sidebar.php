@@ -5,18 +5,25 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * Represents a sidebar events widget
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
-class wsb_sidebar extends WP_Widget {
+class wsb_sidebar extends \WP_Widget {
 
+	/**
+	 * Requests entity
+	 *
+	 * @var WSB_Requests
+	 */
 	private $requests;
 
 	/**
@@ -29,7 +36,9 @@ class wsb_sidebar extends WP_Widget {
 	protected $settings;
 
 	/**
-	 * @var Sidebar_Field[] $fields List of widget fields
+	 * List of widget fields
+	 *
+	 * @var Sidebar_Field[] $fields
 	 * @since 2.0.0
 	 */
 	private $fields;
@@ -74,23 +83,21 @@ class wsb_sidebar extends WP_Widget {
 	 * Renders a widget's settings form
 	 *
 	 * @since 2.0.0
-	 * @param array $instance Widget's instance
-	 *
-	 * @return string
+	 * @param array $instance Widget's instance.
 	 */
 	public function form( $instance ) {
 		foreach ( $this->fields as $name => $field ) {
 			switch ( $field->type ) {
 				default:
 					?>
-					<p>
-						<label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
-						<input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
-							   name="<?php echo $this->get_field_name( $name ); ?>"
-							   type="<?php echo $this->get_field_name( $field->type ); ?>"
-							   value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
-					</p>
-					<?php
+                    <p>
+                        <label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
+                        <input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
+                               name="<?php echo $this->get_field_name( $name ); ?>"
+                               type="<?php echo $this->get_field_name( $field->type ); ?>"
+                               value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
+                    </p>
+				<?php
 			}
 		}
 	}
@@ -99,8 +106,8 @@ class wsb_sidebar extends WP_Widget {
 	 * Renders a widget on the page
 	 *
 	 * @since 2.0.0
-	 * @param array $args
-	 * @param array $instance Settings for the current instance of the widget
+	 * @param array $args     Widget's arguments.
+	 * @param array $instance Settings for the current instance of the widget.
 	 */
 	public function widget( $args, $instance ) {
 		$title = apply_filters( 'widget_title', $instance['title'] );
@@ -118,8 +125,8 @@ class wsb_sidebar extends WP_Widget {
 	 * Updating widget by replacing the old instance with new
 	 *
 	 * @since 2.0.0
-	 * @param array $new_instance
-	 * @param array $old_instance
+	 * @param array $new_instance New widget instance.
+	 * @param array $old_instance Old widget instance.
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
@@ -148,7 +155,7 @@ class wsb_sidebar extends WP_Widget {
 	/**
 	 * Retrieves the sidebar data and renders it
 	 *
-	 * @param array $instance Settings for the current instance of the widget
+	 * @param array $instance Settings for the current instance of the widget.
 	 *
 	 * @since  2.0.0
 	 * @return string
@@ -169,15 +176,15 @@ class wsb_sidebar extends WP_Widget {
 	/**
 	 * Renders the list of events
 	 *
-	 * @param WSB_Response $response
-	 * @param array        $instance Settings for the current instance of the widget
+	 * @param WSB_Response $response Workshop Butler API response.
+	 * @param array        $instance Settings for the current instance of the widget.
 	 *
 	 * @since  2.0.0
 	 * @return string
 	 */
 	private function render_list( $response, $instance ) {
 		if ( $response->is_error() ) {
-			$html  = '<h2>' . __( 'Workshop Butler API: Request failed', 'wsbintegration' ) . '</h2>';
+			$html = '<h2>' . __( 'Workshop Butler API: Request failed', 'wsbintegration' ) . '</h2>';
 			$html .= '<p>' . __( 'Reason : ', 'wsbintegration' ) . $response->error . '</p>';
 			return $html;
 		}
@@ -185,7 +192,7 @@ class wsb_sidebar extends WP_Widget {
 		$events = '<ul>';
 		$sliced = array_slice( $response->body, 0, $instance['length'] );
 		foreach ( $sliced as $json_event ) {
-			$event   = new Event(
+			$event  = new Event(
 				$json_event,
 				$this->settings->get_event_page_url(),
 				$this->settings->get_trainer_page_url(),
@@ -207,6 +214,6 @@ class wsb_sidebar extends WP_Widget {
 	 * @since 2.0.0
 	 */
 	public static function init() {
-		register_widget( 'wsb_sidebar' );
+		register_widget( 'WorkshopButler\wsb_sidebar' );
 	}
 }

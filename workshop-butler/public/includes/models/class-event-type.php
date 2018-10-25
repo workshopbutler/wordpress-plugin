@@ -5,14 +5,16 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * This class represents a type of a Workshop Butler event
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Event_Type {
@@ -43,12 +45,12 @@ class Event_Type {
 	/**
 	 * Initialises a new type
 	 *
-	 * @param $jsonData object JSON data from Workshop Butler API
+	 * @param object $json_data JSON data from Workshop Butler API.
 	 */
-	public function __construct( $jsonData ) {
-		$this->name  = $jsonData->name;
-		$this->badge = $jsonData->badge;
-		$this->id    = $jsonData->id;
+	public function __construct( $json_data ) {
+		$this->name  = $json_data->name;
+		$this->badge = $json_data->badge;
+		$this->id    = $json_data->id;
 	}
 
 	/**
@@ -56,11 +58,11 @@ class Event_Type {
 	 *
 	 * @return Event_Type
 	 */
-	static function createEmpty() {
-		$emptyType        = new stdClass();
-		$emptyType->name  = '';
-		$emptyType->id    = 0;
-		$emptyType->badge = '';
-		return new Event_Type( $emptyType );
+	public static function create_empty() {
+		$empty_type        = new \stdClass();
+		$empty_type->name  = '';
+		$empty_type->id    = 0;
+		$empty_type->badge = '';
+		return new Event_Type( $empty_type );
 	}
 }

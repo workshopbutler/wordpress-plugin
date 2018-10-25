@@ -5,9 +5,16 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
 
+namespace WorkshopButler;
+
+/**
+ * Represents a general ticket type
+ *
+ * @package WorkshopButler
+ */
 abstract class Ticket_Type {
 	/**
 	 * Number of tickets on sale

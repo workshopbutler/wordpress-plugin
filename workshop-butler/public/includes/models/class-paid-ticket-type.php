@@ -5,8 +5,11 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-ticket-price.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-ticket-type-state.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-ticket-type.php';
@@ -15,7 +18,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-ticket-type.
  * This class represents a paid ticket type in a Workshop Butler event
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Paid_Ticket_Type extends Ticket_Type {
@@ -47,7 +50,7 @@ class Paid_Ticket_Type extends Ticket_Type {
 	 * Date when the tickets of this type go on sale
 	 *
 	 * @since  2.0.0
-	 * @var    DateTime $start Date when the tickets of this type go on sale
+	 * @var    \DateTime $start Date when the tickets of this type go on sale
 	 */
 	public $start;
 
@@ -55,7 +58,7 @@ class Paid_Ticket_Type extends Ticket_Type {
 	 * Date when sales of the tickets of this type end
 	 *
 	 * @since  2.0.0
-	 * @var    DateTime $end Date when sales of the tickets of this type end
+	 * @var    \DateTime $end Date when sales of the tickets of this type end
 	 */
 	public $end;
 
@@ -68,12 +71,16 @@ class Paid_Ticket_Type extends Ticket_Type {
 	public $excluded_tax;
 
 	/**
+	 * Price of the ticket
+	 *
 	 * @since   2.0.0
 	 * @var     Ticket_Price $price
 	 */
 	public $price;
 
 	/**
+	 * State of the ticket type. For example, sold out or active
+	 *
 	 * @since   2.0.0
 	 * @var     Ticket_Type_State $state
 	 */
@@ -82,18 +89,18 @@ class Paid_Ticket_Type extends Ticket_Type {
 	/**
 	 * Creates a new paid ticket type from JSON
 	 *
-	 * @param $jsonData object JSON for a ticket type
+	 * @param object $json_data JSON for a ticket type.
 	 */
-	public function __construct( $jsonData ) {
-		$this->id                     = $jsonData->id;
-		$this->name                   = $jsonData->name;
-		$this->number_of_tickets      = $jsonData->amount;
-		$this->number_of_tickets_left = $jsonData->left;
-		$this->start                  = new DateTime( $jsonData->start );
-		$this->end                    = new DateTime( $jsonData->end );
-		$this->excluded_tax           = ! $jsonData->with_vat;
-		$this->price                  = new Ticket_Price( $jsonData->price );
-		$this->state                  = new Ticket_Type_State( $jsonData->state );
+	public function __construct( $json_data ) {
+		$this->id                     = $json_data->id;
+		$this->name                   = $json_data->name;
+		$this->number_of_tickets      = $json_data->amount;
+		$this->number_of_tickets_left = $json_data->left;
+		$this->start                  = new \DateTime( $json_data->start );
+		$this->end                    = new \DateTime( $json_data->end );
+		$this->excluded_tax           = ! $json_data->with_vat;
+		$this->price                  = new Ticket_Price( $json_data->price );
+		$this->state                  = new Ticket_Type_State( $json_data->state );
 	}
 
 	/**

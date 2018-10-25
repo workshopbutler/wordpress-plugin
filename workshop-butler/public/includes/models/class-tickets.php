@@ -5,39 +5,45 @@
  * @link       https://workshopbutler.com
  * @since      2.0.0
  *
- * @package    WSB_Integration
+ * @package    WorkshopButler
  */
+
+namespace WorkshopButler;
 
 /**
  * This class represents all available event tickets
  *
  * @since      2.0.0
- * @package    WSB_Integration
+ * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Tickets {
 
 	/**
+	 * Paid tickets if the event is paid
+	 *
 	 * @since 2.0.0
-	 * @var   Paid_Ticket_Type[] $paid Paid tickets if the event is paid
+	 * @var   Paid_Ticket_Type[] $paid
 	 */
 	public $paid;
 
 	/**
+	 * Free tickets if the event is free
+	 *
 	 * @since 2.0.0
-	 * @var   Free_Ticket_Type $free Free tickets if the event is free
+	 * @var   Free_Ticket_Type $free
 	 */
 	public $free;
 
 	/**
 	 * Initialises new tickets
 	 *
-	 * @param $paidTickets Paid_Ticket_Type[] Paid tickets if the event is paid
-	 * @param $freeTicket Free_Ticket_Type Free ticket if the event is free
+	 * @param Paid_Ticket_Type[] $paid_tickets Paid tickets if the event is paid.
+	 * @param Free_Ticket_Type   $free_ticket  Free ticket if the event is free.
 	 */
-	public function __construct( $paidTickets, $freeTicket ) {
-		$this->free = $freeTicket;
-		$this->paid = $paidTickets;
+	public function __construct( $paid_tickets, $free_ticket ) {
+		$this->free = $free_ticket;
+		$this->paid = $paid_tickets;
 	}
 
 	/**
@@ -53,30 +59,19 @@ class Tickets {
 		}
 	}
 
-	public function get_active_ticket_id() {
-		$active = $this->get_active_ticket();
-		if ( $active ) {
-			return $active->id;
-		} else {
-			return null;
-		}
-	}
-
-	public function get_active_ticket() {
-		$active = $this->get_active();
-		if ( count( $active ) > 0 ) {
-			return $active[0];
-		} else {
-			return null;
-		}
-	}
-
 	/**
 	 * Returns number of all tickets left, for all valid and future types, or null if there is no limitation
 	 *
 	 * @return int | null
 	 */
 	public function get_number_of_seats_left() {
+		/**
+		 * Helper function to calculate a total number of seats
+		 *
+		 * @param int $total  Total number of seats.
+		 * @param int $number Additional number of seats.
+		 * @return int
+		 */
 		function sum( $total, $number ) {
 			return $total + $number;
 		}
