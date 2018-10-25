@@ -146,7 +146,7 @@ class WSB_Integration {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new WSB_Integration_i18n();
+		$plugin_i18n = new WSB_Integration_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -180,7 +180,7 @@ class WSB_Integration {
 	 * @access   private
 	 */
 	private function define_common_hooks() {
-		add_action( 'widgets_init', array( 'Sidebar_Widget', 'init' ) );
+		add_action( 'widgets_init', array( 'WorkshopButler\Sidebar_Widget', 'init' ) );
 	}
 
 	/**

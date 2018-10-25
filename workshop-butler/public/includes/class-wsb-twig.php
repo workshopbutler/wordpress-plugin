@@ -11,32 +11,6 @@
 namespace WorkshopButler;
 
 /**
- * Handle TwigFunction among Twig versions
- *
- * From Twig 2.4.0, extending Twig_Function is deprecated, will be final in 3.0
- *
- * @ticket #1641
- * Temporary fix for conflicts between Twig_Function and Twig_SimpleFunction
- * in different versions of Twig (1.* and 2.*)
- */
-
-if ( version_compare( \Twig_Environment::VERSION, '2.4.0', '>=' ) ) {
-
-	class_alias( '\Twig\TwigFunction', '\Twig_Function' );
-
-} elseif ( version_compare( \Twig_Environment::VERSION, '2.0.0', '>=' ) ) {
-
-	class Twig_Function extends \Twig_Function {
-	}
-
-} else {
-
-	class Twig_Function extends \Twig_SimpleFunction {
-	}
-
-}
-
-/**
  * Initialises Twig environment
  *
  * @since 2.0.0
@@ -115,6 +89,9 @@ class WSB_Twig {
 		);
 	}
 
+	/**
+	 * Adds additional filters, available in Twig templates
+	 */
 	protected function initialise_filters() {
 		$this->twig->addFilter(
 			new \Twig_SimpleFilter(
@@ -127,4 +104,40 @@ class WSB_Twig {
 			)
 		);
 	}
+}
+
+/**
+ * Handle TwigFunction among Twig versions
+ *
+ * From Twig 2.4.0, extending Twig_Function is deprecated, will be final in 3.0
+ *
+ * @ticket #1641
+ * Temporary fix for conflicts between Twig_Function and Twig_SimpleFunction
+ * in different versions of Twig (1.* and 2.*)
+ */
+
+if ( version_compare( \Twig_Environment::VERSION, '2.4.0', '>=' ) ) {
+
+	class_alias( '\Twig\TwigFunction', '\Twig_Function' );
+
+} elseif ( version_compare( \Twig_Environment::VERSION, '2.0.0', '>=' ) ) {
+
+	/**
+	 * Defines Twig_Function class
+	 *
+	 * @package WorkshopButler
+	 */
+	class Twig_Function extends \Twig_Function {
+	}
+
+} else {
+
+	/**
+	 * Defines Twig_Function class
+	 *
+	 * @package WorkshopButler
+	 */
+	class Twig_Function extends \Twig_SimpleFunction {
+	}
+
 }

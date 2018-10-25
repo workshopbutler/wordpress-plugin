@@ -155,14 +155,14 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Renders filters on the page
 	 *
-	 * @param array $attrs Short code attributes
+	 * @param array $attrs Short code attributes.
 	 *
 	 * @since  2.0.0
 	 * @return string
 	 */
 	protected function render_filters( $attrs = [] ) {
 		$events = $this->dict->get_events();
-		if ( $events === null ) {
+		if ( null === $events ) {
 			return '';
 		}
 		$template = $this->get_template( 'filters', null );
@@ -226,7 +226,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			$this->dict->set_event( $event );
 			$item_content           = $this->compile_string( $content, array( 'event' => $event ) );
 			$processed_item_content = do_shortcode( $item_content );
-			$html                   .= $this->compile_string(
+			$html                  .= $this->compile_string(
 				$item_template,
 				array(
 					'event'   => $event,

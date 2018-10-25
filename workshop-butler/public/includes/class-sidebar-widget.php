@@ -90,14 +90,14 @@ class Sidebar_Widget extends \WP_Widget {
 			switch ( $field->type ) {
 				default:
 					?>
-                    <p>
-                        <label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
-                        <input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
-                               name="<?php echo $this->get_field_name( $name ); ?>"
-                               type="<?php echo $this->get_field_name( $field->type ); ?>"
-                               value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
-                    </p>
-				<?php
+					<p>
+						<label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
+						<input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
+							name="<?php echo $this->get_field_name( $name ); ?>"
+							type="<?php echo $this->get_field_name( $field->type ); ?>"
+							value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
+					</p>
+					<?php
 			}
 		}
 	}
@@ -184,7 +184,7 @@ class Sidebar_Widget extends \WP_Widget {
 	 */
 	private function render_list( $response, $instance ) {
 		if ( $response->is_error() ) {
-			$html = '<h2>' . __( 'Workshop Butler API: Request failed', 'wsbintegration' ) . '</h2>';
+			$html  = '<h2>' . __( 'Workshop Butler API: Request failed', 'wsbintegration' ) . '</h2>';
 			$html .= '<p>' . __( 'Reason : ', 'wsbintegration' ) . $response->error . '</p>';
 			return $html;
 		}
@@ -192,7 +192,7 @@ class Sidebar_Widget extends \WP_Widget {
 		$events = '<ul>';
 		$sliced = array_slice( $response->body, 0, $instance['length'] );
 		foreach ( $sliced as $json_event ) {
-			$event  = new Event(
+			$event   = new Event(
 				$json_event,
 				$this->settings->get_event_page_url(),
 				$this->settings->get_trainer_page_url(),

@@ -40,10 +40,12 @@ class WSB_Old_Schedule_Page extends WSB_Page {
 		if ( ! is_array( $attrs ) ) {
 			$attrs = array();
 		}
-		extract( shortcode_atts( array(
+		$default = array(
 			'theme' => '',
 			'url'   => '',
-		), $attrs ) );
+		);
+
+		$attrs  = shortcode_atts( $default, $attrs );
 		$params = '';
 		foreach ( $attrs as $key => $value ) {
 			if ( 'widget_id' === $key ) {
@@ -81,7 +83,7 @@ class WSB_Old_Schedule_Page extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	static public function page( $attrs, $content, $tag ) {
+	public static function page( $attrs, $content ) {
 		$page = new WSB_Old_Schedule_Page();
 		return $page->render_page( $attrs, $content );
 	}

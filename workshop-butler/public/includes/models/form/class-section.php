@@ -10,6 +10,7 @@
 
 namespace WorkshopButler;
 
+require_once plugin_dir_path( __FILE__ ) . 'class-field-type.php';
 require_once plugin_dir_path( __FILE__ ) . 'class-field.php';
 require_once plugin_dir_path( __FILE__ ) . 'class-select.php';
 require_once plugin_dir_path( __FILE__ ) . 'class-country.php';
@@ -70,11 +71,11 @@ class Section {
 	 */
 	protected static function create_any_field( $field_data, $event ) {
 		switch ( $field_data->type ) {
-			case FieldType::SELECT:
+			case Field_Type::SELECT:
 				return new Select( $field_data );
-			case FieldType::COUNTRY:
+			case Field_Type::COUNTRY:
 				return new Country( $field_data );
-			case FieldType::TICKET:
+			case Field_Type::TICKET:
 				if ( $event->free || is_null( $event->tickets ) || $event->sold_out ) {
 					return null;
 				} else {

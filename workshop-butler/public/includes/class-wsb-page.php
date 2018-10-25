@@ -249,7 +249,7 @@ abstract class WSB_Page {
 	 * @return string
 	 */
 	protected function format_error( $error ) {
-		$message = '<h2> Workshop Butler API: Request failed</h2>';
+		$message  = '<h2> Workshop Butler API: Request failed</h2>';
 		$message .= '<p>Reason : ' . $error . '</p>';
 		return $message;
 	}

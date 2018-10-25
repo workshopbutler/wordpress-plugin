@@ -140,7 +140,7 @@ class WSB_Testimonial extends WSB_Page {
 		foreach ( $trainer->testimonials as $testimonial ) {
 			$GLOBALS['wsb_testimonial'] = $testimonial;
 			$with_data                  = $this->compile_string( $template, array( 'testimonial' => $testimonial ) );
-			$html                       .= do_shortcode( $with_data );
+			$html                      .= do_shortcode( $with_data );
 			unset( $GLOBALS['wsb_testimonial'] );
 		}
 

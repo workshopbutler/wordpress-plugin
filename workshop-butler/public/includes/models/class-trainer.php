@@ -23,35 +23,156 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'utils/language.php';
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Trainer {
+	/**
+	 * Trainer's ID
+	 *
+	 * @since 2.0.0
+	 * @var   int
+	 */
 	public $id;
+
+	/**
+	 * First name
+	 *
+	 * @since 2.0.0
+	 * @var string
+	 */
 	public $first_name;
+
+	/**
+	 * Last name
+	 *
+	 * @since 2.0.0
+	 * @var string
+	 */
 	public $last_name;
+
+	/**
+	 * Email address
+	 *
+	 * @since 2.0.0
+	 * @var string
+	 */
 	public $email;
+
+	/**
+	 * URL to the photo
+	 *
+	 * @since 2.0.0
+	 * @var string
+	 */
 	public $photo;
+
+	/**
+	 * Bio (html)
+	 *
+	 * @since 2.0.0
+	 * @var string
+	 */
 	public $bio;
+
+	/**
+	 * URL to the trainer's profile
+	 *
+	 * @since 2.0.0
+	 * @var string
+	 */
 	public $url;
+
+	/**
+	 * 2-letter code of country of origin
+	 *
+	 * @since 2.0.0
+	 * @var string
+	 */
 	public $country_code;
 
 	/**
+	 * List of code languages the trainer speaks at
+	 *
 	 * @since   2.0.0
 	 * @var     string[] $languages Languages the trainer speaks to
 	 */
 	public $languages;
+
+	/**
+	 * Years of experience for the trainer. It's more than 0 only when you work with the profiles of trainers,
+	 * licensed by certification body
+	 *
+	 * @since 2.0.0
+	 * @var int
+	 */
 	public $years_of_experience;
+
+	/**
+	 * Total number of workshops the trainer had
+	 *
+	 * @since 2.0.0
+	 * @var int
+	 */
 	public $number_of_events;
+
+	/**
+	 * List of badges the trainer earned
+	 *
+	 * @since 2.0.0
+	 * @var object[]
+	 */
 	public $badges;
+
+	/**
+	 * Links to Facebook, LinkedIn and other social profiles
+	 *
+	 * @since 2.0.0
+	 * @var Social_Links
+	 */
 	public $social_links;
+
+	/**
+	 * Total statistics for public workshops
+	 *
+	 * @since 2.0.0
+	 * @var Statistics
+	 */
 	public $public_stats;
+
+	/**
+	 * Total statistics for public workshops
+	 *
+	 * @since 2.0.0
+	 * @var Statistics
+	 */
 	public $private_stats;
+
+	/**
+	 * Statistics for the last 6 months for public workshops
+	 *
+	 * @since 2.0.0
+	 * @var Statistics
+	 */
 	public $recent_public_stats;
+
+	/**
+	 * Statistics for the last 6 months for public workshops
+	 *
+	 * @since 2.0.0
+	 * @var Statistics
+	 */
 	public $recent_private_stats;
+
+	/**
+	 * List of testimonials
+	 *
+	 * @since 2.0.0
+	 * @var object[]
+	 */
 	public $testimonials;
 
 	/**
 	 * Creates a new object
 	 *
-	 * @param object      $json_data   JSON data from Workshop Butler API
-	 * @param string|null $trainer_url Trainer profile page URL
+	 * @param object      $json_data   JSON data from Workshop Butler API.
+	 * @param string|null $trainer_url Trainer profile page URL.
 	 */
 	public function __construct( $json_data, $trainer_url = null ) {
 		$this->id                  = $json_data->id;

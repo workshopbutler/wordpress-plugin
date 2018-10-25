@@ -23,7 +23,7 @@ namespace WorkshopButler;
  * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
-class WSB_Integration_i18n {
+class WSB_Integration_I18n {
 
 	/**
 	 * Load the plugin text domain for translation.

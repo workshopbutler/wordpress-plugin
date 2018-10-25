@@ -58,15 +58,17 @@ class Schedule_Formatter {
 	}
 
 	/**
-	 * @param Schedule $schedule Schedule to format
+	 * Produces a formatted schedule in a full-date format
+	 *
+	 * @param Schedule $schedule Schedule to format.
 	 * @return string
 	 * @since 2.0.0
 	 */
 	protected static function format_full_date( $schedule ) {
 		if ( $schedule->at_one_day() ) {
 			return Date_Formatter::format( $schedule->start );
-		} elseif ( $schedule->start->format( 'Y' ) != $schedule->end->format( 'Y' )
-			&& $schedule->start->format( 'm' ) != $schedule->end->format( 'm' ) ) {
+		} elseif ( $schedule->start->format( 'Y' ) !== $schedule->end->format( 'Y' )
+			&& $schedule->start->format( 'm' ) !== $schedule->end->format( 'm' ) ) {
 			return Date_Formatter::format( $schedule->start ) . ' — ' . Date_Formatter::format( $schedule->end );
 		} else {
 			return self::format_same_month_interval( $schedule->start, $schedule->end );
@@ -92,7 +94,7 @@ class Schedule_Formatter {
 			$numeric_days     = $start->format( 'd' ) . '-' . $end->format( 'd' );
 			$without_zero_ays = $start->format( 'j' ) . '-' . $end->format( 'j' );
 
-			if ( (! empty( $wp_locale->month )) ) {
+			if ( ( ! empty( $wp_locale->month ) ) ) {
 				$textual_month      = $wp_locale->get_month( date( 'm', $start->getTimestamp() ) );
 				$textual_month_abbr = $wp_locale->get_month_abbrev( $textual_month );
 			} else {

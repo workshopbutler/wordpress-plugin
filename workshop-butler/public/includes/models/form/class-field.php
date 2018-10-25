@@ -11,22 +11,6 @@
 namespace WorkshopButler;
 
 /**
- * Type of the field
- *
- * @package WorkshopButler
- */
-abstract class FieldType {
-	const CHECKBOX  = 'checkbox';
-	const TEXT_AREA = 'textarea';
-	const SELECT    = 'select';
-	const COUNTRY   = 'country';
-	const TICKET    = 'ticket';
-	const TEXT      = 'text';
-	const EMAIL     = 'email';
-	const DATE      = 'date';
-}
-
-/**
  * Represents a form field
  *
  * @since      2.0.0
