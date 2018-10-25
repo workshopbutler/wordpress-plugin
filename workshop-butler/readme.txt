@@ -68,6 +68,10 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.0.2 =
+* Fixes a bug when a ticket price is not showing on some websites
+* Moves all classes under WorkshopButler namespace to prevent name clashes
+
 = 2.0.1 =
 Fixes a bug which caused a repetitive menu item
 

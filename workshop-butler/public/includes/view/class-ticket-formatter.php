@@ -53,14 +53,9 @@ class Ticket_Formatter {
 	 * @return string
 	 */
 	protected static function format_price( $ticket_type ) {
-		if ( class_exists( 'NumberFormatter' ) ) {
-			$formatter = new \NumberFormatter( get_locale(), \NumberFormatter::CURRENCY );
-			$formatter->formatCurrency( $ticket_type->price->amount, $ticket_type->price->currency );
-		} else {
-			$without_fraction = ( $ticket_type->price->amount - floor( $ticket_type->price->amount ) ) < 0.001;
-			$decimals         = $without_fraction ? 0 : 2;
-			return $ticket_type->price->sign . number_format_i18n( $ticket_type->price->amount, $decimals );
-		}
+		$without_fraction = ( $ticket_type->price->amount - floor( $ticket_type->price->amount ) ) < 0.001;
+		$decimals         = $without_fraction ? 0 : 2;
+		return $ticket_type->price->sign . number_format_i18n( $ticket_type->price->amount, $decimals );
 	}
 
 	/**
