@@ -17,7 +17,7 @@ namespace WorkshopButler;
  * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
-class wsb_sidebar extends \WP_Widget {
+class Sidebar_Widget extends \WP_Widget {
 
 	/**
 	 * Requests entity
@@ -214,6 +214,6 @@ class wsb_sidebar extends \WP_Widget {
 	 * @since 2.0.0
 	 */
 	public static function init() {
-		register_widget( 'WorkshopButler\wsb_sidebar' );
+		register_widget( 'WorkshopButler\Sidebar_Widget' );
 	}
 }

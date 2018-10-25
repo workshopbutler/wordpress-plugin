@@ -111,7 +111,7 @@ class WSB_Integration_Public {
 		wp_register_script( 'wsb-all-events-scripts', plugin_dir_url( __FILE__ ) . 'js/all-events-scripts.js', array( 'jquery' ), $this->version, true );
 
 		wp_deregister_script( 'jquery' );
-		wp_register_script( 'jquery', "http" . ( $_SERVER['SERVER_PORT'] == 443 ? "s" : "" ) . "://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js", false, null );
+		wp_register_script( 'jquery', 'http' . ( 443 === $_SERVER['SERVER_PORT'] ? 's' : '' ) . '://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', false, null );
 		wp_enqueue_script( 'jquery' );
 
 	}
@@ -274,6 +274,7 @@ class WSB_Integration_Public {
 
 		add_shortcode( 'wsb_registration_form', array( 'WorkshopButler\WSB_Registration_Page', 'tag' ) );
 
+		add_shortcode( 'wsb_trainer_name', array( 'WorkshopButler\WSB_Trainer_Page', 'tag' ) );
 		add_shortcode( 'wsb_trainer_country', array( 'WorkshopButler\WSB_Trainer_Page', 'tag' ) );
 		add_shortcode( 'wsb_trainer_photo', array( 'WorkshopButler\WSB_Trainer_Page', 'tag' ) );
 

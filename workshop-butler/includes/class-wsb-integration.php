@@ -127,7 +127,7 @@ class WSB_Integration {
 		/**
 		 * The class responsible rendering and configuring a sidebar
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/includes/class-wsb-sidebar.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/includes/class-sidebar-widget.php';
 
 		/**
 		 * The class responsible for orchestrating the upgrade plugin process
@@ -180,7 +180,7 @@ class WSB_Integration {
 	 * @access   private
 	 */
 	private function define_common_hooks() {
-		add_action( 'widgets_init', array( 'WorkshopButler\wsb_sidebar', 'init' ) );
+		add_action( 'widgets_init', array( 'Sidebar_Widget', 'init' ) );
 	}
 
 	/**

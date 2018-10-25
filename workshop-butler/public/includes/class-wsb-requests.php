@@ -134,7 +134,7 @@ class WSB_Requests {
 	 */
 	public function retrieve_event( $id ) {
 		$method   = 'events/';
-		$method   .= rawurlencode( $id );
+		$method  .= rawurlencode( $id );
 		$query    = array( 'fields' => 'trainer.rating' );
 		$response = $this->get( $method, $query );
 		$dict     = new WSB_Dictionary();
