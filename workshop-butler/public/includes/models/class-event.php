@@ -20,6 +20,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-schedule.php
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-location.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-event-state.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-registration-page.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-event-url.php';
 require_once plugin_dir_path( __FILE__ ) . 'form/class-form.php';
 
 
@@ -128,14 +129,6 @@ class Event {
 	public $sold_out;
 
 	/**
-	 * The url to the event
-	 *
-	 * @since   2.0.0
-	 * @var     string $url
-	 */
-	public $url;
-
-	/**
 	 * Tickets to the event
 	 *
 	 * @since   2.0.0
@@ -184,6 +177,14 @@ class Event {
 	public $state;
 
 	/**
+	 * The url to the event
+	 *
+	 * @since   2.0.0
+	 * @var     Event_Url $url
+	 */
+	private $url;
+
+	/**
 	 * Creates a new object
 	 *
 	 * @param object      $json_data             JSON data from Workshop Butler API.
@@ -206,10 +207,12 @@ class Event {
 		$this->schedule    = new Schedule( $json_data->schedule );
 		$this->location    = new Location( $json_data->location );
 
-		if ( $event_page_url ) {
-			$this->url = $event_page_url . '?id=' . $this->hashed_id;
+		if ( $json_data->custom_settings && $json_data->custom_settings->title_url ) {
+			$this->url = Event_Url::external( $json_data->custom_settings->title_url );
+		} elseif ( $event_page_url ) {
+			$this->url = Event_Url::internal( $event_page_url . '?id=' . $this->hashed_id );
 		} else {
-			$this->url = 'https://workshopbutler.com/public/event/' . $this->hashed_id;
+			$this->url = Event_Url::external( 'https://workshopbutler.com/public/event/' . $this->hashed_id );
 		}
 		$this->tickets = $this->get_tickets( $this->free, $json_data->free_ticket_type, $json_data->paid_ticket_types );
 
@@ -225,6 +228,26 @@ class Event {
 
 		$this->trainers = $this->get_trainers( $json_data, $trainer_page_url );
 		$this->state    = new Event_State( $this );
+	}
+
+	/**
+	 * Returns the URL for the event's page
+	 *
+	 * @since 2.1.0
+	 * @return string
+	 */
+	public function url() {
+		return $this->url->url;
+	}
+
+	/**
+	 * Returns true if the URL leads to a third-party website
+	 *
+	 * @since  2.1.0
+	 * @return boolean
+	 */
+	public function is_url_external() {
+		return $this->url->on_third_party_website;
 	}
 
 	/**

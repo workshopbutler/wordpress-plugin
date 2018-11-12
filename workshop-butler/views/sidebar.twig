@@ -2,7 +2,7 @@
     <div class="wsb-workshop">
         {{ wsb_f(event.schedule) }}, {{ wsb_f(event.location) }}
         <br>
-        <a href="{{ event.url }}">
+        <a href="{{ event.url }}" {% if event.is_url_external %} target="_blank" {% endif %} >
             {{ event.title }}
         </a>
     </div>

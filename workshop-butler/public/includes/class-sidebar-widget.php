@@ -192,16 +192,20 @@ class Sidebar_Widget extends \WP_Widget {
 		$events = '<ul>';
 		$sliced = array_slice( $response->body, 0, $instance['length'] );
 		foreach ( $sliced as $json_event ) {
-			$event   = new Event(
+			$event  = new Event(
 				$json_event,
 				$this->settings->get_event_page_url(),
 				$this->settings->get_trainer_page_url(),
 				$this->settings->get_registration_page_url()
 			);
+			$target = '';
+			if ( $event->is_url_external() ) {
+				$target = ' target="_blank" ';
+			}
 			$events .= '<li>' .
 				Formatter::format( $event->schedule, 'full_short' ) . ', ' .
 				Formatter::format( $event->location ) . '<br>' .
-				'<a href="' . $event->url . '">' .
+				'<a href="' . $event->url() . '" ' . $target . '>' .
 				$event->title . '</a></li>';
 		}
 		$events .= '</ul>';

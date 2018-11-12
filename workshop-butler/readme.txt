@@ -2,7 +2,7 @@
 Contributors: workshopbutlers
 Tags: event management, training management, event schedule, workshop crm, online registrations
 Requires at least: 4.6
-Tested up to: 4.9.8
+Tested up to: 5.0.0
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -68,6 +68,11 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.1.0 =
+* Adds support for WordPress 5.0
+* Adds new shortcode [wsb_trainer_name]
+* Improves the behaviour for external event pages - the links open in new tabs.
+
 = 2.0.2 =
 * Fixes a bug when a ticket price is not showing on some websites
 * Moves all classes under WorkshopButler namespace to prevent name clashes

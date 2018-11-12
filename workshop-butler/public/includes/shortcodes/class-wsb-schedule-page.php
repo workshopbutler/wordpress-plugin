@@ -69,7 +69,7 @@ class WSB_Schedule_Page extends WSB_Page {
 		$attrs = $this->get_widget_attrs( $attrs );
 
 		$method = 'events';
-		$fields = 'title,location,hashed_id,schedule,free,type,registration_page,spoken_languages,sold_out,facilitators,free_ticket_type,paid_ticket_types';
+		$fields = 'title,location,hashed_id,schedule,free,type,registration_page,spoken_languages,sold_out,facilitators,free_ticket_type,paid_ticket_types,title_url';
 		$query  = array(
 			'future' => true,
 			'public' => true,
