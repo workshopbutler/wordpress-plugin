@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.1.1 =
+Fixes a bug with incorrect jQuery loading on some websites
+
 = 2.1.0 =
 * Adds support for WordPress 5.0
 * Adds new shortcode [wsb_trainer_name]
