@@ -45,12 +45,12 @@ class Schedule_Formatter {
 			case 'timezone_short':
 				return $schedule->timezone ? $schedule->start->format( 'T' ) : '';
 			case 'full_short':
-				return self::format_full_date( $schedule );
+				return self::format_full_date( $schedule, false );
 			case 'full_long':
 				if ( ! $schedule->timezone ) {
-					return self::format_full_date( $schedule );
+					return self::format_full_date( $schedule, false );
 				} else {
-					return self::format_full_date( $schedule );
+					return self::format_full_date( $schedule, true );
 				}
 			default:
 				return '';
@@ -60,13 +60,18 @@ class Schedule_Formatter {
 	/**
 	 * Produces a formatted schedule in a full-date format
 	 *
-	 * @param Schedule $schedule Schedule to format.
+	 * @param Schedule $schedule  Schedule to format.
+	 * @param boolean  $with_time When true, the time is added.
 	 * @return string
 	 * @since 2.0.0
 	 */
-	protected static function format_full_date( $schedule ) {
+	protected static function format_full_date( $schedule, $with_time ) {
 		if ( $schedule->at_one_day() ) {
-			return Date_Formatter::format( $schedule->start );
+			if ( $with_time ) {
+				return Date_Formatter::format_at_one_day_time( $schedule->start, $schedule->end );
+			} else {
+				return Date_Formatter::format( $schedule->start );
+			}
 		} elseif ( $schedule->start->format( 'Y' ) !== $schedule->end->format( 'Y' )
 			&& $schedule->start->format( 'm' ) !== $schedule->end->format( 'm' ) ) {
 			return Date_Formatter::format( $schedule->start ) . ' — ' . Date_Formatter::format( $schedule->end );

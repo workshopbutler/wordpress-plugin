@@ -32,6 +32,20 @@ class Date_Formatter {
 	}
 
 	/**
+	 * Shows start and end times for the event if it's at one day
+	 *
+	 * @param \DateTime $start_date Date.
+	 * @param \DateTime $end_date   Date.
+	 * @return string
+	 * @since 2.1.2
+	 */
+	public static function format_at_one_day_time( $start_date, $end_date ) {
+		$formatted_date = date_i18n( self::get_date_format( $start_date ), $start_date->getTimestamp() );
+		$formatted_time = $start_date->format( get_option( 'time_format' ) ) . '—' . $end_date->format( get_option( 'time_format' ) );
+		return trim( $formatted_date . ' ' . $formatted_time, '.,-/ ' );
+	}
+
+	/**
 	 * Returns a date format (with year or without) for the given date
 	 *
 	 * @param \DateTime $date Date.
