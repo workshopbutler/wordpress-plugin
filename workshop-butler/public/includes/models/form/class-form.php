@@ -45,7 +45,7 @@ class Form {
 	 */
 	public function __construct( $instructions, $sections_data, $event ) {
 		$this->instructions = $instructions;
-		$this->sections     = [];
+		$this->sections     = array();
 		foreach ( $sections_data as $section_data ) {
 			$section = new Section( $section_data->name, $section_data->fields, $event );
 			array_push( $this->sections, $section );

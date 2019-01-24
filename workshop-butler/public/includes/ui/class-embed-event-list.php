@@ -79,7 +79,7 @@ class Embed_Event_List extends WSB_Page {
 			return $this->format_error( $response->error );
 		}
 
-		$events = [];
+		$events = array();
 		foreach ( $response->body as $json_event ) {
 			$event = new Event(
 				$json_event,

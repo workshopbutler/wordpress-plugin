@@ -61,7 +61,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public function render_page( $attrs = [], $content = null ) {
+	public function render_page( $attrs = array(), $content = null ) {
 		// Load styles and scripts only on demand.
 		wp_enqueue_script( 'wsb-all-events-scripts' );
 		$this->add_theme_fonts();
@@ -114,7 +114,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			return $this->format_error( $response->error );
 		}
 
-		$events = [];
+		$events = array();
 		foreach ( $response->body as $json_event ) {
 			$event = new Event(
 				$json_event,
@@ -160,7 +160,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	protected function render_filters( $attrs = [] ) {
+	protected function render_filters( $attrs = array() ) {
 		$events = $this->dict->get_events();
 		if ( null === $events ) {
 			return '';
@@ -211,7 +211,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	protected function render_item( $attrs = [], $content = null ) {
+	protected function render_item( $attrs = array(), $content = null ) {
 		$events = $this->dict->get_events();
 		if ( is_null( $events ) ) {
 			return '';
@@ -266,7 +266,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	 * @since 2.0.0
 	 * @return string
 	 */
-	protected function render_simple_shortcode( $name, $attrs = [], $content = null ) {
+	protected function render_simple_shortcode( $name, $attrs = array(), $content = null ) {
 		$event = $this->dict->get_event();
 		if ( ! is_a( $event, 'WorkshopButler\Event' ) ) {
 			return '';

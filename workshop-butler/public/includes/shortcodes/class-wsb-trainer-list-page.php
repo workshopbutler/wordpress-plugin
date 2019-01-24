@@ -62,7 +62,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	 *
 	 * @return string
 	 */
-	public function render_page( $attrs = [], $content = null ) {
+	public function render_page( $attrs = array(), $content = null ) {
 		// Load styles and scripts only on demand.
 		wp_enqueue_script( 'wsb-all-trainers-scripts' );
 		$this->add_theme_fonts();
@@ -87,7 +87,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 			return $this->format_error( $response->error );
 		}
 
-		$trainers = [];
+		$trainers = array();
 		foreach ( $response->body as $json_trainer_data ) {
 			$trainer = new Trainer( $json_trainer_data, $trainer_url );
 			array_push( $trainers, $trainer );
@@ -116,7 +116,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	protected function render_filters( $attrs = [] ) {
+	protected function render_filters( $attrs = array() ) {
 		$attrs = shortcode_atts( $this->get_default_attrs( 'filter' ), $attrs );
 
 		$trainers = $this->dict->get_trainers();
@@ -165,7 +165,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	protected function render_trainer( $attrs = [], $content = null ) {
+	protected function render_trainer( $attrs = array(), $content = null ) {
 		$trainers = $this->dict->get_trainers();
 		if ( is_null( $trainers ) ) {
 			return '';
@@ -225,7 +225,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	 *
 	 * @return bool|string
 	 */
-	protected function render_simple_shortcode( $name, $attrs = [], $content = null ) {
+	protected function render_simple_shortcode( $name, $attrs = array(), $content = null ) {
 		$trainer = $this->dict->get_trainer();
 		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
@@ -246,7 +246,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public static function page( $attrs = [], $content = null ) {
+	public static function page( $attrs = array(), $content = null ) {
 		$page = new WSB_Trainer_List_Page();
 		return $page->render_page( $attrs, $content );
 	}
@@ -259,7 +259,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public static function trainer( $attrs = [], $content = null ) {
+	public static function trainer( $attrs = array(), $content = null ) {
 		$page = new WSB_Trainer_List_Page();
 		return $page->render_trainer( $attrs, $content );
 	}

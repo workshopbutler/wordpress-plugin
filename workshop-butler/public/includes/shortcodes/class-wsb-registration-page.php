@@ -61,7 +61,7 @@ class WSB_Registration_Page extends WSB_Page {
 	 *
 	 * @return string
 	 */
-	public function render( $attrs = [], $content = null ) {
+	public function render( $attrs = array(), $content = null ) {
 		if ( empty( $_GET['id'] ) ) {
 			return $this->format_error( 'empty event ID' );
 		}
@@ -380,7 +380,7 @@ class WSB_Registration_Page extends WSB_Page {
 			'ZM',
 			'ZW',
 		);
-		$countries = [];
+		$countries = array();
 		foreach ( $codes as $code ) {
 			$countries[ $code ] = __( 'country.' . $code, 'wsbintegration' );
 		}
@@ -399,7 +399,7 @@ class WSB_Registration_Page extends WSB_Page {
 	 * @since 2.0.0
 	 * @return string
 	 */
-	protected function render_simple_shortcode( $name, $attrs = [], $content = null ) {
+	protected function render_simple_shortcode( $name, $attrs = array(), $content = null ) {
 		$event = $this->dict->get_event();
 		if ( ! is_a( $event, 'WorkshopButler\Event' ) ) {
 			return '';
@@ -423,7 +423,7 @@ class WSB_Registration_Page extends WSB_Page {
 	 *
 	 * @return string
 	 */
-	public static function page( $attrs = [], $content = null ) {
+	public static function page( $attrs = array(), $content = null ) {
 		$page = new WSB_Registration_Page();
 
 		return $page->render( $attrs, $content );

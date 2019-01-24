@@ -88,7 +88,7 @@ class WSB_Requests {
 	 * @return WSB_Response
 	 */
 	public function post( $method, $data ) {
-		$query            = [];
+		$query            = array();
 		$query['api_key'] = $this->settings->get( WSB_Options::API_KEY );
 		$this->add_stats_parameter( $query );
 
@@ -119,7 +119,7 @@ class WSB_Requests {
 	 * @param array $query List of query parameters for API request.
 	 */
 	protected function add_stats_parameter( &$query ) {
-		$parameters = [];
+		$parameters = array();
 		array_push( $parameters, 'w' );
 		array_push( $parameters, WSB_INTEGRATION_VERSION );
 		array_push( $parameters, $this->settings->get( WSB_Options::THEME, 'alfred' ) );

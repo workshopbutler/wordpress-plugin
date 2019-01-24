@@ -53,7 +53,7 @@ class Trainer_Filters extends List_Filters {
 			case 'badge':
 				return $this->get_badge_filter_data( __( 'filter.badge', 'wsbintegration' ), $this->objects );
 			default:
-				return [];
+				return array();
 		}
 	}
 
@@ -66,7 +66,7 @@ class Trainer_Filters extends List_Filters {
 	 * @return Filter_Value[]
 	 */
 	private function get_badge_filter_data( $default_name, $trainers ) {
-		$badges = [];
+		$badges = array();
 		foreach ( $trainers as $trainer ) {
 			foreach ( $trainer->badges as $badge ) {
 				array_push( $badges, new Filter_Value( $badge->name, $badge->name ) );
@@ -96,7 +96,7 @@ class Trainer_Filters extends List_Filters {
 			'eight' => 8,
 			'nine'  => 9,
 		);
-		$values  = [];
+		$values  = array();
 		foreach ( $ratings as $key => $value ) {
 			array_push( $values, new Filter_Value( __( 'rating.' . $key, 'wsbintegration' ), $value ) );
 		}
@@ -112,7 +112,7 @@ class Trainer_Filters extends List_Filters {
 	 * @return Filter_Value[]
 	 */
 	private function get_language_filter_data( $default_name, $trainers ) {
-		$languages = [];
+		$languages = array();
 		foreach ( $trainers as $trainer ) {
 			$trainer_languages = $trainer->languages;
 			foreach ( $trainer_languages as $language ) {
@@ -134,7 +134,7 @@ class Trainer_Filters extends List_Filters {
 	 * @return Filter_Value[]
 	 */
 	private function get_location_filter_data( $default_name, $trainers ) {
-		$values = [];
+		$values = array();
 		foreach ( $trainers as $trainer ) {
 			$country_name = __( 'country.' . $trainer->country_code, 'wsbintegration' );
 
@@ -154,7 +154,7 @@ class Trainer_Filters extends List_Filters {
 	 * @return Filter_Value[]
 	 */
 	private function get_trainer_filter_data( $default_name, $trainers ) {
-		$values = [];
+		$values = array();
 		foreach ( $trainers as $trainer ) {
 			$full_name = $trainer->first_name . ' ' . $trainer->last_name;
 			$value     = new Filter_Value( $full_name, $full_name );

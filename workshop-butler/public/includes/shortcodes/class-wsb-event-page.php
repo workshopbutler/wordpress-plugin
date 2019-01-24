@@ -61,7 +61,7 @@ class WSB_Event_Page extends WSB_Page {
 	 *
 	 * @return string
 	 */
-	public function render( $attrs = [], $content = null ) {
+	public function render( $attrs = array(), $content = null ) {
 		if ( empty( $_GET['id'] ) ) {
 			return $this->format_error( 'empty event ID' );
 		}
@@ -125,7 +125,7 @@ class WSB_Event_Page extends WSB_Page {
 	 * @param null  $content Shortcode content.
 	 * @return string
 	 */
-	public static function page( $attrs = [], $content = null ) {
+	public static function page( $attrs = array(), $content = null ) {
 		$page = new WSB_Event_Page();
 
 		return $page->render( $attrs, $content );

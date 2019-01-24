@@ -301,13 +301,13 @@ class Event {
 	 */
 	private function get_trainers( $json_data, $trainer_page_url ) {
 		if ( $json_data->facilitators ) {
-			$trainers = [];
+			$trainers = array();
 			foreach ( $json_data->facilitators as $trainer ) {
 				array_push( $trainers, new Trainer( $trainer, $trainer_page_url ) );
 			}
 			return $trainers;
 		} else {
-			return [];
+			return array();
 		}
 	}
 

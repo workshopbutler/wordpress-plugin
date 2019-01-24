@@ -30,7 +30,7 @@ class WSB_Old_Schedule_Page extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public function render_page( $attrs = [], $content = null ) {
+	public function render_page( $attrs = array(), $content = null ) {
 
 		$token = get_option( 'wb_token' );
 		if ( empty( $token ) ) {

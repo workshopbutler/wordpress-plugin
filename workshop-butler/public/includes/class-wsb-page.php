@@ -139,7 +139,7 @@ abstract class WSB_Page {
 	 *
 	 * @return string
 	 */
-	protected function render_simple_shortcode( $name, $attrs = [], $content = null ) {
+	protected function render_simple_shortcode( $name, $attrs = array(), $content = null ) {
 		return '';
 	}
 

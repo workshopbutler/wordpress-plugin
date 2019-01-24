@@ -30,7 +30,7 @@ class WSB_Testimonial extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public function render_testimonials( $attrs = [], $content = null ) {
+	public function render_testimonials( $attrs = array(), $content = null ) {
 		if ( empty( $attrs['trainer_id'] ) ) {
 			return $this->render_builtin_testimonials( $content );
 		} else {
@@ -104,7 +104,7 @@ class WSB_Testimonial extends WSB_Page {
 	 *
 	 * @return bool|string
 	 */
-	protected function render_simple_shortcode( $name, $attrs = [], $content = null ) {
+	protected function render_simple_shortcode( $name, $attrs = array(), $content = null ) {
 		$testimonial = $this->dict->get_testimonial();
 		if ( is_null( $testimonial ) ) {
 			return '';
@@ -126,7 +126,7 @@ class WSB_Testimonial extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public function render_testimonial( $attrs = [], $content = null ) {
+	public function render_testimonial( $attrs = array(), $content = null ) {
 		$trainer = $this->dict->get_trainer();
 		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
@@ -156,7 +156,7 @@ class WSB_Testimonial extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public static function testimonials( $attrs = [], $content = null ) {
+	public static function testimonials( $attrs = array(), $content = null ) {
 		$page = new WSB_Testimonial();
 		return $page->render_testimonials( $attrs, $content );
 	}
@@ -170,7 +170,7 @@ class WSB_Testimonial extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public static function testimonial( $attrs = [], $content = null ) {
+	public static function testimonial( $attrs = array(), $content = null ) {
 		$page = new WSB_Testimonial();
 		return $page->render_testimonial( $attrs, $content );
 	}

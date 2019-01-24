@@ -52,7 +52,7 @@ class WSB_Event extends WSB_Page {
 	 *
 	 * @return bool|string
 	 */
-	protected function render_simple_shortcode( $name, $attrs = [], $content = null ) {
+	protected function render_simple_shortcode( $name, $attrs = array(), $content = null ) {
 		$event = $this->dict->get_event();
 		if ( ! is_a( $event, 'WorkshopButler\Event' ) ) {
 			return '';

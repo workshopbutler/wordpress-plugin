@@ -146,7 +146,7 @@ class Sidebar_Widget extends \WP_Widget {
 	 */
 	private function init_fields() {
 		if ( ! is_array( $this->fields ) ) {
-			$this->fields = [];
+			$this->fields = array();
 		}
 		$this->fields['title']  = new Sidebar_Field( 'text', 'Title', '' );
 		$this->fields['length'] = new Sidebar_Field( 'number', 'Number of events', 3 );

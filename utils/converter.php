@@ -101,7 +101,7 @@ function replace_tokens( $value ) {
  * @return string
  */
 function replace_matches( $pattern, $value ) {
-	$matches = [];
+	$matches = array();
 	preg_match( $pattern, $value, $matches );
 	if ( is_array( $matches ) && count( $matches ) > 1 ) {
 		$value = str_replace( $matches[1], '%s', $value );

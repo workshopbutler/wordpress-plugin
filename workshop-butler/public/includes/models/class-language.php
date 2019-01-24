@@ -43,7 +43,7 @@ class Language {
 	 * @param string|null $materials Materials' language.
 	 */
 	public function __construct( $spoken, $materials ) {
-		$this->spoken = [];
+		$this->spoken = array();
 		foreach ( $spoken as $lang ) {
 			array_push( $this->spoken, get_lang_code( $lang ) );
 		}

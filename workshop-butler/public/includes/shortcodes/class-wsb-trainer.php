@@ -29,7 +29,7 @@ class WSB_Trainer extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public function render_badges( $attrs = [] ) {
+	public function render_badges( $attrs = array() ) {
 		$trainer = $this->dict->get_trainer();
 		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
@@ -52,7 +52,7 @@ class WSB_Trainer extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public function render_events( $attrs = [] ) {
+	public function render_events( $attrs = array() ) {
 		$default_attrs = array( 'future' => true );
 		$attrs         = shortcode_atts( $default_attrs, $attrs );
 
@@ -82,7 +82,7 @@ EOD;
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public function render_statistics( $attrs = [] ) {
+	public function render_statistics( $attrs = array() ) {
 		$default_attrs = array(
 			'type'         => 'years',
 			'show_if_zero' => false,
@@ -110,7 +110,7 @@ EOD;
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public function render_social_link( $attrs = [] ) {
+	public function render_social_link( $attrs = array() ) {
 		$default_attrs = array( 'type' => 'twitter' );
 		$attrs         = shortcode_atts( $default_attrs, $attrs );
 
@@ -298,7 +298,7 @@ EOD;
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public static function events( $attrs = [], $content = null ) {
+	public static function events( $attrs = array(), $content = null ) {
 		$page = new WSB_Trainer();
 		return $page->render_events( $attrs );
 	}
@@ -311,7 +311,7 @@ EOD;
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public static function statistics( $attrs = [], $content = null ) {
+	public static function statistics( $attrs = array(), $content = null ) {
 		$page = new WSB_Trainer();
 		return $page->render_statistics( $attrs );
 	}
@@ -324,7 +324,7 @@ EOD;
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public static function social_link( $attrs = [], $content = null ) {
+	public static function social_link( $attrs = array(), $content = null ) {
 		$page = new WSB_Trainer();
 		return $page->render_social_link( $attrs );
 	}

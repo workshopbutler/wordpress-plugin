@@ -199,7 +199,7 @@ class Trainer {
 		}
 
 		$this->country_code = $this->get_country_code( $json_data );
-		$this->languages    = [];
+		$this->languages    = array();
 		if ( $json_data->languages && is_array( $json_data->languages ) ) {
 			foreach ( $json_data->languages as $lang ) {
 				array_push( $this->languages, get_lang_code( $lang ) );
@@ -224,7 +224,7 @@ class Trainer {
 	 * @return string[]
 	 */
 	public function name_of_badges() {
-		$names = [];
+		$names = array();
 		foreach ( $this->badges as $badge ) {
 			array_push( $names, $badge->name );
 		}

@@ -51,7 +51,7 @@ class Event_Filters extends List_Filters {
 			case 'type':
 				return $this->get_type_filter_data( __( 'filter.types', 'wsbintegration' ), $this->objects );
 			default:
-				return [];
+				return array();
 		}
 	}
 
@@ -64,7 +64,7 @@ class Event_Filters extends List_Filters {
 	 * @return Filter_Value[]
 	 */
 	private function get_language_filter_data( $default_name, $events ) {
-		$languages = [];
+		$languages = array();
 		foreach ( $events as $event ) {
 			$event_languages = $event->language->spoken;
 			foreach ( $event_languages as $language ) {
@@ -85,7 +85,7 @@ class Event_Filters extends List_Filters {
 	 * @return Filter_Value[]
 	 */
 	private function get_location_filter_data( $default_name, $events ) {
-		$values = [];
+		$values = array();
 		foreach ( $events as $event ) {
 			$country_name = __( 'country.' . $event->location->country_code, 'wsbintegration' );
 			$value        = new Filter_Value( $country_name, $event->location->country_code );
@@ -104,7 +104,7 @@ class Event_Filters extends List_Filters {
 	 * @return Filter_Value[]
 	 */
 	private function get_trainer_filter_data( $default_name, $events ) {
-		$values = [];
+		$values = array();
 		foreach ( $events as $event ) {
 			foreach ( $event->trainers as $trainer ) {
 				$value = new Filter_Value( $trainer->full_name(), $trainer->full_name() );
@@ -123,7 +123,7 @@ class Event_Filters extends List_Filters {
 	 * @return Filter_Value[]
 	 */
 	private function get_type_filter_data( $default_name, $events ) {
-		$values = [];
+		$values = array();
 		foreach ( $events as $event ) {
 			$value = new Filter_Value( $event->type->name, $event->type->id );
 			array_push( $values, $value );

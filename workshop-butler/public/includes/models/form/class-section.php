@@ -49,11 +49,11 @@ class Section {
 	 */
 	public function __construct( $name, $json_data, $event ) {
 		$this->name = $name;
-		$fields     = [];
+		$fields     = array();
 		foreach ( $json_data as $field_data ) {
 			array_push( $fields, self::create_any_field( $field_data, $event ) );
 		}
-		$this->fields = [];
+		$this->fields = array();
 		foreach ( $fields as $field ) {
 			if ( is_null( $field ) ) {
 				continue;

@@ -54,7 +54,7 @@ abstract class List_Filters {
 	 * @return Filter[]
 	 */
 	public function get_filters() {
-		$filters = [];
+		$filters = array();
 		foreach ( $this->filters as $filter_name ) {
 			$values = $this->get_filter_values( $filter_name );
 			if ( count( $values ) > 0 ) {
@@ -81,7 +81,7 @@ abstract class List_Filters {
 		);
 		$filtered = array_unique( $filtered );
 		if ( 0 === count( $filtered ) ) {
-			return [];
+			return array();
 		}
 		usort(
 			$filtered,

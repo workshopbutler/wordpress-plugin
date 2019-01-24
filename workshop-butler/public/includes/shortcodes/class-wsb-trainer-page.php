@@ -60,7 +60,7 @@ class WSB_Trainer_Page extends WSB_Page {
 	 *
 	 * @return string
 	 */
-	public function render( $attrs = [], $content = null ) {
+	public function render( $attrs = array(), $content = null ) {
 		if ( empty( $_GET['id'] ) ) {
 			return $this->format_error( 'empty trainer ID' );
 		}
@@ -120,7 +120,7 @@ class WSB_Trainer_Page extends WSB_Page {
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public static function page( $attrs = [], $content = null ) {
+	public static function page( $attrs = array(), $content = null ) {
 		$page = new WSB_Trainer_Page();
 
 		return $page->render( $attrs, $content );
@@ -135,7 +135,7 @@ class WSB_Trainer_Page extends WSB_Page {
 	 *
 	 * @return string
 	 */
-	protected function render_simple_shortcode( $name, $attrs = [], $content = null ) {
+	protected function render_simple_shortcode( $name, $attrs = array(), $content = null ) {
 		$trainer = $this->dict->get_trainer();
 		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
