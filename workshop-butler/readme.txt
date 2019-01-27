@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.1.3 =
+* Fixes another PHP 5.3 related bug
+
 = 2.1.2 =
 * Fixes a support for PHP 5.3
 * Fixes a date/time formatting for one-day workshop

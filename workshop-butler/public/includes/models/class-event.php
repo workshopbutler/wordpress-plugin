@@ -285,7 +285,7 @@ class Event {
 				$paid_ticket_types
 			);
 			return $free ?
-				new Tickets( [], new Free_Ticket_Type( $free_ticket_type ) ) :
+				new Tickets( array(), new Free_Ticket_Type( $free_ticket_type ) ) :
 				new Tickets( $paid_tickets, null );
 		} else {
 			return null;
