@@ -190,13 +190,18 @@ class WSB_Schedule_Page extends WSB_Page {
 	protected function get_default_attrs( $shortcode_name ) {
 		switch ( $shortcode_name ) {
 			case 'item':
-				return array( 'cols' => 'schedule,location,title,register' );
+				return array(
+					'cols'         => 'schedule,location,title,register',
+					'trainer_name' => 'true',
+				);
 			case 'filters':
 				return array( 'filters' => 'location,trainer,language,type' );
 			case 'register':
 				return array( 'registration' => 'false' );
 			case 'table_register':
 				return array( 'registration' => 'false' );
+			case 'trainers':
+				return array( 'name' => 'true' );
 			default:
 				return array();
 		}

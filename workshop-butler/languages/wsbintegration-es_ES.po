@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-09-30T09:52:17.995Z\n"
-"PO-Revision-Date: 2018-09-30T09:52:17.995Z\n"
+"POT-Creation-Date: 2019-02-07T10:10:14.908Z\n"
+"PO-Revision-Date: 2019-02-07T10:10:14.908Z\n"
 "Language: es\n"
 
 msgid "filter.locations"
@@ -820,7 +820,7 @@ msgid "language.NL"
 msgstr "Holandés"
 
 msgid "language.EN"
-msgstr "Español"
+msgstr "Inglés"
 
 msgid "language.FI"
 msgstr "Finlandés"
@@ -908,6 +908,9 @@ msgstr "Dónde"
 
 msgid "schedule.what"
 msgstr "Qué"
+
+msgid "schedule.who"
+msgstr "Quien"
 
 msgid "schedule.event.register"
 msgstr "Registrarse"
