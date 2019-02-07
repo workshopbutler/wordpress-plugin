@@ -68,6 +68,12 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.2.0 =
+* Radically improves mobile templates
+* Adds Trainer column to a Table layout of Schedule
+* Fixes a bug with timezone when workshop dates were different from the ones set by trainers
+* Fixes a Spanish translation
+
 = 2.1.3 =
 * Fixes another PHP 5.3 related bug
 
