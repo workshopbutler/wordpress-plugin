@@ -31,16 +31,10 @@ before_script:
     else
       composer global require "phpunit/phpunit=4.8.*"
     fi
-  - cd workshop-butler
-  - ls -la /home/travis/.local/share/composer
-  - composer config -l
-  - phpunit --version
-  - whereis phpunit
   - composer global require squizlabs/php_codesniffer
-  - pwd
-  - ls -la
   - composer global require wp-coding-standards/wpcs
-  - ~/.config/composer/vendor/bin/phpcs --config-set installed_paths $HOME/.config/composer/vendor/wp-coding-standards/wpcs
+  - ls -la $HOME/.config/composer/vendor/wp-coding-standards/k
+  - phpcs --config-set installed_paths $HOME/.config/composer/vendor/wp-coding-standards/wpcs
 
 script:
   - phpcs --standard=phpcs.ruleset.xml $(find . -name '*.php')
