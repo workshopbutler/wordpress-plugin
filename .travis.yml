@@ -32,8 +32,10 @@ before_script:
       composer global require "phpunit/phpunit=4.8.*"
     fi
   - cd workshop-butler
+  - ls -la /home/travis/.local/share/composer
   - composer config -l
   - phpunit --version
+  - whereis phpunit
   - composer global require squizlabs/php_codesniffer
   - pwd
   - ls -la
