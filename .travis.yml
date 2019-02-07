@@ -33,7 +33,7 @@ before_script:
     fi
   - composer global require squizlabs/php_codesniffer
   - composer global require wp-coding-standards/wpcs
-  - ls -la $HOME/.config/composer/vendor/wp-coding-standards/k
+  - ls -la $HOME/.config/composer/vendor/wp-coding-standards/
   - phpcs --config-set installed_paths $HOME/.config/composer/vendor/wp-coding-standards/wpcs
 
 script:
