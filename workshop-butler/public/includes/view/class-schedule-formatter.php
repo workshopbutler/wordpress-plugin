@@ -43,7 +43,11 @@ class Schedule_Formatter {
 			case 'timezone_long':
 				return $schedule->timezone ? $schedule->timezone : '';
 			case 'timezone_short':
-				return $schedule->timezone ? $schedule->start->format( 'T' ) : '';
+				$start = clone $schedule->start;
+				if ( $schedule->timezone ) {
+					$start->setTimezone( $schedule->default_timezone() );
+				}
+				return $schedule->timezone ? $start->format( 'T' ) : '';
 			case 'full_short':
 				return self::format_full_date( $schedule, false );
 			case 'full_long':
@@ -73,7 +77,7 @@ class Schedule_Formatter {
 				return Date_Formatter::format( $schedule->start );
 			}
 		} elseif ( $schedule->start->format( 'Y' ) !== $schedule->end->format( 'Y' )
-			&& $schedule->start->format( 'm' ) !== $schedule->end->format( 'm' ) ) {
+			|| $schedule->start->format( 'm' ) !== $schedule->end->format( 'm' ) ) {
 			return Date_Formatter::format( $schedule->start ) . ' — ' . Date_Formatter::format( $schedule->end );
 		} else {
 			return self::format_same_month_interval( $schedule->start, $schedule->end );

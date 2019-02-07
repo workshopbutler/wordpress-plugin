@@ -4,7 +4,5 @@
      data-trainer-rating={{ trainer.public_stats.rating }}
      data-trainer-badge="{{ trainer.name_of_badges |join(',') }}"
      data-trainer-trainer="{{ trainer.full_name }}">
-    <div class="wsb-trainer-tile__box">
-        {{ content | raw }}
-    </div>
+    {{ content | raw }}
 </div>

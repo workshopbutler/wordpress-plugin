@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-09-30T09:52:18.813Z\n"
-"PO-Revision-Date: 2018-09-30T09:52:18.813Z\n"
+"POT-Creation-Date: 2019-02-07T10:10:15.822Z\n"
+"PO-Revision-Date: 2019-02-07T10:10:15.822Z\n"
 "Language: nl\n"
 
 msgid "filter.locations"
@@ -908,6 +908,9 @@ msgstr "Waar"
 
 msgid "schedule.what"
 msgstr "Wat"
+
+msgid "schedule.who"
+msgstr "Wie"
 
 msgid "schedule.event.register"
 msgstr "Registreren"

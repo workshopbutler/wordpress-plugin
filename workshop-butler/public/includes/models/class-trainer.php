@@ -193,7 +193,7 @@ class Trainer {
 		$this->testimonials         = $json_data->endorsements;
 
 		if ( $trainer_url ) {
-			$this->url = $trainer_url . '?id=' . $this->id;
+			$this->url = $this->get_trainer_url( $trainer_url );
 		} else {
 			$this->url = null;
 		}
@@ -205,6 +205,17 @@ class Trainer {
 				array_push( $this->languages, get_lang_code( $lang ) );
 			}
 		}
+	}
+
+	/**
+	 * Returns the URL to a trainer profile
+	 *
+	 * @since 2.2.0
+	 * @param string $base_url URL of the page containing TrainerProfile widget.
+	 * @return string
+	 */
+	protected function get_trainer_url( $base_url ) {
+		return $base_url . '?id=' . $this->id . '&full_name=' . $this->full_name();
 	}
 
 	/**

@@ -274,7 +274,7 @@
         "CS": "Checo",
         "DA": "Danés",
         "NL": "Holandés",
-        "EN": "Español",
+        "EN": "Inglés",
         "FI": "Finlandés",
         "FR": "Francés",
         "DE": "Alemán",
@@ -308,6 +308,7 @@
         "when": "Cuando",
         "where": "Dónde",
         "what": "Qué",
+        "who": "Quien",
         "event": {
             "register": "Registrarse",
             "soldOut": "Agotado",

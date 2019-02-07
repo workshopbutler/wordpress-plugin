@@ -49,8 +49,8 @@ class Schedule {
 		} else {
 			$this->timezone = null;
 		}
-		$this->start = new \DateTime( $json_data->start, $this->default_timezone() );
-		$this->end   = new \DateTime( $json_data->end, $this->default_timezone() );
+		$this->start = new \DateTime( $json_data->start );
+		$this->end   = new \DateTime( $json_data->end );
 	}
 
 	/**
@@ -60,7 +60,9 @@ class Schedule {
 	 */
 	public function ended() {
 		$now = new \DateTime( 'now', $this->default_timezone() );
-		return $this->end < $now;
+		$end = clone $this->end;
+		$end->setTimezone( $this->default_timezone() );
+		return $end < $now;
 	}
 
 	/**
@@ -79,7 +81,7 @@ class Schedule {
 	 * @return boolean
 	 */
 	public function at_one_day() {
-		return $this->start->format( 'yyyy-MM-dd' ) === $this->end->format( 'yyyy-MM-dd' );
+		return $this->start->format( 'y-M-d' ) === $this->end->format( 'y-M-d' );
 	}
 
 }
