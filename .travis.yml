@@ -31,7 +31,7 @@ before_script:
     else
       composer global require "phpunit/phpunit=4.8.*"
     fi
-  - ls -la $HOME/.composer/vendor
+  - composer config -l
   - phpunit --version
   - composer global require squizlabs/php_codesniffer
   - pwd
