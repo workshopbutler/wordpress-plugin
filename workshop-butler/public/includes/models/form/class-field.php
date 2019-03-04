@@ -54,7 +54,7 @@ class Field {
 	 * True if the field is required
 	 *
 	 * @var boolean $required
-	 * @since 2.0.1
+	 * @since 2.2.1
 	 */
 	public $custom;
 
