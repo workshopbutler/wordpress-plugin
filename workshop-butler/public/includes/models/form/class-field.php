@@ -51,6 +51,15 @@ class Field {
 	public $required;
 
 	/**
+	 * True if the field is required
+	 *
+	 * @var boolean $required
+	 * @since 2.0.1
+	 */
+	public $custom;
+
+
+	/**
 	 * Field constructor
 	 *
 	 * @param object $json_data JSON field data.
@@ -60,5 +69,14 @@ class Field {
 		$this->name     = $json_data->name;
 		$this->label    = $json_data->label;
 		$this->required = $json_data->required;
+		// the only way to determine if the field is a custom one
+		// is to check its name which should be only contain some numbers
+		// and letters.
+		if ( preg_match( '/[0-9a-f]{8}/', $this->name ) ) {
+			$this->custom = true;
+		} else {
+			$this->custom = false;
+		}
+
 	}
 }
