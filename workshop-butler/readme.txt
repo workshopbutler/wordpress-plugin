@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.2.1 =
+* Fixes the rendering of [custom fields](https://support.workshopbutler.com/article/46-how-to-add-a-new-custom-field). Before labels for custom fields were not shown
+
 = 2.2.0 =
 * Radically improves mobile templates
 * Adds Trainer column to a Table layout of Schedule

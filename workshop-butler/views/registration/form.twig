@@ -23,7 +23,11 @@
                     As a result, our translation files contain several keys not in line with Workshop Butler backend.
                     To make the translation work, we need to convert the keys again.
                 #}
-                {% set label = wsb_t("form.field.#{field.name}" | replace({'street_1': 'street_first', 'street_2': 'street_second'})) %}
+                {% if field.custom %}
+                    {% set label = field.label %}
+                {% else %}
+                    {% set label = wsb_t("form.field.#{field.name}" | replace({'street_1': 'street_first', 'street_2': 'street_second'})) %}
+                {% endif %}
                 <div class="wsb-form__field {{ field.type }}">
                     {% if field.type is not same as("checkbox") %}
                         <label for="{{ field.name }}">
