@@ -2,7 +2,7 @@
 Contributors: workshopbutlers
 Tags: event management, training management, event schedule, workshop crm, online registrations
 Requires at least: 4.6
-Tested up to: 5.0.0
+Tested up to: 5.1.0
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.2.2 =
+* Fixes a bug preventing attendee registration when billing and/or work addresses are set as required
+
 = 2.2.1 =
 * Fixes the rendering of [custom fields](https://support.workshopbutler.com/article/46-how-to-add-a-new-custom-field). Before labels for custom fields were not shown
 
