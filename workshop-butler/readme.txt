@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.2.3 =
+* Fixes an incorrect array initialisation for PHP version < 5
+
 = 2.2.2 =
 * Fixes a bug preventing attendee registration when billing and/or work addresses are set as required
 

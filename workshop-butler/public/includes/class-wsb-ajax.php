@@ -89,7 +89,7 @@ class WSB_Ajax {
 	 * @return array
 	 */
 	protected static function replace_changed_keys( $raw_data ) {
-		$form_data = [];
+		$form_data = array();
 		foreach ( $raw_data as $key => $value ) {
 			if ( strpos( $key, 'work_' ) === 0 ) {
 				$updated_key               = str_replace( 'work_', 'work.', $key );
