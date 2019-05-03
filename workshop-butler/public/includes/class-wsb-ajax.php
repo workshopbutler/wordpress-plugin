@@ -51,7 +51,6 @@ class WSB_Ajax {
 					break;
 				default:
 					die();
-					break;
 			}
 			$requests = new Embed_Event_List();
 			echo $requests->render( $method, $query );
