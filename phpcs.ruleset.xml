@@ -13,4 +13,5 @@
     <exclude-pattern>workshop-butler/views/*</exclude-pattern>
     <exclude-pattern>workshop-butler/lib/*</exclude-pattern>
     <exclude-pattern>**/index.php</exclude-pattern>
+	<exclude-pattern>tests/*</exclude-pattern>
 </ruleset>

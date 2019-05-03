@@ -12,25 +12,32 @@ branches:
     - master
 
 php:
-  - 5.6
-  - 7.0
+  - '5.6'
+  - '7.0'
+  - '7.1'
+  - '7.2'
+  - '7.3'
 
 env:
   - WP_VERSION=latest WP_MULTISITE=0
 
 matrix:
   include:
-    - php: 5.6
+    - php: '5.6'
       env: WP_VERSION=latest WP_MULTISITE=1
 
 before_script:
   - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
   - export PATH="$HOME/.config/composer/vendor/bin:$PATH"
   - |
-    if [[ ${TRAVIS_PHP_VERSION:0:2} == "7." ]]; then
-      composer global require "phpunit/phpunit=5.7.*"
+    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
+      composer global require "phpunit/phpunit ^7"
+    elif [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then
+      composer global require "phpunit/phpunit ^6"
+    elif [[ ${TRAVIS_PHP_VERSION:0:3} == "5.6" ]]; then
+      composer global require "phpunit/phpunit ^5"
     else
-      composer global require "phpunit/phpunit=4.8.*"
+      composer global require "phpunit/phpunit ^8"
     fi
   - composer global require "squizlabs/php_codesniffer=*"
   - composer global require wp-coding-standards/wpcs
@@ -38,3 +45,4 @@ before_script:
 
 script:
   - phpcs --standard=phpcs.ruleset.xml $(find . -name '*.php')
+  - phpunit

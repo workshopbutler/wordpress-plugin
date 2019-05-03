@@ -51,7 +51,6 @@ class WSB_Ajax {
 					break;
 				default:
 					die();
-					break;
 			}
 			$requests = new Embed_Event_List();
 			echo $requests->render( $method, $query );
@@ -68,7 +67,7 @@ class WSB_Ajax {
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			check_ajax_referer( 'wsb-nonce' );
 
-			$form_data = $_POST;
+			$form_data = self::replace_changed_keys( $_POST );
 			unset( $form_data['action'] );
 			unset( $form_data['_ajax_nonce'] );
 
@@ -78,5 +77,31 @@ class WSB_Ajax {
 		} else {
 			exit();
 		}
+	}
+
+	/**
+	 * Corrects form keys
+	 *
+	 * By some reason, WordPress replaces '.' in keys to '_'. We have to replace it back.
+	 *
+	 * @param array $raw_data Raw form data.
+	 * @return array
+	 */
+	protected static function replace_changed_keys( $raw_data ) {
+		$form_data = array();
+		foreach ( $raw_data as $key => $value ) {
+			if ( strpos( $key, 'work_' ) === 0 ) {
+				$updated_key               = str_replace( 'work_', 'work.', $key );
+				$form_data[ $updated_key ] = $value;
+				continue;
+			}
+			if ( strpos( $key, 'billing_' ) === 0 ) {
+				$updated_key               = str_replace( 'billing_', 'billing.', $key );
+				$form_data[ $updated_key ] = $value;
+				continue;
+			}
+			$form_data[ $key ] = $value;
+		}
+		return $form_data;
 	}
 }

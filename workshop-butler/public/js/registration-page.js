@@ -36,7 +36,7 @@ function register_attendee(e) {
             $form.hide();
             $form.removeClass('.h-busy');
         }).fail(function(jqXHR) {
-            var message = (jqXHR.responseJSON && jqXHR.responseJSON.message) ?
+            let message = (jqXHR.responseJSON && jqXHR.responseJSON.message) ?
                 jqXHR.responseJSON.message :
                 'Unknown server error';
             message += ' <br> Something is wrong. This error should not happen. Check console logs or ask a support team for help';
