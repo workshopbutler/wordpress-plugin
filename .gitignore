@@ -7,4 +7,6 @@ wordpress-integration.iml
 workshop-butler/vendor/bin/
 utils/converted/*.json
 workshop-butler/composer.lock
+.composer.json
+.composer.lock
 TODO

@@ -122,11 +122,13 @@ function replace_matches( $pattern, $value ) {
 function convert_files( $src_dir_name, $converted_dir_name ) {
 	$dir = dir( $src_dir_name );
 	if ( $dir ) {
-		while ( false !== ( $entry = $dir->read() ) ) {
+		$entry = $dir->read();
+		while ( false !== $entry ) {
 			$path = $src_dir_name . '/' . $entry;
 			if ( is_file( $path ) ) {
 				convert_file( $path, $converted_dir_name );
 			}
+			$entry = $dir->read();
 		}
 		print "All files were converted\n";
 	} else {
@@ -142,10 +144,12 @@ function convert_files( $src_dir_name, $converted_dir_name ) {
 function clean_converted_dir( $dir_name ) {
 	$dir = dir( $dir_name );
 	if ( $dir ) {
-		while ( false !== ( $entry = $dir->read() ) ) {
+		$entry = $dir->read();
+		while ( false !== $entry ) {
 			if ( is_file( $entry ) ) {
 				unlink( $entry );
 			}
+			$entry = $dir->read();
 		}
 		print "Old converted files were removed\n";
 	} else {
