@@ -57,9 +57,9 @@ class WSB_Registration_Page extends WSB_Page {
 	 * @param array  $attrs   Shortcode attributes.
 	 * @param string $content Shortcode content.
 	 *
+	 * @return string
 	 * @since  2.0.0
 	 *
-	 * @return string
 	 */
 	public function render( $attrs = array(), $content = null ) {
 		if ( empty( $_GET['id'] ) ) {
@@ -384,7 +384,7 @@ class WSB_Registration_Page extends WSB_Page {
 		foreach ( $codes as $code ) {
 			$countries[ $code ] = __( 'country.' . $code, 'wsbintegration' );
 		}
-		sort( $countries );
+		asort( $countries );
 		return $countries;
 	}
 
@@ -396,8 +396,8 @@ class WSB_Registration_Page extends WSB_Page {
 	 * @param array       $attrs   Attributes.
 	 * @param null|string $content Replaceable content.
 	 *
-	 * @since 2.0.0
 	 * @return string
+	 * @since 2.0.0
 	 */
 	protected function render_simple_shortcode( $name, $attrs = array(), $content = null ) {
 		$event = $this->dict->get_event();
@@ -419,9 +419,9 @@ class WSB_Registration_Page extends WSB_Page {
 	 * @param array  $attrs   Shortcode attributes.
 	 * @param string $content Shortcode content.
 	 *
+	 * @return string
 	 * @since  2.0.0
 	 *
-	 * @return string
 	 */
 	public static function page( $attrs = array(), $content = null ) {
 		$page = new WSB_Registration_Page();

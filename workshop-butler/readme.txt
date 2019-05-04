@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.2.4 =
+* Fixes a bug with an incorrect country code sent to Workshop Butler. As a result, the countries of attendees were not saved correctly
+
 = 2.2.3 =
 * Fixes an incorrect array initialisation for PHP version < 5
 
