@@ -59,7 +59,6 @@ class WSB_Registration_Page extends WSB_Page {
 	 *
 	 * @return string
 	 * @since  2.0.0
-	 *
 	 */
 	public function render( $attrs = array(), $content = null ) {
 		if ( empty( $_GET['id'] ) ) {
@@ -421,7 +420,6 @@ class WSB_Registration_Page extends WSB_Page {
 	 *
 	 * @return string
 	 * @since  2.0.0
-	 *
 	 */
 	public static function page( $attrs = array(), $content = null ) {
 		$page = new WSB_Registration_Page();
