@@ -7,8 +7,8 @@ if ! [ -x "$(command -v i18next-conv)" ]; then
 fi
 
 php converter.php
-locales=(en de es fr nl pt)
-suffixes=(US DE ES FR NL PT)
+locales=(en de es fr nl nn nb pt)
+suffixes=(US DE ES FR NL NO NO PT)
 for index in ${!locales[*]}
 do
   locale=${locales[$index]}

@@ -50,7 +50,7 @@ You can change them later.
 
 == Languages ==
 
-The public pages are available in English, Spanish, French, German, Portuguese, and Dutch.
+The public pages are available in English, Spanish, French, German, Portuguese, Dutch and Norwegian.
 The administration panel is available only in English.
 
 == Frequently Asked Questions ==
@@ -68,6 +68,11 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.3.0 =
+* Adds support for Norwegian language
+* Fixes the rendering of italic, bold, <sub> and <sup> text
+* G+ is removed from social sharing
+
 = 2.2.4 =
 * Fixes a bug with an incorrect country code sent to Workshop Butler. As a result, the countries of attendees were not saved correctly
 

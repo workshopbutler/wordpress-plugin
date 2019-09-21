@@ -5,42 +5,42 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-09-21T17:45:17.316Z\n"
-"PO-Revision-Date: 2019-09-21T17:45:17.316Z\n"
-"Language: de\n"
+"POT-Creation-Date: 2019-09-21T15:56:55.051Z\n"
+"PO-Revision-Date: 2019-09-21T15:56:55.051Z\n"
+"Language: no\n"
 
 msgid "filter.categories"
-msgstr "Alle Kategorien"
+msgstr "Alle kategorier"
 
 msgid "filter.locations"
-msgstr "Alle Standorte"
+msgstr "Alle steder"
 
 msgid "filter.languages"
-msgstr "Alle Sprachen"
+msgstr "Alle språk"
 
 msgid "filter.types"
-msgstr "Alle Arten"
+msgstr "Alle typer"
 
 msgid "filter.trainers"
-msgstr "Alle Trainer"
+msgstr "Alle trenere"
 
 msgid "filter.rating"
-msgstr "Alle Bewertungen"
+msgstr "Alle evalueringer"
 
 msgid "filter.badge"
-msgstr "Alle Abzeichen"
+msgstr "Alle merker"
 
 msgid "country.AF"
 msgstr "Afghanistan"
 
 msgid "country.AL"
-msgstr "Albanien"
+msgstr "Albania"
 
 msgid "country.DZ"
-msgstr "Algerien"
+msgstr "Algerie"
 
 msgid "country.AS"
-msgstr "Amerikanisch-Samoa"
+msgstr "Amerikansk Samoa"
 
 msgid "country.AD"
 msgstr "Andorra"
@@ -55,28 +55,28 @@ msgid "country.AQ"
 msgstr "Antarktis"
 
 msgid "country.AG"
-msgstr "Antigua und Barbuda"
+msgstr "Antigua og Barbuda"
 
 msgid "country.AR"
-msgstr "Argentinien"
+msgstr "Argentina"
 
 msgid "country.AM"
-msgstr "Armenien"
+msgstr "Armenia"
 
 msgid "country.AW"
 msgstr "Aruba"
 
-msgid "country.AC"
-msgstr "Ascension Island"
-
 msgid "country.AU"
-msgstr "Australien"
+msgstr "Australia"
 
 msgid "country.AT"
-msgstr "Österreich"
+msgstr "Østerrike"
 
 msgid "country.AZ"
-msgstr "Aserbaidschan"
+msgstr "Aserbajdsjan"
+
+msgid "country.AX"
+msgstr "Ålandsøyene"
 
 msgid "country.BS"
 msgstr "Bahamas"
@@ -85,19 +85,19 @@ msgid "country.BH"
 msgstr "Bahrain"
 
 msgid "country.BD"
-msgstr "Bangladesch"
+msgstr "Bangladesh"
 
 msgid "country.BB"
 msgstr "Barbados"
 
 msgid "country.BY"
-msgstr "Weißrussland"
-
-msgid "country.BE"
-msgstr "Belgien"
+msgstr "Hviterussland"
 
 msgid "country.BZ"
 msgstr "Belize"
+
+msgid "country.BE"
+msgstr "Belgia"
 
 msgid "country.BJ"
 msgstr "Benin"
@@ -108,35 +108,29 @@ msgstr "Bermuda"
 msgid "country.BT"
 msgstr "Bhutan"
 
-msgid "country.BO"
-msgstr "Bolivien"
-
-msgid "country.BQ"
-msgstr "Bonaire, Saint Eustatius und Saba"
-
 msgid "country.BA"
-msgstr "Bosnien und Herzegowina"
+msgstr "Bosnia-Hercegovina"
 
 msgid "country.BW"
 msgstr "Botswana"
+
+msgid "country.BN"
+msgstr "Brunei Darussalam"
+
+msgid "country.BO"
+msgstr "Bolivia"
+
+msgid "country.BQ"
+msgstr "Bonaire, Sint Eustatius og Saba"
 
 msgid "country.BV"
 msgstr "Bouvet Island"
 
 msgid "country.BR"
-msgstr "Brasilien"
-
-msgid "country.IO"
-msgstr "Britisches Territorium im Indischen Ozean"
-
-msgid "country.VG"
-msgstr "Britische Jungferninseln"
-
-msgid "country.BN"
-msgstr "Brunei"
+msgstr "Brasil"
 
 msgid "country.BG"
-msgstr "Bulgarien"
+msgstr "Bulgaria"
 
 msgid "country.BF"
 msgstr "Burkina Faso"
@@ -144,158 +138,137 @@ msgstr "Burkina Faso"
 msgid "country.BI"
 msgstr "Burundi"
 
-msgid "country.KH"
-msgstr "Kambodscha"
+msgid "country.CV"
+msgstr "Cabo Verde"
 
 msgid "country.CM"
 msgstr "Kamerun"
 
 msgid "country.CA"
-msgstr "Kanada"
-
-msgid "country.IC"
-msgstr "Kanarische Inseln"
-
-msgid "country.CT"
-msgstr "Kanton und Enderbury Inseln"
-
-msgid "country.CV"
-msgstr "Kap Verde"
-
-msgid "country.KY"
-msgstr "Cayman-Inseln"
+msgstr "Canada"
 
 msgid "country.CF"
-msgstr "Zentralafrikanische Republik"
-
-msgid "country.EA"
-msgstr "Ceuta und Melilla"
+msgstr "Den sentralafrikanske republikk"
 
 msgid "country.TD"
-msgstr "Tschad"
+msgstr "Tsjad"
 
 msgid "country.CL"
 msgstr "Chile"
 
 msgid "country.CN"
-msgstr "China"
+msgstr "Kina"
 
 msgid "country.CX"
-msgstr "Weihnachtsinsel"
-
-msgid "country.CP"
-msgstr "Clipperton Island"
+msgstr "Juleøya"
 
 msgid "country.CC"
-msgstr "Cocos [Keeling] Inseln"
-
-msgid "country.CO"
-msgstr "Kolumbien"
-
-msgid "country.KM"
-msgstr "Komoren"
-
-msgid "country.CG"
-msgstr "Kongo - Brazzaville"
+msgstr "Cocos (Keeling) Islands"
 
 msgid "country.CD"
-msgstr "Kongo - Kinshasa"
+msgstr "Kongo, Den demokratiske republikken"
+
+msgid "country.CG"
+msgstr "Kongo"
 
 msgid "country.CK"
-msgstr "Kochinseln"
+msgstr "Cookøyene"
+
+msgid "country.CI"
+msgstr "Elfenbenskysten"
+
+msgid "country.CO"
+msgstr "Colombia"
 
 msgid "country.CR"
 msgstr "Costa Rica"
 
 msgid "country.HR"
-msgstr "Kroatien"
+msgstr "Kroatia"
 
 msgid "country.CU"
-msgstr "Kuba"
+msgstr "Cuba"
 
 msgid "country.CW"
 msgstr "Curaçao"
 
 msgid "country.CY"
-msgstr "Zypern"
+msgstr "Kypros"
 
 msgid "country.CZ"
-msgstr "Tschechische Republik"
-
-msgid "country.CI"
-msgstr "Côte d''Ivoire"
+msgstr "Tsjekkia"
 
 msgid "country.DK"
-msgstr "Dänemark"
-
-msgid "country.DG"
-msgstr "Diego Garcia"
+msgstr "Danmark"
 
 msgid "country.DJ"
-msgstr "Dschibuti"
+msgstr "Djibouti"
 
 msgid "country.DM"
 msgstr "Dominica"
 
 msgid "country.DO"
-msgstr "Dominikanische Republik"
-
-msgid "country.NQ"
-msgstr "Dronning Maud Land"
+msgstr "Den Dominikanske republikk"
 
 msgid "country.EC"
 msgstr "Ecuador"
 
 msgid "country.EG"
-msgstr "Ägypten"
+msgstr "Egypt"
 
 msgid "country.SV"
 msgstr "El Salvador"
 
-msgid "country.GQ"
-msgstr "Äquatorialguinea"
-
 msgid "country.ER"
 msgstr "Eritrea"
+
+msgid "country.GQ"
+msgstr "Ekvatorial-Guinea"
 
 msgid "country.EE"
 msgstr "Estland"
 
 msgid "country.ET"
-msgstr "Äthiopien"
+msgstr "Etiopia"
 
 msgid "country.FK"
-msgstr "Falklandinseln"
+msgstr "Falklandsøyene (Malvinas)"
 
 msgid "country.FO"
-msgstr "Färöer-Inseln"
+msgstr "Færøyene"
 
 msgid "country.FJ"
-msgstr "Fidschi"
+msgstr "Fiji"
 
 msgid "country.FI"
-msgstr "Finnland"
+msgstr "Finland"
 
 msgid "country.FR"
-msgstr "Frankreich"
+msgstr "Frankrike"
 
 msgid "country.GF"
-msgstr "Französisch-Guayana"
+msgstr "Fransk Guyana"
 
 msgid "country.PF"
-msgstr "Französisch-Polynesien"
+msgstr "Fransk Polynesia"
 
 msgid "country.GA"
-msgstr "Gabun"
+msgstr "Gabon"
 
 msgid "country.GM"
 msgstr "Gambia"
 
+msgid "country.KH"
+msgstr "Kambodsja"
+
+msgid "country.KY"
+msgstr "Caymanøyene"
+
 msgid "country.GE"
-msgstr "Georgien"
+msgstr "Georgia"
 
 msgid "country.DE"
-msgstr "Deutschland"
+msgstr "Tyskland"
 
 msgid "country.GH"
 msgstr "Ghana"
@@ -303,11 +276,14 @@ msgstr "Ghana"
 msgid "country.GI"
 msgstr "Gibraltar"
 
+msgid "country.KM"
+msgstr "Komorene"
+
 msgid "country.GR"
-msgstr "Griechenland"
+msgstr "Hellas"
 
 msgid "country.GL"
-msgstr "Grönland"
+msgstr "Grønland"
 
 msgid "country.GD"
 msgstr "Grenada"
@@ -315,17 +291,17 @@ msgstr "Grenada"
 msgid "country.GP"
 msgstr "Guadeloupe"
 
-msgid "country.GU"
-msgstr "Guam"
-
-msgid "country.GT"
-msgstr "Guatemala"
-
 msgid "country.GG"
 msgstr "Guernsey"
 
 msgid "country.GN"
 msgstr "Guinea"
+
+msgid "country.GU"
+msgstr "Guam"
+
+msgid "country.GT"
+msgstr "Guatemala"
 
 msgid "country.GW"
 msgstr "Guinea-Bissau"
@@ -336,14 +312,11 @@ msgstr "Guyana"
 msgid "country.HT"
 msgstr "Haiti"
 
-msgid "country.HM"
-msgstr "Gehörte Insel und McDonald Inseln"
+msgid "country.HK"
+msgstr "Hong Kong"
 
 msgid "country.HN"
 msgstr "Honduras"
-
-msgid "country.HK"
-msgstr "Hongkong SAR China"
 
 msgid "country.HU"
 msgstr "Ungarn"
@@ -352,13 +325,13 @@ msgid "country.IS"
 msgstr "Island"
 
 msgid "country.IN"
-msgstr "Indien"
+msgstr "India"
 
 msgid "country.ID"
-msgstr "Indonesien"
+msgstr "Indonesia"
 
 msgid "country.IR"
-msgstr "Iran"
+msgstr "Iran, Islamiske republikk"
 
 msgid "country.IQ"
 msgstr "Irak"
@@ -366,17 +339,17 @@ msgstr "Irak"
 msgid "country.IE"
 msgstr "Irland"
 
-msgid "country.IM"
-msgstr "Isle of Man"
-
 msgid "country.IL"
 msgstr "Israel"
 
+msgid "country.IM"
+msgstr "Isle of Man"
+
 msgid "country.IT"
-msgstr "Italien"
+msgstr "Italia"
 
 msgid "country.JM"
-msgstr "Jamaika"
+msgstr "Jamaica"
 
 msgid "country.JP"
 msgstr "Japan"
@@ -384,32 +357,35 @@ msgstr "Japan"
 msgid "country.JE"
 msgstr "Jersey"
 
-msgid "country.JT"
-msgstr "Johnston Island"
-
 msgid "country.JO"
-msgstr "Jordanien"
+msgstr "Jordan"
 
 msgid "country.KZ"
-msgstr "Kasachstan"
+msgstr "Kasakhstan"
 
 msgid "country.KE"
-msgstr "Kenia"
+msgstr "Kenya"
 
 msgid "country.KI"
 msgstr "Kiribati"
 
-msgid "country.KW"
-msgstr "Kuwait"
-
 msgid "country.KG"
 msgstr "Kirgisistan"
 
+msgid "country.KP"
+msgstr "Korea, Den demokratiske folkerepublikken"
+
+msgid "country.KR"
+msgstr "Korea, republikk"
+
+msgid "country.KW"
+msgstr "Kuwait"
+
 msgid "country.LA"
-msgstr "Laos"
+msgstr "Laos folks demokratiske republikk"
 
 msgid "country.LV"
-msgstr "Lettland"
+msgstr "Latvia"
 
 msgid "country.LB"
 msgstr "Libanon"
@@ -421,7 +397,7 @@ msgid "country.LR"
 msgstr "Liberia"
 
 msgid "country.LY"
-msgstr "Libyen"
+msgstr "Libya"
 
 msgid "country.LI"
 msgstr "Liechtenstein"
@@ -430,13 +406,13 @@ msgid "country.LT"
 msgstr "Litauen"
 
 msgid "country.LU"
-msgstr "Luxemburg"
+msgstr "Luxembourg"
 
 msgid "country.MO"
-msgstr "Macau SAR China"
+msgstr "Macao"
 
 msgid "country.MK"
-msgstr "Mazedonien"
+msgstr "Makedonia"
 
 msgid "country.MG"
 msgstr "Madagaskar"
@@ -448,7 +424,7 @@ msgid "country.MY"
 msgstr "Malaysia"
 
 msgid "country.MV"
-msgstr "Malediven"
+msgstr "Maldivene"
 
 msgid "country.ML"
 msgstr "Mali"
@@ -457,13 +433,13 @@ msgid "country.MT"
 msgstr "Malta"
 
 msgid "country.MH"
-msgstr "Marshall Inseln"
+msgstr "Marshalløyene"
 
 msgid "country.MQ"
 msgstr "Martinique"
 
 msgid "country.MR"
-msgstr "Mauretanien"
+msgstr "Mauritania"
 
 msgid "country.MU"
 msgstr "Mauritius"
@@ -472,19 +448,19 @@ msgid "country.YT"
 msgstr "Mayotte"
 
 msgid "country.MX"
-msgstr "Mexiko"
+msgstr "Mexico"
 
 msgid "country.FM"
-msgstr "Mikronesien"
+msgstr "Mikronesia, Fødererte stater"
 
 msgid "country.MD"
-msgstr "Moldawien"
+msgstr "Moldova, republikk"
 
 msgid "country.MC"
 msgstr "Monaco"
 
 msgid "country.MN"
-msgstr "Mongolei"
+msgstr "Mongolia"
 
 msgid "country.ME"
 msgstr "Montenegro"
@@ -499,7 +475,7 @@ msgid "country.MZ"
 msgstr "Mosambik"
 
 msgid "country.MM"
-msgstr "Myanmar [Burma]"
+msgstr "Myanmar"
 
 msgid "country.NA"
 msgstr "Namibia"
@@ -511,16 +487,13 @@ msgid "country.NP"
 msgstr "Nepal"
 
 msgid "country.NL"
-msgstr "Niederlande"
-
-msgid "country.AN"
-msgstr "Niederländische Antillen"
+msgstr "Nederland"
 
 msgid "country.NC"
-msgstr "Neukaledonien"
+msgstr "Ny-Caledonia"
 
 msgid "country.NZ"
-msgstr "Neuseeland"
+msgstr "New Zealand"
 
 msgid "country.NI"
 msgstr "Nicaragua"
@@ -535,16 +508,13 @@ msgid "country.NU"
 msgstr "Niue"
 
 msgid "country.NF"
-msgstr "Norfolkinsel"
-
-msgid "country.KP"
-msgstr "Nordkorea"
+msgstr "Norfolk Island"
 
 msgid "country.MP"
-msgstr "Nördliche Marianen"
+msgstr "Nord-Marianene"
 
-msgid "country.NO"
-msgstr "Norwegen"
+msgid "country.NEI"
+msgstr "Norge"
 
 msgid "country.OM"
 msgstr "Oman"
@@ -556,28 +526,25 @@ msgid "country.PW"
 msgstr "Palau"
 
 msgid "country.PS"
-msgstr "palästinensische Gebiete"
+msgstr "Palestina, stat"
 
 msgid "country.PA"
 msgstr "Panama"
 
 msgid "country.PG"
-msgstr "Papua-Neuguinea"
+msgstr "Papua Ny-Guinea"
 
 msgid "country.PY"
 msgstr "Paraguay"
-
-msgid "country.YD"
-msgstr "Demokratische Volksrepublik Jemen"
 
 msgid "country.PE"
 msgstr "Peru"
 
 msgid "country.PH"
-msgstr "Philippinen"
+msgstr "Filippinene"
 
 msgid "country.PN"
-msgstr "Pitcairn Inseln"
+msgstr "Pitcairn"
 
 msgid "country.PL"
 msgstr "Polen"
@@ -589,40 +556,40 @@ msgid "country.PR"
 msgstr "Puerto Rico"
 
 msgid "country.QA"
-msgstr "Katar"
+msgstr "Qatar"
+
+msgid "country.RE"
+msgstr "Réunion"
 
 msgid "country.RO"
-msgstr "Rumänien"
+msgstr "Romania"
 
 msgid "country.RU"
 msgstr "Russland"
 
 msgid "country.RW"
-msgstr "Ruanda"
-
-msgid "country.RE"
-msgstr "Réunion"
+msgstr "Rwanda"
 
 msgid "country.BL"
 msgstr "Saint Barthélemy"
 
 msgid "country.SH"
-msgstr "Heilige Helena"
+msgstr "Saint Helena, Ascension og Tristan da Cunha"
 
 msgid "country.KN"
-msgstr "St. Kitts und Nevis"
+msgstr "Saint Kitts og Nevis"
 
 msgid "country.LC"
-msgstr "St. Lucia"
+msgstr "Saint Lucia"
 
 msgid "country.MF"
-msgstr "Saint Martin"
+msgstr "Saint Martin (fransk del)"
 
 msgid "country.PM"
-msgstr "Saint Pierre und Miquelon"
+msgstr "Saint Pierre og Miquelon"
 
 msgid "country.VC"
-msgstr "St. Vincent und die Grenadinen"
+msgstr "Saint Vincent og Grenadinene"
 
 msgid "country.WS"
 msgstr "Samoa"
@@ -630,53 +597,50 @@ msgstr "Samoa"
 msgid "country.SM"
 msgstr "San Marino"
 
+msgid "country.ST"
+msgstr "Sao Tome og Principe"
+
 msgid "country.SA"
-msgstr "Saudi-Arabien"
+msgstr "Saudi Arabia"
 
 msgid "country.SN"
 msgstr "Senegal"
 
 msgid "country.RS"
-msgstr "Serbien"
-
-msgid "country.CS"
-msgstr "Serbien und Montenegro"
+msgstr "Serbia"
 
 msgid "country.SC"
-msgstr "Seychellen"
+msgstr "Seychellene"
 
 msgid "country.SL"
 msgstr "Sierra Leone"
 
 msgid "country.SG"
-msgstr "Singapur"
+msgstr "Singapore"
 
 msgid "country.SX"
-msgstr "Sint Maarten"
+msgstr "Sint Maarten (nederlandsk del)"
 
 msgid "country.SK"
-msgstr "Slowakei"
+msgstr "Slovakia"
 
 msgid "country.SI"
-msgstr "Slowenien"
+msgstr "Slovenia"
 
 msgid "country.SB"
-msgstr "Salomonen"
+msgstr "Salomonøyene"
 
 msgid "country.SO"
 msgstr "Somalia"
 
 msgid "country.ZA"
-msgstr "Südafrika"
+msgstr "Sør-Afrika"
 
-msgid "country.GS"
-msgstr "Südgeorgien und die Südlichen Sandwichinseln"
-
-msgid "country.KR"
-msgstr "Südkorea"
+msgid "country.SS"
+msgstr "Sør-Sudan"
 
 msgid "country.ES"
-msgstr "Spanien"
+msgstr "Spania"
 
 msgid "country.LK"
 msgstr "Sri Lanka"
@@ -685,34 +649,31 @@ msgid "country.SD"
 msgstr "Sudan"
 
 msgid "country.SR"
-msgstr "Suriname"
+msgstr "Surinam"
 
 msgid "country.SJ"
-msgstr "Svalbard und Jan Mayen"
+msgstr "Svalbard og Jan Mayen"
 
 msgid "country.SZ"
-msgstr "Swasiland"
+msgstr "Swaziland"
 
 msgid "country.SE"
-msgstr "Schweden"
+msgstr "Sverige"
 
 msgid "country.CH"
-msgstr "Schweiz"
+msgstr "Sveits"
 
 msgid "country.SY"
-msgstr "Syrien"
-
-msgid "country.ST"
-msgstr "São Tomé und Príncipe"
-
-msgid "country.TW"
-msgstr "Taiwan"
+msgstr "Den syriske arabiske republikken"
 
 msgid "country.TJ"
-msgstr "Tadschikistan"
+msgstr "Tadsjikistan"
+
+msgid "country.TW"
+msgstr "Taiwan, provinsen Kina"
 
 msgid "country.TZ"
-msgstr "Tansania"
+msgstr "Tanzania, De forente republikk"
 
 msgid "country.TH"
 msgstr "Thailand"
@@ -726,26 +687,23 @@ msgstr "Togo"
 msgid "country.TK"
 msgstr "Tokelau"
 
-msgid "country.TO"
+msgid "country.TIL"
 msgstr "Tonga"
 
 msgid "country.TT"
-msgstr "Trinidad und Tobago"
-
-msgid "country.TA"
-msgstr "Tristan da Cunha"
+msgstr "Trinidad og Tobago"
 
 msgid "country.TN"
-msgstr "Tunesien"
+msgstr "Tunisia"
 
 msgid "country.TR"
-msgstr "Türkei"
+msgstr "Tyrkia"
 
 msgid "country.TM"
 msgstr "Turkmenistan"
 
 msgid "country.TC"
-msgstr "Turks- und Caicosinseln"
+msgstr "Turks- og Caicosøyene"
 
 msgid "country.TV"
 msgstr "Tuvalu"
@@ -754,16 +712,16 @@ msgid "country.UG"
 msgstr "Uganda"
 
 msgid "country.UA"
-msgstr "Ukraine"
+msgstr "Ukraina"
 
 msgid "country.AE"
-msgstr "Vereinigte Arabische Emirate"
+msgstr "De forente arabiske emirater"
 
 msgid "country.GB"
-msgstr "Vereinigtes Königreich"
+msgstr "Storbritannia"
 
 msgid "country.US"
-msgstr "Vereinigte Staaten"
+msgstr "Amerikas forente stater"
 
 msgid "country.UY"
 msgstr "Uruguay"
@@ -780,416 +738,419 @@ msgstr "Venezuela"
 msgid "country.VN"
 msgstr "Vietnam"
 
+msgid "country.VG"
+msgstr "Jomfruøyene, britiske"
+
+msgid "country.VI"
+msgstr "Jomfruøyene, U.S."
+
 msgid "country.WF"
-msgstr "Wallis und Futuna"
+msgstr "Wallis og Futuna"
 
 msgid "country.EH"
-msgstr "Westsahara"
+msgstr "Vest-Sahara"
 
 msgid "country.YE"
-msgstr "Jemen"
+msgstr "Yemen"
 
 msgid "country.ZM"
-msgstr "Sambia"
+msgstr "Zambia"
 
 msgid "country.ZW"
-msgstr "Simbabwe"
-
-msgid "country.AX"
-msgstr "Ålandinseln"
+msgstr "Zimbabwe"
 
 msgid "country.00"
-msgstr "Online"
+msgstr "På nett"
 
 msgid "language.AR"
-msgstr "Arabisch"
+msgstr "Arabisk"
 
 msgid "language.BG"
-msgstr "Bulgarisch"
+msgstr "Bulgarian"
 
 msgid "language.ZH"
-msgstr "Chinesisch"
+msgstr "Kinesisk"
 
 msgid "language.HR"
-msgstr "Kroatisch"
+msgstr "Kroatisk"
 
 msgid "language.CS"
-msgstr "Tschechisch"
+msgstr "Czech"
 
 msgid "language.DA"
-msgstr "Dänisch"
+msgstr "Dansk"
 
 msgid "language.NL"
-msgstr "Niederländisch"
+msgstr "Nederlandsk"
 
 msgid "language.EN"
-msgstr "Englisch"
+msgstr "Engelsk"
 
 msgid "language.FI"
-msgstr "Finnisch"
+msgstr "Finsk"
 
 msgid "language.FR"
-msgstr "Französisch"
+msgstr "Fransk"
 
 msgid "language.DE"
-msgstr "Deutsch"
+msgstr "Tysk"
 
 msgid "language.IT"
-msgstr "Italienisch"
+msgstr "Italiensk"
 
 msgid "language.SL"
-msgstr "Slowenisch"
+msgstr "Slovensk"
 
 msgid "language.JA"
-msgstr "Japanisch"
+msgstr "Japansk"
 
 msgid "language.NO"
-msgstr "Norwegisch"
+msgstr "Norsk"
 
 msgid "language.PL"
-msgstr "Polnisch"
+msgstr "Polsk"
 
 msgid "language.PT"
-msgstr "Portugiesisch"
+msgstr "Portugisisk"
 
 msgid "language.RO"
-msgstr "Rumänisch"
+msgstr "Rumensk"
 
 msgid "language.RU"
-msgstr "Russisch"
+msgstr "Russisk"
 
 msgid "language.ES"
-msgstr "Spanisch"
+msgstr "Spansk"
 
 msgid "language.SV"
-msgstr "Schwedisch"
+msgstr "Svensk"
 
 msgid "language.SR"
-msgstr "Serbisch"
+msgstr "Serbisk"
 
 msgid "language.TR"
-msgstr "Türkisch"
+msgstr "Turkish"
 
 msgid "language.VI"
-msgstr "Vietnamesisch"
+msgstr "Vietnamesisk"
 
 msgid "rating.one"
-msgstr "Mehr als 1"
+msgstr "Mer enn 1"
 
 msgid "rating.two"
-msgstr "Mehr als 2"
+msgstr "Mer enn 2"
 
 msgid "rating.three"
-msgstr "Mehr als 3"
+msgstr "Mer enn 3"
 
 msgid "rating.four"
-msgstr "Mehr als 4"
+msgstr "Mer enn 4"
 
 msgid "rating.five"
-msgstr "Mehr als 5"
+msgstr "Mer enn 5"
 
 msgid "rating.six"
-msgstr "Mehr als 6"
+msgstr "Mer enn 6"
 
 msgid "rating.seven"
-msgstr "Mehr als 7"
+msgstr "Mer enn 7"
 
 msgid "rating.eight"
-msgstr "Mehr als 8"
+msgstr "Mer enn 8"
 
 msgid "rating.nine"
-msgstr "Mehr als 9"
+msgstr "Mer enn 9"
 
 msgid "schedule.noEvents"
-msgstr "Es wurden keine Ereignisse gefunden"
+msgstr "Ingen kurs er funnet"
 
 msgid "schedule.when"
-msgstr "Wann"
+msgstr "Når"
 
 msgid "schedule.where"
-msgstr "Wo"
+msgstr "Hvor"
 
 msgid "schedule.what"
-msgstr "Was"
+msgstr "Hva"
 
 msgid "schedule.who"
-msgstr "Wer"
+msgstr "Hvem"
 
 msgid "schedule.event.register"
-msgstr "Registrieren"
+msgstr "Registrer"
 
 msgid "schedule.event.soldOut"
-msgstr "Ausverkauft"
+msgstr "Utsolgt"
 
 msgid "schedule.event.free"
-msgstr "Frei"
+msgstr "Gratis"
 
 msgid "trainers.noTrainers"
-msgstr "Es wurden keine Trainer gefunden"
+msgstr "Ingen trenere ble funnet"
 
 msgid "event.register"
-msgstr "Jetzt registrieren"
+msgstr "Registrer deg nå"
 
 msgid "event.soldOut"
-msgstr "Ausverkauft"
+msgstr "Utsolgt"
 
 msgid "event.free"
-msgstr "Frei"
+msgstr "Gratis"
 
 msgid "event.info.date"
-msgstr "Datum"
+msgstr "Dato"
 
 msgid "event.info.loc"
-msgstr "Ort"
+msgstr "Lokasjon"
 
 msgid "event.info.oneLang"
-msgstr "Veranstaltung ist auf %s"
+msgstr "Arrangement er på %s"
 
 msgid "event.info.twoLangs"
-msgstr "Veranstaltung ist auf %s und %s"
+msgstr "Arrangement er på %s og %s"
 
 msgid "event.info.materials"
-msgstr ". Alle Materialien und Handouts sind in %s"
+msgstr ", alle materialer og brosjyrer er på %s"
 
 msgid "event.info.now"
-msgstr "Aktuelle Zeit in %s"
+msgstr "Gjeldende tid i %s"
 
 msgid "event.info.tickets"
-msgstr "Tickets"
+msgstr "Billetter"
 
 msgid "event.state.ended"
-msgstr "Diese Veranstaltung ist beendet"
+msgstr "Dette kurset er avsluttet"
 
 msgid "event.state.private"
-msgstr "Diese Veranstaltung ist privat"
+msgstr "Dette kurset er privat"
 
 msgid "event.state.soldOut"
-msgstr "Ausverkauft"
+msgstr "Utsolgt"
 
 msgid "event.ticket.free"
-msgstr "Frei"
+msgstr "Gratis"
 
 msgid "event.ticket.freeDescr"
-msgstr "Anmeldung ist erforderlich."
+msgstr "Registrering er nødvendig."
 
 msgid "event.ticket.endedOn"
-msgstr "Endete am %s"
+msgstr "Endte %s"
 
 msgid "event.ticket.endsOn"
-msgstr "Endet am %s"
+msgstr "Slutter %s"
 
 msgid "event.ticket.onSaleFrom"
-msgstr "Zum Verkauf ab %s"
+msgstr "På salg fra %s"
 
 msgid "event.ticket.soldOut"
-msgstr "Ausverkauft"
+msgstr "Utsolgt"
 
 msgid "event.ticket.ended"
-msgstr "Umsatz beendet"
+msgstr "Endte"
 
 msgid "event.ticket.left"
 msgid_plural "event.ticket.left"
-msgstr[0] "1 Ticket übrig"
-msgstr[1] "%s Tickets übrig"
+msgstr[0] "1 billett igjen"
+msgstr[1] "%s billetter igjen"
 
 msgid "event.share"
-msgstr "Veranstaltung teilen"
+msgstr "Del arrangement"
 
 msgid "event.form.title"
-msgstr "Für Veranstaltung anmelden"
+msgstr "Meld meg på kurs"
 
 msgid "event.form.button"
-msgstr "Registrieren"
+msgstr "Registrer"
 
 msgid "trainer.email"
-msgstr "Kontakt per E-Mail"
+msgstr "Kontakt via e-post"
 
 msgid "trainer.experience.years"
-msgstr "Jahre als Trainer"
+msgstr "År som trener"
 
 msgid "trainer.experience.events"
-msgstr "Veranstaltungen abgehalten"
+msgstr "Kurs holdt"
 
 msgid "trainer.experience.rating.public"
-msgstr "Bewertung für öffentliche Veranstaltungen"
+msgstr "Evaluering for åpne kurs"
 
 msgid "trainer.experience.rating.private"
-msgstr "Bewertung für private Veranstaltungen"
+msgstr "Evaluering for private kurs"
 
 msgid "trainer.experience.rating.basedOn"
 msgid_plural "trainer.experience.rating.basedOn"
-msgstr[0] "basierend auf 1&nbsp;Bewertung"
-msgstr[1] "basierend auf %s&nbsp;Bewertungen"
+msgstr[0] "basert på en&nbsp;evaluering"
+msgstr[1] "basert på %s&nbsp;evalueringer"
 
 msgid "trainer.experience.rating.review"
 msgid_plural "trainer.experience.rating.review"
-msgstr[0] "von 1 Bewertung"
-msgstr[1] "von %s Bewertungen"
+msgstr[0] "fra 1 anmeldelse"
+msgstr[1] "fra %s anmeldelser"
 
 msgid "trainer.bio"
 msgstr "Bio"
 
 msgid "trainer.feedback"
-msgstr "Feedback des Teilnehmers"
+msgstr "Tilbakemeldinger fra deltagere"
 
 msgid "tax.excluded_all"
-msgstr "Alle Preise enthalten keine MwSt"
+msgstr "Alle priser uten MVA"
 
 msgid "tax.included_all"
-msgstr "Alle Preisangaben inkl. MwSt"
+msgstr "Alle priser med MVA"
 
 msgid "form.country"
-msgstr "Wählen Sie ein Land"
+msgstr "Velg et land"
 
 msgid "form.error.required"
-msgstr "Dieses Feld ist eine Pflichtangabe"
+msgstr "Dette feltet er obligatorisk"
 
 msgid "form.error.email"
-msgstr "Bitte geben Sie eine gültige E-Mail Adresse ein"
+msgstr "Vennligst skriv inn en gyldig e-post adresse"
 
 msgid "form.error.url"
-msgstr "Bitte geben Sie eine gültige URL ein"
+msgstr "Vennligst skriv inn en gyldig url"
 
 msgid "form.error.date"
-msgstr "Bitte geben Sie ein korrektes Datum ein (yyyy-MM-dd)"
+msgstr "Vennligst oppgi en gyldig dato"
 
 msgid "form.error.number"
-msgstr "Bitte geben Sie eine Nummer ein"
+msgstr "Vennligst oppgi et gyldig nummer"
 
 msgid "form.error.digits"
-msgstr "Bitte benutzen Sie nur Zahlen"
+msgstr "Fyll inn bare tall"
 
 msgid "form.field.first_name"
-msgstr "Vorname"
+msgstr "Fornavn"
 
 msgid "form.field.last_name"
-msgstr "Nachname"
+msgstr "Etternavn"
 
 msgid "form.field.email"
-msgstr "E-Mail Adresse"
+msgstr "e-post"
 
 msgid "form.field.organisation"
-msgstr "Organisation"
+msgstr "Organisasjon"
 
 msgid "form.field.city"
-msgstr "Wohnort"
+msgstr "By"
 
 msgid "form.field.province"
-msgstr "Bundesland"
+msgstr "Fylke/Kommune"
 
 msgid "form.field.country"
 msgstr "Land"
 
 msgid "form.field.postcode"
-msgstr "Postleitzahl"
+msgstr "Postnummer"
 
 msgid "form.field.tax_name"
-msgstr "MwSt. Name"
+msgstr "MVA navn"
 
 msgid "form.field.tax_number"
-msgstr "Umsatzsteuer-Identifikationsnummer"
+msgstr "MVA nummer"
 
 msgid "form.field.phone"
 msgstr "Telefon"
 
 msgid "form.field.date_of_birth"
-msgstr "Geburtsdatum"
+msgstr "Fødselsdato"
 
 msgid "form.field.role"
-msgstr "Wie läßt sich Ihre Tätigkeit am besten beschreiben?"
+msgstr "Hva beskriver best hva du gjør?"
 
 msgid "form.field.job_title"
-msgstr "Berufsbezeichnung"
+msgstr "Jobbtittel"
 
 msgid "form.field.website"
-msgstr "Webseite"
+msgstr "Nettside"
 
 msgid "form.field.blog"
-msgstr "Blog"
+msgstr "Blogg"
 
 msgid "form.field.ticket"
-msgstr "Ticket"
+msgstr "Billett"
 
 msgid "form.field.comment"
 msgstr "Kommentar"
 
 msgid "form.field.promo_code"
-msgstr "Gutscheincode"
+msgstr "Rabattkode"
 
 msgid "form.field.member_id"
-msgstr "Mitgliedsnummer"
+msgstr "Medlems-ID"
 
 msgid "form.field.billing.city"
-msgstr "Wohnort"
+msgstr "By"
 
 msgid "form.field.billing.province"
-msgstr "Bundesland"
+msgstr "Fylke/Kommune"
 
 msgid "form.field.billing.country"
 msgstr "Land"
 
 msgid "form.field.billing.postcode"
-msgstr "Postleitzahl"
+msgstr "Postnummer"
 
 msgid "form.field.billing.street_first"
-msgstr "Adresse (Zeile 1)"
+msgstr "Gate 1"
 
 msgid "form.field.billing.street_second"
-msgstr "Adresse (Zeile 2)"
+msgstr "Gate 2"
 
 msgid "form.field.work.city"
-msgstr "Wohnort"
+msgstr "By"
 
 msgid "form.field.work.province"
-msgstr "Bundesland"
+msgstr "Fylke/Kommune"
 
 msgid "form.field.work.country"
 msgstr "Land"
 
 msgid "form.field.work.postcode"
-msgstr "Postleitzahl"
+msgstr "Postnummer"
 
 msgid "form.field.work.street_first"
-msgstr "Adresse (Zeile 1)"
+msgstr "Gate 1"
 
 msgid "form.field.work.street_second"
-msgstr "Adresse (Zeile 2)"
+msgstr "Gate 2"
 
 msgid "form.field.street_first"
-msgstr "Adresse (Zeile 1)"
+msgstr "Gate 1"
 
 msgid "form.field.street_second"
-msgstr "Adresse (Zeile 2)"
+msgstr "Gate 2"
 
 msgid "form.section.home address"
-msgstr "Heimatadresse"
+msgstr "Hjemmeadresse"
 
 msgid "form.section.billing address"
-msgstr "Rechnungsadresse"
+msgstr "Fakturaadresse"
 
 msgid "form.section.billing info"
-msgstr "Rechnungsinfo"
+msgstr "Faktureringsinfo"
 
 msgid "form.section.work info"
-msgstr "Arbeitsinfo"
+msgstr "Arbeid info"
 
 msgid "form.section.additional information"
-msgstr "zusätzliche Information"
+msgstr "Tilleggsinformasjon"
 
 msgid "form.section.ticket"
-msgstr "Ticket"
+msgstr "Billett"
 
 msgid "registration.successTitle"
-msgstr "Vielen Dank für die Anmeldung"
+msgstr "Takk for registreringen"
 
 msgid "registration.successMsg"
-msgstr "Weitere Details und Ihre Beitrittserklärung folgen in Kürze per Email."
+msgstr "Ytterligere detaljer om din påmelding vil komme i egen e-post."
 
 msgid "sidebar.future"
-msgstr "Kommende Veranstaltungen"
+msgstr "Kommende kurs"
 
 msgid "sidebar.past"
-msgstr "Vergangene Ereignisse"
+msgstr "Tidligere kurs"
 
 msgid "sidebar.noEvents"
-msgstr "Keine Ereignisse"
+msgstr "Ingen oppsatte kurs"

@@ -5,9 +5,12 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-02-07T10:10:13.930Z\n"
-"PO-Revision-Date: 2019-02-07T10:10:13.930Z\n"
+"POT-Creation-Date: 2019-09-21T17:45:16.994Z\n"
+"PO-Revision-Date: 2019-09-21T17:45:16.994Z\n"
 "Language: en\n"
+
+msgid "filter.categories"
+msgstr "All categories"
 
 msgid "filter.locations"
 msgstr "All locations"
@@ -115,7 +118,7 @@ msgid "country.BN"
 msgstr "Brunei Darussalam"
 
 msgid "country.BO"
-msgstr "Bolivia, Plurinational State"
+msgstr "Bolivia"
 
 msgid "country.BQ"
 msgstr "Bonaire, Sint Eustatius and Saba"
