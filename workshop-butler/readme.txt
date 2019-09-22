@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.3.1 =
+* Fixes a price output for some locales
+
 = 2.3.0 =
 * Adds support for Norwegian language
 * Fixes the rendering of italic, bold, <sub> and <sup> text
