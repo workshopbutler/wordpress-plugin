@@ -117,7 +117,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	 * @return string
 	 */
 	protected function render_filters( $attrs = array() ) {
-		$attrs = shortcode_atts( $this->get_default_attrs( 'filter' ), $attrs );
+		$attrs = shortcode_atts( $this->get_default_attrs( 'filters' ), $attrs );
 
 		$trainers = $this->dict->get_trainers();
 		if ( is_null( $trainers ) ) {
@@ -209,7 +209,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 		switch ( $shortcode_name ) {
 			case 'name':
 				return array( 'with_country' => true );
-			case 'filter':
+			case 'filters':
 				return array( 'filters' => 'location,trainer,language,rating,badge' );
 			default:
 				return array();
