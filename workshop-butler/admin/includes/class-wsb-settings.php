@@ -279,6 +279,13 @@ class WSB_Settings {
 				'desc'     => __( 'Enter the name of your theme', 'wsbintegration' ),
 				'required' => array( WSB_Options::THEME, 'equals', 'custom' ),
 			),
+			array(
+				'id'         => WSB_Options::GA_API_KEY,
+				'type'       => 'text',
+				'title'      => __( 'Google Analytics Key', 'wsbintegration' ),
+				'desc'       => __( 'Log in to <a href="https://analytics.google.com/analytics/web/" target="_blank">Google Analytics</a> to get your API key', 'wsbintegration' ),
+				'validation' => 'not_empty',
+			),
 		);
 	}
 
