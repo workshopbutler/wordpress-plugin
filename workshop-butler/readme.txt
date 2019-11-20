@@ -12,10 +12,10 @@ This plugin suits for knowledge brand and training company accounts.
 
 == Description ==
 
-This plugins integrates your website with [Workshop Butler](https://workshopbutler.com) workshop management platform. It helps you to promote trainings
-and other events, accept registrations online, and give visitors detailed information about your trainers and facilitators.
+This plugin integrates your website with [Workshop Butler](https://workshopbutler.com) workshop management platform. It helps you to promote trainings
+and other events, accept registrations online, and give visitors detailed information about your trainers and workshops.
 
-It comes with a five default themes, and many options to customise it for your needs.
+It comes with five default themes, and many options to customise it for your needs.
 
 When you add a new event or trainer to Workshop Butler, they automatically appear on your website, making the process
 of course and license management fast and easy.
@@ -68,10 +68,6 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
-= 2.4.0 =
-* Improves Google Analytics support
-* Fixes a filter configuration for a list of trainers
-
 = 2.3.1 =
 * Fixes a price output for some locales
 
