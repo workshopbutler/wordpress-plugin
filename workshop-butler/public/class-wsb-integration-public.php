@@ -114,6 +114,9 @@ class WSB_Integration_Public {
 		wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', false, null );
 		wp_enqueue_script( 'jquery' );
 
+		$GA_API_KEY = WSB_Options::get_option( WSB_Options::GA_API_KEY );
+		wp_localize_script( 'wsb-registration-page', 'wsb_ga', array( 'google_analytics_key'  => $GA_API_KEY, )
+		);
 	}
 
 	/**

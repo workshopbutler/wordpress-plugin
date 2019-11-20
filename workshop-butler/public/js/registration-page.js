@@ -27,6 +27,8 @@ function register_attendee(e) {
             data: form_data,
             dataType: 'json'
         }).done(function(data) {
+            var wsb_ga_key = wsb_ga.google_analytics_key;
+
             window.scrollTo({
                 top: jQuery('#wsb-success').scrollTop(),
                 behavior: 'smooth'
@@ -35,6 +37,37 @@ function register_attendee(e) {
             jQuery('#wsb-success').show();
             $form.hide();
             $form.removeClass('.h-busy');
+
+            let wsb_ga_key = wsb_ga.google_analytics_key;
+
+            window.scrollTo({
+                top: jQuery('#wsb-success').scrollTop(),
+                behavior: 'smooth'
+            });
+            form_helper.clearForm();
+            jQuery('#wsb-success').show();
+            $form.hide();
+            $form.removeClass('.h-busy');
+
+            if( wsb_ga_key !== '' ){
+               if (typeof ga === 'function') {
+
+                    ga('create', wsb_ga_key, 'auto') ; 
+                    ga('send', 'event', 'Registration Completed', 'submit');
+
+                } else {
+
+                    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)
+                    [0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                    ga('create', wsb_ga_key, 'auto') ; 
+                    ga('send', 'event', 'Registration Completed', 'submit');
+
+                }
+            }
         }).fail(function(jqXHR) {
             let message = (jqXHR.responseJSON && jqXHR.responseJSON.message) ?
                 jqXHR.responseJSON.message :
