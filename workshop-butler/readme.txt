@@ -18,7 +18,7 @@ and other events, accept registrations online, and give visitors detailed inform
 It comes with five default themes, and many options to customise it for your needs.
 
 When you add a new event or trainer to Workshop Butler, they automatically appear on your website, making the process
-of course and license management fast and easy.
+of workshop and license management fast and easy.
 
 == Installation ==
 
