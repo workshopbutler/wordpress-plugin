@@ -68,6 +68,10 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.4.0 =
+* Improves Google Analytics support
+* Fixes a filter configuration for a list of trainers
+
 = 2.3.1 =
 * Fixes a price output for some locales
 
