@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.4.1 =
+* Fixes a bug with the registration form
+
 = 2.4.0 =
 * Improves support for Google Analytics actions
 * Fixes a filter configuration on the list of trainers
