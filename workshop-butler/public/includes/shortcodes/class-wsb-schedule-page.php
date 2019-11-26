@@ -78,6 +78,10 @@ class WSB_Schedule_Page extends WSB_Page {
 		if ( ! is_null( $attrs['category'] ) ) {
 			$query['categoryId'] = $attrs['category'];
 		}
+		if ( ! is_null( $attrs['event_type'] ) ) {
+			$query['eventType'] = $attrs['event_type'];
+		}
+
 		$this->dict->set_schedule_attrs( $attrs );
 		$response = $this->requests->get( $method, $query );
 
@@ -92,10 +96,14 @@ class WSB_Schedule_Page extends WSB_Page {
 	 * @return array
 	 */
 	private function get_widget_attrs( $attrs ) {
+
 		$defaults = array(
 			'category' => null,
 			'layout'   => $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' ),
 		);
+		if( !empty($attrs['event_type']) ){
+			$defaults['event_type'] = $attrs['event_type'];
+		}
 		return shortcode_atts( $defaults, $attrs );
 	}
 
@@ -133,6 +141,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			'events' => $events,
 			'theme'  => $this->get_theme(),
 		);
+
 		if ( $content ) {
 			$template = $content;
 		} else {
