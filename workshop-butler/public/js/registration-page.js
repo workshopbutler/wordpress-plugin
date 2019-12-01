@@ -6,6 +6,11 @@ function get_form() {
 function register_attendee(e) {
     e.preventDefault();
 
+    let ticketsCount = jQuery( 'input[name="ticket"]' ).length;
+    if( ticketsCount == 1 ){
+        jQuery( 'input[name="ticket"]' ).attr("checked",true);
+    }
+
     if (!wsb_event.is_registration_closed) {
         const $form = get_form();
         const form_helper = new FormHelper({
