@@ -358,5 +358,10 @@ class FormHelper {
 
 jQuery(document).ready(function() {
     jQuery('#wsb-success').hide();
+
+    let ticketsCount = jQuery( 'input[name="ticket"]' ).length;
+    if( ticketsCount == 1 ){
+        jQuery( 'input[name="ticket"]' ).attr("checked",true);
+    }
     get_form().on('submit', register_attendee);
 });
