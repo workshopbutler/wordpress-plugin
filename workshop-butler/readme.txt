@@ -68,6 +68,13 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.5.0 =
+* Added 'Event Type' option to the widget. You can show events only from the selected event type
+* Added 'event_type' parameter to '[wsb_schedule]' shortcode. You can show events only from the selected event type
+* If there is only one ticket type, it's selected automatically on the registration form
+* When a user filters workshops in the schedule, this information is saved in URL so you can share links to a filtered schedule
+* Improved Upcoming events widget on the event page: it shows events of an active trainer and do not show an active event
+
 = 2.4.1 =
 * Fixes a bug with the registration form
 
