@@ -47,7 +47,7 @@ class WSB_Options {
 
 	const THEME        = 'theme';
 	const CUSTOM_THEME = 'custom-theme';
-	const GA_API_KEY = 'google-analytics-key';
+	const GA_API_KEY   = 'google-analytics-key';
 
 	const CUSTOM_EVENT_DETAILS   = 'custom-event-page';
 	const SHOW_EXPIRED_TICKETS   = 'show-expired-tickets';

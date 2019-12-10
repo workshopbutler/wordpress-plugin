@@ -8,6 +8,8 @@
 
 namespace WorkshopButler;
 
+use Redux;
+
 /**
  * General plugin settings
  *
@@ -58,9 +60,9 @@ class WSB_Settings {
 	 * @return mixed
 	 */
 	public function init() {
-		\Redux::setArgs( $this->opt_name, $this->get_arguments( true ) );
+		Redux::setArgs( $this->opt_name, $this->get_arguments( true ) );
 
-		\Redux::setSection(
+		Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'            => __( 'General', 'wsbintegration' ),
@@ -71,7 +73,7 @@ class WSB_Settings {
 			)
 		);
 
-		\Redux::setSection(
+		Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'            => __( 'Events', 'wsbintegration' ),
@@ -81,7 +83,7 @@ class WSB_Settings {
 				'fields'           => $this->get_event_settings(),
 			)
 		);
-		\Redux::setSection(
+		Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'            => __( 'Trainers', 'wsbintegration' ),
@@ -91,7 +93,7 @@ class WSB_Settings {
 				'fields'           => $this->get_trainer_settings(),
 			)
 		);
-		\Redux::setSection(
+		Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'            => __( 'Pages', 'wsbintegration' ),
@@ -103,7 +105,7 @@ class WSB_Settings {
 
 		$this->get_pages_settings();
 
-		\Redux::setSection(
+		Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'            => __( 'Custom CSS', 'wsbintegration' ),
@@ -133,7 +135,7 @@ class WSB_Settings {
 	 * Returns plugin settings
 	 */
 	protected function get_pages_settings() {
-		\Redux::setSection(
+		Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'      => __( 'Schedule (tiles)', 'wsbintegration' ),
@@ -151,7 +153,7 @@ class WSB_Settings {
 				),
 			)
 		);
-		\Redux::setSection(
+		Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'      => __( 'Schedule (table)', 'wsbintegration' ),
@@ -169,7 +171,7 @@ class WSB_Settings {
 				),
 			)
 		);
-		\Redux::setSection(
+		Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'      => __( 'Event Page', 'wsbintegration' ),
@@ -187,7 +189,7 @@ class WSB_Settings {
 				),
 			)
 		);
-		\Redux::setSection(
+		Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'      => __( 'Registration Page', 'wsbintegration' ),
@@ -205,7 +207,7 @@ class WSB_Settings {
 				),
 			)
 		);
-		\Redux::setSection(
+		Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'      => __( 'Trainer List', 'wsbintegration' ),
@@ -223,7 +225,7 @@ class WSB_Settings {
 				),
 			)
 		);
-		\Redux::setSection(
+		Redux::setSection(
 			$this->opt_name,
 			array(
 				'title'      => __( 'Trainer Profile', 'wsbintegration' ),

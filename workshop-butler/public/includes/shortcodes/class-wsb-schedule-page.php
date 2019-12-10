@@ -101,7 +101,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			'category' => null,
 			'layout'   => $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' ),
 		);
-		if( !empty($attrs['event_type']) ){
+		if ( ! empty( $attrs['event_type'] ) ) {
 			$defaults['event_type'] = $attrs['event_type'];
 		}
 		return shortcode_atts( $defaults, $attrs );
