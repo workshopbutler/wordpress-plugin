@@ -9,7 +9,9 @@ function wsb_load_events(type, callback) {
 		action : 'wsb_get_values',
 		type: type,
 		_ajax_nonce: wsb_event.nonce,
-		country_code: wsb_event.country
+		country_code: wsb_event.country,
+		trainer_id: wsb_event.trainer,
+		event_id: wsb_event.id,
 	};
 
 	jQuery.ajax(

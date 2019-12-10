@@ -93,6 +93,8 @@ class WSB_Event_Page extends WSB_Page {
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce'    => $wsb_nonce,
 				'country'  => $event->location->country_code,
+				'trainer'  => $event->trainers[0]->id,
+				'id'       => $event->hashed_id,
 			)
 		);
 	}

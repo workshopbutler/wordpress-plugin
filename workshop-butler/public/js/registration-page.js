@@ -188,8 +188,7 @@ class FormHelper {
 		for (let rule in rules) {
 			valid = this[`${rule}Validator`](valueControl, $control);
 
-			if ( ! valid) {
-				return
+			if ( !valid) return {
 				isValid: false,
 				message: this.messages[rule]
 			};
@@ -310,7 +309,7 @@ class FormHelper {
 		this.$controls.each(
 			(index, el) => {
 				const $el  = jQuery( el );
-				const name = $el.attr( 'name' );
+				const name = $el.attr('name');
 				if (name && formData[name] === undefined) {
 					formData[name] = this.getControlValue( $el )
 				}
@@ -325,9 +324,9 @@ class FormHelper {
 
 		for ( let field in formData) {
 			if (formData.hasOwnProperty( field )) {
-				let $control = $controls.filter( `[name = "${field}"]` ).first();
+				let $control = $controls.filter( `[name="${field}"]` ).first();
 
-				if ( ! $control.length) {
+				if ( !$control.length) {
 					return;
 				}
 
@@ -349,9 +348,9 @@ class FormHelper {
 
 		arrErrors.forEach(
 			(item) => {
-				const $control = self.$controls.filter( `[name = "${item.name}"]` ).first();
-				const name     = $control.length ? $control.attr( 'title' ) : item.name;
-				errorTxt      += ` < b > ${name} < / b > : ${item.error} < br > `;
+				const $control = self.$controls.filter( `[name="${item.name}"]` ).first();
+				const name = $control.length ? $control.attr( 'title' ) : item.name;
+				errorTxt += `<b>${name}</b> : ${item.error} <br>`;
 			}
 		);
 
@@ -362,7 +361,7 @@ class FormHelper {
 		this.$controls.each(
 			(index, el) => {
 				const $el = jQuery( el );
-				if ( ! $el.attr( "disabled" )) {
+				if ( !$el.attr( "disabled" )) {
 					$el.val( '' );
 				}
 			}

@@ -72,9 +72,9 @@ class Social_Links {
 	 * @param object $json_data JSON data from Workshop Butler API.
 	 */
 	public function __construct( $json_data ) {
-		$this->website     = $json_data->website;
-		$this->blog        = $json_data->blog;
-		$this->facebook    = $json_data->facebook_url;
+		$this->website  = $json_data->website;
+		$this->blog     = $json_data->blog;
+		$this->facebook = $json_data->facebook_url;
 		if ( $json_data->twitter_handle ) {
 			$this->twitter = 'https://twitter.com/' . $json_data->twitter_handle;
 		}

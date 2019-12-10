@@ -31,15 +31,18 @@ class WSB_Ajax {
 			// Nonce check.
 			check_ajax_referer( 'wsb-nonce' );
 
-			$type = $_GET['type'];
+			$type     = $_GET['type'];
+			$event_id = null;
 
 			switch ( $type ) {
 				case 'future-events-country':
-					$method = 'events';
-					$query  = array(
+					$method   = 'events';
+					$query    = array(
 						'future'      => 'true',
 						'countryCode' => rawurlencode( $_GET['country_code'] ),
+						'trainerId'   => rawurldecode( $_GET['trainer_id'] ),
 					);
+					$event_id = rawurlencode( $_GET['event_id'] );
 					break;
 				case 'future-trainer-events':
 					$method = 'facilitators/' . rawurlencode( $_GET['id'] ) . '/events';
@@ -53,7 +56,7 @@ class WSB_Ajax {
 					die();
 			}
 			$requests = new Embed_Event_List();
-			echo $requests->render( $method, $query );
+			echo $requests->render( $method, $query, $event_id );
 			wp_die();
 		} else {
 			exit();

@@ -57,24 +57,26 @@ class Embed_Event_List extends WSB_Page {
 	 *
 	 * @param string $method Workshop Butler API method.
 	 * @param array  $query  API parameters.
+	 * @param string $event_id ID of event where the request took place.
 	 *
 	 * @since  2.0.0
 	 * @return string
 	 */
-	public function render( $method, $query ) {
+	public function render( $method, $query, $event_id ) {
 		$response = $this->requests->get( $method, $query );
-		return $this->render_list( $response );
+		return $this->render_list( $response, $event_id );
 	}
 
 	/**
 	 * Renders the list of trainers
 	 *
 	 * @param WSB_Response $response Response.
+	 * @param string       $event_id ID of event where the request took place.
 	 *
 	 * @since  2.0.0
 	 * @return string
 	 */
-	private function render_list( $response ) {
+	private function render_list( $response, $event_id ) {
 		if ( $response->is_error() ) {
 			return $this->format_error( $response->error );
 		}
@@ -87,7 +89,9 @@ class Embed_Event_List extends WSB_Page {
 				$this->settings->get_trainer_page_url(),
 				$this->settings->get_registration_page_url()
 			);
-			array_push( $events, $event );
+			if ( $event->hashed_id !== $event_id ) {
+				array_push( $events, $event );
+			}
 		}
 		$sliced        = array_slice( $events, 0, 5 );
 		$template_data = array( 'events' => $sliced );
