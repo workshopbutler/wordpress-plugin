@@ -75,7 +75,9 @@ class Social_Links {
 		$this->website     = $json_data->website;
 		$this->blog        = $json_data->blog;
 		$this->facebook    = $json_data->facebook_url;
-		$this->twitter     = 'https://twitter.com/' . $json_data->twitter_handle;
+		if ( $json_data->twitter_handle ) {
+			$this->twitter = 'https://twitter.com/' . $json_data->twitter_handle;
+		}
 		$this->linked_in   = $json_data->linkedin_url;
 		$this->google_plus = $json_data->google_plus_url;
 	}
