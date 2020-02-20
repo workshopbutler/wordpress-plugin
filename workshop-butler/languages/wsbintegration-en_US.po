@@ -5,9 +5,18 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-09-21T17:45:16.994Z\n"
-"PO-Revision-Date: 2019-09-21T17:45:16.994Z\n"
+"POT-Creation-Date: 2020-02-22T11:52:37.587Z\n"
+"PO-Revision-Date: 2020-02-22T11:52:37.588Z\n"
 "Language: en\n"
+
+msgid "attendees.empty"
+msgstr "No attendees found"
+
+msgid "pagination.next"
+msgstr "Next"
+
+msgid "pagination.prev"
+msgstr "Previous"
 
 msgid "filter.categories"
 msgstr "All categories"
@@ -834,6 +843,18 @@ msgstr "Turkish"
 msgid "language.VI"
 msgstr "Vietnamese"
 
+msgid "language.KA"
+msgstr "Georgian"
+
+msgid "language.SK"
+msgstr "Slovakian"
+
+msgid "language.HU"
+msgstr "Hungarian"
+
+msgid "language.KO"
+msgstr "Korean"
+
 msgid "rating.one"
 msgstr "More than 1"
 
@@ -1122,23 +1143,41 @@ msgstr "Street 1"
 msgid "form.field.street_second"
 msgstr "Street 2"
 
-msgid "form.section.home address"
+msgid "form.section.general"
+msgstr "Personal Info"
+
+msgid "form.section.address"
 msgstr "Home Address"
 
-msgid "form.section.billing address"
-msgstr "Billing Address"
-
-msgid "form.section.billing info"
+msgid "form.section.billing"
 msgstr "Billing Info"
 
-msgid "form.section.work info"
+msgid "form.section.work"
 msgstr "Work Info"
 
-msgid "form.section.additional information"
+msgid "form.section.other"
 msgstr "Additional Information"
 
 msgid "form.section.ticket"
-msgstr "Ticket"
+msgstr "Choose your ticket"
+
+msgid "form.summary.caption"
+msgstr "Summary"
+
+msgid "form.summary.price"
+msgstr "Ticket price"
+
+msgid "form.summary.tax"
+msgstr "Tax"
+
+msgid "form.summary.total"
+msgstr "Total"
+
+msgid "form.summary.included"
+msgstr "included"
+
+msgid "form.promo.caption"
+msgstr "I have a promo code"
 
 msgid "registration.successTitle"
 msgstr "Thank you for the registration"

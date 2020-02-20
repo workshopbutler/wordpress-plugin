@@ -5,9 +5,18 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-09-21T17:45:18.185Z\n"
-"PO-Revision-Date: 2019-09-21T17:45:18.185Z\n"
+"POT-Creation-Date: 2020-02-22T11:52:38.834Z\n"
+"PO-Revision-Date: 2020-02-22T11:52:38.834Z\n"
 "Language: nl\n"
+
+msgid "attendees.empty"
+msgstr "Geen studenten gevonden"
+
+msgid "pagination.next"
+msgstr "De volgende"
+
+msgid "pagination.prev"
+msgstr "Voorgaand"
 
 msgid "filter.categories"
 msgstr "Alle categorieën"
@@ -873,6 +882,18 @@ msgstr "Turks"
 msgid "language.VI"
 msgstr "Vietnamees"
 
+msgid "language.KA"
+msgstr "Georgische"
+
+msgid "language.SK"
+msgstr "Slowaakse"
+
+msgid "language.HU"
+msgstr "Hongaarse"
+
+msgid "language.KO"
+msgstr "Koreaanse"
+
 msgid "rating.one"
 msgstr "Meer dan 1"
 
@@ -1161,23 +1182,41 @@ msgstr "Straat 1"
 msgid "form.field.street_second"
 msgstr "Straat 2"
 
-msgid "form.section.home address"
+msgid "form.section.general"
+msgstr "Persoonlijke informatie"
+
+msgid "form.section.address"
 msgstr "Thuisadres"
 
-msgid "form.section.billing address"
-msgstr "Facturatie adres"
-
-msgid "form.section.work info"
+msgid "form.section.work"
 msgstr "Werkinfo"
 
-msgid "form.section.billing info"
+msgid "form.section.billing"
 msgstr "Betaal informatie"
 
-msgid "form.section.additional information"
+msgid "form.section.other"
 msgstr "Extra informatie"
 
 msgid "form.section.ticket"
-msgstr "Ticket"
+msgstr "Kies uw ticket"
+
+msgid "form.summary.caption"
+msgstr "Samenvatting"
+
+msgid "form.summary.price"
+msgstr "Ticketprijs"
+
+msgid "form.summary.tax"
+msgstr "Tax"
+
+msgid "form.summary.total"
+msgstr "Total"
+
+msgid "form.summary.included"
+msgstr "inbegrepen"
+
+msgid "form.promo.caption"
+msgstr "Ik heb een promotiecode"
 
 msgid "registration.successTitle"
 msgstr "Bedankt voor de registratie"

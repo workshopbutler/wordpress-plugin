@@ -3,9 +3,5 @@
         {{ wsb_f(event.location) }}
     </div>
 {% else %}
-    <div class="wsb-table__col wsb-table__col-location">{{ wsb_f(event.location) }}
-        {% if event.free %}
-            <div class="wsb-free wsb-first">{{ wsb_t('schedule.event.free') }}</div>
-        {% endif %}
-    </div>
+    <div class="wsb-table__col wsb-table__col-location">{{ wsb_f(event.location) }}</div>
 {% endif %}

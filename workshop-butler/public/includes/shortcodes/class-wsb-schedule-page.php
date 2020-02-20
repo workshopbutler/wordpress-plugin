@@ -71,7 +71,7 @@ class WSB_Schedule_Page extends WSB_Page {
 		$method = 'events';
 		$fields = 'title,location,hashed_id,schedule,free,type,registration_page,spoken_languages,sold_out,facilitators,free_ticket_type,paid_ticket_types,title_url';
 		$query  = array(
-			'future' => true,
+			'dates'  => 'future',
 			'public' => true,
 			'fields' => $fields,
 		);
@@ -124,7 +124,7 @@ class WSB_Schedule_Page extends WSB_Page {
 		}
 
 		$events = array();
-		foreach ( $response->body as $json_event ) {
+		foreach ( $response->body->data as $json_event ) {
 			$event = new Event(
 				$json_event,
 				$this->settings->get_event_page_url(),

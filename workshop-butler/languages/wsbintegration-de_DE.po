@@ -5,9 +5,18 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-09-21T17:45:17.316Z\n"
-"PO-Revision-Date: 2019-09-21T17:45:17.316Z\n"
+"POT-Creation-Date: 2020-02-22T11:52:37.929Z\n"
+"PO-Revision-Date: 2020-02-22T11:52:37.929Z\n"
 "Language: de\n"
+
+msgid "attendees.empty"
+msgstr "Keine Teilnehmer gefunden"
+
+msgid "pagination.next"
+msgstr "Nächster"
+
+msgid "pagination.prev"
+msgstr "Bisherige"
 
 msgid "filter.categories"
 msgstr "Alle Kategorien"
@@ -873,6 +882,18 @@ msgstr "Türkisch"
 msgid "language.VI"
 msgstr "Vietnamesisch"
 
+msgid "language.KA"
+msgstr "Georgisch"
+
+msgid "language.SK"
+msgstr "Slowakisch"
+
+msgid "language.HU"
+msgstr "Ungarisch"
+
+msgid "language.KO"
+msgstr "Koreanisch"
+
 msgid "rating.one"
 msgstr "Mehr als 1"
 
@@ -1161,23 +1182,41 @@ msgstr "Adresse (Zeile 1)"
 msgid "form.field.street_second"
 msgstr "Adresse (Zeile 2)"
 
-msgid "form.section.home address"
+msgid "form.section.general"
+msgstr "Persönliche Angaben"
+
+msgid "form.section.address"
 msgstr "Heimatadresse"
 
-msgid "form.section.billing address"
-msgstr "Rechnungsadresse"
-
-msgid "form.section.billing info"
+msgid "form.section.billing"
 msgstr "Rechnungsinfo"
 
-msgid "form.section.work info"
+msgid "form.section.work"
 msgstr "Arbeitsinfo"
 
-msgid "form.section.additional information"
+msgid "form.section.other"
 msgstr "zusätzliche Information"
 
 msgid "form.section.ticket"
-msgstr "Ticket"
+msgstr "Ticket auswählen"
+
+msgid "form.summary.caption"
+msgstr "Summary"
+
+msgid "form.summary.price"
+msgstr "Ticketpreis"
+
+msgid "form.summary.tax"
+msgstr "Tax"
+
+msgid "form.summary.total"
+msgstr "Total"
+
+msgid "form.summary.included"
+msgstr "enthalten"
+
+msgid "form.promo.caption"
+msgstr "Ich habe einen Gutscheincode"
 
 msgid "registration.successTitle"
 msgstr "Vielen Dank für die Anmeldung"

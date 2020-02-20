@@ -37,6 +37,20 @@ class WSB_Registration_Page extends WSB_Page {
 		parent::__construct();
 		$this->load_dependencies();
 		$this->requests = new WSB_Requests();
+		$this->load_templates();
+	}
+
+	private function load_templates() {
+		$field          = $this->get_template( 'registration/field', null );
+		$label          = $this->get_template( 'registration/label', null );
+		$input          = $this->get_template( 'registration/input', null );
+		$ticket         = $this->get_template( 'registration/ticket', null );
+		$ticket_section = $this->get_template( 'registration/ticket-section', null );
+		$this->twig->loader->setTemplate( 'field.twig', $field );
+		$this->twig->loader->setTemplate( 'label.twig', $label );
+		$this->twig->loader->setTemplate( 'input.twig', $input );
+		$this->twig->loader->setTemplate( 'ticket.twig', $ticket );
+		$this->twig->loader->setTemplate( 'ticket-section.twig', $ticket_section );
 	}
 
 	/**
@@ -54,7 +68,7 @@ class WSB_Registration_Page extends WSB_Page {
 	/**
 	 * Renders the registration page
 	 *
-	 * @param array  $attrs   Shortcode attributes.
+	 * @param array  $attrs Shortcode attributes.
 	 * @param string $content Shortcode content.
 	 *
 	 * @return string
@@ -115,7 +129,8 @@ class WSB_Registration_Page extends WSB_Page {
 	 */
 	private function render_page( $event ) {
 		$custom_template = $this->settings->get( WSB_Options::REGISTRATION_TEMPLATE );
-		$template        = $this->get_template( 'registration-page', $custom_template );
+		// $template        = $this->get_template( 'registration-page', $custom_template );
+		$template = $this->get_template( 'registration-page', null );
 
 		$template_data = array(
 			'event' => $event,
@@ -384,6 +399,7 @@ class WSB_Registration_Page extends WSB_Page {
 			$countries[ $code ] = __( 'country.' . $code, 'wsbintegration' );
 		}
 		asort( $countries );
+
 		return $countries;
 	}
 
@@ -391,8 +407,8 @@ class WSB_Registration_Page extends WSB_Page {
 	/**
 	 * Renders a simple shortcode with no additional logic
 	 *
-	 * @param string      $name    Name of the shortcode (like 'title', 'register').
-	 * @param array       $attrs   Attributes.
+	 * @param string      $name Name of the shortcode (like 'title', 'register').
+	 * @param array       $attrs Attributes.
 	 * @param null|string $content Replaceable content.
 	 *
 	 * @return string
@@ -409,13 +425,14 @@ class WSB_Registration_Page extends WSB_Page {
 		}
 		$attrs['event']     = $event;
 		$attrs['countries'] = $this->get_countries();
+
 		return $this->compile_string( $template, $attrs );
 	}
 
 	/**
 	 * Renders the registration page
 	 *
-	 * @param array  $attrs   Shortcode attributes.
+	 * @param array  $attrs Shortcode attributes.
 	 * @param string $content Shortcode content.
 	 *
 	 * @return string

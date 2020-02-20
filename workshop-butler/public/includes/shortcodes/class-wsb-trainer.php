@@ -147,17 +147,17 @@ EOD;
 				);
 			case 'public-rating':
 				return array(
-					'parameter'             => $trainer->public_stats->number_of_evaluations, // used only for visibility check.
+					'parameter'             => $trainer->stats->total->public_stats->evaluations, // used only for visibility check.
 					'description'           => 'trainer.experience.rating.public',
-					'rating'                => $trainer->public_stats->rating,
-					'number_of_evaluations' => $trainer->public_stats->number_of_evaluations,
+					'rating'                => $trainer->stats->total->public_stats->rating,
+					'number_of_evaluations' => $trainer->stats->total->public_stats->evaluations,
 				);
 			case 'private-rating':
 				return array(
-					'parameter'             => $trainer->private_stats->number_of_evaluations, // used only for visibility check.
+					'parameter'             => $trainer->stats->total->private_stats->evaluations, // used only for visibility check.
 					'description'           => 'trainer.experience.rating.private',
-					'rating'                => $trainer->private_stats->rating,
-					'number_of_evaluations' => $trainer->private_stats->number_of_evaluations,
+					'rating'                => $trainer->stats->total->private_stats->rating,
+					'number_of_evaluations' => $trainer->stats->total->private_stats->evaluations,
 				);
 			default:
 				return array(
@@ -212,11 +212,6 @@ EOD;
 				return array(
 					'content' => $content,
 					'link'    => $trainer->social_links->linked_in,
-				);
-			case 'google-plus':
-				return array(
-					'content' => $content,
-					'link'    => $trainer->social_links->google_plus,
 				);
 			default:
 				return array(

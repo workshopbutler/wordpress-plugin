@@ -77,8 +77,8 @@ class Schedule {
 	/**
 	 * Returns true if the event is at one day
 	 *
-	 * @since 2.0.0
 	 * @return boolean
+	 * @since 2.0.0
 	 */
 	public function at_one_day() {
 		return $this->start->format( 'y-M-d' ) === $this->end->format( 'y-M-d' );

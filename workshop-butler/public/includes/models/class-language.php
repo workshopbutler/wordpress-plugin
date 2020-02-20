@@ -20,6 +20,18 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'utils/language.php';
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Language {
+
+	/**
+	 * Creates Language object from JSON
+	 *
+	 * @param object $json JSON to convert.
+	 *
+	 * @return Language
+	 */
+	static function from_json( $json ) {
+		return new Language( $json->spoken, $json->materials );
+	}
+
 	/**
 	 * The array of spoken languages' codes at the workshop
 	 *
@@ -39,14 +51,11 @@ class Language {
 	/**
 	 * Language constructor
 	 *
-	 * @param string[]    $spoken    Spoken languages at the workshop.
+	 * @param string[]    $spoken Spoken languages at the workshop.
 	 * @param string|null $materials Materials' language.
 	 */
 	public function __construct( $spoken, $materials ) {
-		$this->spoken = array();
-		foreach ( $spoken as $lang ) {
-			array_push( $this->spoken, get_lang_code( $lang ) );
-		}
-		$this->materials = $materials ? get_lang_code( $materials ) : null;
+		$this->spoken    = $spoken;
+		$this->materials = $materials;
 	}
 }

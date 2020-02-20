@@ -18,6 +18,20 @@ namespace WorkshopButler;
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Ticket_Price {
+
+	/**
+	 * Creates a new ticket price.
+	 *
+	 * @param object $json JSON value.
+	 *
+	 * @return Ticket_Price
+	 */
+	static function from_json( $json ) {
+		$amount = $json->amount / 100;
+
+		return new Ticket_Price( $amount, $json->currency, $json->sign );
+	}
+
 	/**
 	 * Price amount
 	 *
@@ -38,18 +52,20 @@ class Ticket_Price {
 	 * Currency sign ($ or €)
 	 *
 	 * @since   2.0.0
-	 * @var     string
+	 * @var     string|null
 	 */
 	public $sign;
 
 	/**
 	 * Creates a new price
 	 *
-	 * @param object $json_data JSON representation of ticket price.
+	 * @param float       $amount Price amount.
+	 * @param string      $currency 3-letter currency code.
+	 * @param string|null $sign Currency sign.
 	 */
-	public function __construct( $json_data ) {
-		$this->amount   = $json_data->amount;
-		$this->currency = $json_data->currency;
-		$this->sign     = $json_data->sign;
+	public function __construct( $amount, $currency, $sign ) {
+		$this->amount   = $amount;
+		$this->currency = $currency;
+		$this->sign     = $sign;
 	}
 }

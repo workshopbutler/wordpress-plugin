@@ -1,6 +1,3 @@
 <span class="wsb-cite">
-  <strong>{{ testimonial.name }}</strong>
-  {% if testimonial.company %}
-      , {{ testimonial.company }}
-  {% endif %}
+  <strong>{{ testimonial.attendee }}</strong>{% if testimonial.company %}, {{ testimonial.company }}{% endif %}
 </span>

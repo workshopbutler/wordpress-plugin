@@ -1,0 +1,25 @@
+{#
+    This is a quite dirty hack. In 'converter.php' we replace 'street_1' and 'street_2' with
+    'street_first/street_second' to prevent i18next-conv transform them as plurals.
+
+    As a result, our translation files contain several keys not in line with Workshop Butler backend.
+    To make the translation work, we need to convert the keys again.
+#}
+{% if field.custom %}
+    {% set label = field.label %}
+{% else %}
+    {% set label = wsb_t("form.field.#{field.name}" | replace({'street_1': 'street_first', 'street_2': 'street_second'})) %}
+{% endif %}
+
+{% if field.type is not same as("checkbox") %}
+    {% if field.name is not same as ("promo_code") %}
+        <label for="{{ field.name }}" class="wsb-label">
+            {{ label }}
+            {% if field.required %}
+                <span class="wsb-form__required">*</span>
+            {% endif %}
+        </label>
+    {% endif %}
+{% else %}
+    <label for="{{ field.name }}" class="wsb-label"></label>
+{% endif %}

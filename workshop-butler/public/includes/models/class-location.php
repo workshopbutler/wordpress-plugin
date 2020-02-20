@@ -17,6 +17,19 @@ namespace WorkshopButler;
  * @package WSB_Integration
  */
 class Location {
+
+	/**
+	 * Creates Location object from JSON
+	 *
+	 * @param object $json JSON to convert.
+	 *
+	 * @return Location
+	 * @since 2.6.0
+	 */
+	static function from_json( $json ) {
+		return new Location( $json->online, $json->country, $json->city );
+	}
+
 	/**
 	 * True if an event is online
 	 *
@@ -44,11 +57,13 @@ class Location {
 	/**
 	 * Initialises a new location
 	 *
-	 * @param object $json_data JSON data from Workshop Butler API.
+	 * @param boolean     $online True if the event is online.
+	 * @param string      $country_code 2-letter country code.
+	 * @param string|null $city Name of the city.
 	 */
-	public function __construct( $json_data ) {
-		$this->online       = $json_data->online;
-		$this->country_code = $this->online ? '00' : $json_data->country_code;
-		$this->city         = $json_data->city;
+	public function __construct( $online, $country_code, $city ) {
+		$this->online       = $online;
+		$this->country_code = $this->online ? '00' : $country_code;
+		$this->city         = $city;
 	}
 }

@@ -14,8 +14,8 @@
                         {{ trainer.full_name() }}
                     {% endif %}
                     <div class="wsb-profile__rating">
-                        {% if trainer.public_stats.rating > 0 %}
-                            {% set rating = trainer.public_stats.rating | round(0, 'floor')%}
+                        {% if trainer.stats.total.public_stats.rating > 0 %}
+                            {% set rating = trainer.stats.total.public_stats.rating | round(0, 'floor')%}
                             {% set stars = range(0, 4) %}
                             {% for i in stars %}
                                 {% set index = i + 1 %}
@@ -30,8 +30,8 @@
                                     {% endif %}
                                 {% endif %}
                             {% endfor %}
-                            {{ wsb_f(trainer.public_stats.rating) }}
-                                <span>{{ wsb_pt('trainer.experience.rating.review', trainer.public_stats.number_of_evaluations) | raw }}</span>
+                            {{ wsb_f(trainer.stats.total.public_stats.rating) }}
+                                <span>{{ wsb_pt('trainer.experience.rating.review', trainer.stats.total.public_stats.number_of_evaluations) | raw }}</span>
                         {% endif  %}
                     </div>
 

@@ -1,0 +1,41 @@
+<div class="wsb-form__field {{ field.type }}" id="wsb-form-field-{{ field.name }}">
+    {{ include('label.twig') }}
+    {% if field.type is same as("textarea") %}
+        <textarea name="{{ field.name }}" data-control title="{{ field.label }}"
+                                    {% if field.required %} required {% endif %}
+                {% if event.state.closed() %} disabled {% endif %}
+                                    style="height : 90px ;" cols="30" rows="10"></textarea>
+    {% elseif field.type is same as ("select") %}
+        <select name="{{ field.name }}" title="{{ field.label }}" data-control
+                {% if field.required %} required {% endif %}
+                {% if event.state.closed() %} disabled {% endif %}
+        >
+            {% for option in field.options %}
+                <option value="{{ option.value }}">{{ option.label }}</option>
+            {% endfor %}
+        </select>
+    {% elseif field.type is same as("country") %}
+        <select name="{{ field.name }}" title="{{ field.label }}"
+                {% if field.required %} required {% endif %}
+                {% if event.state.closed() %} disabled {% endif %}
+                data-control
+        >
+            <option value="" selected disabled>{{ wsb_t('form.country') }}</option>
+            {% for code, name in countries %}
+                <option value="{{ code }}">{{ name }}</option>
+            {% endfor %}
+        </select>
+    {% elseif field.type is same as("checkbox") %}
+        <input name="{{ field.name }}" id="{{ field.name }}" type="checkbox"
+                {% if field.required %} required {% endif %}
+                {% if event.state.closed() %} disabled {% endif %}
+               value="yes" data-control/>
+        <label class="wsb-checkbox" for="{{ field.name }}">
+            {{ field.label | raw }}
+        </label>
+    {% elseif field.type is same as("ticket") %}
+        {{ include('ticket.twig') }}
+    {% else %}
+        {{ include('input.twig') }}
+    {% endif %}
+</div>

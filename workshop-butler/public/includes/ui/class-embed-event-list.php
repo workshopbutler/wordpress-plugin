@@ -82,7 +82,7 @@ class Embed_Event_List extends WSB_Page {
 		}
 
 		$events = array();
-		foreach ( $response->body as $json_event ) {
+		foreach ( $response->body->data as $json_event ) {
 			$event = new Event(
 				$json_event,
 				$this->settings->get_event_page_url(),

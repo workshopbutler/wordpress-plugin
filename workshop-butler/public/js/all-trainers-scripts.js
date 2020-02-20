@@ -21,7 +21,6 @@ function wsb_get_filter(name, value) {
 		}
 	};
 	switch (name) {
-		case 'location': return '[data-trainer-' + name + '="' + value + '"]';
 		case 'experience': return experienceFunction;
 		case 'rating': return ratingFunction;
 		default: return '[data-trainer-' + name + '*="' + value + '"]';

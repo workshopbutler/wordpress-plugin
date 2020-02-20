@@ -24,6 +24,15 @@ require_once plugin_dir_path( __FILE__ ) . 'class-ticket.php';
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Section {
+
+	/**
+	 * Section unique identifier
+	 *
+	 * @var string $id
+	 * @since 2.6.0
+	 */
+	public $id;
+
 	/**
 	 * Section's fields
 	 *
@@ -43,15 +52,19 @@ class Section {
 	/**
 	 * Section constructor.
 	 *
-	 * @param string $name      Name of the section.
-	 * @param object $json_data Section's field in JSON.
-	 * @param Event  $event     Related event.
+	 * @param string      $id Section's unique identifier.
+	 * @param string|null $name Name of the section.
+	 * @param object[]    $json Section's field in JSON.
+	 * @param Event       $event Related event.
 	 */
-	public function __construct( $name, $json_data, $event ) {
+	public function __construct( $id, $name, $json, $event ) {
+		$this->id   = $id;
 		$this->name = $name;
 		$fields     = array();
-		foreach ( $json_data as $field_data ) {
-			array_push( $fields, self::create_any_field( $field_data, $event ) );
+		if ( is_array( $json ) ) {
+			foreach ( $json as $field_data ) {
+				array_push( $fields, self::create_any_field( $field_data, $event ) );
+			}
 		}
 		$this->fields = array();
 		foreach ( $fields as $field ) {
@@ -66,7 +79,8 @@ class Section {
 	 * Creates any field, including tickets
 	 *
 	 * @param object $field_data JSON field data.
-	 * @param Event  $event      Form's event.
+	 * @param Event  $event Form's event.
+	 *
 	 * @return Field
 	 */
 	protected static function create_any_field( $field_data, $event ) {

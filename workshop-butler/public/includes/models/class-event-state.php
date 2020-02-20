@@ -10,6 +10,9 @@
 
 namespace WorkshopButler;
 
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-free-ticket-type.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-paid-tickets.php';
+
 /**
  * Represents an event's state
  *
@@ -56,23 +59,19 @@ class Event_State {
 			return true;
 		} elseif ( ! $this->event->tickets ) {
 			return false;
-		} elseif ( $this->event->free && $this->event->tickets->free->sold_out() ) {
+		} elseif ( $this->event->tickets instanceof Free_Ticket_Type && $this->event->tickets->sold_out() ) {
 			return true;
-		} else {
-			if ( ! $this->event->tickets ) {
-				return false;
-			}
-			if ( ! $this->event->free && count( $this->event->tickets->paid ) > 0 ) {
-				$sold_out = true;
-				foreach ( $this->event->tickets->paid as $ticket_type ) {
-					if ( $ticket_type->active() ) {
-						$sold_out = false;
-					}
+		} elseif ( $this->event->tickets instanceof Paid_Tickets && count( $this->event->tickets->types ) > 0 ) {
+			$sold_out = true;
+			foreach ( $this->event->tickets->types as $ticket_type ) {
+				if ( $ticket_type->active() ) {
+					$sold_out = false;
 				}
-				return $sold_out;
-			} else {
-				return false;
 			}
+
+			return $sold_out;
+		} else {
+			return false;
 		}
 	}
 
@@ -89,20 +88,18 @@ class Event_State {
 			return 'event.state.private';
 		} elseif ( ! $this->event->tickets ) {
 			return null;
-		} elseif ( $this->event->free && $this->event->tickets->free->sold_out() ) {
+		} elseif ( $this->event->tickets instanceof Free_Ticket_Type && $this->event->tickets->sold_out() ) {
 			return 'event.state.soldOut';
-		} else {
-			if ( ! $this->event->free && count( $this->event->tickets->paid ) > 0 ) {
-				$sold_out = true;
-				foreach ( $this->event->tickets->paid as $ticket_type ) {
-					if ( $ticket_type->active() ) {
-						$sold_out = false;
-					}
+		} elseif ( $this->event->tickets instanceof Paid_Tickets && count( $this->event->tickets->types ) > 0 ) {
+			$sold_out = true;
+			foreach ( $this->event->tickets->types as $ticket_type ) {
+				if ( $ticket_type->active() ) {
+					$sold_out = false;
 				}
-				return $sold_out ? 'event.state.soldOut' : null;
-			} else {
-				return null;
 			}
+			return $sold_out ? 'event.state.soldOut' : null;
+		} else {
+			return null;
 		}
 	}
 

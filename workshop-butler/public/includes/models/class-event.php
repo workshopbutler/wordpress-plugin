@@ -312,9 +312,9 @@ class Event {
 	 * @return Trainer[]
 	 */
 	private function get_trainers( $json_data, $trainer_page_url ) {
-		if ( $json_data->facilitators ) {
+		if ( $json_data->trainers ) {
 			$trainers = array();
-			foreach ( $json_data->facilitators as $trainer ) {
+			foreach ( $json_data->trainers as $trainer ) {
 				array_push( $trainers, new Trainer( $trainer, $trainer_page_url ) );
 			}
 

@@ -10,6 +10,8 @@
 
 namespace WorkshopButler;
 
+use DateTime;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-ticket-price.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-ticket-type-state.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-ticket-type.php';
@@ -22,11 +24,28 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-ticket-type.
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Paid_Ticket_Type extends Ticket_Type {
+
+	/**
+	 * Creates Paid_Ticket_Type object from JSON
+	 *
+	 * @param object $json JSON to convert.
+	 *
+	 * @return Paid_Ticket_Type
+	 * @since 2.6.0
+	 */
+	static function from_json( $json ) {
+		$start = $json->start ? new DateTime( $json->start ) : null;
+		$end   = $json->end ? new DateTime( $json->end ) : null;
+		$price = Ticket_Price::from_json( $json->price );
+
+		return new Paid_Ticket_Type( $json->id, $json->name, $json->total, $json->left, $start, $end, $json->vat_excluded, $price );
+	}
+
 	/**
 	 * ID of the type
 	 *
 	 * @since  2.0.0
-	 * @var    int $id ID of the type
+	 * @var    string $id ID of the type
 	 */
 	public $id;
 
@@ -50,7 +69,7 @@ class Paid_Ticket_Type extends Ticket_Type {
 	 * Date when the tickets of this type go on sale
 	 *
 	 * @since  2.0.0
-	 * @var    \DateTime $start Date when the tickets of this type go on sale
+	 * @var    DateTime|null $start Date when the tickets of this type go on sale
 	 */
 	public $start;
 
@@ -58,7 +77,7 @@ class Paid_Ticket_Type extends Ticket_Type {
 	 * Date when sales of the tickets of this type end
 	 *
 	 * @since  2.0.0
-	 * @var    \DateTime $end Date when sales of the tickets of this type end
+	 * @var    DateTime|null $end Date when sales of the tickets of this type end
 	 */
 	public $end;
 
@@ -79,68 +98,66 @@ class Paid_Ticket_Type extends Ticket_Type {
 	public $price;
 
 	/**
-	 * State of the ticket type. For example, sold out or active
-	 *
-	 * @since   2.0.0
-	 * @var     Ticket_Type_State $state
-	 */
-	private $state;
-
-	/**
 	 * Creates a new paid ticket type from JSON
 	 *
-	 * @param object $json_data JSON for a ticket type.
+	 * @param string        $id Unique ID.
+	 * @param string        $name Name.
+	 * @param int           $total Total number of tickets.
+	 * @param int           $left Number of tickets left.
+	 * @param DateTime|null $start Start datetime of ticket sales.
+	 * @param DateTime|null $end End datetime of ticket sales.
+	 * @param boolean       $excluded_tax True if the tax is excluded.
+	 * @param Ticket_Price  $price Price of the ticket.
 	 */
-	public function __construct( $json_data ) {
-		$this->id                     = $json_data->id;
-		$this->name                   = $json_data->name;
-		$this->number_of_tickets      = $json_data->amount;
-		$this->number_of_tickets_left = $json_data->left;
-		$this->start                  = new \DateTime( $json_data->start );
-		$this->end                    = new \DateTime( $json_data->end );
-		$this->excluded_tax           = ! $json_data->with_vat;
-		$this->price                  = new Ticket_Price( $json_data->price );
-		$this->state                  = new Ticket_Type_State( $json_data->state );
+	public function __construct( $id, $name, $total, $left, $start, $end, $excluded_tax, $price ) {
+		$this->id                     = $id;
+		$this->name                   = $name;
+		$this->number_of_tickets      = $total;
+		$this->number_of_tickets_left = $left;
+		$this->start                  = $start;
+		$this->end                    = $end;
+		$this->excluded_tax           = $excluded_tax;
+		$this->price                  = $price;
 	}
 
 	/**
 	 * Returns true if the tickets of this type can be bought
 	 *
-	 * @since  2.0.0
 	 * @return boolean
+	 * @since  2.0.0
 	 */
 	public function active() {
-		return $this->state->valid;
+		return ! $this->sold_out() && ! $this->ended() && ! $this->in_future();
 	}
 
 	/**
 	 * Returns true if the tickets of this type can be bought later, in future
 	 *
-	 * @since  2.0.0
 	 * @return boolean
+	 * @since  2.0.0
 	 */
 	public function in_future() {
-		return $this->state->in_future;
+		return $this->start ? $this->start > new DateTime( 'now' ) : false;
 	}
 
 	/**
 	 * Returns true if no more seats left
 	 *
-	 * @since  2.0.0
 	 * @return boolean
+	 * @since  2.0.0
 	 */
 	public function sold_out() {
-		return $this->state->sold_out;
+		return $this->number_of_tickets_left < 1;
 	}
 
 	/**
 	 * Returns true if the sales of tickets of this type have ended
 	 *
-	 * @since  2.0.0
 	 * @return boolean
+	 * @since  2.0.0
 	 */
 	public function ended() {
-		return $this->state->ended;
+		return $this->end ? $this->end < new DateTime( 'now' ) : false;
 	}
 
 	/**

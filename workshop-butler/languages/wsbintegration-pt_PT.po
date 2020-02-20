@@ -5,9 +5,18 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"POT-Creation-Date: 2019-09-21T17:45:19.034Z\n"
-"PO-Revision-Date: 2019-09-21T17:45:19.034Z\n"
+"POT-Creation-Date: 2020-02-22T11:52:39.734Z\n"
+"PO-Revision-Date: 2020-02-22T11:52:39.734Z\n"
 "Language: pt\n"
+
+msgid "attendees.empty"
+msgstr "Nenhum participante encontrado"
+
+msgid "pagination.next"
+msgstr "Próximo"
+
+msgid "pagination.prev"
+msgstr "Anterior"
 
 msgid "filter.categories"
 msgstr "Todas as categorias"
@@ -873,6 +882,18 @@ msgstr "turco"
 msgid "language.VI"
 msgstr "vietnamita"
 
+msgid "language.KA"
+msgstr "georgiano"
+
+msgid "language.SK"
+msgstr "eslovaco"
+
+msgid "language.HU"
+msgstr "húngara"
+
+msgid "language.KO"
+msgstr "coreana"
+
 msgid "rating.one"
 msgstr "Mais de 1"
 
@@ -1161,23 +1182,41 @@ msgstr "Endereço 1"
 msgid "form.field.street_second"
 msgstr "Endereço 2"
 
-msgid "form.section.home address"
+msgid "form.section.general"
+msgstr "Informações pessoais"
+
+msgid "form.section.address"
 msgstr "Endereço Residencial"
 
-msgid "form.section.billing address"
-msgstr "Endereço de Cobrança"
-
-msgid "form.section.work info"
+msgid "form.section.work"
 msgstr "Info de Trabalho"
 
-msgid "form.section.billing info"
+msgid "form.section.billing"
 msgstr "Informação de pagamento"
 
-msgid "form.section.additional information"
+msgid "form.section.other"
 msgstr "Informação Adicional"
 
 msgid "form.section.ticket"
-msgstr "Bilhete"
+msgstr "Escolha seu bilhete"
+
+msgid "form.summary.caption"
+msgstr "Resumo"
+
+msgid "form.summary.price"
+msgstr "Preço do bilhete"
+
+msgid "form.summary.tax"
+msgstr "Tax"
+
+msgid "form.summary.total"
+msgstr "Total"
+
+msgid "form.summary.included"
+msgstr "incluído"
+
+msgid "form.promo.caption"
+msgstr "Eu tenho um código promocional"
 
 msgid "registration.successTitle"
 msgstr "Obrigado pelo seu registro"

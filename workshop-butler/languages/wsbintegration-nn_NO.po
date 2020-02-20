@@ -5,9 +5,18 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-09-21T17:45:18.471Z\n"
-"PO-Revision-Date: 2019-09-21T17:45:18.471Z\n"
+"POT-Creation-Date: 2020-02-22T11:52:39.146Z\n"
+"PO-Revision-Date: 2020-02-22T11:52:39.146Z\n"
 "Language: nn\n"
+
+msgid "attendees.empty"
+msgstr "Ingen deltagere funnet"
+
+msgid "pagination.next"
+msgstr "Neste"
+
+msgid "pagination.prev"
+msgstr "Tidligere"
 
 msgid "filter.categories"
 msgstr "Alle kategorier"
@@ -834,6 +843,18 @@ msgstr "Turkish"
 msgid "language.VI"
 msgstr "Vietnamesisk"
 
+msgid "language.KA"
+msgstr "Georgisk"
+
+msgid "language.SK"
+msgstr "Slovakisk"
+
+msgid "language.HU"
+msgstr "Ungarsk"
+
+msgid "language.KO"
+msgstr "Koreansk"
+
 msgid "rating.one"
 msgstr "Mer enn 1"
 
@@ -1122,23 +1143,41 @@ msgstr "Gate 1"
 msgid "form.field.street_second"
 msgstr "Gate 2"
 
-msgid "form.section.home address"
+msgid "form.section.general"
+msgstr "Personlig informasjon"
+
+msgid "form.section.address"
 msgstr "Hjemmeadresse"
 
-msgid "form.section.billing address"
-msgstr "Fakturaadresse"
-
-msgid "form.section.billing info"
+msgid "form.section.billing"
 msgstr "Faktureringsinfo"
 
-msgid "form.section.work info"
+msgid "form.section.work"
 msgstr "Arbeid info"
 
-msgid "form.section.additional information"
+msgid "form.section.other"
 msgstr "Tilleggsinformasjon"
 
 msgid "form.section.ticket"
-msgstr "Billett"
+msgstr "Velg din billett"
+
+msgid "form.summary.caption"
+msgstr "Sammendrag"
+
+msgid "form.summary.price"
+msgstr "Billettpris"
+
+msgid "form.summary.tax"
+msgstr "Skatt"
+
+msgid "form.summary.total"
+msgstr "Total"
+
+msgid "form.summary.included"
+msgstr "inkludert"
+
+msgid "form.promo.caption"
+msgstr "Jeg har en kampanjekode"
 
 msgid "registration.successTitle"
 msgstr "Takk for registreringen"

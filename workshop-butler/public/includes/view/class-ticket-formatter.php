@@ -22,7 +22,7 @@ class Ticket_Formatter {
 	 * Formats different parts of the ticket type
 	 *
 	 * @param Ticket_Type $ticket_type Type to format.
-	 * @param string      $part        Name of the part to format.
+	 * @param string      $part Name of the part to format.
 	 *
 	 * @return string
 	 */
@@ -48,24 +48,32 @@ class Ticket_Formatter {
 	/**
 	 * Returns correctly-formatted price
 	 *
-	 * @since 2.0.0
 	 * @param Paid_Ticket_Type $ticket_type Ticket type to format.
+	 *
 	 * @return string
+	 * @since 2.0.0
 	 */
 	protected static function format_price( $ticket_type ) {
-		$without_fraction = ( $ticket_type->price->amount - floor( $ticket_type->price->amount ) ) < 0.001;
-		$decimals         = $without_fraction ? 0 : 2;
-		return $ticket_type->price->sign . number_format_i18n( $ticket_type->price->amount, $decimals );
+		if ( class_exists( 'NumberFormatter' ) ) {
+			$formatter = new \NumberFormatter( get_locale(), \NumberFormatter::CURRENCY );
+			return $formatter->formatCurrency( $ticket_type->price->amount, $ticket_type->price->currency );
+		} else {
+			$without_fraction = ( $ticket_type->price->amount - floor( $ticket_type->price->amount ) ) < 0.001;
+			$decimals         = $without_fraction ? 0 : 2;
+
+			$sign = $ticket_type->price->sign ? $ticket_type->price->sign : $ticket_type->price->currency;
+
+			return $sign . number_format_i18n( $ticket_type->price->amount, $decimals );
+		}
 	}
 
 	/**
 	 * Returns correctly-formatted stated of the given ticket type
 	 *
-	 * @since 2.0.0
-	 *
 	 * @param Ticket_Type $ticket_type Ticket type to format.
 	 *
 	 * @return string
+	 * @since 2.0.0
 	 */
 	protected static function format_state( $ticket_type ) {
 		if ( $ticket_type->sold_out() ) {
@@ -77,6 +85,7 @@ class Ticket_Formatter {
 				return '';
 			} else {
 				$token = _n( 'event.ticket.left', 'event.ticket.left', $ticket_type->number_of_tickets_left, 'wsbintegration' );
+
 				return sprintf( $token, $ticket_type->number_of_tickets_left );
 			}
 		}
@@ -85,9 +94,10 @@ class Ticket_Formatter {
 	/**
 	 * Returns correctly-formatted ticket description
 	 *
-	 * @since 2.0.0
 	 * @param Paid_Ticket_Type $ticket_type Ticket type to format.
+	 *
 	 * @return string
+	 * @since 2.0.0
 	 */
 	protected static function format_description( $ticket_type ) {
 		if ( $ticket_type->ended() ) {
@@ -96,6 +106,7 @@ class Ticket_Formatter {
 		if ( $ticket_type->active() ) {
 			return sprintf( __( 'event.ticket.endsOn', 'wsbintegration' ), Date_Formatter::format( $ticket_type->end ) );
 		}
+
 		return sprintf( __( 'event.ticket.onSaleFrom', 'wsbintegration' ), Date_Formatter::format( $ticket_type->start ) );
 	}
 }

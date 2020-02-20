@@ -82,8 +82,9 @@ class Sidebar_Widget extends \WP_Widget {
 	/**
 	 * Renders a widget's settings form
 	 *
-	 * @since 2.0.0
 	 * @param array $instance Widget's instance.
+	 *
+	 * @since 2.0.0
 	 */
 	public function form( $instance ) {
 		foreach ( $this->fields as $name => $field ) {
@@ -91,25 +92,25 @@ class Sidebar_Widget extends \WP_Widget {
 
 				case 'eventtype':
 					?>
-					<p>
-						<label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
-						<input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
-							name="<?php echo $this->get_field_name( $name ); ?>"
-							type="<?php echo $this->get_field_name( $field->type ); ?>"
-							value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
-					</p>
+                    <p>
+                        <label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
+                        <input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
+                               name="<?php echo $this->get_field_name( $name ); ?>"
+                               type="<?php echo $this->get_field_name( $field->type ); ?>"
+                               value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
+                    </p>
 					<?php
 					break;
 				default:
 					?>
-					<p>
-						<label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
-						<input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
-							name="<?php echo $this->get_field_name( $name ); ?>"
-							type="<?php echo $this->get_field_name( $field->type ); ?>"
-							value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
-					</p>
-					<?php
+                    <p>
+                        <label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
+                        <input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
+                               name="<?php echo $this->get_field_name( $name ); ?>"
+                               type="<?php echo $this->get_field_name( $field->type ); ?>"
+                               value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
+                    </p>
+				<?php
 			}
 		}
 	}
@@ -117,9 +118,10 @@ class Sidebar_Widget extends \WP_Widget {
 	/**
 	 * Renders a widget on the page
 	 *
-	 * @since 2.0.0
-	 * @param array $args     Widget's arguments.
+	 * @param array $args Widget's arguments.
 	 * @param array $instance Settings for the current instance of the widget.
+	 *
+	 * @since 2.0.0
 	 */
 	public function widget( $args, $instance ) {
 		$title = apply_filters( 'widget_title', $instance['title'] );
@@ -136,10 +138,11 @@ class Sidebar_Widget extends \WP_Widget {
 	/**
 	 * Updating widget by replacing the old instance with new
 	 *
-	 * @since 2.0.0
 	 * @param array $new_instance New widget instance.
 	 * @param array $old_instance Old widget instance.
+	 *
 	 * @return array
+	 * @since 2.0.0
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
@@ -147,6 +150,7 @@ class Sidebar_Widget extends \WP_Widget {
 		foreach ( array_keys( $this->fields ) as $name ) {
 			$instance[ $name ] = strip_tags( $new_instance[ $name ] );
 		}
+
 		return $instance;
 	}
 
@@ -170,18 +174,18 @@ class Sidebar_Widget extends \WP_Widget {
 	 *
 	 * @param array $instance Settings for the current instance of the widget.
 	 *
-	 * @since  2.0.0
 	 * @return string
+	 * @since  2.0.0
 	 */
 	public function render( $instance ) {
 		$method = 'events';
 		$fields = 'type,title,location,hashed_id,schedule,free,spoken_languages';
 
 		$query = array(
-			'future' => true,
+			'dates'  => 'future',
 			'public' => true,
 			'fields' => $fields,
-			'length' => $instance['length'],
+			'per_page' => $instance['length'],
 		);
 
 		if ( $instance['eventType'] ) {
@@ -198,19 +202,19 @@ class Sidebar_Widget extends \WP_Widget {
 	 * @param WSB_Response $response Workshop Butler API response.
 	 * @param array        $instance Settings for the current instance of the widget.
 	 *
-	 * @since  2.0.0
 	 * @return string
+	 * @since  2.0.0
 	 */
 	private function render_list( $response, $instance ) {
 		if ( $response->is_error() ) {
-			$html  = '<h2>' . __( 'Workshop Butler API: Request failed', 'wsbintegration' ) . '</h2>';
+			$html = '<h2>' . __( 'Workshop Butler API: Request failed', 'wsbintegration' ) . '</h2>';
 			$html .= '<p>' . __( 'Reason : ', 'wsbintegration' ) . $response->error . '</p>';
+
 			return $html;
 		}
 
 		$events = '<ul>';
-		$sliced = array_slice( $response->body, 0, $instance['length'] );
-		foreach ( $sliced as $json_event ) {
+		foreach ( $response->body->data as $json_event ) {
 			$event  = new Event(
 				$json_event,
 				$this->settings->get_event_page_url(),
@@ -228,6 +232,7 @@ class Sidebar_Widget extends \WP_Widget {
 				$event->title . '</a></li>';
 		}
 		$events .= '</ul>';
+
 		return $events;
 	}
 

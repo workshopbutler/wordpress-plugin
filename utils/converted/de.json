@@ -1,4 +1,11 @@
 {
+    "attendees": {
+        "empty": "Keine Teilnehmer gefunden"
+    },
+    "pagination": {
+        "next": "Nächster",
+        "prev": "Bisherige"
+    },
     "filter": {
         "categories": "Alle Kategorien",
         "locations": "Alle Standorte",
@@ -291,7 +298,11 @@
         "SV": "Schwedisch",
         "SR": "Serbisch",
         "TR": "Türkisch",
-        "VI": "Vietnamesisch"
+        "VI": "Vietnamesisch",
+        "KA": "Georgisch",
+        "SK": "Slowakisch",
+        "HU": "Ungarisch",
+        "KO": "Koreanisch"
     },
     "rating": {
         "one": "Mehr als 1",
@@ -426,12 +437,22 @@
             "street_second": "Adresse (Zeile 2)"
         },
         "section": {
-            "home address": "Heimatadresse",
-            "billing address": "Rechnungsadresse",
-            "billing info": "Rechnungsinfo",
-            "work info": "Arbeitsinfo",
-            "additional information": "zusätzliche Information",
-            "ticket": "Ticket"
+            "general": "Persönliche Angaben",
+            "address": "Heimatadresse",
+            "billing": "Rechnungsinfo",
+            "work": "Arbeitsinfo",
+            "other": "zusätzliche Information",
+            "ticket": "Ticket auswählen"
+        },
+        "summary": {
+            "caption": "Summary",
+            "price": "Ticketpreis",
+            "tax": "Tax",
+            "total": "Total",
+            "included": "enthalten"
+        },
+        "promo": {
+            "caption": "Ich habe einen Gutscheincode"
         }
     },
     "registration": {

@@ -194,4 +194,14 @@ class WSB_Options {
 			return null;
 		}
 	}
+
+	/**
+	 * Returns a selected theme
+	 *
+	 * @since 2.6.0
+	 * @return string
+	 */
+	public function get_theme() {
+		return $this->get( self::THEME, 'alfred' );
+	}
 }

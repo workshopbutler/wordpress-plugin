@@ -1,4 +1,11 @@
 {
+  "attendees": {
+    "empty": "Geen studenten gevonden"
+  },
+  "pagination": {
+    "next": "De volgende",
+    "prev": "Voorgaand"
+  },
   "filter": {
     "categories": "Alle categorieën",
     "locations": "Alle locaties",
@@ -291,7 +298,11 @@
     "SV": "Zweeds",
     "SR": "Servisch",
     "TR": "Turks",
-    "VI": "Vietnamees"
+    "VI": "Vietnamees",
+    "KA": "Georgische",
+    "SK": "Slowaakse",
+    "HU": "Hongaarse",
+    "KO": "Koreaanse"
   },
   "rating": {
     "one": "Meer dan 1",
@@ -427,13 +438,24 @@
 
     },
     "section": {
-      "home address": "Thuisadres",
-      "billing address": "Facturatie adres",
-      "work info": "Werkinfo",
-      "billing info": "Betaal informatie",
-      "additional information": "Extra informatie",
-      "ticket": "Ticket"
+      "general": "Persoonlijke informatie",
+      "address": "Thuisadres",
+      "work": "Werkinfo",
+      "billing": "Betaal informatie",
+      "other": "Extra informatie",
+      "ticket": "Kies uw ticket"
+    },
+    "summary": {
+      "caption": "Samenvatting",
+      "price": "Ticketprijs",
+      "tax": "Tax",
+      "total": "Total",
+      "included": "inbegrepen"
+    },
+    "promo": {
+      "caption": "Ik heb een promotiecode"
     }
+
   },
   "registration": {
     "successTitle": "Bedankt voor de registratie",

@@ -1,4 +1,11 @@
 {
+  "attendees": {
+    "empty": "Aucun élève trouvé"
+  },
+  "pagination": {
+    "next": "Prochain",
+    "prev": "Précédent"
+  },
   "filter": {
     "categories": "Toutes les catégories",
     "locations": "Tous les lieux",
@@ -291,7 +298,11 @@
     "SV": "Suédois",
     "SR": "Serbian",
     "TR": "Turc",
-    "VI": "Vietnamien"
+    "VI": "Vietnamien",
+    "KA": "Géorgien",
+    "SK": "Slovaque",
+    "HU": "Hongrois",
+    "KO": "Coréen"
   },
   "rating": {
     "one": "Plus de 1",
@@ -426,12 +437,22 @@
       }
     },
     "section": {
-      "home address": "Adresse du domicile",
-      "billing address": "Adresse de facturation",
-      "work info": "Informations professionnelles",
-      "billing info": "Informations de facturation",
-      "additional information": "Informations supplémentaires",
-      "ticket": "Billet"
+      "general": "Infos personnelles",
+      "address": "Adresse du domicile",
+      "work": "Informations professionnelles",
+      "billing": "Informations de facturation",
+      "other": "Informations supplémentaires",
+      "ticket": "Choisissez votre ticket"
+    },
+    "summary": {
+      "caption": "Summary",
+      "price": "Prix du ticket",
+      "tax": "Taxe",
+      "total": "Total",
+      "included": "inclus"
+    },
+    "promo": {
+      "caption": "J'ai un code promo"
     }
   },
   "registration": {

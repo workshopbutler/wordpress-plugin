@@ -39,14 +39,14 @@ class Ticket extends Field {
 	/**
 	 * Ticket constructor
 	 *
-	 * @param object  $json_data JSON field data.
-	 * @param Tickets $tickets   Available event's tickets.
+	 * @param object       $json_data JSON field data.
+	 * @param Paid_Tickets $tickets Available event's tickets.
 	 */
 	public function __construct( $json_data, $tickets ) {
 		parent::__construct( $json_data );
 		$this->tickets      = $tickets;
 		$this->excluded_tax = false;
-		foreach ( $tickets->paid as $ticket ) {
+		foreach ( $tickets->types as $ticket ) {
 			if ( $ticket->excluded_tax ) {
 				$this->excluded_tax = true;
 				break;

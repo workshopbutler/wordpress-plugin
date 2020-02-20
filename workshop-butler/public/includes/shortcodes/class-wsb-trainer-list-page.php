@@ -88,7 +88,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 		}
 
 		$trainers = array();
-		foreach ( $response->body as $json_trainer_data ) {
+		foreach ( $response->body->data as $json_trainer_data ) {
 			$trainer = new Trainer( $json_trainer_data, $trainer_url );
 			array_push( $trainers, $trainer );
 		}

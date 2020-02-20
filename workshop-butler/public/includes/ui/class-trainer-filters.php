@@ -25,7 +25,7 @@ class Trainer_Filters extends List_Filters {
 	/**
 	 * Initialises a new object
 	 *
-	 * @param Trainer[] $trainers        Available trainers which we use to build filters.
+	 * @param Trainer[] $trainers Available trainers which we use to build filters.
 	 * @param string[]  $visible_filters List of filters to render on the page.
 	 */
 	public function __construct( $trainers, $visible_filters ) {
@@ -61,7 +61,7 @@ class Trainer_Filters extends List_Filters {
 	 * Returns values for Badge filter
 	 *
 	 * @param string    $default_name Name of the default filter value.
-	 * @param Trainer[] $trainers     Available trainers to filter.
+	 * @param Trainer[] $trainers Available trainers to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
@@ -80,7 +80,7 @@ class Trainer_Filters extends List_Filters {
 	 * Returns values for Rating filter
 	 *
 	 * @param string    $default_name Name of the default filter value.
-	 * @param Trainer[] $trainers     Available trainers to filter.
+	 * @param Trainer[] $trainers Available trainers to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
@@ -100,6 +100,7 @@ class Trainer_Filters extends List_Filters {
 		foreach ( $ratings as $key => $value ) {
 			array_push( $values, new Filter_Value( __( 'rating.' . $key, 'wsbintegration' ), $value ) );
 		}
+
 		return $this->get_filter_data( $default_name, $values );
 	}
 
@@ -107,7 +108,7 @@ class Trainer_Filters extends List_Filters {
 	 * Returns values for Language filter
 	 *
 	 * @param string    $default_name Name of the default filter value.
-	 * @param Trainer[] $trainers     Available trainers to filter.
+	 * @param Trainer[] $trainers Available trainers to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
@@ -129,17 +130,19 @@ class Trainer_Filters extends List_Filters {
 	 * Returns values for Location filter
 	 *
 	 * @param string    $default_name Name of the default filter value.
-	 * @param Trainer[] $trainers     Available trainers to filter.
+	 * @param Trainer[] $trainers Available trainers to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
 	private function get_location_filter_data( $default_name, $trainers ) {
 		$values = array();
 		foreach ( $trainers as $trainer ) {
-			$country_name = __( 'country.' . $trainer->country_code, 'wsbintegration' );
+			foreach ( $trainer->works_in as $country_code ) {
+				$country_name = __( 'country.' . $country_code, 'wsbintegration' );
 
-			$value = new Filter_Value( $country_name, $trainer->country_code );
-			array_push( $values, $value );
+				$value = new Filter_Value( $country_name, $country_code );
+				array_push( $values, $value );
+			}
 		}
 
 		return $this->get_filter_data( $default_name, $values );
@@ -149,7 +152,7 @@ class Trainer_Filters extends List_Filters {
 	 * Returns values for Trainer filter
 	 *
 	 * @param string    $default_name Name of the default filter value.
-	 * @param Trainer[] $trainers     Available trainers to filter.
+	 * @param Trainer[] $trainers Available trainers to filter.
 	 *
 	 * @return Filter_Value[]
 	 */

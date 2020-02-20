@@ -18,10 +18,27 @@ namespace WorkshopButler;
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class Social_Links {
+
+	/**
+	 * Creates a new Social_Links object
+	 *
+	 * @param object $json JSON value.
+	 *
+	 * @return Social_Links
+	 * @since 2.6.0
+	 */
+	static function from_json( $json ) {
+		if ( $json ) {
+			return new Social_Links( $json->website, $json->blog, $json->twitter, $json->linkedin, $json->facebook );
+		} else {
+			return new Social_Links( null, null, null, null, null );
+		}
+	}
+
 	/**
 	 * Trainer's website
 	 *
-	 * @var string $website
+	 * @var string|null $website
 	 * @since 2.0.0
 	 */
 	public $website;
@@ -29,7 +46,7 @@ class Social_Links {
 	/**
 	 * Trainer's blog
 	 *
-	 * @var string $blog
+	 * @var string|null $blog
 	 * @since 2.0.0
 	 */
 	public $blog;
@@ -37,7 +54,7 @@ class Social_Links {
 	/**
 	 * Trainer's twitter account
 	 *
-	 * @var string $twitter
+	 * @var string|null $twitter
 	 * @since 2.0.0
 	 */
 	public $twitter;
@@ -45,7 +62,7 @@ class Social_Links {
 	/**
 	 * URL to the trainer's LinkedIn account
 	 *
-	 * @var string $linked_in
+	 * @var string|null $linked_in
 	 * @since 2.0.0
 	 */
 	public $linked_in;
@@ -53,32 +70,25 @@ class Social_Links {
 	/**
 	 * URL to the trainer's Facebook account
 	 *
-	 * @var string $facebook
+	 * @var string|null $facebook
 	 * @since 2.0.0
 	 */
 	public $facebook;
 
 	/**
-	 * URL to the trainer's G+ account
+	 * Social_Links constructor.
 	 *
-	 * @var string $google_plus
-	 * @since 2.0.0
+	 * @param string|null $website Trainer's website.
+	 * @param string|null $blog Trainer's blog.
+	 * @param string|null $twitter Link to the trainer's twitter.
+	 * @param string|null $linked_in Link to the trainer's linkedin account.
+	 * @param string|null $facebook Link to the trainer's facebook account.
 	 */
-	public $google_plus;
-
-	/**
-	 * Creates a new object
-	 *
-	 * @param object $json_data JSON data from Workshop Butler API.
-	 */
-	public function __construct( $json_data ) {
-		$this->website  = $json_data->website;
-		$this->blog     = $json_data->blog;
-		$this->facebook = $json_data->facebook_url;
-		if ( $json_data->twitter_handle ) {
-			$this->twitter = 'https://twitter.com/' . $json_data->twitter_handle;
-		}
-		$this->linked_in   = $json_data->linkedin_url;
-		$this->google_plus = $json_data->google_plus_url;
+	public function __construct( $website, $blog, $twitter, $linked_in, $facebook ) {
+		$this->website   = $website;
+		$this->blog      = $blog;
+		$this->facebook  = $facebook;
+		$this->twitter   = $twitter;
+		$this->linked_in = $linked_in;
 	}
 }
