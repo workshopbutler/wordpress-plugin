@@ -256,6 +256,7 @@ class WSB_Integration_Public {
 		add_shortcode( 'wsb_schedule_item', array( 'WorkshopButler\WSB_Schedule_Page', 'tag' ) );
 		add_shortcode( 'wsb_schedule_register', array( 'WorkshopButler\WSB_Schedule_Page', 'tag' ) );
 		add_shortcode( 'wsb_schedule_title', array( 'WorkshopButler\WSB_Schedule_Page', 'tag' ) );
+		add_shortcode( 'wsb_schedule_image', array( 'WorkshopButler\WSB_Schedule_Page', 'tag' ) );
 		add_shortcode( 'wsb_schedule_trainers', array( 'WorkshopButler\WSB_Schedule_Page', 'tag' ) );
 		add_shortcode( 'wsb_schedule_schedule', array( 'WorkshopButler\WSB_Schedule_Page', 'tag' ) );
 		add_shortcode( 'wsb_schedule_location', array( 'WorkshopButler\WSB_Schedule_Page', 'tag' ) );
@@ -271,6 +272,7 @@ class WSB_Integration_Public {
 		add_shortcode( 'wsb_event_title', array( 'WorkshopButler\WSB_Event', 'tag' ) );
 		add_shortcode( 'wsb_event_registration_button', array( 'WorkshopButler\WSB_Event', 'tag' ) );
 		add_shortcode( 'wsb_event_schedule', array( 'WorkshopButler\WSB_Event', 'tag' ) );
+		add_shortcode( 'wsb_event_image', array( 'WorkshopButler\WSB_Event', 'tag' ) );
 		add_shortcode( 'wsb_event_location', array( 'WorkshopButler\WSB_Event', 'tag' ) );
 		add_shortcode( 'wsb_event_social_links', array( 'WorkshopButler\WSB_Event', 'tag' ) );
 		add_shortcode( 'wsb_event_events', array( 'WorkshopButler\WSB_Event', 'tag' ) );

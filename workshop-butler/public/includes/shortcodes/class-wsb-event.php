@@ -33,9 +33,17 @@ class WSB_Event extends WSB_Page {
 			case 'tickets':
 				$show_expired_tickets   = $this->settings->get( WSB_Options::SHOW_EXPIRED_TICKETS, true );
 				$show_number_of_tickets = $this->settings->get( WSB_Options::SHOW_NUMBER_OF_TICKETS, true );
+
 				return array(
 					'show_expired_tickets'   => $show_expired_tickets,
 					'show_number_of_tickets' => $show_number_of_tickets,
+				);
+			case 'image':
+				return array(
+					'width'  => '300',
+					'height' => '200',
+					'type'   => 'full',
+					'class'  => null,
 				);
 			default:
 				return array();
@@ -46,8 +54,8 @@ class WSB_Event extends WSB_Page {
 	/**
 	 * Renders a simple shortcode with no additional logic
 	 *
-	 * @param string      $name    Name of the shortcode (like 'title', 'register').
-	 * @param array       $attrs   Attributes.
+	 * @param string      $name Name of the shortcode (like 'title', 'register').
+	 * @param array       $attrs Attributes.
 	 * @param null|string $content Replaceable content.
 	 *
 	 * @return bool|string
@@ -62,6 +70,7 @@ class WSB_Event extends WSB_Page {
 			return '[wsb_event_' . $name . ']';
 		}
 		$attrs['event'] = $event;
+
 		return $this->compile_string( $template, $attrs );
 	}
 

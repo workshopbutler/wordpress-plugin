@@ -21,6 +21,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-location.php
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-event-state.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-registration-page.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-event-url.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-cover-image.php';
 require_once plugin_dir_path( __FILE__ ) . 'form/class-form.php';
 
 
@@ -177,6 +178,14 @@ class Event {
 	public $state;
 
 	/**
+	 * Cover image for the event
+	 *
+	 * @var Cover_Image $cover_image
+	 * @since 2.6.0
+	 */
+	public $cover_image;
+
+	/**
 	 * The url to the event
 	 *
 	 * @since   2.0.0
@@ -187,9 +196,9 @@ class Event {
 	/**
 	 * Creates a new object
 	 *
-	 * @param object      $json_data             JSON data from Workshop Butler API.
-	 * @param string|null $event_page_url        Event page URL on the integrated website.
-	 * @param string|null $trainer_page_url      Trainer profile page URL on the integrated website.
+	 * @param object      $json_data JSON data from Workshop Butler API.
+	 * @param string|null $event_page_url Event page URL on the integrated website.
+	 * @param string|null $trainer_page_url Trainer profile page URL on the integrated website.
 	 * @param string|null $registration_page_url Registration page URL on the integrated website.
 	 */
 	public function __construct( $json_data, $event_page_url, $trainer_page_url, $registration_page_url ) {
@@ -225,6 +234,7 @@ class Event {
 			$registration_page_url,
 			$this->hashed_id
 		);
+		$this->cover_image       = Cover_Image::from_json( $json_data->cover_image );
 
 		$this->trainers = $this->get_trainers( $json_data, $trainer_page_url );
 		$this->state    = new Event_State( $this );
@@ -233,8 +243,8 @@ class Event {
 	/**
 	 * Returns the URL for the event's page
 	 *
-	 * @since 2.1.0
 	 * @return string
+	 * @since 2.1.0
 	 */
 	public function url() {
 		return $this->url->url;
@@ -243,8 +253,8 @@ class Event {
 	/**
 	 * Returns true if the URL leads to a third-party website
 	 *
-	 * @since  2.1.0
 	 * @return boolean
+	 * @since  2.1.0
 	 */
 	public function is_url_external() {
 		return $this->url->on_third_party_website;
@@ -255,8 +265,8 @@ class Event {
 	 *
 	 * This method is used in templates
 	 *
-	 * @since  2.0.0
 	 * @return string[]
+	 * @since  2.0.0
 	 */
 	public function names_of_trainers() {
 		return array_map(
@@ -270,8 +280,8 @@ class Event {
 	/**
 	 * Returns Tickets object
 	 *
-	 * @param boolean            $free              True if the event is free.
-	 * @param Free_Ticket_Type   $free_ticket_type  Free tickets.
+	 * @param boolean            $free True if the event is free.
+	 * @param Free_Ticket_Type   $free_ticket_type Free tickets.
 	 * @param Paid_Ticket_Type[] $paid_ticket_types Paid tickets.
 	 *
 	 * @return null|Tickets
@@ -284,6 +294,7 @@ class Event {
 				},
 				$paid_ticket_types
 			);
+
 			return $free ?
 				new Tickets( array(), new Free_Ticket_Type( $free_ticket_type ) ) :
 				new Tickets( $paid_tickets, null );
@@ -295,8 +306,9 @@ class Event {
 	/**
 	 * Returns a list of event trainers
 	 *
-	 * @param object      $json_data        JSON representation of a trainer.
+	 * @param object      $json_data JSON representation of a trainer.
 	 * @param string|null $trainer_page_url Trainer profile page URL on the integrated website.
+	 *
 	 * @return Trainer[]
 	 */
 	private function get_trainers( $json_data, $trainer_page_url ) {
@@ -305,6 +317,7 @@ class Event {
 			foreach ( $json_data->facilitators as $trainer ) {
 				array_push( $trainers, new Trainer( $trainer, $trainer_page_url ) );
 			}
+
 			return $trainers;
 		} else {
 			return array();

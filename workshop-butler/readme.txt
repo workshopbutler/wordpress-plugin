@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.6.0 =
+* Two new shortcodes added to show cover image of events: [wsb_schedule_image] and [wsb_event_image]
+
 = 2.5.0 =
 * Added 'Event Type' option to the widget. You can show events only from the selected event type
 * Added 'event_type' parameter to '[wsb_schedule]' shortcode. You can show events only from the selected event type

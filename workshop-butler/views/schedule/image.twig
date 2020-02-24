@@ -1,0 +1,10 @@
+{% set url = event.cover_image.thumbnail %}
+{% if url %}
+    {% if without_url %}
+        <img src="{{ url }}" alt="{{ event.title }}" width="{{ width }}" height="{{ height }}"/>
+    {% else %}
+        <a href="{{ event.url }}">
+            <img src="{{ url }}" alt="{{ event.title }}"  width="{{ width }}" height="{{ height }}"/>
+        </a>
+    {% endif %}
+{% endif %}

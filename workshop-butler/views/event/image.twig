@@ -1,0 +1,5 @@
+{% set url = type == 'thumbnail' ? event.cover_image.thumbnail : event.cover_image.url %}
+{% if url %}
+    <img src="{{ url }}" alt="{{ event.title }}" width="{{ width }}" height="{{ height }}"
+        {% if class %} class="{{ class }}" {% endif %}/>
+{% endif %}

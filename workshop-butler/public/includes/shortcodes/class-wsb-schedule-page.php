@@ -55,11 +55,11 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Retrieves the page data and renders it
 	 *
-	 * @param array       $attrs   Short code attributes.
+	 * @param array       $attrs Short code attributes.
 	 * @param null|string $content Short code content.
 	 *
-	 * @since  2.0.0
 	 * @return string
+	 * @since  2.0.0
 	 */
 	public function render_page( $attrs = array(), $content = null ) {
 		// Load styles and scripts only on demand.
@@ -104,6 +104,7 @@ class WSB_Schedule_Page extends WSB_Page {
 		if ( ! empty( $attrs['event_type'] ) ) {
 			$defaults['event_type'] = $attrs['event_type'];
 		}
+
 		return shortcode_atts( $defaults, $attrs );
 	}
 
@@ -111,11 +112,11 @@ class WSB_Schedule_Page extends WSB_Page {
 	 * Renders the list of events
 	 *
 	 * @param WSB_Response  $response Workshop Butler API response.
-	 * @param array         $attrs    Widget's attributes.
-	 * @param string | null $content  Content of the wsb_schedule shortcode.
+	 * @param array         $attrs Widget's attributes.
+	 * @param string | null $content Content of the wsb_schedule shortcode.
 	 *
-	 * @since  2.0.0
 	 * @return string
+	 * @since  2.0.0
 	 */
 	private function render_list( $response, $attrs, $content ) {
 		if ( $response->is_error() ) {
@@ -166,8 +167,8 @@ class WSB_Schedule_Page extends WSB_Page {
 	 *
 	 * @param array $attrs Short code attributes.
 	 *
-	 * @since  2.0.0
 	 * @return string
+	 * @since  2.0.0
 	 */
 	protected function render_filters( $attrs = array() ) {
 		$events = $this->dict->get_events();
@@ -186,6 +187,7 @@ class WSB_Schedule_Page extends WSB_Page {
 		);
 
 		$event_filters = new Event_Filters( $events, $available_filters );
+
 		return $this->compile_string( $template, array( 'filters' => $event_filters->get_filters() ) );
 	}
 
@@ -211,6 +213,12 @@ class WSB_Schedule_Page extends WSB_Page {
 				return array( 'registration' => 'false' );
 			case 'trainers':
 				return array( 'name' => 'true' );
+			case 'image':
+				return array(
+					'without_url' => 'false',
+					'width'       => '300',
+					'height'      => '200',
+				);
 			default:
 				return array();
 		}
@@ -219,11 +227,11 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Renders the list of events
 	 *
-	 * @param array       $attrs   Short code attributes.
+	 * @param array       $attrs Short code attributes.
 	 * @param null|string $content Short code content.
 	 *
-	 * @since  2.0.0
 	 * @return string
+	 * @since  2.0.0
 	 */
 	protected function render_item( $attrs = array(), $content = null ) {
 		$events = $this->dict->get_events();
@@ -240,7 +248,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			$this->dict->set_event( $event );
 			$item_content           = $this->compile_string( $content, array( 'event' => $event ) );
 			$processed_item_content = do_shortcode( $item_content );
-			$html                  .= $this->compile_string(
+			$html                   .= $this->compile_string(
 				$item_template,
 				array(
 					'event'   => $event,
@@ -267,18 +275,19 @@ class WSB_Schedule_Page extends WSB_Page {
 		$attrs['content'] = $html;
 		$attrs['cols']    = $columns;
 		$attrs['layout']  = $this->get_list_type();
+
 		return $this->compile_string( $list_template, $attrs );
 	}
 
 	/**
 	 * Renders a simple shortcode with no additional logic
 	 *
-	 * @param string      $name    Name of the shortcode (like 'title', 'register').
-	 * @param array       $attrs   Attributes.
+	 * @param string      $name Name of the shortcode (like 'title', 'register').
+	 * @param array       $attrs Attributes.
 	 * @param null|string $content Replaceable content.
 	 *
-	 * @since 2.0.0
 	 * @return string
+	 * @since 2.0.0
 	 */
 	protected function render_simple_shortcode( $name, $attrs = array(), $content = null ) {
 		$event = $this->dict->get_event();
@@ -299,14 +308,15 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Returns the type of event list
 	 *
-	 * @since  2.0.0
 	 * @return string
+	 * @since  2.0.0
 	 */
 	private function get_list_type() {
 		$attrs = $this->dict->get_schedule_attrs();
 		if ( is_null( $attrs ) || is_null( $attrs['layout'] ) ) {
 			return 'table';
 		}
+
 		return $attrs['layout'];
 	}
 
@@ -314,13 +324,15 @@ class WSB_Schedule_Page extends WSB_Page {
 	/**
 	 * Handles 'wsb_schedule' shortcode
 	 *
-	 * @param array  $attrs   Shortcode attributes.
+	 * @param array  $attrs Shortcode attributes.
 	 * @param string $content Shortcode content.
-	 * @since  2.0.0
+	 *
 	 * @return string
+	 * @since  2.0.0
 	 */
 	public static function page( $attrs, $content ) {
 		$page = new WSB_Schedule_Page();
+
 		return $page->render_page( $attrs, $content );
 	}
 }
