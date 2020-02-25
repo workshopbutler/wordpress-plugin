@@ -25,7 +25,7 @@ class Social_Links {
 	 * @param object $json JSON value.
 	 *
 	 * @return Social_Links
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	static function from_json( $json ) {
 		if ( $json ) {

@@ -31,7 +31,7 @@ class Paid_Ticket_Type extends Ticket_Type {
 	 * @param object $json JSON to convert.
 	 *
 	 * @return Paid_Ticket_Type
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	static function from_json( $json ) {
 		$start = $json->start ? new DateTime( $json->start ) : null;

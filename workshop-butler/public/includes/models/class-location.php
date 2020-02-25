@@ -24,7 +24,7 @@ class Location {
 	 * @param object $json JSON to convert.
 	 *
 	 * @return Location
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	static function from_json( $json ) {
 		return new Location( $json->online, $json->country, $json->city );

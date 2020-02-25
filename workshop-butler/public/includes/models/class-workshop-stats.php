@@ -2,7 +2,7 @@
 /**
  * This file contains Workshop_Stats class
  *
- * @since 2.6.0
+ * @since 2.7.0
  * @package WorkshopButler
  */
 
@@ -14,7 +14,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-votes.php';
  * Describes a workshop's statistics
  *
  * @package WorkshopButler
- * @since 2.6.0
+ * @since 2.7.0
  */
 class Workshop_Stats {
 
@@ -33,7 +33,7 @@ class Workshop_Stats {
 	 * Number of evaluations.
 	 *
 	 * @var int $evaluations
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $evaluations;
 
@@ -41,7 +41,7 @@ class Workshop_Stats {
 	 * Median
 	 *
 	 * @var float $median
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $median;
 
@@ -49,7 +49,7 @@ class Workshop_Stats {
 	 * NPS in percents
 	 *
 	 * @var float $nps
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $nps;
 
@@ -57,7 +57,7 @@ class Workshop_Stats {
 	 * Average rating.
 	 *
 	 * @var float $rating
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $rating;
 
@@ -65,7 +65,7 @@ class Workshop_Stats {
 	 * Raw attendees' votes.
 	 *
 	 * @var Votes $votes
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $votes;
 

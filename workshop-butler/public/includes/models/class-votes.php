@@ -3,7 +3,7 @@
  * This file contains Votes class
  *
  * @package WorkshopButler
- * @since 2.6.0
+ * @since 2.7.0
  */
 
 namespace WorkshopButler;
@@ -12,7 +12,7 @@ namespace WorkshopButler;
  * Represents the set of votes for one object (workshop, for example)
  *
  * @package WorkshopButler
- * @since 2.6.0
+ * @since 2.7.0
  */
 class Votes {
 
@@ -20,7 +20,7 @@ class Votes {
 	 * Number of voters, who gave '0'
 	 *
 	 * @var int $vote0
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $vote0;
 
@@ -28,7 +28,7 @@ class Votes {
 	 * Number of voters, who gave '1'
 	 *
 	 * @var int $vote1
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $vote1;
 
@@ -36,7 +36,7 @@ class Votes {
 	 * Number of voters, who gave '2'
 	 *
 	 * @var int $vote2
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $vote2;
 
@@ -44,7 +44,7 @@ class Votes {
 	 * Number of voters, who gave '3'
 	 *
 	 * @var int $vote3
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $vote3;
 
@@ -52,7 +52,7 @@ class Votes {
 	 * Number of voters, who gave '4'
 	 *
 	 * @var int $vote4
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $vote4;
 
@@ -60,7 +60,7 @@ class Votes {
 	 * Number of voters, who gave '5'
 	 *
 	 * @var int $vote5
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $vote5;
 
@@ -68,7 +68,7 @@ class Votes {
 	 * Number of voters, who gave '6'
 	 *
 	 * @var int $vote6
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $vote6;
 
@@ -76,7 +76,7 @@ class Votes {
 	 * Number of voters, who gave '7'
 	 *
 	 * @var int $vote7
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $vote7;
 
@@ -84,7 +84,7 @@ class Votes {
 	 * Number of voters, who gave '8'
 	 *
 	 * @var int $vote8
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $vote8;
 
@@ -92,7 +92,7 @@ class Votes {
 	 * Number of voters, who gave '9'
 	 *
 	 * @var int $vote9
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $vote9;
 
@@ -100,7 +100,7 @@ class Votes {
 	 * Number of voters, who gave '10'
 	 *
 	 * @var int $vote10
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $vote10;
 

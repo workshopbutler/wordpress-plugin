@@ -132,7 +132,7 @@ class Trainer {
 	/**
 	 * Trainer's statistics
 	 *
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 * @var Trainer_Stats
 	 */
 	public $stats;
@@ -148,7 +148,7 @@ class Trainer {
 	/**
 	 * List of countries (2-letter codes) where the trainer works in
 	 *
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 * @var string[]
 	 */
 	public $works_in;

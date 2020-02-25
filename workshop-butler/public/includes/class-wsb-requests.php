@@ -194,7 +194,7 @@ class WSB_Requests {
 	 * Returns plugin statistics for request
 	 *
 	 * @return string
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	protected function get_plugin_stats() {
 		return 'w;' . WSB_INTEGRATION_VERSION . ';' . $this->settings->get_theme();

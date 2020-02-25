@@ -3,7 +3,7 @@
  * This file contains Ticket_Section class.
  *
  * @package WorkshopButler
- * @since 2.6.0
+ * @since 2.7.0
  */
 
 namespace WorkshopButler;
@@ -14,7 +14,7 @@ require_once plugin_dir_path( __FILE__ ) . 'class-section.php';
  * Represents a ticket section on the form
  *
  * @package WorkshopButler
- * @since 2.6.0
+ * @since 2.7.0
  */
 class Ticket_Section extends Section {
 
@@ -22,7 +22,7 @@ class Ticket_Section extends Section {
 	 * Unique ID of the section
 	 *
 	 * @var string $id
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	static public $section_id = 'ticket';
 
@@ -30,7 +30,7 @@ class Ticket_Section extends Section {
 	 * Name of promo code field
 	 *
 	 * @var string $promo
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	static public $promo = 'promo_code';
 
@@ -38,7 +38,7 @@ class Ticket_Section extends Section {
 	 * True if the section contains 'promo code' field
 	 *
 	 * @var boolean $with_promo
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $with_promo;
 
@@ -46,7 +46,7 @@ class Ticket_Section extends Section {
 	 * True if the tax is excluded from the price of tickets.
 	 *
 	 * @var boolean $excluded_tax
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $excluded_tax;
 
@@ -54,7 +54,7 @@ class Ticket_Section extends Section {
 	 * Size of tax
 	 *
 	 * @var float|null $tax
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $tax;
 
@@ -62,7 +62,7 @@ class Ticket_Section extends Section {
 	 * Related event
 	 *
 	 * @var Event $event
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	protected $event;
 

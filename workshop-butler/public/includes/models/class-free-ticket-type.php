@@ -27,7 +27,7 @@ class Free_Ticket_Type extends Ticket_Type {
 	 * @param object $json JSON to convert.
 	 *
 	 * @return Free_Ticket_Type
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	static function from_json( $json ) {
 		return new Free_Ticket_Type( $json->total, $json->left, $json->unlimited );

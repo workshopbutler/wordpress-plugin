@@ -3,7 +3,7 @@
  * This files contains Testimonial class
  *
  * @package WorkshopButler
- * @since 2.6.0
+ * @since 2.7.0
  */
 
 namespace WorkshopButler;
@@ -12,7 +12,7 @@ namespace WorkshopButler;
  * Class Testimonial
  *
  * @package WorkshopButler
- * @since 2.6.0
+ * @since 2.7.0
  */
 class Testimonial {
 
@@ -31,7 +31,7 @@ class Testimonial {
 	 * Name of attendee who gave the testimonial
 	 *
 	 * @var string $attendee Name of attendee who gave the testimonial
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $attendee;
 
@@ -39,7 +39,7 @@ class Testimonial {
 	 * Content
 	 *
 	 * @var string $content
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $content;
 
@@ -47,7 +47,7 @@ class Testimonial {
 	 * Name of the company where the attendee works at
 	 *
 	 * @var string|null $company
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $company;
 
@@ -55,7 +55,7 @@ class Testimonial {
 	 * Verified rating given by attendee
 	 *
 	 * @var int|null $rating
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $rating;
 

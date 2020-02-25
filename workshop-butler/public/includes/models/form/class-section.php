@@ -29,7 +29,7 @@ class Section {
 	 * Section unique identifier
 	 *
 	 * @var string $id
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $id;
 

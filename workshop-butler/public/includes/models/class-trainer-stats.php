@@ -3,7 +3,7 @@
  * This class contains trainer's statistics
  *
  * @package WorkshopButler
- * @since 2.6.0
+ * @since 2.7.0
  */
 
 namespace WorkshopButler;
@@ -14,7 +14,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-combined-wor
  * Trainer's statistics
  *
  * @package WorkshopButler
- * @since 2.6.0
+ * @since 2.7.0
  */
 class Trainer_Stats {
 
@@ -37,7 +37,7 @@ class Trainer_Stats {
 	 * All-time workshop statistics.
 	 *
 	 * @var Combined_Workshop_Stats $total
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $total;
 
@@ -45,7 +45,7 @@ class Trainer_Stats {
 	 * Statistics for the last 12 months.
 	 *
 	 * @var Combined_Workshop_Stats $recent
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $recent;
 
@@ -53,7 +53,7 @@ class Trainer_Stats {
 	 * Years of experience for a specific brand.
 	 *
 	 * @var int|null $years_of_experience
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $years_of_experience;
 

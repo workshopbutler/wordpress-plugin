@@ -3,7 +3,7 @@
  * This file contains Combined_Workshop_Stats class
  *
  * @package WorkshopButler
- * @since 2.6.0
+ * @since 2.7.0
  */
 
 namespace WorkshopButler;
@@ -13,7 +13,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-workshop-sta
 /**
  * Describes statistics for both public and private workshops
  *
- * @since 2.6.0
+ * @since 2.7.0
  * @package WorkshopButler
  */
 class Combined_Workshop_Stats {
@@ -37,7 +37,7 @@ class Combined_Workshop_Stats {
 	 * Total number of workshops.
 	 *
 	 * @var int $total
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $total;
 
@@ -45,7 +45,7 @@ class Combined_Workshop_Stats {
 	 * Statistics for public workshops.
 	 *
 	 * @var Workshop_Stats $public_stats
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $public_stats;
 
@@ -53,7 +53,7 @@ class Combined_Workshop_Stats {
 	 * Statistics for private workshops.
 	 *
 	 * @var Workshop_Stats $private_stats
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 */
 	public $private_stats;
 

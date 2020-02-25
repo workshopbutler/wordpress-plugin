@@ -198,7 +198,7 @@ class WSB_Options {
 	/**
 	 * Returns a selected theme
 	 *
-	 * @since 2.6.0
+	 * @since 2.7.0
 	 * @return string
 	 */
 	public function get_theme() {
