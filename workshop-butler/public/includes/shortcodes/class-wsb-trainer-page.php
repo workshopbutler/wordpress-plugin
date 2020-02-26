@@ -104,7 +104,7 @@ class WSB_Trainer_Page extends WSB_Page {
 		);
 
 		$custom_template = $this->settings->get( WSB_Options::TRAINER_TEMPLATE );
-		$template        = $this->get_template( 'trainer-page', null );
+		$template        = $this->get_template( 'trainer-page', $custom_template );
 
 		$processed_template = do_shortcode( $template );
 		$content            = $this->compile_string( $processed_template, $template_data );

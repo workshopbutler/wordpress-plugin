@@ -37,6 +37,7 @@ class WSB_Integration_Upgrade {
 		if ( empty( $new_key ) ) {
 			$self->transfer_settings();
 		}
+		$this->update_templates_2_7_0();
 		$self->save_internal_settings( $self->get_version() );
 
 		$event_page = WSB_Options::get_option( WSB_Options::EVENT_PAGE );
@@ -65,6 +66,30 @@ class WSB_Integration_Upgrade {
 	}
 
 	/**
+	 * Updates the classes that changed in version 2.7.0 for all related pages
+	 */
+	protected function update_templates_2_7_0() {
+		if ( $this->get_version() && $this->get_version() < '2.7.0' ) {
+			$this->update_classes_2_7_0( WSB_Options::EVENT_TEMPLATE );
+			$this->update_classes_2_7_0( WSB_Options::TRAINER_TEMPLATE );
+			$this->update_classes_2_7_0( WSB_Options::REGISTRATION_TEMPLATE );
+		}
+	}
+
+	/**
+	 * Updates the classes that changed in version 2.7.0 for one template
+	 *
+	 * @param string $option Name of the template.
+	 */
+	protected function update_classes_2_7_0( $option ) {
+		$template = WSB_Options::get_option( $option );
+		$template = str_replace( 'wsb-left-col', 'wsb-description', $template );
+		$template = preg_replace( '/wsb-right-col/', 'wsb-toolbar wsb-first', $template, 1 );
+		$template = preg_replace( '/wsb-right-col/', 'wsb-toolbar wsb-second', $template, 1 );
+		WSB_Options::set_option( $option, $template );
+	}
+
+	/**
 	 * Returns the active version or false if there is no version yet
 	 *
 	 * @return bool|string
@@ -84,6 +109,7 @@ class WSB_Integration_Upgrade {
 	 * Saves the internal state settings
 	 *
 	 * @param string $previous_version Previous version of the plugin.
+	 *
 	 * @since 2.0.0
 	 */
 	protected function save_internal_settings( $previous_version ) {
@@ -117,16 +143,17 @@ class WSB_Integration_Upgrade {
 			return false;
 		}
 		WSB_Options::set_option( WSB_Options::API_KEY, $old_key );
+
 		return true;
 	}
 
 	/**
 	 * Adds a new post with a content
 	 *
-	 * @param string      $title       Page title.
+	 * @param string      $title Page title.
 	 * @param string      $id_opt_name Name of the option with a page ID.
-	 * @param string      $content     Page Content.
-	 * @param string|null $parent_id   ID of the parent page.
+	 * @param string      $content Page Content.
+	 * @param string|null $parent_id ID of the parent page.
 	 *
 	 * @since 2.0.0
 	 */

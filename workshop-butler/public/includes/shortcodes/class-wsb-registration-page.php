@@ -129,8 +129,7 @@ class WSB_Registration_Page extends WSB_Page {
 	 */
 	private function render_page( $event ) {
 		$custom_template = $this->settings->get( WSB_Options::REGISTRATION_TEMPLATE );
-		// $template        = $this->get_template( 'registration-page', $custom_template );
-		$template = $this->get_template( 'registration-page', null );
+		$template        = $this->get_template( 'registration-page', $custom_template );
 
 		$template_data = array(
 			'event' => $event,
