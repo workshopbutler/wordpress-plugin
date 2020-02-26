@@ -37,7 +37,7 @@ class WSB_Integration_Upgrade {
 		if ( empty( $new_key ) ) {
 			$self->transfer_settings();
 		}
-		$this->update_templates_2_7_0();
+		$self->update_templates_2_7_1();
 		$self->save_internal_settings( $self->get_version() );
 
 		$event_page = WSB_Options::get_option( WSB_Options::EVENT_PAGE );
@@ -66,13 +66,13 @@ class WSB_Integration_Upgrade {
 	}
 
 	/**
-	 * Updates the classes that changed in version 2.7.0 for all related pages
+	 * Updates the classes that changed in version 2.7.1 for all related pages
 	 */
-	protected function update_templates_2_7_0() {
-		if ( $this->get_version() && $this->get_version() < '2.7.0' ) {
-			$this->update_classes_2_7_0( WSB_Options::EVENT_TEMPLATE );
-			$this->update_classes_2_7_0( WSB_Options::TRAINER_TEMPLATE );
-			$this->update_classes_2_7_0( WSB_Options::REGISTRATION_TEMPLATE );
+	protected function update_templates_2_7_1() {
+		if ( $this->get_version() && $this->get_version() < '2.7.1' ) {
+			$this->update_classes_2_7_1( WSB_Options::EVENT_TEMPLATE );
+			$this->update_classes_2_7_1( WSB_Options::TRAINER_TEMPLATE );
+			$this->update_classes_2_7_1( WSB_Options::REGISTRATION_TEMPLATE );
 		}
 	}
 
@@ -81,7 +81,7 @@ class WSB_Integration_Upgrade {
 	 *
 	 * @param string $option Name of the template.
 	 */
-	protected function update_classes_2_7_0( $option ) {
+	protected function update_classes_2_7_1( $option ) {
 		$template = WSB_Options::get_option( $option );
 		$template = str_replace( 'wsb-left-col', 'wsb-description', $template );
 		$template = preg_replace( '/wsb-right-col/', 'wsb-toolbar wsb-first', $template, 1 );

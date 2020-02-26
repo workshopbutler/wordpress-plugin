@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.7.1 =
+Fixes an issue prevented to update some classes in page templates
+
 = 2.7.0 =
 * Cleaner, easier-to-user registration form
 * Multiple smaller UI fixes
