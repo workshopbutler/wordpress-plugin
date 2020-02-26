@@ -71,9 +71,10 @@ class WSB_Schedule_Page extends WSB_Page {
 		$method = 'events';
 		$fields = 'title,location,hashed_id,schedule,free,type,registration_page,spoken_languages,sold_out,facilitators,free_ticket_type,paid_ticket_types,title_url';
 		$query  = array(
-			'dates'  => 'future',
-			'public' => true,
-			'fields' => $fields,
+			'dates'    => 'future',
+			'public'   => true,
+			'fields'   => $fields,
+			'per_page' => '-1',
 		);
 		if ( ! is_null( $attrs['category'] ) ) {
 			$query['categoryId'] = $attrs['category'];

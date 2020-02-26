@@ -55,12 +55,11 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	/**
 	 * Renders the list of trainers
 	 *
-	 * @param array  $attrs   Shortcode attributes.
+	 * @param array  $attrs Shortcode attributes.
 	 * @param string $content Shortcode content.
 	 *
-	 * @since  2.0.0
-	 *
 	 * @return string
+	 * @since  2.0.0
 	 */
 	public function render_page( $attrs = array(), $content = null ) {
 		// Load styles and scripts only on demand.
@@ -68,16 +67,19 @@ class WSB_Trainer_List_Page extends WSB_Page {
 		$this->add_theme_fonts();
 
 		$method = 'facilitators';
-		$query  = array();
+		$query  = array(
+			'per_page' => '-1',
+		);
 
 		$response = $this->requests->get( $method, $query );
+
 		return $this->render_list( $response, $this->settings->get_trainer_page_url() );
 	}
 
 	/**
 	 * Renders the list of trainers
 	 *
-	 * @param WSB_Response $response    Workshop Butler API response.
+	 * @param WSB_Response $response Workshop Butler API response.
 	 * @param string       $trainer_url Trainer profile page URL.
 	 *
 	 * @return string
@@ -113,8 +115,8 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	 *
 	 * @param array $attrs Short code attributes.
 	 *
-	 * @since  2.0.0
 	 * @return string
+	 * @since  2.0.0
 	 */
 	protected function render_filters( $attrs = array() ) {
 		$attrs = shortcode_atts( $this->get_default_attrs( 'filters' ), $attrs );
@@ -135,6 +137,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 		);
 
 		$trainer_filters = new Trainer_Filters( $trainers, $available_filters );
+
 		return $this->compile_string( $template, array( 'filters' => $trainer_filters->get_filters() ) );
 	}
 
@@ -143,8 +146,8 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	 *
 	 * @param string $tag Full shortcode tag.
 	 *
-	 * @since 2.0.0
 	 * @return string
+	 * @since 2.0.0
 	 */
 	protected static function get_shortcode_name( $tag ) {
 		$parts     = explode( '_', $tag );
@@ -159,11 +162,11 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	/**
 	 * Renders the list of trainers
 	 *
-	 * @param array       $attrs   Short code attributes.
+	 * @param array       $attrs Short code attributes.
 	 * @param null|string $content Short code content.
 	 *
-	 * @since  2.0.0
 	 * @return string
+	 * @since  2.0.0
 	 */
 	protected function render_trainer( $attrs = array(), $content = null ) {
 		$trainers = $this->dict->get_trainers();
@@ -180,7 +183,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 			$this->dict->set_trainer( $trainer );
 			$item_content           = $this->compile_string( $content, array( 'trainer' => $trainer ) );
 			$processed_item_content = do_shortcode( $item_content );
-			$html                  .= $this->compile_string(
+			$html                   .= $this->compile_string(
 				$item_template,
 				array(
 					'trainer' => $trainer,
@@ -219,8 +222,8 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	/**
 	 * Renders a simple shortcode with no additional logic
 	 *
-	 * @param string      $name    Name of the shortcode (like 'title', 'register').
-	 * @param array       $attrs   Attributes.
+	 * @param string      $name Name of the shortcode (like 'title', 'register').
+	 * @param array       $attrs Attributes.
 	 * @param null|string $content Replaceable content.
 	 *
 	 * @return bool|string
@@ -235,32 +238,37 @@ class WSB_Trainer_List_Page extends WSB_Page {
 			return '[wsb_trainer_list_' . $name . ']';
 		}
 		$attrs['trainer'] = $trainer;
+
 		return $this->compile_string( $template, $attrs );
 	}
 
 	/**
 	 * Handles 'wsb_trainer_list' shortcode
 	 *
-	 * @param array  $attrs   Shortcode attributes.
+	 * @param array  $attrs Shortcode attributes.
 	 * @param string $content Shortcode content.
-	 * @since  2.0.0
+	 *
 	 * @return string
+	 * @since  2.0.0
 	 */
 	public static function page( $attrs = array(), $content = null ) {
 		$page = new WSB_Trainer_List_Page();
+
 		return $page->render_page( $attrs, $content );
 	}
 
 	/**
 	 * Handles 'wsb_trainer_list_item' shortcode
 	 *
-	 * @param array  $attrs   Shortcode attributes.
+	 * @param array  $attrs Shortcode attributes.
 	 * @param string $content Shortcode content.
-	 * @since  2.0.0
+	 *
 	 * @return string
+	 * @since  2.0.0
 	 */
 	public static function trainer( $attrs = array(), $content = null ) {
 		$page = new WSB_Trainer_List_Page();
+
 		return $page->render_trainer( $attrs, $content );
 	}
 
