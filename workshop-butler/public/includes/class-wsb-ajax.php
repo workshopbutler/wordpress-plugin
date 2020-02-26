@@ -35,13 +35,9 @@ class WSB_Ajax {
 			$event_id = null;
 
 			switch ( $type ) {
-				case 'future-events-country':
+				case 'event-page-sidebar':
 					$method   = 'events';
-					$query    = array(
-						'future'      => 'true',
-						'countryCode' => rawurlencode( $_GET['country_code'] ),
-						'trainerId'   => rawurldecode( $_GET['trainer_id'] ),
-					);
+					$query    = WSB_Ajax::get_event_page_sidebar_params();
 					$event_id = rawurlencode( $_GET['event_id'] );
 					break;
 				case 'future-trainer-events':
@@ -55,11 +51,52 @@ class WSB_Ajax {
 				default:
 					die();
 			}
-			$requests = new Embed_Event_List();
+			$requests = new Embed_Event_List( WSB_Ajax::get_sidebar_length( $type ) );
 			echo $requests->render( $method, $query, $event_id );
 			wp_die();
 		} else {
 			exit();
+		}
+	}
+
+	/**
+	 * Returns the number of events in sidebar
+	 *
+	 * @param string $type Event type.
+	 *
+	 * @return int
+	 */
+	protected static function get_sidebar_length( $type ) {
+		$length = 5;
+		switch ( $type ) {
+			case 'event-page-sidebar':
+				$length = intval( WSB_Options::get_option( WSB_Options::EVENT_PAGE_SIDEBAR_SIZE ) );
+				break;
+			default:
+				break;
+		}
+		$max_length = 10;
+
+		return $length > $max_length ? $max_length : $length;
+	}
+
+	/**
+	 * Returns the parameters for the list of events on Event page
+	 *
+	 * @return array
+	 */
+	protected static function get_event_page_sidebar_params() {
+		if ( 'type' === WSB_Options::get_option( WSB_Options::EVENT_PAGE_SIDEBAR_TYPE ) ) {
+			return array(
+				'dates'     => 'future',
+				'eventType' => rawurldecode( $_GET['type_id'] ),
+			);
+		} else {
+			return array(
+				'dates'       => 'future',
+				'countryCode' => rawurlencode( $_GET['country_code'] ),
+				'trainerId'   => rawurldecode( $_GET['trainer_id'] ),
+			);
 		}
 	}
 
@@ -88,6 +125,7 @@ class WSB_Ajax {
 	 * By some reason, WordPress replaces '.' in keys to '_'. We have to replace it back.
 	 *
 	 * @param array $raw_data Raw form data.
+	 *
 	 * @return array
 	 */
 	protected static function replace_changed_keys( $raw_data ) {
@@ -105,6 +143,7 @@ class WSB_Ajax {
 			}
 			$form_data[ $key ] = $value;
 		}
+
 		return $form_data;
 	}
 }

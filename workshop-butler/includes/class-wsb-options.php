@@ -25,48 +25,50 @@ if ( ! class_exists( 'ReduxFramework' )
  */
 class WSB_Options {
 
-	const OLD_API_KEY       = 'wb_token';
+	const OLD_API_KEY = 'wb_token';
 	const OLD_SCHEDULE_PAGE = 'wb_url';
 
-	const PLUGIN_SETTINGS   = 'wsb-settings';
+	const PLUGIN_SETTINGS = 'wsb-settings';
 	const INTERNAL_SETTINGS = 'wsb-internal-settings';
 
-	const INT_STATE   = '_state';
+	const INT_STATE = '_state';
 	const INT_VERSION = '_version';
 
 	const API_KEY = 'api-key';
 
-	const SCHEDULE_TILE_TEMPLATE  = 'schedule-tile-template';
+	const SCHEDULE_TILE_TEMPLATE = 'schedule-tile-template';
 	const SCHEDULE_TABLE_TEMPLATE = 'schedule-table-template';
-	const EVENT_TEMPLATE          = 'event-template';
-	const REGISTRATION_TEMPLATE   = 'registration-template';
-	const TRAINER_LIST_TEMPLATE   = 'trainer-list-template';
-	const TRAINER_TEMPLATE        = 'trainer-template';
+	const EVENT_TEMPLATE = 'event-template';
+	const REGISTRATION_TEMPLATE = 'registration-template';
+	const TRAINER_LIST_TEMPLATE = 'trainer-list-template';
+	const TRAINER_TEMPLATE = 'trainer-template';
 
 	const CUSTOM_CSS = 'custom-css';
 
-	const THEME        = 'theme';
+	const THEME = 'theme';
 	const CUSTOM_THEME = 'custom-theme';
-	const GA_API_KEY   = 'google-analytics-key';
+	const GA_API_KEY = 'google-analytics-key';
 
-	const CUSTOM_EVENT_DETAILS   = 'custom-event-page';
-	const SHOW_EXPIRED_TICKETS   = 'show-expired-tickets';
+	const CUSTOM_EVENT_DETAILS = 'custom-event-page';
+	const SHOW_EXPIRED_TICKETS = 'show-expired-tickets';
 	const SHOW_NUMBER_OF_TICKETS = 'show-number-of-tickets';
-	const SCHEDULE_NO_EVENTS     = 'no-events-caption';
-	const SCHEDULE_LAYOUT        = 'event-list-layout';
-	const SCHEDULE_PAGE          = 'event-list-page-id';
-	const EVENT_PAGE             = 'event-page-id';
-	const REGISTRATION_PAGE      = 'registration-page-id';
+	const SCHEDULE_NO_EVENTS = 'no-events-caption';
+	const SCHEDULE_LAYOUT = 'event-list-layout';
+	const SCHEDULE_PAGE = 'event-list-page-id';
+	const EVENT_PAGE = 'event-page-id';
+	const EVENT_PAGE_SIDEBAR_TYPE = 'event-page-sidebar-type';
+	const EVENT_PAGE_SIDEBAR_SIZE = 'event-page-sidebar-size';
+	const REGISTRATION_PAGE = 'registration-page-id';
 
-	const TRAINER_MODULE       = 'trainer-module';
-	const TRAINER_LIST_PAGE    = 'trainer-list-page-id';
+	const TRAINER_MODULE = 'trainer-module';
+	const TRAINER_LIST_PAGE = 'trainer-list-page-id';
 	const TRAINER_PROFILE_PAGE = 'trainer-page-id';
 
 	/**
 	 * Removes plugin options
 	 *
-	 * @since  2.0.0
 	 * @return void
+	 * @since  2.0.0
 	 */
 	public static function destroy_options() {
 		delete_option( self::PLUGIN_SETTINGS );
@@ -76,24 +78,27 @@ class WSB_Options {
 	/**
 	 * Returns the value of the option, or false if the option is not set
 	 *
-	 * @param  string $name Name of the option.
-	 * @since  2.0.0
+	 * @param string $name Name of the option.
+	 *
 	 * @return bool|mixed
+	 * @since  2.0.0
 	 */
 	public static function get_option( $name ) {
 		$option = \Redux::getOption( self::PLUGIN_SETTINGS, $name );
 		if ( null === $option ) {
 			return false;
 		}
+
 		return $option;
 	}
 
 	/**
 	 * Returns the value of the option, or false if the option is not set
 	 *
-	 * @param  string $name Name of the option.
-	 * @since  2.0.0
+	 * @param string $name Name of the option.
+	 *
 	 * @return bool|mixed
+	 * @since  2.0.0
 	 */
 	public static function get_internal_option( $name ) {
 		$settings = get_option( self::INTERNAL_SETTINGS, array() );
@@ -107,7 +112,7 @@ class WSB_Options {
 	/**
 	 * Updates the option
 	 *
-	 * @param string $name  Name of the option.
+	 * @param string $name Name of the option.
 	 * @param mixed  $value Value of the option.
 	 *
 	 * @since 2.0.0
@@ -119,7 +124,7 @@ class WSB_Options {
 	/**
 	 * Updates the option
 	 *
-	 * @param string $name  Name of the option.
+	 * @param string $name Name of the option.
 	 * @param mixed  $value Value of the option.
 	 *
 	 * @since 2.0.0
@@ -134,24 +139,26 @@ class WSB_Options {
 	/**
 	 * Returns the value of the option, or false if the option is not set
 	 *
-	 * @param  string $name    Name of the option.
-	 * @param  mixed  $default Default value if the option does not exist.
-	 * @since  2.0.0
+	 * @param string $name Name of the option.
+	 * @param mixed  $default Default value if the option does not exist.
+	 *
 	 * @return bool|mixed
+	 * @since  2.0.0
 	 */
 	public function get( $name, $default = null ) {
 		$option = \Redux::getOption( self::PLUGIN_SETTINGS, $name );
 		if ( null === $option ) {
 			return $default;
 		}
+
 		return $option;
 	}
 
 	/**
 	 * Returns the url to an event page
 	 *
-	 * @since  2.0.0
 	 * @return string|null
+	 * @since  2.0.0
 	 */
 	public function get_event_page_url() {
 		$page_id               = $this->get( self::EVENT_PAGE );
@@ -166,8 +173,8 @@ class WSB_Options {
 	/**
 	 * Returns the url to a registration page
 	 *
-	 * @since  2.0.0
 	 * @return string|null
+	 * @since  2.0.0
 	 */
 	public function get_registration_page_url() {
 		$page_id = $this->get( self::REGISTRATION_PAGE );
@@ -182,8 +189,8 @@ class WSB_Options {
 	/**
 	 * Returns the url to a trainer profile
 	 *
-	 * @since  2.0.0
 	 * @return string|null
+	 * @since  2.0.0
 	 */
 	public function get_trainer_page_url() {
 		$page_id       = $this->get( self::TRAINER_PROFILE_PAGE );
@@ -198,8 +205,8 @@ class WSB_Options {
 	/**
 	 * Returns a selected theme
 	 *
-	 * @since 2.7.0
 	 * @return string
+	 * @since 2.7.0
 	 */
 	public function get_theme() {
 		return $this->get( self::THEME, 'alfred' );

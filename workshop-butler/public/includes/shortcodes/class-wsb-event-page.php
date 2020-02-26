@@ -54,12 +54,12 @@ class WSB_Event_Page extends WSB_Page {
 	/**
 	 * Renders the event page
 	 *
-	 * @param array  $attrs   Shortcode attributes.
+	 * @param array  $attrs Shortcode attributes.
 	 * @param string $content Shortcode content.
 	 *
+	 * @return string
 	 * @since  2.0.0
 	 *
-	 * @return string
 	 */
 	public function render( $attrs = array(), $content = null ) {
 		if ( empty( $_GET['id'] ) ) {
@@ -94,6 +94,7 @@ class WSB_Event_Page extends WSB_Page {
 				'nonce'    => $wsb_nonce,
 				'country'  => $event->location->country_code,
 				'trainer'  => $event->trainers[0]->id,
+				'type_id'  => $event->type->id,
 				'id'       => $event->hashed_id,
 			)
 		);
@@ -117,14 +118,16 @@ class WSB_Event_Page extends WSB_Page {
 
 		$processed_template = do_shortcode( $template );
 		$content            = $this->compile_string( $processed_template, $template_data );
+
 		return $this->add_custom_styles( $content );
 	}
 
 	/**
 	 * Controls the page shortcode
 	 *
-	 * @param array $attrs   Shortcode attributes.
+	 * @param array $attrs Shortcode attributes.
 	 * @param null  $content Shortcode content.
+	 *
 	 * @return string
 	 */
 	public static function page( $attrs = array(), $content = null ) {

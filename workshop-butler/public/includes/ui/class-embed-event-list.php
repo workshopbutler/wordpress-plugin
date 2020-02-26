@@ -30,14 +30,25 @@ class Embed_Event_List extends WSB_Page {
 	private $requests;
 
 	/**
+	 * Number of items
+	 *
+	 * @var int $length
+	 * @since 2.7.0
+	 */
+	private $length;
+
+	/**
 	 * Initialize the class and set its properties.
+	 *
+	 * @param int $length Number of items.
 	 *
 	 * @since    2.0.0
 	 */
-	public function __construct() {
+	public function __construct( $length ) {
 		parent::__construct();
 		$this->load_dependencies();
 		$this->requests = new WSB_Requests();
+		$this->length   = $length;
 	}
 
 	/**
@@ -56,14 +67,16 @@ class Embed_Event_List extends WSB_Page {
 	 * Retrieves the page data and renders it
 	 *
 	 * @param string $method Workshop Butler API method.
-	 * @param array  $query  API parameters.
+	 * @param array  $query API parameters.
 	 * @param string $event_id ID of event where the request took place.
 	 *
-	 * @since  2.0.0
 	 * @return string
+	 * @since  2.0.0
 	 */
 	public function render( $method, $query, $event_id ) {
-		$response = $this->requests->get( $method, $query );
+		$query['per_page'] = $this->length + 1; // to handle the case when current event is returned in the list.
+		$response          = $this->requests->get( $method, $query );
+
 		return $this->render_list( $response, $event_id );
 	}
 
@@ -73,8 +86,8 @@ class Embed_Event_List extends WSB_Page {
 	 * @param WSB_Response $response Response.
 	 * @param string       $event_id ID of event where the request took place.
 	 *
-	 * @since  2.0.0
 	 * @return string
+	 * @since  2.0.0
 	 */
 	private function render_list( $response, $event_id ) {
 		if ( $response->is_error() ) {
@@ -93,9 +106,10 @@ class Embed_Event_List extends WSB_Page {
 				array_push( $events, $event );
 			}
 		}
-		$sliced        = array_slice( $events, 0, 5 );
+		$sliced        = array_slice( $events, 0, $this->length );
 		$template_data = array( 'events' => $sliced );
 		$template      = $this->get_template( 'sidebar', null );
+
 		return $this->compile_string( $template, $template_data );
 	}
 }

@@ -408,6 +408,25 @@ class WSB_Settings {
 				'subtitle' => 'Switch to OFF to hide the number of tickets left for each ticket type',
 				'default'  => true,
 			),
+			array(
+				'id'      => WSB_Options::EVENT_PAGE_SIDEBAR_TYPE,
+				'type'    => 'radio',
+				'title'   => __( 'Type of upcoming events', 'wsbintegration' ),
+				'desc'    => __( 'This parameter defines what upcoming events to show on the event page', 'wsbintegration' ),
+				'options' => array(
+					'trainer' => 'From the same trainer and country',
+					'type'    => 'From the same type',
+				),
+				'default' => 'trainer',
+			),
+			array(
+				'id'         => WSB_Options::EVENT_PAGE_SIDEBAR_SIZE,
+				'type'       => 'text',
+				'title'      => __( 'Number of upcoming events', 'wsbintegration' ),
+				'desc'       => __( 'This parameter defines how many upcoming events to show on the event page. Default = 5. Max = 10', 'wsbintegration' ),
+				'validation' => array( 'not_empty', 'numeric' ),
+				'default'    => '5',
+			),
 		);
 	}
 
@@ -416,8 +435,8 @@ class WSB_Settings {
 	 *
 	 * @param boolean $save_ajax True when the changes should be saved via Ajax.
 	 *
-	 * @since 2.0.0
 	 * @return array
+	 * @since 2.0.0
 	 */
 	protected function get_arguments( $save_ajax ) {
 
@@ -549,8 +568,8 @@ class WSB_Settings {
 	 *
 	 * @param string $name Name of the template.
 	 *
-	 * @since  2.0.0
 	 * @return null|string
+	 * @since  2.0.0
 	 */
 	protected function get_template( $name ) {
 		$filename = plugin_dir_path( dirname( __FILE__ ) ) . '../views/' . $name . '.twig';
@@ -558,6 +577,7 @@ class WSB_Settings {
 		if ( ! $content ) {
 			return '';
 		}
+
 		return $content;
 	}
 

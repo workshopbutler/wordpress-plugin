@@ -68,6 +68,11 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.7.0 =
+* Cleaner, easier-to-user registration form
+* Multiple smaller UI fixes
+* Adds two new configuration options for event page: a number of events in the sidebar and what events to show in the sidebar
+
 = 2.6.0 =
 * Two new shortcodes added to show cover image of events: [wsb_schedule_image] and [wsb_event_image]
 
