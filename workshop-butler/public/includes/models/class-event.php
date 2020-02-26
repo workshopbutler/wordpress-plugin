@@ -12,7 +12,7 @@ namespace WorkshopButler;
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-event-type.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-free-ticket-type.php';
-require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-paid-ticket-type.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-paid-tickets.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-tickets.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-trainer.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-language.php';
@@ -133,7 +133,7 @@ class Event {
 	 * Tickets to the event
 	 *
 	 * @since   2.0.0
-	 * @var     Tickets|null $tickets
+	 * @var     Free_Ticket_Type|Paid_Tickets|null $tickets
 	 */
 	public $tickets;
 
@@ -206,7 +206,7 @@ class Event {
 		$this->hashed_id   = $json_data->hashed_id;
 		$this->title       = $json_data->title;
 		$this->type        = $json_data->type ? new Event_Type( $json_data->type ) : Event_Type::create_empty();
-		$this->language    = new Language( $json_data->spoken_languages, $json_data->materials_language );
+		$this->language    = Language::from_json( $json_data->language );
 		$this->rating      = $json_data->rating;
 		$this->confirmed   = $json_data->confirmed;
 		$this->free        = $json_data->free;
@@ -214,7 +214,7 @@ class Event {
 		$this->description = $json_data->description;
 		$this->sold_out    = $json_data->sold_out;
 		$this->schedule    = new Schedule( $json_data->schedule );
-		$this->location    = new Location( $json_data->location );
+		$this->location    = Location::from_json( $json_data->location );
 
 		if ( $json_data->custom_settings && $json_data->custom_settings->title_url ) {
 			$this->url = Event_Url::external( $json_data->custom_settings->title_url );
@@ -223,11 +223,9 @@ class Event {
 		} else {
 			$this->url = Event_Url::external( 'https://workshopbutler.com/public/event/' . $this->hashed_id );
 		}
-		$this->tickets = $this->get_tickets( $this->free, $json_data->free_ticket_type, $json_data->paid_ticket_types );
+		$this->tickets = $this->get_tickets( $this->free, $json_data->tickets );
 
-		$this->registration_form = $json_data->registration_form ?
-			new Form( $json_data->instructions, $json_data->registration_form, $this ) :
-			null;
+		$this->registration_form = Form::from_json( $json_data->form, $this );
 
 		$this->registration_page = new Registration_Page(
 			$json_data->registration_page,
@@ -278,26 +276,35 @@ class Event {
 	}
 
 	/**
+	 * Returns true if tickets are available
+	 *
+	 * @return bool
+	 * @since 2.7.0
+	 */
+	public function with_tickets() {
+		if ( $this->tickets instanceof Free_Ticket_Type ) {
+			return ! $this->tickets->without_limit();
+		}
+		if ( $this->tickets instanceof Paid_Tickets ) {
+			return ! empty( $this->tickets->types );
+		}
+
+		return false;
+	}
+
+	/**
 	 * Returns Tickets object
 	 *
-	 * @param boolean            $free True if the event is free.
-	 * @param Free_Ticket_Type   $free_ticket_type Free tickets.
-	 * @param Paid_Ticket_Type[] $paid_ticket_types Paid tickets.
+	 * @param boolean $free True if the event is free.
+	 * @param object  $tickets Tickets in JSON.
 	 *
-	 * @return null|Tickets
+	 * @return null|Paid_Tickets|Free_Ticket_Type
 	 */
-	private function get_tickets( $free, $free_ticket_type, $paid_ticket_types ) {
-		if ( $free_ticket_type || $paid_ticket_types ) {
-			$paid_tickets = array_map(
-				function ( $type ) {
-					return new Paid_Ticket_Type( $type );
-				},
-				$paid_ticket_types
-			);
-
+	private function get_tickets( $free, $tickets ) {
+		if ( $tickets->free || $tickets->paid ) {
 			return $free ?
-				new Tickets( array(), new Free_Ticket_Type( $free_ticket_type ) ) :
-				new Tickets( $paid_tickets, null );
+				Free_Ticket_Type::from_json( $tickets->free ) :
+				Paid_Tickets::from_json( $tickets->paid );
 		} else {
 			return null;
 		}

@@ -74,8 +74,7 @@ abstract class WSB_Page {
 	 * Compiles the template
 	 *
 	 * @param string $template Template.
-	 * @param array  $data Template paratemeters.
-	 *
+	 * @param array  $data     Template paratemeters.
 	 * @return string
 	 */
 	public function compile_string( $template, $data = array() ) {
@@ -83,19 +82,17 @@ abstract class WSB_Page {
 		if ( ! $this->twig->loader->exists( $key ) ) {
 			$this->twig->loader->setTemplate( $key, $template );
 		}
-
 		return $this->twig->twig->render( $key, $data );
 	}
 
 	/**
 	 * Handles 'wsb_x_*' shortcodes
 	 *
-	 * @param array  $attrs Shortcode attributes.
+	 * @param array  $attrs   Shortcode attributes.
 	 * @param string $content Shortcode content.
-	 * @param string $tag Shortcode's tag.
-	 *
-	 * @return string
+	 * @param string $tag     Shortcode's tag.
 	 * @since  2.0.0
+	 * @return string
 	 */
 	public static function tag( $attrs, $content, $tag ) {
 		$shortcode_name      = static::get_shortcode_name( $tag );
@@ -130,15 +127,14 @@ abstract class WSB_Page {
 					break;
 			}
 		}
-
 		return $attrs;
 	}
 
 	/**
 	 * Renders a simple shortcode with no additional logic
 	 *
-	 * @param string      $name Name of the shortcode (like 'title', 'register').
-	 * @param array       $attrs Attributes.
+	 * @param string      $name    Name of the shortcode (like 'title', 'register').
+	 * @param array       $attrs   Attributes.
 	 * @param null|string $content Replaceable content.
 	 *
 	 * @return string
@@ -193,11 +189,11 @@ abstract class WSB_Page {
 	/**
 	 * Returns an active theme for the integration
 	 *
-	 * @return mixed
 	 * @since  2.0.0
+	 * @return string
 	 */
 	protected function get_theme() {
-		return $this->settings->get( WSB_Options::THEME, 'alfred' );
+		return $this->settings->get_theme();
 	}
 
 	/**
@@ -228,11 +224,11 @@ abstract class WSB_Page {
 	/**
 	 * Returns the named template or 'null' if it doesn't exist
 	 *
-	 * @param string      $name Name of the template.
+	 * @param string      $name    Name of the template.
 	 * @param null|string $content Template content.
 	 *
-	 * @return null|string
 	 * @since  2.0.0
+	 * @return null|string
 	 */
 	protected function get_template( $name, $content ) {
 		if ( empty( $content ) ) {
@@ -242,7 +238,6 @@ abstract class WSB_Page {
 				return null;
 			}
 		}
-
 		return $content;
 	}
 
@@ -254,9 +249,8 @@ abstract class WSB_Page {
 	 * @return string
 	 */
 	protected function format_error( $error ) {
-		$message = '<h2> Workshop Butler API: Request failed</h2>';
+		$message  = '<h2> Workshop Butler API: Request failed</h2>';
 		$message .= '<p>Reason : ' . $error . '</p>';
-
 		return $message;
 	}
 
@@ -265,8 +259,8 @@ abstract class WSB_Page {
 	 *
 	 * @param string $content Page content.
 	 *
-	 * @return string
 	 * @since  2.0.0
+	 * @return string
 	 */
 	protected function add_custom_styles( $content ) {
 		$custom_styles = $this->settings->get( WSB_Options::CUSTOM_CSS );
@@ -274,7 +268,6 @@ abstract class WSB_Page {
 			return $content;
 		}
 		$styles = '<style>' . $custom_styles . '</style>';
-
 		return $styles . $content;
 	}
 }

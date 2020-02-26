@@ -54,8 +54,8 @@ class WSB_Event extends WSB_Page {
 	/**
 	 * Renders a simple shortcode with no additional logic
 	 *
-	 * @param string      $name Name of the shortcode (like 'title', 'register').
-	 * @param array       $attrs Attributes.
+	 * @param string      $name    Name of the shortcode (like 'title', 'register').
+	 * @param array       $attrs   Attributes.
 	 * @param null|string $content Replaceable content.
 	 *
 	 * @return bool|string
@@ -70,7 +70,6 @@ class WSB_Event extends WSB_Page {
 			return '[wsb_event_' . $name . ']';
 		}
 		$attrs['event'] = $event;
-
 		return $this->compile_string( $template, $attrs );
 	}
 
