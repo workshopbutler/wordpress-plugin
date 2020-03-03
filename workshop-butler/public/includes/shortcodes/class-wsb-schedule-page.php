@@ -80,7 +80,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			$query['categoryId'] = $attrs['category'];
 		}
 		if ( ! is_null( $attrs['event_type'] ) ) {
-			$query['eventType'] = $attrs['event_type'];
+			$query['typeIds'] = $attrs['event_type'];
 		}
 
 		$this->dict->set_schedule_attrs( $attrs );

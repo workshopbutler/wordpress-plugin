@@ -1,3 +1,30 @@
 .wsb-content .wsb-trainer-profile .wsb-trainer-buttons {
   padding-top: 1em;
 }
+.wsb-content .wsb-left-col {
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  grid-area: descr;
+  -ms-grid-row: 1;
+  grid-row-start: 1;
+  -ms-grid-row-span: 3;
+  grid-row-end: span 3;
+}
+.wsb-content .wsb-right-col {
+  width: 100%;
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: first;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 479px) {
+  .wsb-content .wsb-left-col {
+    width: 100%;
+    margin-right: 0;
+  }
+  .wsb-content .wsb-right-col {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 30px;
+  }
+}

@@ -166,7 +166,7 @@ class Sidebar_Widget extends \WP_Widget {
 		}
 		$this->fields['title']     = new Sidebar_Field( 'text', 'Title', '' );
 		$this->fields['length']    = new Sidebar_Field( 'number', 'Number of events', 3 );
-		$this->fields['eventType'] = new Sidebar_Field( 'text', 'Event type 	(Example: 002)', '' );
+		$this->fields['eventType'] = new Sidebar_Field( 'text', 'Event types 	(Example: 2,12)', '' );
 	}
 
 	/**
@@ -189,7 +189,7 @@ class Sidebar_Widget extends \WP_Widget {
 		);
 
 		if ( $instance['eventType'] ) {
-			$query['eventType'] = $instance['eventType'];
+			$query['typeIds'] = $instance['eventType'];
 		}
 		$response = $this->requests->get( $method, $query );
 

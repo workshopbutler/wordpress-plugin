@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.7.3 =
+Partially fixes an issue when an event page template is not updated
+
 = 2.7.2 =
 Fixes an issue with incomplete list of trainers and events
 
