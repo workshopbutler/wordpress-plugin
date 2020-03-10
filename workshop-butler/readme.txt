@@ -68,6 +68,12 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.7.4 =
+* Fixes a bug preventing sending a correct ticket type on multiple tickets
+* Fixes a problem with promo code box not showing when the link is clicked
+* Improves the look of registration form
+* Fixes a bug when an external registration link did not work
+
 = 2.7.3 =
 Partially fixes an issue when an event page template is not updated
 

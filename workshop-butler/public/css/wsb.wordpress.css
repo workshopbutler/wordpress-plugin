@@ -28,3 +28,8 @@
     margin-bottom: 30px;
   }
 }
+
+/** promo link **/
+.wsb-content a.wsb-promo-link:focus {
+  outline: none;
+}

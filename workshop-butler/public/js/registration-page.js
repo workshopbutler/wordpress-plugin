@@ -6,11 +6,6 @@ function get_form() {
 function register_attendee(e) {
 	e.preventDefault();
 
-	let ticketsCount = jQuery( 'input[name="ticket"]' ).length;
-	if ( ticketsCount == 1 ) {
-		jQuery( 'input[name="ticket"]' ).attr( "checked",true );
-	}
-
 	if ( ! wsb_event.is_registration_closed) {
 		const $form       = get_form();
 		const form_helper = new FormHelper(
@@ -117,12 +112,52 @@ function get_translated_error_messages() {
  */
 function prepare_form_data(data) {
 	data.event_id = Number( wsb_event.id );
-	for (var item in data) {
+	for (const item in data) {
 		if ( ! data[item]) {
 			delete data[item];
 		}
 	}
 	return data;
+}
+
+/**
+ * Shows/hides promo code field on the click to a related link
+ */
+function init_promo_activation() {
+	const root = get_form();
+	root.find('[data-promo-link]').on('click', e => {
+		e.preventDefault();
+		root.find('[data-promo-code]').toggle();
+	});
+}
+
+function init_active_ticket_selection() {
+	const root = get_form();
+	const tickets = root.find('#wsb-tickets input');
+	tickets.on('change', () => {
+		toggle_ticket(tickets.not(':checked'), false);
+		toggle_ticket(tickets.filter(':checked'), true);
+	});
+	if (tickets.length > 0) {
+		const activeTicket = tickets.first();
+		toggle_ticket(activeTicket, true);
+	}
+}
+
+/**
+ * Switches active ticket
+ * @param tickets {JQuery} Available tickets
+ * @param on {boolean}
+ */
+function toggle_ticket(tickets, on) {
+	const name = 'wsb-active';
+	if (on) {
+		tickets.prop( 'checked', 'true' );
+		tickets.parent().addClass(name);
+	} else {
+		tickets.removeProp('checked');
+		tickets.parent().removeClass(name);
+	}
 }
 
 class FormHelper {
@@ -389,17 +424,17 @@ class FormHelper {
 	 * @returns {String|Boolean}
 	 */
 	getControlValue($control){
-		let value = null;
-
 		if ($control.is( ':checkbox' )) {
-			value = $control.prop( 'checked' );
-		} else if ($control.is( ':radio' ) && $control.prop( 'checked' )) {
-			return $control.val();
+			return $control.prop( 'checked' );
+		} else if ($control.is( ':radio' )) {
+			if ($control.prop( 'checked' )) {
+				return $control.val();
+			} else {
+				return undefined;
+			}
 		} else {
-			value = $control.val();
+			return $control.val();
 		}
-
-		return value;
 	}
 }
 
@@ -407,10 +442,8 @@ jQuery( document ).ready(
 	function() {
 		jQuery( '#wsb-success' ).hide();
 
-		let ticketsCount = jQuery( 'input[name="ticket"]' ).length;
-		if ( ticketsCount == 1 ) {
-			jQuery( 'input[name="ticket"]' ).attr( "checked",true );
-		}
 		get_form().on( 'submit', register_attendee );
+		init_promo_activation();
+		init_active_ticket_selection();
 	}
 );

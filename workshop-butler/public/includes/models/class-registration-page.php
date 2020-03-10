@@ -39,7 +39,7 @@ class Registration_Page {
 	 */
 	public function __construct( $json_data, $registration_url, $event_id ) {
 		if ( $json_data ) {
-			$this->external = $json_data->custom;
+			$this->external = $json_data->external;
 			$this->url      = $json_data->url;
 		}
 		if ( ! $this->external && $registration_url ) {

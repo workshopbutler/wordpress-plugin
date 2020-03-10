@@ -921,6 +921,11 @@ fieldset[disabled] .wsb-content .wsb-btn {
   margin-left: 0;
   margin-right: 0.5em;
 }
+.wsb-content input[type=checkbox],
+.wsb-content select[type=checkbox],
+.wsb-content textarea[type=checkbox] {
+  align-self: flex-start;
+}
 .wsb-content input:focus,
 .wsb-content select:focus,
 .wsb-content textarea:focus {
@@ -960,7 +965,14 @@ fieldset[disabled] .wsb-content .wsb-btn {
   }
 }
 .wsb-content .wsb-form__instructions {
-  margin-bottom: 25px;
+  margin: 0.9em 0 0;
+  background-color: aliceblue;
+  padding: 1em;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 479px) {
+  .wsb-content .wsb-form__instructions {
+    margin-bottom: 0.9em;
+  }
 }
 .wsb-content .wsb-form__section-title {
   font-size: 24.5px;
@@ -978,7 +990,7 @@ fieldset[disabled] .wsb-content .wsb-btn {
   border-bottom: none;
 }
 .wsb-content section:first-of-type {
-  padding-top: 0;
+  padding-top: 2em;
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 479px), screen and (max-width: 600px) {
   .wsb-content section {
@@ -1039,7 +1051,7 @@ fieldset[disabled] .wsb-content .wsb-btn {
 }
 .wsb-content .wsb-label {
   -webkit-box-flex: 0;
-          flex: 0 0 8em;
+          flex: 0 0 10em;
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 479px), screen and (max-width: 600px) {
   .wsb-content .wsb-label {
@@ -1065,7 +1077,7 @@ fieldset[disabled] .wsb-content .wsb-btn {
   border-color: #ccc;
 }
 .wsb-content select {
-  padding: 0;
+  padding-left: 0.4em;
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 479px) {
   .wsb-content select {
@@ -1127,7 +1139,7 @@ fieldset[disabled] .wsb-content .wsb-btn {
   display: none;
 }
 .wsb-content .wsb-promo-block {
-  padding-left: 8em;
+  padding-left: 10em;
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 479px) {
   .wsb-content .wsb-promo-block {
@@ -1142,7 +1154,7 @@ fieldset[disabled] .wsb-content .wsb-btn {
   display: inline-block;
   width: 50%;
   min-width: 300px;
-  margin-left: 8em;
+  margin-left: 10em;
   padding: 15px 0;
   text-decoration: none !important;
   color: #fff !important;

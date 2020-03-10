@@ -9,7 +9,9 @@
 
 <form action="#" class="wsb-form" id="wsb-form">
     <div class="wsb-form__body">
-        <div class="wsb-form__instructions">{{ event.registration_form.instructions }}</div>
+        {% if event.registration_form.instructions %}
+            <div class="wsb-form__instructions">{{ event.registration_form.instructions }}</div>
+        {% endif %}
         {% for section in event.registration_form.sections %}
             {% if section.id == 'ticket' %}
                 {{ include('ticket-section.twig') }}
