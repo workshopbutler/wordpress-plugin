@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.7.5 =
+* Fixes the output for future/past events on a trainer's page
+
 = 2.7.4 =
 * Fixes a bug preventing sending a correct ticket type on multiple tickets
 * Fixes a problem with promo code box not showing when the link is clicked
