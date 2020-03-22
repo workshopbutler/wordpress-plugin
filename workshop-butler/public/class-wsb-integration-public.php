@@ -116,6 +116,8 @@ class WSB_Integration_Public {
 		wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', false, null );
 		wp_enqueue_script( 'jquery' );
 
+		wp_register_script( 'stripe', 'https://js.stripe.com/v3/' );
+
 		$ga_key = WSB_Options::get_option( WSB_Options::GA_API_KEY );
 		wp_localize_script(
 			'wsb-registration-page',
@@ -310,7 +312,10 @@ class WSB_Integration_Public {
 		add_action( 'wp_ajax_nopriv_wsb_get_values', array( 'WorkshopButler\WSB_Ajax', 'get_values' ) );
 		add_action( 'wp_ajax_wsb_get_values', array( 'WorkshopButler\WSB_Ajax', 'get_values' ) );
 
-		add_action( 'wp_ajax_nopriv_wsb_register_to_event', array( 'WorkshopButler\WSB_Ajax', 'register_to_event' ) );
-		add_action( 'wp_ajax_wsb_register_to_event', array( 'WorkshopButler\WSB_Ajax', 'register_to_event' ) );
+		add_action( 'wp_ajax_nopriv_wsb_register', array( 'WorkshopButler\WSB_Ajax', 'register' ) );
+		add_action( 'wp_ajax_wsb_register', array( 'WorkshopButler\WSB_Ajax', 'register' ) );
+
+		add_action( 'wp_ajax_nopriv_wsb_pre_register', array( 'WorkshopButler\WSB_Ajax', 'pre_register' ) );
+		add_action( 'wp_ajax_wsb_pre_register', array( 'WorkshopButler\WSB_Ajax', 'pre_register' ) );
 	}
 }

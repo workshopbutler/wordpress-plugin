@@ -22,6 +22,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-event-state.
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-registration-page.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-event-url.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-cover-image.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-payment.php';
 require_once plugin_dir_path( __FILE__ ) . 'form/class-form.php';
 
 
@@ -194,6 +195,14 @@ class Event {
 	private $url;
 
 	/**
+	 * Payment configuration
+	 *
+	 * @since 2.8.0
+	 * @var Payment|null $payment
+	 */
+	public $payment;
+
+	/**
 	 * Creates a new object
 	 *
 	 * @param object      $json_data JSON data from Workshop Butler API.
@@ -236,6 +245,7 @@ class Event {
 
 		$this->trainers = $this->get_trainers( $json_data, $trainer_page_url );
 		$this->state    = new Event_State( $this );
+		$this->payment  = Payment::from_json( $json_data->card_payment );
 	}
 
 	/**

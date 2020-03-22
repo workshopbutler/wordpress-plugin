@@ -120,6 +120,25 @@ class WSB_Ajax {
 	}
 
 	/**
+	 * Makes a POST Pre-Register request to Workshop Butler API
+	 */
+	public static function pre_register() {
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			check_ajax_referer( 'wsb-nonce' );
+
+			$form_data = self::replace_changed_keys( $_POST );
+			unset( $form_data['action'] );
+			unset( $form_data['_ajax_nonce'] );
+
+			$requests = new WSB_Requests();
+			$response = $requests->post( 'attendees/pre-register', $form_data );
+			wp_send_json( $response->body, $response->http_code );
+		} else {
+			exit();
+		}
+	}
+
+	/**
 	 * Corrects form keys
 	 *
 	 * By some reason, WordPress replaces '.' in keys to '_'. We have to replace it back.

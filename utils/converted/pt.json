@@ -434,6 +434,7 @@
                 "street_first": "Endereço 1",
                 "street_second": "Endereço 2"
             },
+            "payment_type": "Forma de pagamento",
             "street_first": "Endereço 1",
             "street_second": "Endereço 2"
         },

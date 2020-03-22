@@ -31,6 +31,105 @@ function submit_ga_event() {
 }
 
 /**
+ * Creates a Stripe payment form
+ *
+ * @returns {{validateInputs: validateInputs, clearCardInput: clearCardInput, createPaymentMethod: createPaymentMethod, disableCardInput: (function(*=): card|void|undefined|Promise<void>|*|IDBRequest<IDBValidKey>), confirmCardPayment: confirmCardPayment, stripeClient: *}}
+ */
+function create_stripe_card(stripeHolderEl, publicKey, stripeAccount) {
+	const x = function (tagName, attrs = null) {
+		const el = document.createElement(tagName);
+		if (attrs !== null) Object.entries(attrs).forEach((e) => el.setAttribute(e[0], e[1]));
+		return el;
+	};
+
+	const options = {};
+	if (stripeAccount) {
+		options.stripeAccount = stripeAccount;
+	}
+
+	const cl = Stripe(publicKey, options);
+
+	const stripeCardHolderEl = x('div', {'class': 'wsb-stripe-card-element'});
+	stripeHolderEl.appendChild(stripeCardHolderEl);
+	const stripeCardErrorsHolderEl = x('div', {'class': 'wsb-stripe-card-error'});
+	stripeHolderEl.appendChild(stripeCardErrorsHolderEl);
+	const incompleteMessage = "Your card number is incomplete.";
+
+	const elements = cl.elements();
+	const stripeCardEl = elements.create('card', {
+		hidePostalCode: true,
+		style: {
+			base: {
+				color: '#32325d',
+				fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+				fontSmoothing: 'antialiased',
+				fontSize: '16px',
+				'::placeholder': {
+					color: '#aab7c4'
+				}
+			},
+			invalid: {
+				color: '#fa755a',
+				iconColor: '#fa755a'
+			}
+		}
+	});
+
+	let inputComplete = false;
+	stripeCardEl.on('change', (e) => {
+		inputComplete = e.complete;
+		if (e.error) {
+			stripeCardErrorsHolderEl.innerHTML = e.error.message;
+		} else {
+			stripeCardErrorsHolderEl.innerHTML = "";
+		}
+	});
+	stripeCardEl.mount(stripeCardHolderEl);
+	return {
+		stripeClient: cl,
+		disableCardInput: (disable) => stripeCardEl.update({disabled:disable}),
+		clearCardInput: () => {
+			stripeCardEl.clear();
+			stripeCardErrorsHolderEl.innerHTML = ""
+		},
+		validateInputs: () => {
+			// It is also possible to use createToken method for card validation,
+			// bit it's not a proper usage and we don't know about possible side effects of it
+			// cl.createToken(stripeCardEl).then((token)=>console.log(token))
+			//
+			if(!inputComplete) {
+				stripeCardErrorsHolderEl.innerHTML = incompleteMessage;
+				stripeCardEl.focus(); // not work on iOS 13+
+				return false;
+			}
+			return true;
+		},
+		confirmCardPayment: (clientSecret, {payment_method}) => {
+			if (!inputComplete) {
+				return Promise.reject(incompleteMessage);
+			}
+			return cl.confirmCardPayment(clientSecret, {
+				payment_method: {
+					card: stripeCardEl,
+					billing_details: payment_method ? payment_method.billing_details : {},
+				},
+			})
+		},
+		createPaymentMethod: ({billing_details}) => {
+			if (!inputComplete) {
+				return Promise.reject(incompleteMessage);
+			}
+			return cl.createPaymentMethod({
+				type: 'card',
+				card: stripeCardEl,
+				billing_details: billing_details || {}
+			})
+		}
+	};
+}
+
+
+/**
  * Returns a set of translated error messages for a form helper
  *
  * @return {{required: *, email: *, url: *, date: *, nospace: *, digits: *}}
@@ -57,16 +156,8 @@ class EventRegistrationForm {
 			}, get_translated_error_messages()
 		);
 
-		this.cardPaymentEnabled = false;
-		//this._initStripeCard();
-
-		// if (!this.cardPaymentEnabled) {
-		// 	console.log('Card payment allowed: ' + this._cardPaymentAllowed());
-		// 	// const conf = CONFIG.payment || {};
-		// 	const conf = {};
-		// 	console.log('Stripe client id: ' + conf.stripeClientId);
-		// 	console.log('Stripe key: ' + conf.stripeKey);
-		// }
+		this.cardPaymentEnabled = this._initStripeCard();
+		this.invoicePaymentEnabled = this._invoicePaymentAllowed();
 
 		this._assignEvents();
 		this._init();
@@ -80,8 +171,7 @@ class EventRegistrationForm {
 
 		return {
 			$formControls: $root.find('[data-control]'),
-			$btnToggle: $root.find('[data-widget-register]'),
-			$btnSubmit: $root.find('[data-widget-submit]'),
+			$btnSubmit: $root.find('[type="submit"]'),
 			$cardSection: $root.find('[data-card-section]'),
 			$success: jQuery('#wsb-success'),
 		};
@@ -91,10 +181,55 @@ class EventRegistrationForm {
 		this.locals.$success.hide();
 		this.initPromoActivation();
 		this.initActiveTicketSelection();
+		this._isNotSecure();
+		this._checkPaymentMethods();
+	}
+
+	_checkPaymentMethods() {
+		if (this.cardPaymentEnabled || this.invoicePaymentEnabled) {
+			return;
+		}
+		this.$root.addClass('wsb-form-without-payment');
+		this.$root.find('[data-payment-section]').hide();
+		this.formIsLocked = true;
+		this.locals.$btnSubmit.prop('disabled', true);
+	}
+
+	_isNotSecure() {
+		if (this._isPaymentActive() && !this._isPageSecure()) {
+			this.$root.addClass('wsb-form-not-secure');
+			this._getCardPaymentOption().prop('disabled', 'disabled').removeProp('selected');
+		}
+	}
+
+	_getCardPaymentOption() {
+		return this.$root.find('[data-control][name="payment_type"] option[value="Card"]');
+	}
+
+	/**
+	 * Returns true if the payment configuration is available
+	 * @returns boolean
+	 * @private
+	 */
+	_isPaymentActive() {
+		return wsb_payment && wsb_payment.active && wsb_payment.stripe_client_id && wsb_payment.stripe_public_key;
+	}
+
+	/**
+	 * Returns true if it's allowed to use card payments on this page
+	 * @returns boolean
+	 * @private
+	 */
+	_isPageSecure() {
+		return wsb_payment.secure || wsb_payment.test;
 	}
 
 	_cardPaymentAllowed() {
-		return !!this.$root.find('[data-control][name="payment_type"] option[value="Card"]').length;
+		return !!this._getCardPaymentOption().length;
+	}
+
+	_invoicePaymentAllowed() {
+		return !!this.$root.find('[data-control][name="payment_type"] option[value="Invoice"]').length;
 	}
 
 	_cardPaymentSelected() {
@@ -113,15 +248,14 @@ class EventRegistrationForm {
 
 		if (!(
 			this._cardPaymentAllowed()
-			&& CONFIG.payment
-			&& CONFIG.payment.stripeClientId
-			&& CONFIG.payment.stripeKey)
+			&& this._isPaymentActive()
+			&& this._isPageSecure())
 		) return false;
 
-		this.stripeCard = createStripeCard(
+		this.stripeCard = create_stripe_card(
 			this.$root.find("#stripe-placeholder")[0],
-			CONFIG.payment.stripeKey,
-			CONFIG.payment.stripeClientId);
+			wsb_payment.stripe_public_key,
+			wsb_payment.stripe_client_id);
 
 		this._displayCardSection(this._cardPaymentSelected());
 
@@ -190,6 +324,7 @@ class EventRegistrationForm {
 
 	_onSubmitForm(e) {
 		e.preventDefault();
+		console.log("SUBMIT");
 
 		if (this.formIsLocked) return;
 
@@ -225,14 +360,12 @@ class EventRegistrationForm {
 		}
 
 		const formData = self.formHelper.getFormData();
-		const registrationUrl = self.$root.attr('action');
-		// const preparePaymentUrl = self.$root.data("preparePaymentUrl");
-		const preparePaymentUrl = wsb_event.ajax_url;
+		const url = wsb_event.ajax_url;
 
 		self._lockFormSubmit();
-		self._sendFormData(preparePaymentUrl, formData)
+		self._sendFormData(url, this._prepareFormData(formData, true))
 			.done((data) => {
-				self._processCardPayment(registrationUrl, formData, data.data.client_secret);
+				self._processCardPayment(url, formData, data.data.client_secret);
 			}).fail(self._processFailResponse);
 	}
 
@@ -242,11 +375,10 @@ class EventRegistrationForm {
 		console.log("Enter simple registration flow");
 
 		const formData = self.formHelper.getFormData();
-		// const registrationUrl = self.$root.attr('action');
 		const registrationUrl = wsb_event.ajax_url;
 
 		self._lockFormSubmit();
-		self._sendFormData(registrationUrl, this._prepareFormData(formData))
+		self._sendFormData(registrationUrl, this._prepareFormData(formData, false))
 			.done(() => {
 				self._submitSucceed();
 			}).fail(self._processFailResponse);
@@ -256,10 +388,11 @@ class EventRegistrationForm {
 	 * Removes empty values from data, sent to the server
 	 *
 	 * @param data {object} Form data
+	 * @param preRegister {boolean} True if the call is to pre-register
 	 * @return {object}
 	 */
-	_prepareFormData(data) {
-		data.action = 'wsb_register_to_event';
+	_prepareFormData(data, preRegister) {
+		data.action = preRegister ? 'wsb_pre_register' : 'wsb_register';
 		data._ajax_nonce = wsb_event.nonce;
 		data.event_id = Number(wsb_event.id);
 		for (const item in data) {
@@ -315,7 +448,7 @@ class EventRegistrationForm {
 
 			formData['intent_id'] = result.paymentIntent.id;
 
-			self._sendFormData(url, formData)
+			self._sendFormData(url, this._prepareFormData(formData, false))
 				.done(() => {
 					self._submitSucceed();
 				})
@@ -366,7 +499,6 @@ class EventRegistrationForm {
 
 	// transport
 	_sendFormData(url, data) {
-		data.action = 'wsb_register_to_event';
 		data._ajax_nonce = wsb_event.nonce;
 		return $.ajax({
 			url,

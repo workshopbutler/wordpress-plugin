@@ -435,7 +435,8 @@
         "province": "Município/Estado",
         "country": "País",
         "postcode": "Código Postal"
-      }
+      },
+      "payment_type": "Forma de pagamento"
     },
     "section": {
       "general": "Informações pessoais",

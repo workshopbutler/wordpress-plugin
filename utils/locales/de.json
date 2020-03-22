@@ -436,7 +436,8 @@
         "province": "Bundesland",
         "country": "Land",
         "postcode": "Postleitzahl"
-      }
+      },
+      "payment_type": "Bezahlverfahren"
     },
     "section": {
       "general": "Persönliche Angaben",
