@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-02-22T11:52:38.234Z\n"
-"PO-Revision-Date: 2020-02-22T11:52:38.234Z\n"
+"POT-Creation-Date: 2020-03-22T11:58:26.619Z\n"
+"PO-Revision-Date: 2020-03-22T11:58:26.619Z\n"
 "Language: es\n"
 
 msgid "attendees.empty"
@@ -1079,6 +1079,9 @@ msgstr "Formato de número largo no válido"
 
 msgid "form.error.digits"
 msgstr "Sólo dígitos"
+
+msgid "form.error.attendee"
+msgstr "Ya existe un asistente con esta dirección de correo electrónico"
 
 msgid "form.field.first_name"
 msgstr "Nombre"

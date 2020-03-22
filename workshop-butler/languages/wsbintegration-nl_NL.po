@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-02-22T11:52:38.834Z\n"
-"PO-Revision-Date: 2020-02-22T11:52:38.834Z\n"
+"POT-Creation-Date: 2020-03-22T11:58:27.231Z\n"
+"PO-Revision-Date: 2020-03-22T11:58:27.231Z\n"
 "Language: nl\n"
 
 msgid "attendees.empty"
@@ -1079,6 +1079,9 @@ msgstr "Het nummer is te lang en niet geldig"
 
 msgid "form.error.digits"
 msgstr "Alleen cijfers"
+
+msgid "form.error.attendee"
+msgstr "Er bestaat al een deelnemer met dit e-mailadres"
 
 msgid "form.field.first_name"
 msgstr "Voornaam"

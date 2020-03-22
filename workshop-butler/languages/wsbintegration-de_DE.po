@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-02-22T11:52:37.929Z\n"
-"PO-Revision-Date: 2020-02-22T11:52:37.929Z\n"
+"POT-Creation-Date: 2020-03-22T11:58:26.323Z\n"
+"PO-Revision-Date: 2020-03-22T11:58:26.323Z\n"
 "Language: de\n"
 
 msgid "attendees.empty"
@@ -1079,6 +1079,9 @@ msgstr "Bitte geben Sie eine Nummer ein"
 
 msgid "form.error.digits"
 msgstr "Bitte benutzen Sie nur Zahlen"
+
+msgid "form.error.attendee"
+msgstr "Ein Teilnehmer mit dieser E-Mail-Adresse ist bereits vorhanden"
 
 msgid "form.field.first_name"
 msgstr "Vorname"

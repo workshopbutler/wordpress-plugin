@@ -113,6 +113,7 @@ class WSB_Registration_Page extends WSB_Page {
 				'error_date'               => __( 'form.error.date', 'wsbintegration' ),
 				'error_nospace'            => __( 'form.error.number', 'wsbintegration' ),
 				'error_digits'             => __( 'form.error.digits', 'wsbintegration' ),
+				'error_attendee_exist'     => __( 'form.error.attendee', 'wsbintegration' ),
 				'string_validation_errors' => __( 'Validation errors occurred. Please confirm the fields and try again.', 'wsbintegration' ),
 				'string_error_try_again'   => __( 'The server doesn\'t response. Please try again. If the error persists please contact your trainer.', 'wsbintegration' ),
 				'string_try_again'         => __( 'Please try again. If the error persists please contact your trainer.', 'wsbintegration' ),

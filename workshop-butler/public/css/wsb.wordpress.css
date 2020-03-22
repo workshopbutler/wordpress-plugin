@@ -1,3 +1,21 @@
+/* This part must in in common styles */
+/* Temporary here */
+.b-error {
+  position: absolute;
+  right: 0px;
+  top: 32px;
+  font-size: 10px;
+  color: #E73B2B;
+}
+
+.wsb-form__field {
+  position: relative;
+}
+.wsb-form__error {
+  margin-left: 10em;
+}
+
+/* This part is only relevant for WordPress */
 .wsb-content .wsb-trainer-profile .wsb-trainer-buttons {
   padding-top: 1em;
 }

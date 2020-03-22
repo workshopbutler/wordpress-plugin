@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"POT-Creation-Date: 2020-02-22T11:52:39.734Z\n"
-"PO-Revision-Date: 2020-02-22T11:52:39.734Z\n"
+"POT-Creation-Date: 2020-03-22T11:58:28.132Z\n"
+"PO-Revision-Date: 2020-03-22T11:58:28.132Z\n"
 "Language: pt\n"
 
 msgid "attendees.empty"
@@ -1079,6 +1079,9 @@ msgstr "Formato de número longo inválido"
 
 msgid "form.error.digits"
 msgstr "Apenas dígitos"
+
+msgid "form.error.attendee"
+msgstr "Já existe um participante com este endereço de email"
 
 msgid "form.field.first_name"
 msgstr "Primeiro Nome"
