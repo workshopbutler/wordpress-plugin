@@ -15,6 +15,14 @@
         {% for section in event.registration_form.sections %}
             {% if section.id == 'ticket' %}
                 {{ include('ticket-section.twig') }}
+            {% elseif section.id == 'payment' %}
+                <div class="wsb-form__payment-alert wsb-not-secure-alert">
+                    This page is not secure. Card payments are turned off.
+                </div>
+                <div class="wsb-form__payment-alert wsb-no-payment-method">
+                    No payment method is available. You cannot register to this event.
+                </div>
+                {{ include('payment-section.twig') }}
             {% else %}
                 <section>
                     {% if section.id != 'footer' %}
@@ -31,7 +39,7 @@
             <button class="wsb-form__btn" disabled>{{ wsb_f(event.state) }}</button>
         {% else %}
             <button type="submit" class="wsb-form__btn">
-                {{ wsb_t('event.form.button') }}
+                <i class="fa fa-spinner fa-spin" style="display: none;"></i> {{ wsb_t('event.form.button') }}
             </button>
         {% endif %}
     </div>

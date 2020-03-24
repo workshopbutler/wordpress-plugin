@@ -423,7 +423,8 @@
         "province": "Fylke/Kommune",
         "country": "Land",
         "postcode": "Postnummer"
-      }
+      },
+      "payment_type": "Betalingsmetode"
     },
     "section": {
       "general": "Personlig informasjon",

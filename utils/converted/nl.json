@@ -434,6 +434,7 @@
                 "street_first": "Straat 1",
                 "street_second": "Straat 2"
             },
+            "payment_type": "Betalingswijze",
             "street_first": "Straat 1",
             "street_second": "Straat 2"
         },

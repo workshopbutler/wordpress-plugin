@@ -434,6 +434,7 @@
                 "street_first": "Adresse (Zeile 1)",
                 "street_second": "Adresse (Zeile 2)"
             },
+            "payment_type": "Bezahlverfahren",
             "street_first": "Adresse (Zeile 1)",
             "street_second": "Adresse (Zeile 2)"
         },

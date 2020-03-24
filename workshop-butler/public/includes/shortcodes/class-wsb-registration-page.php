@@ -40,17 +40,24 @@ class WSB_Registration_Page extends WSB_Page {
 		$this->load_templates();
 	}
 
+	/**
+	 * Loads templates used later in the other templates
+	 *
+	 * @since 2.7.0
+	 */
 	private function load_templates() {
-		$field          = $this->get_template( 'registration/field', null );
-		$label          = $this->get_template( 'registration/label', null );
-		$input          = $this->get_template( 'registration/input', null );
-		$ticket         = $this->get_template( 'registration/ticket', null );
-		$ticket_section = $this->get_template( 'registration/ticket-section', null );
+		$field           = $this->get_template( 'registration/field', null );
+		$label           = $this->get_template( 'registration/label', null );
+		$input           = $this->get_template( 'registration/input', null );
+		$ticket          = $this->get_template( 'registration/ticket', null );
+		$ticket_section  = $this->get_template( 'registration/ticket-section', null );
+		$payment_section = $this->get_template( 'registration/payment-section', null );
 		$this->twig->loader->setTemplate( 'field.twig', $field );
 		$this->twig->loader->setTemplate( 'label.twig', $label );
 		$this->twig->loader->setTemplate( 'input.twig', $input );
 		$this->twig->loader->setTemplate( 'ticket.twig', $ticket );
 		$this->twig->loader->setTemplate( 'ticket-section.twig', $ticket_section );
+		$this->twig->loader->setTemplate( 'payment-section.twig', $payment_section );
 	}
 
 	/**
@@ -86,10 +93,39 @@ class WSB_Registration_Page extends WSB_Page {
 			return $this->format_error( $may_be_event->get_error_message() );
 		}
 		wp_enqueue_script( 'wsb-registration-page' );
+		if ( $may_be_event->payment ) {
+			if ( $this->is_https() || $this->is_test( $may_be_event->payment ) ) {
+				wp_enqueue_script( 'stripe' );
+			}
+			$this->add_payment_config( $may_be_event );
+		}
+
 		$this->add_theme_fonts();
 		$this->add_localized_script( $may_be_event );
 
 		return $this->render_page( $may_be_event );
+	}
+
+	/**
+	 * Returns true if the request is secure
+	 *
+	 * @return bool
+	 */
+	protected function is_https() {
+		return
+			( ! empty( $_SERVER['HTTPS'] ) && 'off' !== $_SERVER['HTTPS'] )
+			|| 443 === $_SERVER['SERVER_PORT'];
+	}
+
+	/**
+	 * Returns true if the payment is in test mode
+	 *
+	 * @param Payment $payment Payment configuration.
+	 *
+	 * @return bool
+	 */
+	protected function is_test( $payment ) {
+		return strpos( $payment->stripe_public_key, 'pk_test_' ) === 0;
 	}
 
 	/**
@@ -119,6 +155,29 @@ class WSB_Registration_Page extends WSB_Page {
 				'string_try_again'         => __( 'Please try again. If the error persists please contact your trainer.', 'wsbintegration' ),
 			)
 		);
+	}
+
+	/**
+	 * Adds payment configuration to the registration page
+	 *
+	 * @param Event $event Event.
+	 *
+	 * @since 2.8.0
+	 */
+	protected function add_payment_config( $event ) {
+		if ( $event->payment ) {
+			wp_localize_script(
+				'wsb-registration-page',
+				'wsb_payment',
+				array(
+					'active'            => $event->payment->active,
+					'secure'            => $this->is_https(),
+					'test'              => $this->is_test( $event->payment ),
+					'stripe_public_key' => $event->payment->stripe_public_key,
+					'stripe_client_id'  => $event->payment->stripe_client_id,
+				)
+			);
+		}
 	}
 
 	/**

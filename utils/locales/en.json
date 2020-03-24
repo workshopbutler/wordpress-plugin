@@ -422,7 +422,8 @@
         "province": "Province/State",
         "country": "Country",
         "postcode": "Postcode"
-      }
+      },
+      "payment_type": "Payment method"
     },
     "section": {
       "general": "Personal Info",

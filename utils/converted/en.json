@@ -421,6 +421,7 @@
                 "street_first": "Street 1",
                 "street_second": "Street 2"
             },
+            "payment_type": "Payment method",
             "street_first": "Street 1",
             "street_second": "Street 2"
         },

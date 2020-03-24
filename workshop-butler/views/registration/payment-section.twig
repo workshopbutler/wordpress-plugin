@@ -1,0 +1,14 @@
+<section class="wsb-ticket-section" data-payment-section>
+    {% for field in section.fields %}
+        {{ include('field.twig') }}
+    {% endfor %}
+    <div class="wsb-form__field wsb-form__payment" data-card-section style="display:none;">
+        <label class="wsb-label"></label>
+        <div class="wsb-form__payment-holder">
+            <div class="form-control wsb-form__card">
+                <div id="stripe-placeholder"></div>
+            </div>
+            <div id="register-form-error" class="wsb-form__error"></div>
+        </div>
+    </div>
+</section>

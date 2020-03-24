@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-03-22T11:58:26.323Z\n"
-"PO-Revision-Date: 2020-03-22T11:58:26.323Z\n"
+"POT-Creation-Date: 2020-03-22T16:45:13.681Z\n"
+"PO-Revision-Date: 2020-03-22T16:45:13.681Z\n"
 "Language: de\n"
 
 msgid "attendees.empty"
@@ -1178,6 +1178,9 @@ msgstr "Adresse (Zeile 1)"
 
 msgid "form.field.work.street_second"
 msgstr "Adresse (Zeile 2)"
+
+msgid "form.field.payment_type"
+msgstr "Bezahlverfahren"
 
 msgid "form.field.street_first"
 msgstr "Adresse (Zeile 1)"

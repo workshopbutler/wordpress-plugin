@@ -434,6 +434,7 @@
                 "street_first": "Calle 1",
                 "street_second": "Calle 2"
             },
+            "payment_type": "Método de pago",
             "street_first": "Calle 1",
             "street_second": "Calle 2"
         },

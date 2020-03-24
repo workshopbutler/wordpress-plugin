@@ -435,8 +435,8 @@
         "province": "Provincie / Staat",
         "postcode": "Postcode",
         "country": "Land"
-      }
-
+      },
+      "payment_type": "Betalingswijze"
     },
     "section": {
       "general": "Persoonlijke informatie",
