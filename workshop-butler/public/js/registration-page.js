@@ -157,7 +157,7 @@ class EventRegistrationForm {
 		);
 
 		this.cardPaymentEnabled = this._initStripeCard();
-		this.invoicePaymentEnabled = this._invoicePaymentAllowed();
+		this.invoicePaymentEnabled = !this._isPaymentActive() || this._invoicePaymentAllowed();
 
 		this._assignEvents();
 		this._init();
@@ -365,7 +365,7 @@ class EventRegistrationForm {
 		self._lockFormSubmit();
 		self._sendFormData(url, this._prepareFormData(formData, true))
 			.done((data) => {
-				self._processCardPayment(url, formData, data.data.client_secret);
+				self._processCardPayment(url, formData, data.data.stripe_client_secret);
 			}).fail(self._processFailResponse);
 	}
 

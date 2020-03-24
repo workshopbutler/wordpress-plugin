@@ -39,7 +39,7 @@
             <button class="wsb-form__btn" disabled>{{ wsb_f(event.state) }}</button>
         {% else %}
             <button type="submit" class="wsb-form__btn">
-                {{ wsb_t('event.form.button') }}
+                <i class="fa fa-spinner fa-spin" style="display: none;"></i> {{ wsb_t('event.form.button') }}
             </button>
         {% endif %}
     </div>

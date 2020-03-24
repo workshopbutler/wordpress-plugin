@@ -103,7 +103,7 @@ class WSB_Ajax {
 	/**
 	 * Makes a POST Register request to Workshop Butler API
 	 */
-	public static function register_to_event() {
+	public static function register() {
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			check_ajax_referer( 'wsb-nonce' );
 
