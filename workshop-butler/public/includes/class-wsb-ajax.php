@@ -42,11 +42,17 @@ class WSB_Ajax {
 					break;
 				case 'future-trainer-events':
 					$method = 'facilitators/' . rawurlencode( $_GET['id'] ) . '/events';
-					$query  = array( 'dates' => 'future' );
+					$query  = array(
+						'dates'  => 'future',
+						'public' => true,
+					);
 					break;
 				case 'past-trainer-events':
 					$method = 'facilitators/' . rawurlencode( $_GET['id'] ) . '/events';
-					$query  = array( 'dates' => 'past' );
+					$query  = array(
+						'dates'  => 'past',
+						'public' => true,
+					);
 					break;
 				default:
 					die();
