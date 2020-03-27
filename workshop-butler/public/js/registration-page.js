@@ -403,7 +403,7 @@ class EventRegistrationForm {
 		return data;
 	}
 
-	_processFailResponse = (response) => {
+	_processFailResponse(response) {
 		const data = JSON.parse(response.responseText);
 		this._submitFail(data.message);
 		if (!(data.info)) return;

@@ -12,6 +12,7 @@ namespace WorkshopButler;
 
 use WP_Error;
 
+
 define( 'WSB_API_END_POINT', 'https://api.workshopbutler.com/' );
 require_once plugin_dir_path( __FILE__ ) . 'class-wsb-response.php';
 
