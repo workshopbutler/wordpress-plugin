@@ -68,11 +68,14 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.8.2 =
+Fixes a bug in Safari preventing card payments
+
 = 2.8.1 =
-* Fixes an incorrect Stripe fee
+Fixes an incorrect Stripe key
 
 = 2.8.0 =
-* Adds support for card payments (card payments must be activated in Workshop Butler)
+Adds support for card payments (card payments must be activated in Workshop Butler)
 
 = 2.7.6 =
 * Fixes the output of future/past events on a trainers's page: remove private workshops from the list
