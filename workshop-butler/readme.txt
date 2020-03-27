@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.8.1 =
+* Fixes an incorrect Stripe fee
+
 = 2.8.0 =
 * Adds support for card payments (card payments must be activated in Workshop Butler)
 

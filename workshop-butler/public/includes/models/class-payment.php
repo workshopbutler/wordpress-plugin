@@ -67,8 +67,7 @@ class Payment {
 	 */
 	function __construct( $active, $stripe_public_key, $stripe_client_id ) {
 		$this->active            = $active;
-//		$this->stripe_public_key = $stripe_public_key;
-		$this->stripe_public_key = 'pk_test_KB8OSKjkVaRtEhiryleXFMkd';
+		$this->stripe_public_key = $stripe_public_key;
 		$this->stripe_client_id  = $stripe_client_id;
 	}
 }
