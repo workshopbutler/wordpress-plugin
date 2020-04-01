@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.8.3 =
+Improves handling of secure requests for reverse-proxy website
+
 = 2.8.2 =
 Fixes a bug in Safari preventing card payments
 

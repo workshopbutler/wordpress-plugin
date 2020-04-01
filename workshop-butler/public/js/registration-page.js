@@ -221,7 +221,7 @@ class EventRegistrationForm {
 	 * @private
 	 */
 	_isPageSecure() {
-		return wsb_payment.secure || wsb_payment.test;
+		return window.location.href.startsWith('https') || wsb_payment.test;
 	}
 
 	_cardPaymentAllowed() {

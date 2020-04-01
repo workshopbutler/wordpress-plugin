@@ -94,9 +94,7 @@ class WSB_Registration_Page extends WSB_Page {
 		}
 		wp_enqueue_script( 'wsb-registration-page' );
 		if ( $may_be_event->payment ) {
-			if ( $this->is_https() || $this->is_test( $may_be_event->payment ) ) {
-				wp_enqueue_script( 'stripe' );
-			}
+			wp_enqueue_script( 'stripe' );
 			$this->add_payment_config( $may_be_event );
 		}
 
@@ -104,17 +102,6 @@ class WSB_Registration_Page extends WSB_Page {
 		$this->add_localized_script( $may_be_event );
 
 		return $this->render_page( $may_be_event );
-	}
-
-	/**
-	 * Returns true if the request is secure
-	 *
-	 * @return bool
-	 */
-	protected function is_https() {
-		return
-			( ! empty( $_SERVER['HTTPS'] ) && 'off' !== $_SERVER['HTTPS'] )
-			|| 443 === $_SERVER['SERVER_PORT'];
 	}
 
 	/**
@@ -171,7 +158,6 @@ class WSB_Registration_Page extends WSB_Page {
 				'wsb_payment',
 				array(
 					'active'            => $event->payment->active,
-					'secure'            => $this->is_https(),
 					'test'              => $this->is_test( $event->payment ),
 					'stripe_public_key' => $event->payment->stripe_public_key,
 					'stripe_client_id'  => $event->payment->stripe_client_id,
