@@ -197,7 +197,7 @@ class WSB_Integration {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		if ( ! is_admin() ) {
-			$this->loader->add_action( 'init', $plugin_public, 'add_shortcodes' );
+			$this->loader->add_action( 'init', $plugin_public, 'init' );
 			$this->loader->add_filter( 'pre_get_document_title', $plugin_public, 'set_document_title' );
 			$this->loader->add_filter( 'the_title', $plugin_public, 'set_title', 10, 2 );
 		}

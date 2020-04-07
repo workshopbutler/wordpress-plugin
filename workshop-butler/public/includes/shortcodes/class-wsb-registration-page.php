@@ -82,12 +82,13 @@ class WSB_Registration_Page extends WSB_Page {
 	 * @since  2.0.0
 	 */
 	public function render( $attrs = array(), $content = null ) {
-		if ( empty( $_GET['id'] ) ) {
-			return $this->format_error( 'empty event ID' );
+		$id = get_query_var( 'id', 0 );
+		if ( 0 === $id ) {
+			return $this->format_error( 'Incorrect workshop ID' );
 		}
 		$may_be_event = $this->dict->get_event();
 		if ( is_null( $may_be_event ) ) {
-			$may_be_event = $this->requests->retrieve_event( $_GET['id'] );
+			$may_be_event = $this->requests->retrieve_event( $id );
 		}
 		if ( is_wp_error( $may_be_event ) ) {
 			return $this->format_error( $may_be_event->get_error_message() );

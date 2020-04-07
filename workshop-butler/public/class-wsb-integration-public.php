@@ -240,9 +240,9 @@ class WSB_Integration_Public {
 	}
 
 	/**
-	 * Adds Workshop Butler shortcodes
+	 * Adds Workshop Butler shortcodes and initialises custom query parameters
 	 */
-	public function add_shortcodes() {
+	public function init() {
 
 		// Old version support.
 		add_shortcode( 'wb_content', array( 'WorkshopButler\WSB_Old_Schedule_Page', 'page' ) );
@@ -303,6 +303,10 @@ class WSB_Integration_Public {
 		add_shortcode( 'wsb_testimonial_author', array( 'WorkshopButler\WSB_Testimonial', 'tag' ) );
 		add_shortcode( 'wsb_testimonial_rating', array( 'WorkshopButler\WSB_Testimonial', 'tag' ) );
 		add_shortcode( 'wsb_testimonial_content', array( 'WorkshopButler\WSB_Testimonial', 'tag' ) );
+
+		// Adds support for custom query parameter.
+		global $wp;
+		$wp->add_query_var( 'id' );
 	}
 
 	/**

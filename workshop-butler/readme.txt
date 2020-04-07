@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.8.4 =
+Fixes a random bug when workshop ID wasn't retrieved from a query string (probably erased by WordPress)
+
 = 2.8.3 =
 Improves handling of secure requests for reverse-proxy website
 
