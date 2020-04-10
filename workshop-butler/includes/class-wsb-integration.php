@@ -170,6 +170,7 @@ class WSB_Integration {
 
 		$upgrader = new WSB_Integration_Upgrade();
 		$this->loader->add_action( 'admin_init', $upgrader, 'upgrade' );
+		$this->loader->add_action( 'init', $upgrader, 'upgrade', 15 );
 	}
 
 	/**

@@ -31,7 +31,6 @@ class WSB_Integration_Deactivator {
 	 * @since    2.0.0
 	 */
 	public static function deactivate() {
-		delete_option( WSB_Options::PLUGIN_SETTINGS );
 		WSB_Options::set_internal_option( WSB_Options::INT_STATE, false );
 	}
 

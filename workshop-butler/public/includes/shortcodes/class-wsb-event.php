@@ -30,6 +30,17 @@ class WSB_Event extends WSB_Page {
 	 */
 	protected function get_default_attrs( $shortcode_name ) {
 		switch ( $shortcode_name ) {
+			case 'image':
+				return array(
+					'width'  => '300',
+					'height' => '200',
+					'type'   => 'full',
+					'class'  => null,
+				);
+			case 'registration_button':
+				return array(
+					'target' => '_self',
+				);
 			case 'tickets':
 				$show_expired_tickets   = $this->settings->get( WSB_Options::SHOW_EXPIRED_TICKETS, true );
 				$show_number_of_tickets = $this->settings->get( WSB_Options::SHOW_NUMBER_OF_TICKETS, true );
@@ -37,13 +48,6 @@ class WSB_Event extends WSB_Page {
 				return array(
 					'show_expired_tickets'   => $show_expired_tickets,
 					'show_number_of_tickets' => $show_number_of_tickets,
-				);
-			case 'image':
-				return array(
-					'width'  => '300',
-					'height' => '200',
-					'type'   => 'full',
-					'class'  => null,
 				);
 			default:
 				return array();

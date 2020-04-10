@@ -11,7 +11,7 @@
  * Plugin URI:        https://github.com/workshopbutler/wordpress-plugin
  * Description:       This plugin integrates Workshop Butler Events, Trainers and Testimonials to your WordPress
  *     website.
- * Version:           2.8.4
+ * Version:           2.9.0
  * Author:            Workshop Butler
  * Author URI:        https://workshopbutler.com/
  * License:           GPL-2.0+
@@ -28,12 +28,12 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'WSB_INTEGRATION_VERSION', '2.8.4' );
+define( 'WSB_INTEGRATION_VERSION', '2.9.0' );
 
 /**
  * Version of Workshop Butler API, used by this plugin
  */
-define( 'WSB_API_VERSION', '2020-03-19' );
+define( 'WSB_API_VERSION', '2020-04-06' );
 
 /**
  * The code that runs during plugin activation.
@@ -53,8 +53,18 @@ function deactivate_wsb_integration() {
 	WorkshopButler\WSB_Integration_Deactivator::deactivate();
 }
 
+/**
+ * The code that runs during plugin removal.
+ * This action is documented in includes/class-wsb-integration-uninstaller.php
+ */
+function remove_wsb_integration() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-integration-uninstaller.php';
+	WorkshopButler\WSB_Integration_Uninstaller::uninstall();
+}
+
 register_activation_hook( __FILE__, 'activate_wsb_integration' );
 register_deactivation_hook( __FILE__, 'deactivate_wsb_integration' );
+register_uninstall_hook( __FILE__, 'remove_wsb_integration' );
 
 /**
  * The core plugin class that is used to define internationalization,

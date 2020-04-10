@@ -56,6 +56,7 @@ class Ticket_Formatter {
 	protected static function format_price( $ticket_type ) {
 		if ( class_exists( 'NumberFormatter' ) ) {
 			$formatter = new \NumberFormatter( get_locale(), \NumberFormatter::CURRENCY );
+
 			return $formatter->formatCurrency( $ticket_type->price->amount, $ticket_type->price->currency );
 		} else {
 			$without_fraction = ( $ticket_type->price->amount - floor( $ticket_type->price->amount ) ) < 0.001;
@@ -103,10 +104,12 @@ class Ticket_Formatter {
 		if ( $ticket_type->ended() ) {
 			return sprintf( __( 'event.ticket.endedOn', 'wsbintegration' ), Date_Formatter::format( $ticket_type->end ) );
 		}
-		if ( $ticket_type->active() ) {
+		if ( $ticket_type->active() && ! empty( $ticket_type->end ) ) {
 			return sprintf( __( 'event.ticket.endsOn', 'wsbintegration' ), Date_Formatter::format( $ticket_type->end ) );
 		}
-
-		return sprintf( __( 'event.ticket.onSaleFrom', 'wsbintegration' ), Date_Formatter::format( $ticket_type->start ) );
+		if ( $ticket_type->in_future() ) {
+			return sprintf( __( 'event.ticket.onSaleFrom', 'wsbintegration' ), Date_Formatter::format( $ticket_type->start ) );
+		}
+		return '';
 	}
 }

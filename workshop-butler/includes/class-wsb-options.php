@@ -11,7 +11,7 @@
 namespace WorkshopButler;
 
 if ( ! class_exists( 'ReduxFramework' )
-	&& file_exists( dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php' ) ) {
+     && file_exists( dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php' ) ) {
 	require_once dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php';
 }
 
@@ -33,6 +33,7 @@ class WSB_Options {
 
 	const INT_STATE = '_state';
 	const INT_VERSION = '_version';
+	const INT_TEMPLATE_VERSION = '_tmpl_version';
 
 	const API_KEY = 'api-key';
 
@@ -135,6 +136,24 @@ class WSB_Options {
 		update_option( self::INTERNAL_SETTINGS, $settings );
 	}
 
+	/**
+	 * Returns the active template version or false if there is no version yet
+	 *
+	 * @return bool|string
+	 * @since 2.9.0
+	 */
+	public static function get_template_version() {
+		return self::get_internal_option( self::INT_TEMPLATE_VERSION );
+	}
+
+	/**
+	 * Updates the stored version
+	 *
+	 * @since 2.9.0
+	 */
+	public static function set_template_version() {
+		self::set_internal_option( self::INT_TEMPLATE_VERSION, WSB_INTEGRATION_VERSION );
+	}
 
 	/**
 	 * Returns the value of the option, or false if the option is not set
@@ -211,4 +230,5 @@ class WSB_Options {
 	public function get_theme() {
 		return $this->get( self::THEME, 'alfred' );
 	}
+
 }

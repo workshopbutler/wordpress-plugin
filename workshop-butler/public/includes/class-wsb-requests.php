@@ -76,13 +76,14 @@ class WSB_Requests {
 	 * @return WSB_Response
 	 */
 	public function get( $method, $query ) {
-		$query['api_key']     = $this->settings->get( WSB_Options::API_KEY );
-		$query['t']           = $this->get_plugin_stats();
-		$query['api_version'] = WSB_API_VERSION;
-		$this->add_stats_parameter( $query );
-		$url = WSB_API_END_POINT . $method . '?' . http_build_query( $query );
+		$url  = $this->build_url( $method, $query );
+		$args = array(
+			'headers' => array(
+				'referer' => $this->get_referer(),
+			),
+		);
 
-		return new WSB_Response( wp_remote_get( $url ) );
+		return new WSB_Response( wp_remote_get( $url, $args ) );
 	}
 
 	/**
@@ -94,20 +95,14 @@ class WSB_Requests {
 	 * @return WSB_Response
 	 */
 	public function post( $method, $data ) {
-		$query                = array();
-		$query['api_key']     = $this->settings->get( WSB_Options::API_KEY );
-		$query['t']           = $this->get_plugin_stats();
-		$query['api_version'] = WSB_API_VERSION;
-
-		$this->add_stats_parameter( $query );
+		$url = $this->build_url( $method, array() );
 
 		$data_string = json_encode( $data );
-
-		$url = WSB_API_END_POINT . $method . '?' . http_build_query( $query );
 
 		$headers = array(
 			'content-type'   => 'application/json',
 			'content-length' => strlen( $data_string ),
+			'referer'        => $this->get_referer(),
 		);
 
 		$resp = wp_remote_post(
@@ -120,19 +115,6 @@ class WSB_Requests {
 		);
 
 		return new WSB_Response( $resp );
-	}
-
-	/**
-	 * Adds a properly formatted parameter which contains an information about plugin settings
-	 *
-	 * @param array $query List of query parameters for API request.
-	 */
-	protected function add_stats_parameter( &$query ) {
-		$parameters = array();
-		array_push( $parameters, 'w' );
-		array_push( $parameters, WSB_INTEGRATION_VERSION );
-		array_push( $parameters, $this->settings->get( WSB_Options::THEME, 'alfred' ) );
-		$query['t'] = implode( ';', $parameters );
 	}
 
 	/**
@@ -198,7 +180,39 @@ class WSB_Requests {
 	 * @since 2.7.0
 	 */
 	protected function get_plugin_stats() {
-		return 'w;' . WSB_INTEGRATION_VERSION . ';' . $this->settings->get_theme();
+		$parameters = array();
+		array_push( $parameters, 'w' );
+		array_push( $parameters, WSB_INTEGRATION_VERSION );
+		array_push( $parameters, $this->settings->get( WSB_Options::THEME, 'alfred' ) );
+		array_push( $parameters, WSB_Options::get_template_version() );
+
+		return implode( ';', $parameters );
 	}
 
+	/**
+	 * Returns an API url.
+	 *
+	 * @param string $method POST/GET.
+	 * @param array  $query API query parameters.
+	 *
+	 * @return string
+	 * @since 2.9.0
+	 */
+	protected function build_url( $method, $query ) {
+		$query['api_key']     = $this->settings->get( WSB_Options::API_KEY );
+		$query['t']           = $this->get_plugin_stats();
+		$query['api_version'] = WSB_API_VERSION;
+
+		return WSB_API_END_POINT . $method . '?' . http_build_query( $query );
+	}
+
+	/**
+	 * Returns current page.
+	 *
+	 * @return string
+	 * @since 2.9.0
+	 */
+	protected function get_referer() {
+		return filter_input( INPUT_SERVER, 'HTTP_HOST' ) . filter_input( INPUT_SERVER, 'REQUEST_URI' );
+	}
 }

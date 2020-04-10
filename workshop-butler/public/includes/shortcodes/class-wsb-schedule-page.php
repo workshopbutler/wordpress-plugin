@@ -66,7 +66,7 @@ class WSB_Schedule_Page extends WSB_Page {
 		wp_enqueue_script( 'wsb-all-events-scripts' );
 		$this->add_theme_fonts();
 
-		$attrs = $this->get_widget_attrs( $attrs );
+		$attrs = $this->get_attrs( $attrs );
 
 		$method = 'events';
 		$fields = 'title,location,hashed_id,schedule,free,type,registration_page,spoken_languages,sold_out,facilitators,free_ticket_type,paid_ticket_types,title_url';
@@ -96,15 +96,14 @@ class WSB_Schedule_Page extends WSB_Page {
 	 *
 	 * @return array
 	 */
-	private function get_widget_attrs( $attrs ) {
+	private function get_attrs( $attrs ) {
 
 		$defaults = array(
-			'category' => null,
-			'layout'   => $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' ),
+			'category'   => null,
+			'event_type' => null,
+			'layout'     => $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' ),
+			'wrapper'    => false,
 		);
-		if ( ! empty( $attrs['event_type'] ) ) {
-			$defaults['event_type'] = $attrs['event_type'];
-		}
 
 		return shortcode_atts( $defaults, $attrs );
 	}
@@ -113,7 +112,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	 * Renders the list of events
 	 *
 	 * @param WSB_Response  $response Workshop Butler API response.
-	 * @param array         $attrs Widget's attributes.
+	 * @param array         $attrs Shortcodes's attributes.
 	 * @param string | null $content Content of the wsb_schedule shortcode.
 	 *
 	 * @return string
@@ -201,6 +200,12 @@ class WSB_Schedule_Page extends WSB_Page {
 	 */
 	protected function get_default_attrs( $shortcode_name ) {
 		switch ( $shortcode_name ) {
+			case 'image':
+				return array(
+					'without_url' => 'false',
+					'width'       => '300',
+					'height'      => '200',
+				);
 			case 'item':
 				return array(
 					'cols'         => 'schedule,location,title,register',
@@ -209,17 +214,14 @@ class WSB_Schedule_Page extends WSB_Page {
 			case 'filters':
 				return array( 'filters' => 'location,trainer,language,type' );
 			case 'register':
-				return array( 'registration' => 'false' );
 			case 'table_register':
 				return array( 'registration' => 'false' );
+			case 'title':
+				return array(
+					'truncate' => '60',
+				);
 			case 'trainers':
 				return array( 'name' => 'true' );
-			case 'image':
-				return array(
-					'without_url' => 'false',
-					'width'       => '300',
-					'height'      => '200',
-				);
 			default:
 				return array();
 		}

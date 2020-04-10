@@ -76,6 +76,8 @@ class WSB_Event_Page extends WSB_Page {
 		$this->add_theme_fonts();
 		$this->add_localized_script( $may_be_event );
 
+		$attrs = $this->get_attrs( $attrs );
+
 		return $this->render_page( $may_be_event );
 	}
 
@@ -98,6 +100,22 @@ class WSB_Event_Page extends WSB_Page {
 				'id'       => $event->hashed_id,
 			)
 		);
+	}
+
+	/**
+	 * Returns shortcodes's attributes
+	 *
+	 * @param array $attrs User attributes.
+	 *
+	 * @return array
+	 */
+	private function get_attrs( $attrs ) {
+
+		$defaults = array(
+			'wrapper' => false,
+		);
+
+		return shortcode_atts( $defaults, $attrs );
 	}
 
 	/**
