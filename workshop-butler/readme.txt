@@ -68,6 +68,14 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.9.0 =
+* Adds 'truncate' parameter to wsb_schedule_title (only for 'tile' view). By default, 60. Set to 0 or false to remove completely. ... is added when truncate is on.
+* Adds 'target' parameter to wsb_event_registration_button. By default, set to '_self'. Possible values are the same as for 'target' attribute for HTML link <a>.
+* Adds support for optional start/end dates in ticket prices
+* Fixes deactivation behaviour for the plugin (do not remove settings anymore)
+* Adds complete settings removal when the plugin is uninstalled
+* Sends a bit more statistics on each API request
+
 = 2.8.4 =
 Fixes a random bug when workshop ID wasn't retrieved from a query string (probably erased by WordPress)
 
