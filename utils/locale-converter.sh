@@ -8,11 +8,20 @@ fi
 
 php converter.php
 locales=(en de es fr nl nn nb pt)
-suffixes=(US DE ES FR NL NO NO PT)
+en_suffixes="AU BZ CA GB IE IN JM MY NZ PH SG TT US ZA ZW"
+all_suffixes=("AU BZ CA GB IE IN JM MY NZ PH SG TT US ZA ZW" "AT CH DE LI LU" "AR BO CL CO CR DO EC ES GT HN MX NI PA PE PR PY SV US UY VE" "BE CA CH FR LU" "BE NL" "NO" "NO" "BR PT")
+
+
 for index in ${!locales[*]}
 do
   locale=${locales[$index]}
-  suffix=${suffixes[$index]}
-  i18next-conv --ctxSeparator ! -k . -l $locale -s converted/$locale.json -t ../workshop-butler/languages/wsbintegration-${locale}_$suffix.po
-  i18next-conv --ctxSeparator ! -k . -l $locale -s converted/$locale.json -t ../workshop-butler/languages/wsbintegration-${locale}_$suffix.mo
+  suffixes=(${all_suffixes[$index]})
+  i18next-conv --ctxSeparator ! -k . -l $locale -s converted/$locale.json -t ../workshop-butler/languages/wsbintegration-${locale}.po
+  i18next-conv --ctxSeparator ! -k . -l $locale -s converted/$locale.json -t ../workshop-butler/languages/wsbintegration-${locale}.mo
+  for j in ${!suffixes[*]}
+  do
+    suffix=${suffixes[$j]}
+    cp ../workshop-butler/languages/wsbintegration-${locale}.po ../workshop-butler/languages/wsbintegration-${locale}_${suffix}.po
+    cp ../workshop-butler/languages/wsbintegration-${locale}.mo ../workshop-butler/languages/wsbintegration-${locale}_${suffix}.mo
+  done
 done
