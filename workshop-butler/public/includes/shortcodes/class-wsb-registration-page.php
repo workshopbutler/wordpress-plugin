@@ -159,6 +159,7 @@ class WSB_Registration_Page extends WSB_Page {
 				'wsb_payment',
 				array(
 					'active'            => $event->payment->active,
+					'free'              => $event->free,
 					'test'              => $this->is_test( $event->payment ),
 					'stripe_public_key' => $event->payment->stripe_public_key,
 					'stripe_client_id'  => $event->payment->stripe_client_id,

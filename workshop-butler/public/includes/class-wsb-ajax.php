@@ -52,6 +52,7 @@ class WSB_Ajax {
 					$query  = array(
 						'dates'  => 'past',
 						'public' => true,
+						'sort'   => '-start_date',
 					);
 					break;
 				default:

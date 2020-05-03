@@ -186,7 +186,7 @@ class EventRegistrationForm {
 	}
 
 	_checkPaymentMethods() {
-		if (this.cardPaymentEnabled || this.invoicePaymentEnabled) {
+		if (this.cardPaymentEnabled || this.invoicePaymentEnabled || this._isFree()) {
 			return;
 		}
 		this.$root.addClass('wsb-form-without-payment');
@@ -204,6 +204,15 @@ class EventRegistrationForm {
 
 	_getCardPaymentOption() {
 		return this.$root.find('[data-control][name="payment_type"] option[value="Card"]');
+	}
+
+	/**
+	 * Returns true if the event is free
+	 * @return {boolean}
+	 * @private
+	 */
+	_isFree() {
+		return wsb_payment && wsb_payment.free;
 	}
 
 	/**
