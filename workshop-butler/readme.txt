@@ -68,6 +68,12 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.10.0 =
+* Fixes an issue with non-working registration form for free events
+* On the trainer's profile, the newest past events are shown, not the oldest ones
+* Improves support for multiple locales
+
+
 = 2.9.0 =
 * Adds 'truncate' parameter to wsb_schedule_title (only for 'tile' view). By default, 60. Set to 0 or false to remove completely. ... is added when truncate is on.
 * Adds 'target' parameter to wsb_event_registration_button. By default, set to '_self'. Possible values are the same as for 'target' attribute for HTML link <a>.
