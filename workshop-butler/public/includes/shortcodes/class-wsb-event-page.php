@@ -11,6 +11,7 @@
 namespace WorkshopButler;
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'utils/log-error.php';
 
 /**
  * Event Page class which handles the rendering and logic for the event page
@@ -63,6 +64,8 @@ class WSB_Event_Page extends WSB_Page {
 	public function render( $attrs = array(), $content = null ) {
 		$id = get_query_var( 'id', 0 );
 		if ( 0 === $id ) {
+			log_error( 'WSB_Event_Page', 'Incorrect workshop ID', array() );
+
 			return $this->format_error( 'Incorrect workshop ID' );
 		}
 		$may_be_event = $this->dict->get_event();

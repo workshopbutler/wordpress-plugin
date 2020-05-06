@@ -183,7 +183,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 			$this->dict->set_trainer( $trainer );
 			$item_content           = $this->compile_string( $content, array( 'trainer' => $trainer ) );
 			$processed_item_content = do_shortcode( $item_content );
-			$html                   .= $this->compile_string(
+			$html                  .= $this->compile_string(
 				$item_template,
 				array(
 					'trainer' => $trainer,

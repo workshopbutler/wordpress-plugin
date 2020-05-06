@@ -155,6 +155,14 @@ class Event {
 	public $description;
 
 	/**
+	 * True if the event is featured.
+	 *
+	 * @var boolean $featured
+	 * @since 2.11.0
+	 */
+	public $featured;
+
+	/**
 	 * Registration form
 	 *
 	 * @since   2.0.0
@@ -246,6 +254,7 @@ class Event {
 		$this->trainers = $this->get_trainers( $json_data, $trainer_page_url );
 		$this->state    = new Event_State( $this );
 		$this->payment  = Payment::from_json( $json_data->card_payment );
+		$this->featured = $json_data->featured;
 	}
 
 	/**

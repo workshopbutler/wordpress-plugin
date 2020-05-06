@@ -10,8 +10,7 @@
 
 namespace WorkshopButler;
 
-if ( ! class_exists( 'ReduxFramework' )
-     && file_exists( dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php' ) ) {
+if ( ! class_exists( 'ReduxFramework' ) && file_exists( dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php' ) ) {
 	require_once dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php';
 }
 
@@ -25,44 +24,45 @@ if ( ! class_exists( 'ReduxFramework' )
  */
 class WSB_Options {
 
-	const OLD_API_KEY = 'wb_token';
+	const OLD_API_KEY       = 'wb_token';
 	const OLD_SCHEDULE_PAGE = 'wb_url';
 
-	const PLUGIN_SETTINGS = 'wsb-settings';
+	const PLUGIN_SETTINGS   = 'wsb-settings';
 	const INTERNAL_SETTINGS = 'wsb-internal-settings';
 
-	const INT_STATE = '_state';
-	const INT_VERSION = '_version';
+	const INT_STATE            = '_state';
+	const INT_VERSION          = '_version';
 	const INT_TEMPLATE_VERSION = '_tmpl_version';
 
 	const API_KEY = 'api-key';
 
-	const SCHEDULE_TILE_TEMPLATE = 'schedule-tile-template';
+	const SCHEDULE_TILE_TEMPLATE  = 'schedule-tile-template';
 	const SCHEDULE_TABLE_TEMPLATE = 'schedule-table-template';
-	const EVENT_TEMPLATE = 'event-template';
-	const REGISTRATION_TEMPLATE = 'registration-template';
-	const TRAINER_LIST_TEMPLATE = 'trainer-list-template';
-	const TRAINER_TEMPLATE = 'trainer-template';
+	const EVENT_TEMPLATE          = 'event-template';
+	const REGISTRATION_TEMPLATE   = 'registration-template';
+	const TRAINER_LIST_TEMPLATE   = 'trainer-list-template';
+	const TRAINER_TEMPLATE        = 'trainer-template';
 
 	const CUSTOM_CSS = 'custom-css';
 
-	const THEME = 'theme';
-	const CUSTOM_THEME = 'custom-theme';
-	const GA_API_KEY = 'google-analytics-key';
+	const THEME         = 'theme';
+	const CUSTOM_THEME  = 'custom-theme';
+	const GA_API_KEY    = 'google-analytics-key';
+	const REPORT_ERRORS = 'report-errors';
 
-	const CUSTOM_EVENT_DETAILS = 'custom-event-page';
-	const SHOW_EXPIRED_TICKETS = 'show-expired-tickets';
-	const SHOW_NUMBER_OF_TICKETS = 'show-number-of-tickets';
-	const SCHEDULE_NO_EVENTS = 'no-events-caption';
-	const SCHEDULE_LAYOUT = 'event-list-layout';
-	const SCHEDULE_PAGE = 'event-list-page-id';
-	const EVENT_PAGE = 'event-page-id';
+	const CUSTOM_EVENT_DETAILS    = 'custom-event-page';
+	const SHOW_EXPIRED_TICKETS    = 'show-expired-tickets';
+	const SHOW_NUMBER_OF_TICKETS  = 'show-number-of-tickets';
+	const SCHEDULE_NO_EVENTS      = 'no-events-caption';
+	const SCHEDULE_LAYOUT         = 'event-list-layout';
+	const SCHEDULE_PAGE           = 'event-list-page-id';
+	const EVENT_PAGE              = 'event-page-id';
 	const EVENT_PAGE_SIDEBAR_TYPE = 'event-page-sidebar-type';
 	const EVENT_PAGE_SIDEBAR_SIZE = 'event-page-sidebar-size';
-	const REGISTRATION_PAGE = 'registration-page-id';
+	const REGISTRATION_PAGE       = 'registration-page-id';
 
-	const TRAINER_MODULE = 'trainer-module';
-	const TRAINER_LIST_PAGE = 'trainer-list-page-id';
+	const TRAINER_MODULE       = 'trainer-module';
+	const TRAINER_LIST_PAGE    = 'trainer-list-page-id';
 	const TRAINER_PROFILE_PAGE = 'trainer-page-id';
 
 	/**

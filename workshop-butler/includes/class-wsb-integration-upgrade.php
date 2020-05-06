@@ -38,7 +38,8 @@ class WSB_Integration_Upgrade {
 		if ( empty( $new_key ) ) {
 			$self->transfer_settings();
 		}
-		$self->update_templates_2_7_1();
+		$self->update_templates();
+		$self->update_settings();
 		$self->save_internal_settings( $self->get_version() );
 
 		$event_page = WSB_Options::get_option( WSB_Options::EVENT_PAGE );
@@ -67,9 +68,18 @@ class WSB_Integration_Upgrade {
 	}
 
 	/**
+	 * Updates selected settings
+	 */
+	protected function update_settings() {
+		if ( $this->get_version() && $this->get_version() < '2.11.0' ) {
+			WSB_Options::set_option( WSB_Options::REPORT_ERRORS, true );
+		}
+	}
+
+	/**
 	 * Updates the classes that changed in version 2.7.1 for all related pages
 	 */
-	protected function update_templates_2_7_1() {
+	protected function update_templates() {
 		if ( $this->get_version() && $this->get_version() < '2.7.1' ) {
 			$this->update_classes_2_7_1( WSB_Options::EVENT_TEMPLATE );
 			$this->update_classes_2_7_1( WSB_Options::TRAINER_TEMPLATE );

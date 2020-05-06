@@ -47,8 +47,8 @@ class Sidebar_Field {
 	/**
 	 * Sidebar_Field constructor
 	 *
-	 * @param string                  $type          Type of the field.
-	 * @param string                  $description   Description of the field.
+	 * @param string                  $type Type of the field.
+	 * @param string                  $description Description of the field.
 	 * @param string|boolean|int|null $default_value Default value of the field.
 	 */
 	public function __construct( $type, $description, $default_value = null ) {

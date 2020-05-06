@@ -288,6 +288,13 @@ class WSB_Settings {
 				'desc'       => __( 'Log in to <a href="https://analytics.google.com/analytics/web/" target="_blank">Google Analytics</a> to get your API key', 'wsbintegration' ),
 				'validation' => 'not_empty',
 			),
+			array(
+				'id'      => WSB_Options::REPORT_ERRORS,
+				'type'    => 'switch',
+				'title'   => 'Report failed requests',
+				'desc'    => 'When a request to Workshop Butler API fails, the plugin sends this information to our logging servers helping us to find the source of the problem faster. We do not collect any personal information, only detailed error reports.',
+				'default' => true,
+			),
 		);
 	}
 

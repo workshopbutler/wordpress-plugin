@@ -1,0 +1,13 @@
+<div class="{% if layout == 'table' %} wsb-table__col wsb-table__col-schedule {% else %} wsb-tile-info {% endif %}
+    {% if class %} {{ class }} {% endif %}">
+    {{ wsb_f(event.schedule, 'time') }}
+    {% if timezone and event.schedule.timezone %}
+        {% if timezone == 'online' and event.location.online or timezone == 'all' %}
+            {% if timezone_format == 'long' %}
+                {{ wsb_f(event.schedule, 'timezone_long') }}
+            {% else %}
+                {{ wsb_f(event.schedule, 'timezone_short') }}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+</div>

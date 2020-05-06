@@ -256,6 +256,8 @@ class WSB_Integration_Public {
 		add_shortcode( 'wsb_trainer', array( 'WorkshopButler\WSB_Trainer_Page', 'page' ) );
 
 		// Elements.
+		add_shortcode( 'wsb_schedule_date', array( 'WorkshopButler\WSB_Schedule_Page', 'tag' ) );
+		add_shortcode( 'wsb_schedule_time', array( 'WorkshopButler\WSB_Schedule_Page', 'tag' ) );
 		add_shortcode( 'wsb_schedule_filters', array( 'WorkshopButler\WSB_Schedule_Page', 'tag' ) );
 		add_shortcode( 'wsb_schedule_item', array( 'WorkshopButler\WSB_Schedule_Page', 'tag' ) );
 		add_shortcode( 'wsb_schedule_register', array( 'WorkshopButler\WSB_Schedule_Page', 'tag' ) );

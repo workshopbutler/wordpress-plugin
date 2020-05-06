@@ -99,10 +99,11 @@ class WSB_Schedule_Page extends WSB_Page {
 	private function get_attrs( $attrs ) {
 
 		$defaults = array(
-			'category'   => null,
-			'event_type' => null,
-			'layout'     => $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' ),
-			'wrapper'    => false,
+			'category'      => null,
+			'event_type'    => null,
+			'layout'        => $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' ),
+			'wrapper'       => false,
+			'only_featured' => false,
 		);
 
 		return shortcode_atts( $defaults, $attrs );
@@ -131,7 +132,9 @@ class WSB_Schedule_Page extends WSB_Page {
 				$this->settings->get_trainer_page_url(),
 				$this->settings->get_registration_page_url()
 			);
-			array_push( $events, $event );
+			if ( ! $attrs['only_featured'] || $event->featured ) {
+				array_push( $events, $event );
+			}
 		}
 
 		if ( 0 === count( $events ) ) {
@@ -216,6 +219,11 @@ class WSB_Schedule_Page extends WSB_Page {
 			case 'register':
 			case 'table_register':
 				return array( 'registration' => 'false' );
+			case 'time':
+				return array(
+					'timezone'        => 'online',
+					'timezone_format' => 'short',
+				);
 			case 'title':
 				return array(
 					'truncate' => '60',
@@ -251,7 +259,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			$this->dict->set_event( $event );
 			$item_content           = $this->compile_string( $content, array( 'event' => $event ) );
 			$processed_item_content = do_shortcode( $item_content );
-			$html                   .= $this->compile_string(
+			$html                  .= $this->compile_string(
 				$item_template,
 				array(
 					'event'   => $event,

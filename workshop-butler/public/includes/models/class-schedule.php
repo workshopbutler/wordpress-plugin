@@ -51,6 +51,11 @@ class Schedule {
 		}
 		$this->start = new \DateTime( $json_data->start );
 		$this->end   = new \DateTime( $json_data->end );
+		if ( $this->timezone ) {
+			$timezone = new \DateTimeZone( $this->timezone );
+			$this->start->setTimezone( $timezone );
+			$this->end->setTimezone( $timezone );
+		}
 	}
 
 	/**
@@ -62,6 +67,7 @@ class Schedule {
 		$now = new \DateTime( 'now', $this->default_timezone() );
 		$end = clone $this->end;
 		$end->setTimezone( $this->default_timezone() );
+
 		return $end < $now;
 	}
 

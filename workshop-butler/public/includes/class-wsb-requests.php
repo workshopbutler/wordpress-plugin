@@ -15,6 +15,7 @@ use WP_Error;
 
 define( 'WSB_API_END_POINT', 'https://api.workshopbutler.com/' );
 require_once plugin_dir_path( __FILE__ ) . 'class-wsb-response.php';
+require_once plugin_dir_path( __FILE__ ) . 'utils/log-error.php';
 
 /**
  * The request wrapper class
@@ -82,8 +83,10 @@ class WSB_Requests {
 				'referer' => $this->get_referer(),
 			),
 		);
+		$resp = wp_remote_get( $url, $args );
+		$this->report_error( $resp, $query, $method );
 
-		return new WSB_Response( wp_remote_get( $url, $args ) );
+		return new WSB_Response( $resp );
 	}
 
 	/**
@@ -113,6 +116,7 @@ class WSB_Requests {
 				'body'    => $data_string,
 			)
 		);
+		$this->report_error( $resp, $data, $method );
 
 		return new WSB_Response( $resp );
 	}
@@ -214,5 +218,24 @@ class WSB_Requests {
 	 */
 	protected function get_referer() {
 		return filter_input( INPUT_SERVER, 'HTTP_HOST' ) . filter_input( INPUT_SERVER, 'REQUEST_URI' );
+	}
+
+	/**
+	 * If there is a error in response, report it to Workshop Butler
+	 *
+	 * @param array|WP_Error $resp Response.
+	 * @param array          $data Method data.
+	 * @param string         $method Method type (POST, GET).
+	 */
+	protected function report_error( $resp, $data, $method ) {
+		if ( is_a( $resp, 'WP_Error' ) ) {
+			$error_data            = array();
+			$error_data['data']    = $data;
+			$error_data['method']  = $method;
+			$error_data['code']    = $resp->get_error_code();
+			$error_data['message'] = $resp->get_error_message();
+			$error_data['errors']  = $resp->get_error_data();
+			log_error( 'WSB_Requests', $method, $error_data );
+		}
 	}
 }

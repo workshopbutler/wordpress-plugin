@@ -1,0 +1,4 @@
+<div class="{% if layout == 'table' %} wsb-table__col wsb-table__col-schedule {% else %} wsb-tile-info {% endif %}
+    {% if class %} {{ class }} {% endif %}">
+    {{ wsb_f(event.schedule, 'full_short') }}
+</div>
