@@ -1,4 +1,4 @@
-{% if trainer.public_stats.rating > 0 %}
+{% if trainer.stats.total.public_stats.rating > 0 %}
     <i class="fas fa-star"></i>
-    {{ wsb_f(trainer.public_stats.rating) }}
+    {{ wsb_f(trainer.stats.total.public_stats.rating) }}
 {% endif %}
