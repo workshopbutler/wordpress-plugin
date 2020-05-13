@@ -13,8 +13,9 @@ services:
     depends_on:
       - mysql
     networks:
-      - front
       - back
+    ports:
+      - "80:80"
     volumes:
       - "wp:/var/www/html:rw"
       - "./workshop-butler:/var/www/html/wp-content/plugins/workshop-butler:ro"
@@ -39,19 +40,8 @@ services:
       MYSQL_ROOT_PASSWORD: ""
     networks:
       - "back"
-  proxy:
-    image: "jwilder/nginx-proxy:alpine"
-    ports:
-      - "80:80"
-    networks:
-      front:
-        aliases:
-          - "${DOCKER_DEV_DOMAIN:-project.test}"
-    volumes:
-      - "/var/run/docker.sock:/tmp/docker.sock:ro"
 
 networks:
-  front: {}
   back: {}
 
 volumes:
