@@ -1,4 +1,4 @@
-FROM wordpress:4.9.6-php7.-apache
+FROM wordpress:4.9.8-php7.2-apache
 
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
 
