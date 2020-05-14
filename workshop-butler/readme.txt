@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.11.2 =
+Fixes "mailto" button on the trainer's page
+
 = 2.11.1 =
 Fixes `[wsb_trainer_list_rating]` shortcode which didn't show trainer's rating
 

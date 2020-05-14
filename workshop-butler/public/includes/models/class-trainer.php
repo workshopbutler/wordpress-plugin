@@ -165,7 +165,7 @@ class Trainer {
 		$this->last_name           = $json_data->last_name;
 		$this->photo               = $json_data->avatar;
 		$this->bio                 = $json_data->bio;
-		$this->email               = $json_data->email_address;
+		$this->email               = $json_data->email;
 		$this->years_of_experience = $json_data->years_of_experience;
 		$this->number_of_events    = $json_data->number_of_events;
 		$this->badges              = $json_data->badges ? $json_data->badges : array();
