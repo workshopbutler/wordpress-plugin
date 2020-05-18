@@ -20,10 +20,47 @@ class Language_Formatter {
 	 * Formats the language
 	 *
 	 * @param Language $language Workshop's language.
+	 * @param string   $type Type of formatting. Long - full sentence. Short - only languages.
+	 *
 	 * @return string
 	 * @since 2.0.0
 	 */
-	public static function format( $language ) {
+	public static function format( $language, $type = null ) {
+		if ( 'short' === $type ) {
+			return self::short_format( $language );
+		} else {
+			return self::long_format( $language );
+		}
+	}
+
+	/**
+	 * Returns a long formatted workshop's language
+	 *
+	 * @param Language $language Workshop's language.
+	 *
+	 * @return string
+	 * @since 2.12.0
+	 */
+	protected static function short_format( $language ) {
+		$languages = array();
+		if ( count( $language->spoken ) > 1 ) {
+			array_push( $languages, self::get_name( $language->spoken[0] ), self::get_name( $language->spoken[1] ) );
+		} else {
+			array_push( $languages, self::get_name( $language->spoken[0] ) );
+		}
+
+		return implode( ', ', $languages );
+	}
+
+	/**
+	 * Returns a short formatted workshop's language
+	 *
+	 * @param Language $language Workshop's language.
+	 *
+	 * @return string
+	 * @since 2.12.0
+	 */
+	protected static function long_format( $language ) {
 		if ( count( $language->spoken ) > 1 ) {
 			$str    = __( 'event.info.twoLangs', 'wsbintegration' );
 			$prefix = sprintf(
@@ -37,6 +74,7 @@ class Language_Formatter {
 		}
 		$suffix = $language->materials ? __( 'event.info.materials', 'wsbintegration' ) : '.';
 		$suffix = sprintf( $suffix, self::get_name( $language->materials ) );
+
 		return $prefix . $suffix;
 	}
 

@@ -76,11 +76,22 @@ class WSB_Settings {
 		Redux::setSection(
 			$this->opt_name,
 			array(
-				'title'            => __( 'Events', 'wsbintegration' ),
-				'id'               => 'events',
+				'title'            => __( 'Schedule', 'wsbintegration' ),
+				'id'               => 'schedule',
 				'customizer_width' => '400px',
-				'icon'             => 'el el-list-alt',
-				'fields'           => $this->get_event_settings(),
+				'icon'             => 'el el-calendar',
+				'fields'           => $this->get_schedule_settings(),
+			)
+		);
+
+		Redux::setSection(
+			$this->opt_name,
+			array(
+				'title'            => __( 'Event Page', 'wsbintegration' ),
+				'id'               => 'event-page',
+				'customizer_width' => '400px',
+				'icon'             => 'el el-website',
+				'fields'           => $this->get_event_page_settings(),
 			)
 		);
 		Redux::setSection(
@@ -332,22 +343,12 @@ class WSB_Settings {
 		);
 	}
 
-
-	/**
-	 * Returns settings for event-related pages
-	 *
-	 * @return array
-	 */
-	private function get_event_settings() {
-		return array_merge( $this->get_event_list_settings(), $this->get_event_page_settings() );
-	}
-
 	/**
 	 * Returns the settings for the list of events
 	 *
 	 * @return array
 	 */
-	private function get_event_list_settings() {
+	private function get_schedule_settings() {
 		return array(
 			array(
 				'id'      => WSB_Options::SCHEDULE_NO_EVENTS,
@@ -365,6 +366,49 @@ class WSB_Settings {
 					'tile'  => 'Tiles',
 				),
 				'default' => 'table',
+			),
+			array(
+				'id'   => 'schedule_info_id',
+				'type' => 'info',
+				'desc' => '<h3>Filters</h3> In some rare cases, you may need to change the name of query string parameters for schedule filter. For example,
+					a default parameter for <b>Location</b> filter is <code>location</code> and the url with an applied filter would look like 
+					<code>https://example.com/schedule?location=DE</code>. If you change <code>location</code> to <code>loc</code>, then 
+					the url with an applied filter becomes <code>https://example.com/schedule?loc=DE</code>.<br><br>
+					We recommend changing these values only if the default ones do not work due to other plugins.',
+			),
+			array(
+				'id'     => 'schedule_filter_section_start',
+				'type'   => 'section',
+				'indent' => true,
+			),
+			array(
+				'id'      => WSB_Options::SCHEDULE_LANGUAGE,
+				'type'    => 'text',
+				'title'   => __( '<code>Language</code>', 'wsbintegration' ),
+				'default' => __( WSB_Options::FILTER_LANGUAGE_ID, 'wsbintegration' ),
+			),
+			array(
+				'id'      => WSB_Options::SCHEDULE_LOCATION,
+				'type'    => 'text',
+				'title'   => __( '<code>Location</code>', 'wsbintegration' ),
+				'default' => __( WSB_Options::FILTER_LOCATION_ID, 'wsbintegration' ),
+			),
+			array(
+				'id'      => WSB_Options::SCHEDULE_TRAINER,
+				'type'    => 'text',
+				'title'   => __( '<code>Trainer</code>', 'wsbintegration' ),
+				'default' => __( WSB_Options::FILTER_TRAINER_ID, 'wsbintegration' ),
+			),
+			array(
+				'id'      => WSB_Options::SCHEDULE_TYPE,
+				'type'    => 'text',
+				'title'   => __( '<code>Event type</code>', 'wsbintegration' ),
+				'default' => __( WSB_Options::FILTER_TYPE_ID, 'wsbintegration' ),
+			),
+			array(
+				'id'     => 'schedule_filter_section_end',
+				'type'   => 'section',
+				'indent' => false,
 			),
 		);
 	}

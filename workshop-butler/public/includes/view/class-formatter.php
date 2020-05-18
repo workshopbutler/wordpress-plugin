@@ -37,7 +37,7 @@ class Formatter {
 			return Schedule_Formatter::format( $object, $type );
 		}
 		if ( $object instanceof Language ) {
-			return Language_Formatter::format( $object );
+			return Language_Formatter::format( $object, $type );
 		}
 		if ( $object instanceof Ticket_Type ) {
 			return esc_html_e( Ticket_Formatter::format( $object, $type ) );
@@ -50,9 +50,11 @@ class Formatter {
 				return number_format_i18n( $object, 0 );
 			} else {
 				$number = number_format_i18n( $object, 2 );
+
 				return trim( $number, '0.,' );
 			}
 		}
+
 		return '';
 	}
 }

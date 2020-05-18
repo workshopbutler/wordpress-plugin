@@ -56,6 +56,14 @@ class WSB_Options {
 	const SCHEDULE_NO_EVENTS      = 'no-events-caption';
 	const SCHEDULE_LAYOUT         = 'event-list-layout';
 	const SCHEDULE_PAGE           = 'event-list-page-id';
+	const SCHEDULE_LANGUAGE       = 'schedule-language';
+	const SCHEDULE_LOCATION       = 'schedule-location';
+	const SCHEDULE_TRAINER        = 'schedule-trainer';
+	const SCHEDULE_TYPE           = 'schedule-type';
+	const FILTER_LANGUAGE_ID      = 'language';
+	const FILTER_LOCATION_ID      = 'location';
+	const FILTER_TRAINER_ID       = 'trainer';
+	const FILTER_TYPE_ID          = 'type';
 	const EVENT_PAGE              = 'event-page-id';
 	const EVENT_PAGE_SIDEBAR_TYPE = 'event-page-sidebar-type';
 	const EVENT_PAGE_SIDEBAR_SIZE = 'event-page-sidebar-size';
@@ -79,15 +87,16 @@ class WSB_Options {
 	/**
 	 * Returns the value of the option, or false if the option is not set
 	 *
-	 * @param string $name Name of the option.
+	 * @param string      $name Name of the option.
+	 * @param string|bool $default Default value if the option does is empty.
 	 *
 	 * @return bool|mixed
 	 * @since  2.0.0
 	 */
-	public static function get_option( $name ) {
+	public static function get_option( $name, $default = false ) {
 		$option = \Redux::getOption( self::PLUGIN_SETTINGS, $name );
 		if ( null === $option ) {
-			return false;
+			return $default;
 		}
 
 		return $option;
@@ -230,5 +239,4 @@ class WSB_Options {
 	public function get_theme() {
 		return $this->get( self::THEME, 'alfred' );
 	}
-
 }

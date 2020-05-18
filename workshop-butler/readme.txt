@@ -68,6 +68,13 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.12.0 =
+* Fixes a bug with incorrect Hebrew language
+* Adds new `wsb_schedule_language` shortcode which renders the column of workshop's languages
+* Adds support for customizable query parameters for schedule
+* Reports a bit more data (request ID, user agent) on errors
+*
+
 = 2.11.2 =
 Fixes "mailto" button on the trainer's page
 

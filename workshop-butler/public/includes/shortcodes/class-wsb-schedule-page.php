@@ -63,7 +63,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	 */
 	public function render_page( $attrs = array(), $content = null ) {
 		// Load styles and scripts only on demand.
-		wp_enqueue_script( 'wsb-all-events-scripts' );
+		$this->add_localized_script();
 		$this->add_theme_fonts();
 
 		$attrs = $this->get_attrs( $attrs );
@@ -87,6 +87,25 @@ class WSB_Schedule_Page extends WSB_Page {
 		$response = $this->requests->get( $method, $query );
 
 		return $this->render_list( $response, $attrs, $content );
+	}
+
+	/**
+	 * Adds a localized version of JS script on the page
+	 *
+	 * @since 2.12.0
+	 */
+	protected function add_localized_script() {
+		wp_enqueue_script( 'wsb-all-events-scripts' );
+		wp_localize_script(
+			'wsb-all-events-scripts',
+			'wsb',
+			array(
+				WSB_Options::FILTER_LOCATION_ID => WSB_Options::get_option( WSB_Options::SCHEDULE_LOCATION, WSB_Options::FILTER_LOCATION_ID ),
+				WSB_Options::FILTER_LANGUAGE_ID => WSB_Options::get_option( WSB_Options::SCHEDULE_LANGUAGE, WSB_Options::FILTER_LANGUAGE_ID ),
+				WSB_Options::FILTER_TRAINER_ID  => WSB_Options::get_option( WSB_Options::SCHEDULE_TRAINER, WSB_Options::FILTER_TRAINER_ID ),
+				WSB_Options::FILTER_TYPE_ID     => WSB_Options::get_option( WSB_Options::SCHEDULE_TYPE, WSB_Options::FILTER_TYPE_ID ),
+			)
+		);
 	}
 
 	/**
@@ -259,7 +278,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			$this->dict->set_event( $event );
 			$item_content           = $this->compile_string( $content, array( 'event' => $event ) );
 			$processed_item_content = do_shortcode( $item_content );
-			$html                  .= $this->compile_string(
+			$html                   .= $this->compile_string(
 				$item_template,
 				array(
 					'event'   => $event,

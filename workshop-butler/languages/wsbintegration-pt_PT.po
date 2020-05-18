@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"POT-Creation-Date: 2020-05-01T08:24:29.097Z\n"
-"PO-Revision-Date: 2020-05-01T08:24:29.097Z\n"
+"POT-Creation-Date: 2020-05-18T10:14:19.426Z\n"
+"PO-Revision-Date: 2020-05-18T10:14:19.426Z\n"
 "Language: pt\n"
 
 msgid "attendees.empty"
@@ -893,6 +893,9 @@ msgstr "húngara"
 
 msgid "language.KO"
 msgstr "coreana"
+
+msgid "language.HE"
+msgstr "hebraico"
 
 msgid "rating.one"
 msgstr "Mais de 1"

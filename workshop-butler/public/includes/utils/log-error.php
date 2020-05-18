@@ -20,10 +20,11 @@ namespace WorkshopButler;
  * @since 2.11.0
  */
 function log_error( $where, $what, $data ) {
-	$data['where']   = $where;
-	$data['what']    = $what;
-	$data['page']    = filter_input( INPUT_SERVER, 'HTTP_HOST' ) . filter_input( INPUT_SERVER, 'REQUEST_URI' );
-	$data['referer'] = filter_input( INPUT_SERVER, 'HTTP_REFERER' );
+	$data['where']      = $where;
+	$data['what']       = $what;
+	$data['page']       = filter_input( INPUT_SERVER, 'HTTP_HOST' ) . filter_input( INPUT_SERVER, 'REQUEST_URI' );
+	$data['referer']    = filter_input( INPUT_SERVER, 'HTTP_REFERER' );
+	$data['user-agent'] = filter_input( INPUT_SERVER, 'HTTP_USER_AGENT' );
 
 	$params            = array();
 	$params['type']    = 'wp';

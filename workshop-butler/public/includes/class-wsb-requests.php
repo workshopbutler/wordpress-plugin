@@ -77,14 +77,16 @@ class WSB_Requests {
 	 * @return WSB_Response
 	 */
 	public function get( $method, $query ) {
-		$url  = $this->build_url( $method, $query );
-		$args = array(
+		$url        = $this->build_url( $method, $query );
+		$request_id = uniqid();
+		$args       = array(
 			'headers' => array(
-				'referer' => $this->get_referer(),
+				'referer'      => $this->get_referer(),
+				'X-Request-Id' => $request_id,
 			),
 		);
-		$resp = wp_remote_get( $url, $args );
-		$this->report_error( $resp, $query, $method );
+		$resp       = wp_remote_get( $url, $args );
+		$this->report_error( $resp, $query, $method, $request_id );
 
 		return new WSB_Response( $resp );
 	}
@@ -102,10 +104,13 @@ class WSB_Requests {
 
 		$data_string = json_encode( $data );
 
+		$request_id = uniqid();
+
 		$headers = array(
 			'content-type'   => 'application/json',
 			'content-length' => strlen( $data_string ),
 			'referer'        => $this->get_referer(),
+			'X-Request-Id'   => $request_id,
 		);
 
 		$resp = wp_remote_post(
@@ -116,7 +121,7 @@ class WSB_Requests {
 				'body'    => $data_string,
 			)
 		);
-		$this->report_error( $resp, $data, $method );
+		$this->report_error( $resp, $data, $method, $request_id );
 
 		return new WSB_Response( $resp );
 	}
@@ -226,10 +231,12 @@ class WSB_Requests {
 	 * @param array|WP_Error $resp Response.
 	 * @param array          $data Method data.
 	 * @param string         $method Method type (POST, GET).
+	 * @param string         $request_id ID of the request.
 	 */
-	protected function report_error( $resp, $data, $method ) {
+	protected function report_error( $resp, $data, $method, $request_id ) {
 		if ( is_a( $resp, 'WP_Error' ) ) {
 			$error_data            = array();
+			$data['request_id']    = $request_id;
 			$error_data['data']    = $data;
 			$error_data['method']  = $method;
 			$error_data['code']    = $resp->get_error_code();

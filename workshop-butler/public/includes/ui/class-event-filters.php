@@ -25,12 +25,31 @@ class Event_Filters extends List_Filters {
 	/**
 	 * Initialises a new object
 	 *
-	 * @param Event[]  $events          Available events which we use to build filters.
+	 * @param Event[]  $events Available events which we use to build filters.
 	 * @param string[] $visible_filters List of filters to render on the page.
 	 */
 	public function __construct( $events, $visible_filters ) {
 		$this->objects = $events;
 		$this->filters = $visible_filters;
+	}
+
+	/**
+	 * Returns filters which should be added to the page
+	 *
+	 * @return Filter[]
+	 * @since 2.12.0
+	 */
+	public function get_filters() {
+		$filters = array();
+		foreach ( $this->filters as $id ) {
+			$values = $this->get_filter_values( $id );
+			if ( count( $values ) > 0 ) {
+				$filter_value = new Filter( $id, $values, true );
+				array_push( $filters, $filter_value );
+			}
+		}
+
+		return $filters;
 	}
 
 	/**
@@ -42,13 +61,13 @@ class Event_Filters extends List_Filters {
 	 */
 	protected function get_filter_values( $name ) {
 		switch ( $name ) {
-			case 'language':
+			case WSB_Options::FILTER_LANGUAGE_ID:
 				return $this->get_language_filter_data( __( 'filter.languages', 'wsbintegration' ), $this->objects );
-			case 'location':
+			case WSB_Options::FILTER_LOCATION_ID:
 				return $this->get_location_filter_data( __( 'filter.locations', 'wsbintegration' ), $this->objects );
-			case 'trainer':
+			case WSB_Options::FILTER_TRAINER_ID:
 				return $this->get_trainer_filter_data( __( 'filter.trainers', 'wsbintegration' ), $this->objects );
-			case 'type':
+			case WSB_Options::FILTER_TYPE_ID:
 				return $this->get_type_filter_data( __( 'filter.types', 'wsbintegration' ), $this->objects );
 			default:
 				return array();
@@ -59,7 +78,7 @@ class Event_Filters extends List_Filters {
 	 * Returns values for Language filter
 	 *
 	 * @param string  $default_name Name of the default filter value.
-	 * @param Event[] $events       Available events to filter.
+	 * @param Event[] $events Available events to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
@@ -73,6 +92,7 @@ class Event_Filters extends List_Filters {
 				array_push( $languages, $value );
 			}
 		}
+
 		return $this->get_filter_data( $default_name, $languages );
 	}
 
@@ -80,7 +100,7 @@ class Event_Filters extends List_Filters {
 	 * Returns values for Location filter
 	 *
 	 * @param string  $default_name Name of the default filter value.
-	 * @param Event[] $events       Available events to filter.
+	 * @param Event[] $events Available events to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
@@ -99,7 +119,7 @@ class Event_Filters extends List_Filters {
 	 * Returns values for Trainer filter
 	 *
 	 * @param string  $default_name Name of the default filter value.
-	 * @param Event[] $events       Available events to filter.
+	 * @param Event[] $events Available events to filter.
 	 *
 	 * @return Filter_Value[]
 	 */
@@ -111,6 +131,7 @@ class Event_Filters extends List_Filters {
 				array_push( $values, $value );
 			}
 		}
+
 		return $this->get_filter_data( $default_name, $values );
 	}
 
@@ -118,7 +139,7 @@ class Event_Filters extends List_Filters {
 	 * Returns values for Event Type filter
 	 *
 	 * @param string  $default_name Name of the default filter value.
-	 * @param Event[] $events       Available events to filter.
+	 * @param Event[] $events Available events to filter.
 	 *
 	 * @return Filter_Value[]
 	 */

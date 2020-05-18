@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-01T08:24:28.460Z\n"
-"PO-Revision-Date: 2020-05-01T08:24:28.460Z\n"
+"POT-Creation-Date: 2020-05-18T10:14:18.833Z\n"
+"PO-Revision-Date: 2020-05-18T10:14:18.833Z\n"
 "Language: nn\n"
 
 msgid "attendees.empty"
@@ -855,6 +855,9 @@ msgstr "Ungarsk"
 msgid "language.KO"
 msgstr "Koreansk"
 
+msgid "language.HE"
+msgstr "Hebraisk"
+
 msgid "rating.one"
 msgstr "Mer enn 1"
 
@@ -1041,6 +1044,9 @@ msgstr "Vennligst oppgi et gyldig nummer"
 msgid "form.error.digits"
 msgstr "Fyll inn bare tall"
 
+msgid "form.error.attendee"
+msgstr "En deltaker med denne e-postadressen eksisterer allerede"
+
 msgid "form.field.first_name"
 msgstr "Fornavn"
 
@@ -1136,6 +1142,9 @@ msgstr "Gate 1"
 
 msgid "form.field.work.street_second"
 msgstr "Gate 2"
+
+msgid "form.field.payment_type"
+msgstr "Betalingsmetode"
 
 msgid "form.field.street_first"
 msgstr "Gate 1"

@@ -1,4 +1,11 @@
 {
+  "attendees": {
+    "empty": "Ingen deltagere funnet"
+  },
+  "pagination": {
+    "next": "Neste",
+    "prev": "Tidligere"
+  },
   "filter": {
     "categories": "Alle kategorier",
     "locations": "Alle steder",
@@ -278,7 +285,12 @@
     "SV": "Svensk",
     "SR": "Serbisk",
     "TR": "Turkish",
-    "VI": "Vietnamesisk"
+    "VI": "Vietnamesisk",
+    "KA": "Georgisk",
+    "SK": "Slovakisk",
+    "HU": "Ungarsk",
+    "KO": "Koreansk",
+    "HE": "Hebraisk"
   },
   "rating": {
     "one": "Mer enn 1",
@@ -370,7 +382,8 @@
       "url": "Vennligst skriv inn en gyldig url",
       "date": "Vennligst oppgi en gyldig dato",
       "number": "Vennligst oppgi et gyldig nummer",
-      "digits": "Fyll inn bare tall"
+      "digits": "Fyll inn bare tall",
+      "attendee": "En deltaker med denne e-postadressen eksisterer allerede"
     },
     "field": {
       "first_name": "Fornavn",
@@ -410,15 +423,26 @@
         "province": "Fylke/Kommune",
         "country": "Land",
         "postcode": "Postnummer"
-      }
+      },
+      "payment_type": "Betalingsmetode"
     },
     "section": {
-      "home address": "Hjemmeadresse",
-      "billing address": "Fakturaadresse",
-      "billing info": "Faktureringsinfo",
-      "work info": "Arbeid info",
-      "additional information": "Tilleggsinformasjon",
-      "ticket": "Billett"
+      "general": "Personlig informasjon",
+      "address": "Hjemmeadresse",
+      "billing": "Faktureringsinfo",
+      "work": "Arbeid info",
+      "other": "Tilleggsinformasjon",
+      "ticket": "Velg din billett"
+    },
+    "summary": {
+      "caption": "Sammendrag",
+      "price": "Billettpris",
+      "tax": "Skatt",
+      "total": "Total",
+      "included": "inkludert"
+    },
+    "promo": {
+      "caption": "Jeg har en kampanjekode"
     }
   },
   "registration": {

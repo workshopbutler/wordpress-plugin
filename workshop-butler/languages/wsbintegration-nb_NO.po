@@ -5,9 +5,18 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-01T08:24:28.781Z\n"
-"PO-Revision-Date: 2020-05-01T08:24:28.781Z\n"
+"POT-Creation-Date: 2020-05-18T10:14:19.124Z\n"
+"PO-Revision-Date: 2020-05-18T10:14:19.124Z\n"
 "Language: nb\n"
+
+msgid "attendees.empty"
+msgstr "Ingen deltagere funnet"
+
+msgid "pagination.next"
+msgstr "Neste"
+
+msgid "pagination.prev"
+msgstr "Tidligere"
 
 msgid "filter.categories"
 msgstr "Alle kategorier"
@@ -834,6 +843,21 @@ msgstr "Turkish"
 msgid "language.VI"
 msgstr "Vietnamesisk"
 
+msgid "language.KA"
+msgstr "Georgisk"
+
+msgid "language.SK"
+msgstr "Slovakisk"
+
+msgid "language.HU"
+msgstr "Ungarsk"
+
+msgid "language.KO"
+msgstr "Koreansk"
+
+msgid "language.HE"
+msgstr "Hebraisk"
+
 msgid "rating.one"
 msgstr "Mer enn 1"
 
@@ -1020,6 +1044,9 @@ msgstr "Vennligst oppgi et gyldig nummer"
 msgid "form.error.digits"
 msgstr "Fyll inn bare tall"
 
+msgid "form.error.attendee"
+msgstr "En deltaker med denne e-postadressen eksisterer allerede"
+
 msgid "form.field.first_name"
 msgstr "Fornavn"
 
@@ -1116,29 +1143,50 @@ msgstr "Gate 1"
 msgid "form.field.work.street_second"
 msgstr "Gate 2"
 
+msgid "form.field.payment_type"
+msgstr "Betalingsmetode"
+
 msgid "form.field.street_first"
 msgstr "Gate 1"
 
 msgid "form.field.street_second"
 msgstr "Gate 2"
 
-msgid "form.section.home address"
+msgid "form.section.general"
+msgstr "Personlig informasjon"
+
+msgid "form.section.address"
 msgstr "Hjemmeadresse"
 
-msgid "form.section.billing address"
-msgstr "Fakturaadresse"
-
-msgid "form.section.billing info"
+msgid "form.section.billing"
 msgstr "Faktureringsinfo"
 
-msgid "form.section.work info"
+msgid "form.section.work"
 msgstr "Arbeid info"
 
-msgid "form.section.additional information"
+msgid "form.section.other"
 msgstr "Tilleggsinformasjon"
 
 msgid "form.section.ticket"
-msgstr "Billett"
+msgstr "Velg din billett"
+
+msgid "form.summary.caption"
+msgstr "Sammendrag"
+
+msgid "form.summary.price"
+msgstr "Billettpris"
+
+msgid "form.summary.tax"
+msgstr "Skatt"
+
+msgid "form.summary.total"
+msgstr "Total"
+
+msgid "form.summary.included"
+msgstr "inkludert"
+
+msgid "form.promo.caption"
+msgstr "Jeg har en kampanjekode"
 
 msgid "registration.successTitle"
 msgstr "Takk for registreringen"
