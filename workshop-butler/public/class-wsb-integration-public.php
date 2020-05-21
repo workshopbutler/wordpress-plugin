@@ -44,10 +44,10 @@ class WSB_Integration_Public {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    2.0.0
+	 * @param string $plugin_name The name of the plugin.
+	 * @param string $version The version of this plugin.
 	 *
-	 * @param      string $plugin_name The name of the plugin.
-	 * @param      string $version     The version of this plugin.
+	 * @since    2.0.0
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -73,6 +73,7 @@ class WSB_Integration_Public {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-testimonial.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-event.php';
+		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-next-event.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-ajax.php';
 	}
 
@@ -104,14 +105,24 @@ class WSB_Integration_Public {
 	 */
 	public function enqueue_scripts() {
 		wp_register_script( 'wsb-all-trainers-scripts', plugin_dir_url( __FILE__ ) . 'js/all-trainers-scripts.js', array( 'jquery' ), $this->version, true );
-		wp_register_script( 'wsb-event-page', plugin_dir_url( __FILE__ ) . 'js/event-page.js', array( 'jquery', 'wsb-dateformat' ), $this->version, true );
-		wp_register_script( 'wsb-registration-page', plugin_dir_url( __FILE__ ) . 'js/registration-page.js', array( 'jquery', 'wsb-dateformat' ), $this->version, true );
+		wp_register_script( 'wsb-event-page', plugin_dir_url( __FILE__ ) . 'js/event-page.js', array(
+			'jquery',
+			'wsb-dateformat'
+		), $this->version, true );
+		wp_register_script( 'wsb-registration-page', plugin_dir_url( __FILE__ ) . 'js/registration-page.js', array(
+			'jquery',
+			'wsb-dateformat'
+		), $this->version, true );
 
-		wp_register_script( 'wsb-single-trainer-scripts', plugin_dir_url( __FILE__ ) . 'js/single-trainer-scripts.js', array( 'jquery', 'wsb-dateformat' ), $this->version, true );
+		wp_register_script( 'wsb-single-trainer-scripts', plugin_dir_url( __FILE__ ) . 'js/single-trainer-scripts.js', array(
+			'jquery',
+			'wsb-dateformat'
+		), $this->version, true );
 
 		wp_register_script( 'wsb-dateformat', plugin_dir_url( __FILE__ ) . 'js/jquery-dateFormat.min.js', array( 'jquery' ), $this->version, true );
 		wp_register_script( 'wsb-all-events-scripts', plugin_dir_url( __FILE__ ) . 'js/all-events-scripts.js', array( 'jquery' ), $this->version, true );
 
+		wp_register_script( 'wsb-next-event', plugin_dir_url( __FILE__ ) . 'js/next-event.js', array( 'jquery' ), $this->version, true );
 		wp_deregister_script( 'jquery' );
 		wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', false, null );
 		wp_enqueue_script( 'jquery' );
@@ -130,9 +141,10 @@ class WSB_Integration_Public {
 	 * Updates the title of the page
 	 *
 	 * @param string $title Current page title.
-	 * @param int    $id    ID of the page.
-	 * @since 2.0.0
+	 * @param int    $id ID of the page.
+	 *
 	 * @return string
+	 * @since 2.0.0
 	 */
 	public function set_title( $title, $id ) {
 		$options      = new WSB_Options();
@@ -153,6 +165,7 @@ class WSB_Integration_Public {
 	 * Updates the document title
 	 *
 	 * @param string $title Current title.
+	 *
 	 * @return string
 	 */
 	public function set_document_title( $title ) {
@@ -163,8 +176,9 @@ class WSB_Integration_Public {
 	 * Returns the title of the page based on its url
 	 *
 	 * @param string $title Current page title.
-	 * @since 2.0.0
+	 *
 	 * @return string
+	 * @since 2.0.0
 	 */
 	protected function get_title( $title ) {
 		global $post;
@@ -307,6 +321,7 @@ class WSB_Integration_Public {
 		add_shortcode( 'wsb_testimonial_rating', array( 'WorkshopButler\WSB_Testimonial', 'tag' ) );
 		add_shortcode( 'wsb_testimonial_content', array( 'WorkshopButler\WSB_Testimonial', 'tag' ) );
 
+		add_shortcode( 'wsb_next_event', array( 'WorkshopButler\WSB_Next_Event', 'next_event' ) );
 		// Adds support for custom query parameter.
 		global $wp;
 		$wp->add_query_var( 'id' );
