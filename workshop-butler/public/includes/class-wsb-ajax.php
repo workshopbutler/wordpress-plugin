@@ -58,8 +58,8 @@ class WSB_Ajax {
 				default:
 					die();
 			}
-			$requests = new Embed_Event_List( WSB_Ajax::get_sidebar_length( $type ) );
-			echo $requests->render( $method, $query, $event_id );
+			$requests = new Embed_Event_List( WSB_Ajax::get_sidebar_length( $type ), $event_id );
+			echo $requests->render( $method, $query );
 			wp_die();
 		} else {
 			exit();

@@ -1,5 +1,6 @@
 {% for event in events %}
-    <div class="wsb-workshop">
+    <div class="wsb-workshop {% if highlight_featured and event.featured %} wsb-featured {% endif %}">
+        {{ include('tag.twig') }}
         {{ wsb_f(event.schedule) }}, {{ wsb_f(event.location) }}
         <br>
         <a href="{{ event.url }}" {% if event.is_url_external %} target="_blank" {% endif %} >

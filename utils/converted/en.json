@@ -322,6 +322,7 @@
         "register": "Register Now",
         "soldOut": "Sold Out",
         "free": "Free",
+        "featured": "Featured",
         "info": {
             "date": "Date",
             "loc": "Location",

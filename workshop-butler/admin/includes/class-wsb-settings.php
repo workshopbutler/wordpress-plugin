@@ -368,6 +368,21 @@ class WSB_Settings {
 				'default' => 'table',
 			),
 			array(
+				'id'      => WSB_Options::FEATURED_EVENTS,
+				'type'    => 'switch',
+				'title'   => __( 'Featured Events', 'wsbintegration' ),
+				'desc'    => __( 'Highlight featured events on the schedule and on-page event lists', 'wsbintegration' ),
+				'default' => false,
+			),
+			array(
+				'id'       => WSB_Options::FEATURED_ON_TOP,
+				'type'     => 'switch',
+				'title'    => __( 'Featured on top', 'wsbintegration' ),
+				'desc'     => __( 'Show featured events before non-featured events in the schedule', 'wsbintegration' ),
+				'default'  => false,
+				'required' => array( WSB_Options::FEATURED_EVENTS, '=', true ),
+			),
+			array(
 				'id'   => 'schedule_info_id',
 				'type' => 'info',
 				'desc' => '<h3>Filters</h3> In some rare cases, you may need to change the name of query string parameters for schedule filter. For example,

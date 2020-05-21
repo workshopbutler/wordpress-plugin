@@ -37,6 +37,7 @@ class WSB_Schedule_Page extends WSB_Page {
 		parent::__construct();
 		$this->load_dependencies();
 		$this->requests = new WSB_Requests();
+		$this->load_templates();
 	}
 
 	/**
@@ -49,7 +50,17 @@ class WSB_Schedule_Page extends WSB_Page {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . '/../../includes/class-wsb-options.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-requests.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'ui/class-event-filters.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-event.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-event-list.php';
+	}
+
+	/**
+	 * Loads templates used later in the other templates
+	 *
+	 * @since 2.12.0
+	 */
+	private function load_templates() {
+		$tag = $this->get_template( 'schedule/tag', null );
+		$this->twig->loader->setTemplate( 'tag.twig', $tag );
 	}
 
 	/**
@@ -118,11 +129,12 @@ class WSB_Schedule_Page extends WSB_Page {
 	private function get_attrs( $attrs ) {
 
 		$defaults = array(
-			'category'      => null,
-			'event_type'    => null,
-			'layout'        => $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' ),
-			'wrapper'       => false,
-			'only_featured' => false,
+			'category'        => null,
+			'event_type'      => null,
+			'layout'          => $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' ),
+			'wrapper'         => false,
+			'only_featured'   => false,
+			'featured_on_top' => $this->settings->is_featured_events_active() && $this->settings->get( WSB_Options::FEATURED_ON_TOP, false ),
 		);
 
 		return shortcode_atts( $defaults, $attrs );
@@ -143,17 +155,9 @@ class WSB_Schedule_Page extends WSB_Page {
 			return $this->format_error( $response->error );
 		}
 
-		$events = array();
-		foreach ( $response->body->data as $json_event ) {
-			$event = new Event(
-				$json_event,
-				$this->settings->get_event_page_url(),
-				$this->settings->get_trainer_page_url(),
-				$this->settings->get_registration_page_url()
-			);
-			if ( ! $attrs['only_featured'] || $event->featured ) {
-				array_push( $events, $event );
-			}
+		$events = Event_List::from_json( $response->body->data, $this->settings, $attrs['only_featured'] );
+		if ( true === filter_var( $attrs['featured_on_top'], FILTER_VALIDATE_BOOLEAN ) ) {
+			$events = Event_List::put_featured_on_top( $events );
 		}
 
 		if ( 0 === count( $events ) ) {
@@ -230,8 +234,8 @@ class WSB_Schedule_Page extends WSB_Page {
 				);
 			case 'item':
 				return array(
-					'cols'         => 'schedule,location,title,register',
-					'trainer_name' => 'true',
+					'tags'               => $this->settings->is_featured_events_active() ? 'all' : 'free',
+					'highlight_featured' => $this->settings->is_featured_events_active(),
 				);
 			case 'filters':
 				return array( 'filters' => 'location,trainer,language,type' );
@@ -273,19 +277,17 @@ class WSB_Schedule_Page extends WSB_Page {
 			return '';
 		}
 
-		$html = '';
+		$html       = '';
+		$item_attrs = shortcode_atts( $this->get_default_attrs( 'item' ), $attrs );
 		foreach ( $events as $event ) {
 			$this->dict->set_event( $event );
+			$this->dict->set_item_attrs( $item_attrs );
 			$item_content           = $this->compile_string( $content, array( 'event' => $event ) );
 			$processed_item_content = do_shortcode( $item_content );
-			$html                   .= $this->compile_string(
-				$item_template,
-				array(
-					'event'   => $event,
-					'content' => $processed_item_content,
-					'layout'  => $this->get_list_type(),
-				)
-			);
+			$item_attrs['event']    = $event;
+			$item_attrs['content']  = $processed_item_content;
+			$item_attrs['layout']   = $this->get_list_type();
+			$html                   .= $this->compile_string( $item_template, $item_attrs );
 			$this->dict->clear_event();
 		}
 
@@ -294,16 +296,8 @@ class WSB_Schedule_Page extends WSB_Page {
 			return '';
 		}
 
-		$attrs   = shortcode_atts( $this->get_default_attrs( 'item' ), $attrs );
-		$columns = array_map(
-			function ( $name ) {
-				return trim( $name );
-			},
-			explode( ',', $attrs['cols'] )
-		);
-
+		$attrs            = shortcode_atts( $this->get_default_attrs( 'item' ), $attrs );
 		$attrs['content'] = $html;
-		$attrs['cols']    = $columns;
 		$attrs['layout']  = $this->get_list_type();
 
 		return $this->compile_string( $list_template, $attrs );
@@ -330,6 +324,7 @@ class WSB_Schedule_Page extends WSB_Page {
 		}
 		$attrs['event']     = $event;
 		$attrs['layout']    = $this->get_list_type();
+		$attrs['tags']      = $this->get_active_tags();
 		$processed_template = do_shortcode( $template );
 
 		return $this->compile_string( $processed_template, $attrs );
@@ -350,6 +345,20 @@ class WSB_Schedule_Page extends WSB_Page {
 		return $attrs['layout'];
 	}
 
+	/**
+	 * Returns the types of active tags ('all', 'free', 'featured')
+	 *
+	 * @return string
+	 * @since 2.12.0
+	 */
+	private function get_active_tags() {
+		$attrs = $this->dict->get_item_attrs();
+		if ( is_null( $attrs ) || is_null( $attrs['tags'] ) ) {
+			return 'all';
+		}
+
+		return $attrs['tags'];
+	}
 
 	/**
 	 * Handles 'wsb_schedule' shortcode

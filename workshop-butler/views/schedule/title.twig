@@ -1,7 +1,4 @@
 {% if layout == 'tile' %}
-    {% if event.free %}
-        <div class="wsb-free">{{ __('event.free', 'wsbintegration') }}</div>
-    {% endif %}
     <a href="{{ event.url }}" class="wsb-tile-title"
         {% if event.is_url_external %} target="_blank" {% endif %}>
         {% if truncate > 0 %}
@@ -18,8 +15,6 @@
         <a href="{{ event.url }}" class="wsb-table__link" {% if event.is_url_external %} target="_blank" {% endif %}>
             {{ event.title }}
         </a>
-        {% if event.free %}
-            <div class="wsb-free">{{ wsb_t('schedule.event.free') }}</div>
-        {% endif %}
+        &nbsp;{{ include('tag.twig') }}
     </div>
 {% endif %}

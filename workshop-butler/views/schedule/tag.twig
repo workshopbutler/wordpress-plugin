@@ -1,0 +1,5 @@
+{% if event.free and tags in ['all', 'free'] %}
+    <span class="{% if mobile %} wsb-mobile {% endif %} wsb-free">{{ wsb_t('schedule.event.free') }}</span>
+{% elseif event.featured and tags in ['all', 'featured']%}
+    <span class="{% if mobile %} wsb-mobile {% endif %} wsb-tag">{{ wsb_t('event.featured') }}</span>
+{% endif %}

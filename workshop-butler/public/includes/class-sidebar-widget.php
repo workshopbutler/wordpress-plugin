@@ -68,7 +68,7 @@ class Sidebar_Widget extends \WP_Widget {
 		require_once plugin_dir_path( __FILE__ ) . '/../../admin/includes/class-sidebar-field.php';
 		require_once plugin_dir_path( __FILE__ ) . 'view/class-formatter.php';
 		require_once plugin_dir_path( __FILE__ ) . 'class-wsb-requests.php';
-		require_once plugin_dir_path( __FILE__ ) . 'models/class-event.php';
+		require_once plugin_dir_path( __FILE__ ) . 'models/class-event-list.php';
 
 		/**
 		 * The class responsible for all plugin-related options
@@ -92,25 +92,25 @@ class Sidebar_Widget extends \WP_Widget {
 
 				case 'eventtype':
 					?>
-					<p>
-						<label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
-						<input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
-							name="<?php echo $this->get_field_name( $name ); ?>"
-							type="<?php echo $this->get_field_name( $field->type ); ?>"
-							value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
-					</p>
+                    <p>
+                        <label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
+                        <input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
+                               name="<?php echo $this->get_field_name( $name ); ?>"
+                               type="<?php echo $this->get_field_name( $field->type ); ?>"
+                               value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
+                    </p>
 					<?php
 					break;
 				default:
 					?>
-					<p>
-						<label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
-						<input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
-							name="<?php echo $this->get_field_name( $name ); ?>"
-							type="<?php echo $this->get_field_name( $field->type ); ?>"
-							value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
-					</p>
-					<?php
+                    <p>
+                        <label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
+                        <input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
+                               name="<?php echo $this->get_field_name( $name ); ?>"
+                               type="<?php echo $this->get_field_name( $field->type ); ?>"
+                               value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
+                    </p>
+				<?php
 			}
 		}
 	}
@@ -207,33 +207,28 @@ class Sidebar_Widget extends \WP_Widget {
 	 */
 	private function render_list( $response, $instance ) {
 		if ( $response->is_error() ) {
-			$html  = '<h2>' . __( 'Workshop Butler API: Request failed', 'wsbintegration' ) . '</h2>';
+			$html = '<h2>' . __( 'Workshop Butler API: Request failed', 'wsbintegration' ) . '</h2>';
 			$html .= '<p>' . __( 'Reason : ', 'wsbintegration' ) . $response->error . '</p>';
 
 			return $html;
 		}
 
-		$events = '<ul>';
-		foreach ( $response->body->data as $json_event ) {
-			$event  = new Event(
-				$json_event,
-				$this->settings->get_event_page_url(),
-				$this->settings->get_trainer_page_url(),
-				$this->settings->get_registration_page_url()
-			);
+		$events  = Event_List::from_json( $response->body->data, $this->settings, false );
+		$content = '<ul>';
+		foreach ( $events as $event ) {
 			$target = '';
 			if ( $event->is_url_external() ) {
 				$target = ' target="_blank" ';
 			}
-			$events .= '<li>' .
-					Formatter::format( $event->schedule, 'full_short' ) . ', ' .
-					Formatter::format( $event->location ) . '<br>' .
-					'<a href="' . $event->url() . '" ' . $target . '>' .
-					$event->title . '</a></li>';
+			$content .= '<li>' .
+						Formatter::format( $event->schedule, 'full_short' ) . ', ' .
+						Formatter::format( $event->location ) . '<br>' .
+						'<a href="' . $event->url() . '" ' . $target . '>' .
+						$event->title . '</a></li>';
 		}
-		$events .= '</ul>';
+		$content .= '</ul>';
 
-		return $events;
+		return $content;
 	}
 
 	/**

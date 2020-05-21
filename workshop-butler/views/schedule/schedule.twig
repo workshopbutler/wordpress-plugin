@@ -1,4 +1,5 @@
-<div class="{% if layout == 'table' %} wsb-table__col wsb-table__col-schedule {% else %} wsb-tile-info {% endif %}">
+<div class="{% if layout == 'table' %} wsb-table__col wsb-table__col-schedule {% else %} wsb-tile-info {% endif %}
+    wsb-datetime">
     {% if event.schedule.at_one_day() %}
         {{ wsb_f(event.schedule, 'full_long') }}
         {% if event.location.online and event.schedule.timezone %}

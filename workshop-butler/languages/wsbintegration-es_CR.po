@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-18T10:14:17.811Z\n"
-"PO-Revision-Date: 2020-05-18T10:14:17.811Z\n"
+"POT-Creation-Date: 2020-05-21T13:22:25.809Z\n"
+"PO-Revision-Date: 2020-05-21T13:22:25.809Z\n"
 "Language: es\n"
 
 msgid "attendees.empty"
@@ -959,6 +959,9 @@ msgstr "Agotado"
 
 msgid "event.free"
 msgstr "Gratis"
+
+msgid "event.featured"
+msgstr "Destacado"
 
 msgid "event.info.date"
 msgstr "Fecha"

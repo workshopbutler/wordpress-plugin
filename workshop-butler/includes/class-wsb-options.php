@@ -56,6 +56,8 @@ class WSB_Options {
 	const SCHEDULE_NO_EVENTS      = 'no-events-caption';
 	const SCHEDULE_LAYOUT         = 'event-list-layout';
 	const SCHEDULE_PAGE           = 'event-list-page-id';
+	const FEATURED_EVENTS         = 'featured-events';
+	const FEATURED_ON_TOP         = 'featured-on-top';
 	const SCHEDULE_LANGUAGE       = 'schedule-language';
 	const SCHEDULE_LOCATION       = 'schedule-location';
 	const SCHEDULE_TRAINER        = 'schedule-trainer';
@@ -238,5 +240,15 @@ class WSB_Options {
 	 */
 	public function get_theme() {
 		return $this->get( self::THEME, 'alfred' );
+	}
+
+	/**
+	 * Returns true if featured events are active
+	 *
+	 * @return bool
+	 * @since 2.12.0
+	 */
+	public function is_featured_events_active() {
+		return $this->get( self::FEATURED_EVENTS, false );
 	}
 }
