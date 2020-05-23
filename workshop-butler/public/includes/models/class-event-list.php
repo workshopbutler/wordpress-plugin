@@ -40,8 +40,8 @@ class Event_List {
 				if ( ! $only_featured || $event->featured ) {
 					array_push( $events, $event );
 				}
-			} catch (\Exception $e) {
-				error_log($e->getMessage());
+			} catch ( \Exception $e ) {
+				error_log( $e->getMessage() );
 			}
 		}
 
@@ -70,5 +70,33 @@ class Event_List {
 		);
 
 		return array_merge( $featured, $non_featured );
+	}
+
+	/**
+	 * Returns query parameters for request to API
+	 *
+	 * @param array $attrs Shortcode attributes.
+	 * @param int   $per_page Number of events per request.
+	 *
+	 * @return array
+	 */
+	static public function prepare_query( $attrs, $per_page ) {
+		$query = array(
+			'dates'    => 'future',
+			'public'   => true,
+			'per_page' => $per_page,
+		);
+		if ( ! is_null( $attrs['category'] ) ) {
+			$query['categoryId'] = $attrs['category'];
+		}
+		if ( ! is_null( $attrs['event_type'] ) ) {
+			$query['typeIds'] = $attrs['event_type'];
+		}
+		// newer version of the attribute rewrites the old one.
+		if ( ! is_null( $attrs['event_types'] ) ) {
+			$query['typeIds'] = $attrs['event_types'];
+		}
+
+		return $query;
 	}
 }

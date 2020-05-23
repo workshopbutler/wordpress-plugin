@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-21T13:22:26.728Z\n"
-"PO-Revision-Date: 2020-05-21T13:22:26.728Z\n"
+"POT-Creation-Date: 2020-05-23T13:59:09.082Z\n"
+"PO-Revision-Date: 2020-05-23T13:59:09.082Z\n"
 "Language: nn\n"
 
 msgid "attendees.empty"
@@ -1205,3 +1205,9 @@ msgstr "Tidligere kurs"
 
 msgid "sidebar.noEvents"
 msgstr "Ingen oppsatte kurs"
+
+msgid "nextEvent.register"
+msgstr "Registrer"
+
+msgid "nextEvent.notAvailable"
+msgstr "Ingen planlagte hendelser"

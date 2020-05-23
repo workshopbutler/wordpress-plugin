@@ -29,6 +29,14 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	private $requests;
 
 	/**
+	 * Number of words between '_' in prefix (usually 2)
+	 *
+	 * @var int
+	 * @since 2.12.0
+	 */
+	static protected $prefix_size = 3;
+
+	/**
 	 * WSB_Trainer_List_Page constructor
 	 *
 	 * @since 2.0.0
@@ -142,24 +150,6 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	}
 
 	/**
-	 * Retrieves the name of Workshop Butler shortcode
-	 *
-	 * @param string $tag Full shortcode tag.
-	 *
-	 * @return string
-	 * @since 2.0.0
-	 */
-	protected static function get_shortcode_name( $tag ) {
-		$parts     = explode( '_', $tag );
-		$empty_tag = '[' . $tag . ']';
-		if ( count( $parts ) < 4 ) {
-			return $empty_tag;
-		}
-
-		return implode( '_', array_slice( $parts, 3 ) );
-	}
-
-	/**
 	 * Renders the list of trainers
 	 *
 	 * @param array       $attrs Short code attributes.
@@ -183,7 +173,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 			$this->dict->set_trainer( $trainer );
 			$item_content           = $this->compile_string( $content, array( 'trainer' => $trainer ) );
 			$processed_item_content = do_shortcode( $item_content );
-			$html                  .= $this->compile_string(
+			$html                   .= $this->compile_string(
 				$item_template,
 				array(
 					'trainer' => $trainer,

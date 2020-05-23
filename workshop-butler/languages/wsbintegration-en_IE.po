@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-21T13:22:25.181Z\n"
-"PO-Revision-Date: 2020-05-21T13:22:25.182Z\n"
+"POT-Creation-Date: 2020-05-23T13:59:07.510Z\n"
+"PO-Revision-Date: 2020-05-23T13:59:07.510Z\n"
 "Language: en\n"
 
 msgid "attendees.empty"
@@ -1205,3 +1205,9 @@ msgstr "Past events"
 
 msgid "sidebar.noEvents"
 msgstr "No events"
+
+msgid "nextEvent.register"
+msgstr "Register"
+
+msgid "nextEvent.notAvailable"
+msgstr "No planned events"

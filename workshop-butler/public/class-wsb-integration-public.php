@@ -321,7 +321,8 @@ class WSB_Integration_Public {
 		add_shortcode( 'wsb_testimonial_rating', array( 'WorkshopButler\WSB_Testimonial', 'tag' ) );
 		add_shortcode( 'wsb_testimonial_content', array( 'WorkshopButler\WSB_Testimonial', 'tag' ) );
 
-		add_shortcode( 'wsb_next_event', array( 'WorkshopButler\WSB_Next_Event', 'next_event' ) );
+		add_shortcode( 'wsb_next_event', array( 'WorkshopButler\WSB_Next_Event', 'element' ) );
+		add_shortcode( 'wsb_next_event_button', array( 'WorkshopButler\WSB_Next_Event', 'tag' ) );
 		// Adds support for custom query parameter.
 		global $wp;
 		$wp->add_query_var( 'id' );

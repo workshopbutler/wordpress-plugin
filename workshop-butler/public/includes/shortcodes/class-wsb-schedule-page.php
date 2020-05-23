@@ -28,7 +28,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	 */
 	private $requests;
 
-	/**A
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    2.0.0
@@ -80,19 +80,7 @@ class WSB_Schedule_Page extends WSB_Page {
 		$attrs = $this->get_attrs( $attrs );
 
 		$method = 'events';
-		$fields = 'title,location,hashed_id,schedule,free,type,registration_page,spoken_languages,sold_out,facilitators,free_ticket_type,paid_ticket_types,title_url';
-		$query  = array(
-			'dates'    => 'future',
-			'public'   => true,
-			'fields'   => $fields,
-			'per_page' => '-1',
-		);
-		if ( ! is_null( $attrs['category'] ) ) {
-			$query['categoryId'] = $attrs['category'];
-		}
-		if ( ! is_null( $attrs['event_type'] ) ) {
-			$query['typeIds'] = $attrs['event_type'];
-		}
+		$query  = Event_List::prepare_query( $attrs, - 1 );
 
 		$this->dict->set_schedule_attrs( $attrs );
 		$response = $this->requests->get( $method, $query );
@@ -287,7 +275,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			$item_attrs['event']    = $event;
 			$item_attrs['content']  = $processed_item_content;
 			$item_attrs['layout']   = $this->get_list_type();
-			$html                   .= $this->compile_string( $item_template, $item_attrs );
+			$html                  .= $this->compile_string( $item_template, $item_attrs );
 			$this->dict->clear_event();
 		}
 
