@@ -70,7 +70,6 @@ class WSB_Next_Event extends WSB_Page {
 	private function get_attrs( $attrs ) {
 
 		$defaults = array(
-			'async'       => true,
 			'category'    => null,
 			'event_types' => null,
 		);

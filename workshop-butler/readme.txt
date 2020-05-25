@@ -70,12 +70,12 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 == Changelog ==
 = 2.12.0 =
 * Fixes a bug with incorrect Hebrew language
-* Adds new `wsb_schedule_language` shortcode which renders the column of workshop's languages
+* Adds new [`wsb_schedule_language`](https://workshopbutler.com/developers/wordpress/shortcodes/schedule-template/#wsb_schedule_language) shortcode which renders the column of workshop's languages
 * Adds support for customizable query parameters for schedule
 * Reports a bit more data (request ID, user agent) on errors
 * Adds support for featured events in schedules and on-page event lists
 * Fixes the output of ordered/unordered lists in event description and trainer profile
-* Adds a new element - `Next event` block. For now, it includes only button which contains the link to the next event
+* Adds a new element - [`Next event`](https://workshopbutler.com/developers/wordpress/shortcodes/next-event/) block. For now, it includes only button which contains the link to the next event
 (either any event or from specified category/event types)
 
 = 2.11.2 =
