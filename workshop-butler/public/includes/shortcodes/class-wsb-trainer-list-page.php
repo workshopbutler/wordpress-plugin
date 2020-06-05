@@ -81,18 +81,19 @@ class WSB_Trainer_List_Page extends WSB_Page {
 
 		$response = $this->requests->get( $method, $query );
 
-		return $this->render_list( $response, $this->settings->get_trainer_page_url() );
+		return $this->render_list( $response, $attrs, $this->settings->get_trainer_page_url() );
 	}
 
 	/**
 	 * Renders the list of trainers
 	 *
 	 * @param WSB_Response $response Workshop Butler API response.
+	 * @param array        $attrs Shortcode attributes.
 	 * @param string       $trainer_url Trainer profile page URL.
 	 *
 	 * @return string
 	 */
-	protected function render_list( $response, $trainer_url ) {
+	protected function render_list( $response, $attrs, $trainer_url ) {
 		if ( $response->is_error() ) {
 			return $this->format_error( $response->error );
 		}
@@ -102,6 +103,12 @@ class WSB_Trainer_List_Page extends WSB_Page {
 			$trainer = new Trainer( $json_trainer_data, $trainer_url );
 			array_push( $trainers, $trainer );
 		}
+		$attrs = $this->get_attrs( $attrs );
+		if ( ! is_null( $attrs['badges'] ) ) {
+			$badge_ids = explode( ',', $attrs['badges'] );
+			$trainers  = $this->filter_by_badges( $trainers, $badge_ids );
+		}
+
 		$template_data = array(
 			'trainers' => $trainers,
 			'theme'    => $this->get_theme(),
@@ -116,6 +123,47 @@ class WSB_Trainer_List_Page extends WSB_Page {
 		unset( $GLOBALS['wsb_trainers'] );
 
 		return $this->add_custom_styles( $content );
+	}
+
+	/**
+	 * Returns list of trainers who contains at least one of given badges.
+	 *
+	 * @param Trainer[] $trainers List of trainers to filter.
+	 * @param int[]     $badge_ids List of badges which trainer should posses.
+	 *
+	 * @return Trainer[]
+	 * @since 2.13.0
+	 */
+	private function filter_by_badges( $trainers, $badge_ids ) {
+		$filtered_trainers = array();
+		foreach ( $trainers as $trainer ) {
+			$ids = array();
+			foreach ( $trainer->badges as $badge ) {
+				array_push( $ids, $badge->id );
+			}
+			if ( count( array_intersect( $badge_ids, $ids ) ) > 0 ) {
+				array_push( $filtered_trainers, $trainer );
+			}
+		}
+
+		return $filtered_trainers;
+	}
+
+	/**
+	 * Returns widget's attributes
+	 *
+	 * @param array $attrs User attributes.
+	 *
+	 * @return array
+	 * @since 2.13.0
+	 */
+	private function get_attrs( $attrs ) {
+
+		$defaults = array(
+			'badges' => null,
+		);
+
+		return shortcode_atts( $defaults, $attrs );
 	}
 
 	/**

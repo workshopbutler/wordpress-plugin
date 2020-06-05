@@ -13,6 +13,7 @@ namespace WorkshopButler;
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-social-links.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-trainer-stats.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-testimonial.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-badge.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'utils/language.php';
 
 
@@ -117,7 +118,7 @@ class Trainer {
 	 * List of badges the trainer earned
 	 *
 	 * @since 2.0.0
-	 * @var object[]
+	 * @var Badge[]
 	 */
 	public $badges;
 
@@ -168,8 +169,13 @@ class Trainer {
 		$this->email               = $json_data->email;
 		$this->years_of_experience = $json_data->years_of_experience;
 		$this->number_of_events    = $json_data->number_of_events;
-		$this->badges              = $json_data->badges ? $json_data->badges : array();
-		$this->social_links        = Social_Links::from_json( $json_data->social_links );
+		$this->badges              = array();
+		if ( $json_data->badges && is_array( $json_data->badges ) ) {
+			foreach ( $json_data->badges as $badge ) {
+				array_push( $this->badges, Badge::from_json( $badge ) );
+			}
+		}
+		$this->social_links = Social_Links::from_json( $json_data->social_links );
 
 		$this->stats        = Trainer_Stats::from_json( $json_data->statistics );
 		$this->testimonials = $this->create_testimonials( $json_data->testimonials );

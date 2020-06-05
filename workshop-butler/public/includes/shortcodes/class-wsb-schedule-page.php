@@ -118,7 +118,8 @@ class WSB_Schedule_Page extends WSB_Page {
 
 		$defaults = array(
 			'category'        => null,
-			'event_type'      => null,
+			'event_type'      => null, // DEPRECATED.
+			'event_types'     => null,
 			'layout'          => $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' ),
 			'wrapper'         => false,
 			'only_featured'   => false,
@@ -275,7 +276,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			$item_attrs['event']    = $event;
 			$item_attrs['content']  = $processed_item_content;
 			$item_attrs['layout']   = $this->get_list_type();
-			$html                  .= $this->compile_string( $item_template, $item_attrs );
+			$html                   .= $this->compile_string( $item_template, $item_attrs );
 			$this->dict->clear_event();
 		}
 

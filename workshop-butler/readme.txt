@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.13.0 =
+* Adds `badges` attribute to `wsb-trainer_list` shortcode which shows trainers who have at least one of the given badges (use badge ids for that)
+
 = 2.12.0 =
 * Fixes a bug with incorrect Hebrew language
 * Adds new [`wsb_schedule_language`](https://workshopbutler.com/developers/wordpress/shortcodes/schedule-template/#wsb_schedule_language) shortcode which renders the column of workshop's languages
