@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.13.1 =
+Fixes a small translation issue in German language
+
 = 2.13.0 =
 * Adds `badges` attribute to `wsb-trainer_list` shortcode which shows trainers who have at least one of the given badges (use badge ids for that)
 
