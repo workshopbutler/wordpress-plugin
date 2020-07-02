@@ -68,6 +68,10 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.13.2 =
+* Fixes an issue with incorrect error handling from server
+* Fixes an issue with registration in IE
+
 = 2.13.1 =
 Fixes a small translation issue in German language
 
