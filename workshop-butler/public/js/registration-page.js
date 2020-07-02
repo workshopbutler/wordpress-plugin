@@ -435,7 +435,14 @@ var EventRegistrationForm = /*#__PURE__*/function () {
   };
 
   _proto._processFailResponse = function _processFailResponse(response) {
-    var data = JSON.parse(response.responseText);
+    var data = {}
+
+    try {
+      data = JSON.parse(response.responseText);
+    }
+    catch(e) {
+      data.message = "Can't recognize server response";
+    }
 
     this._submitFail(data.message);
 
