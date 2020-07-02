@@ -396,7 +396,12 @@ var EventRegistrationForm = /*#__PURE__*/function () {
     self._lockFormSubmit();
 
     self._sendFormData(url, this._prepareFormData(formData, true)).done(function (data) {
-      self._processCardPayment(url, formData, data.data.stripe_client_secret);
+      var stripeClientSecret = data && data.data && data.data.stripe_client_secret;
+      if(!stripeClientSecret){
+        self._submitFail("Can't initiate payment");
+        return;
+      }
+      self._processCardPayment(url, formData, stripeClientSecret);
     }).fail(function (response) {
       self._processFailResponse(response)
     });
@@ -742,7 +747,7 @@ var FormHelper = /*#__PURE__*/function () {
       if (!$currentControl.length) {
         const error = errors[key];
         const errorText = this.messages[error] ? this.messages[error] : error;
-        missedErrors.push(`${key}: ${errorText}`);
+        missedErrors.push(key+': '+errorText);
         continue;
       }
 
