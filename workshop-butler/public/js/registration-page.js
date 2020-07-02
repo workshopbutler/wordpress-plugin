@@ -168,7 +168,8 @@ function get_translated_error_messages() {
     date: wsb_event.error_date,
     nospace: wsb_event.error_nospace,
     digits: wsb_event.error_digits,
-    'form.error.attendee.exist': wsb_event.error_attendee_exist
+    'form.error.attendee.exist': wsb_event.error_attendee_exist,
+    'api.error.data.malformed': wsb_event.string_validation_errors
   };
 }
 
@@ -396,7 +397,9 @@ var EventRegistrationForm = /*#__PURE__*/function () {
 
     self._sendFormData(url, this._prepareFormData(formData, true)).done(function (data) {
       self._processCardPayment(url, formData, data.data.stripe_client_secret);
-    }).fail(self._processFailResponse);
+    }).fail(function (response) {
+      self._processFailResponse(response)
+    });
   };
 
   _proto._submitRegistration = function _submitRegistration() {
@@ -409,7 +412,9 @@ var EventRegistrationForm = /*#__PURE__*/function () {
 
     self._sendFormData(registrationUrl, this._prepareFormData(formData, false)).done(function () {
       self._submitSucceed();
-    }).fail(self._processFailResponse);
+    }).fail(function (response) {
+      self._processFailResponse(response);
+    });
   }
   /**
    * Removes empty values from data, sent to the server
@@ -440,7 +445,10 @@ var EventRegistrationForm = /*#__PURE__*/function () {
     this._submitFail(data.message);
 
     if (!data.info) return;
-    this.formHelper.setErrors(data.info);
+    var missedErrors = this.formHelper.setErrors(data.info);
+    if (missedErrors.length > 0) {
+      this._submitFail(missedErrors);
+    }
   };
 
   _proto._prepareBillingDetails = function _prepareBillingDetails(formData) {
@@ -719,16 +727,21 @@ var FormHelper = /*#__PURE__*/function () {
 
   _proto2.setErrors = function setErrors(errors) {
     this.$inputWithError = null;
+    var missedErrors = [];
 
     for (var key in errors) {
       var $currentControl = this.$controls.filter('[name="' + key + '"]').first();
 
       if (!$currentControl.length) {
-        return;
+        const error = errors[key];
+        const errorText = this.messages[error] ? this.messages[error] : error;
+        missedErrors.push(`${key}: ${errorText}`);
+        continue;
       }
 
       this._setError($currentControl, errors[key], false);
     }
+    return missedErrors;
   };
 
   _proto2.removeErrors = function removeErrors() {
