@@ -115,6 +115,14 @@ class Event {
 	public $private;
 
 	/**
+	 * True if the event is canceled
+	 *
+	 * @since   2.13.0
+	 * @var     boolean $canceled
+	 */
+	public $canceled;
+
+	/**
 	 * True if the event is free
 	 *
 	 * @since   2.0.0
@@ -228,6 +236,7 @@ class Event {
 		$this->confirmed   = $json_data->confirmed;
 		$this->free        = $json_data->free;
 		$this->private     = $json_data->private;
+		$this->canceled    = $json_data->state === 'canceled';
 		$this->description = $json_data->description;
 		$this->sold_out    = $json_data->sold_out;
 		$this->schedule    = new Schedule( $json_data->schedule );

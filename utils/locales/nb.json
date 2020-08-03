@@ -335,6 +335,7 @@
     "state": {
       "ended": "Dette kurset er avsluttet",
       "private": "Dette kurset er privat",
+      "canceled": "Dette kurset blir avlyst",
       "soldOut": "Utsolgt"
     },
     "ticket": {

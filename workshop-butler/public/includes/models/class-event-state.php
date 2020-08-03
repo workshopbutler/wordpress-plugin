@@ -57,6 +57,8 @@ class Event_State {
 			return true;
 		} elseif ( $this->event->private ) {
 			return true;
+		} elseif ( $this->event->canceled ) {
+			return true;
 		} elseif ( ! $this->event->tickets ) {
 			return false;
 		} elseif ( $this->event->tickets instanceof Free_Ticket_Type && $this->event->tickets->sold_out() ) {
@@ -86,6 +88,8 @@ class Event_State {
 			return 'event.state.ended';
 		} elseif ( $this->event->private ) {
 			return 'event.state.private';
+		} elseif ( $this->event->canceled ) {
+			return 'event.state.canceled';
 		} elseif ( ! $this->event->tickets ) {
 			return null;
 		} elseif ( $this->event->tickets instanceof Free_Ticket_Type && $this->event->tickets->sold_out() ) {

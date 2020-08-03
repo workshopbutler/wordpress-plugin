@@ -348,6 +348,7 @@
         "state": {
             "ended": "Dit evenement is afgelopen",
             "private": "Dit evenement is privé",
+            "canceled": "Dit evenement is geannuleerd",
             "soldOut": "Uitverkocht"
         },
         "ticket": {

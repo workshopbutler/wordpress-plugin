@@ -349,6 +349,7 @@
     "state": {
       "ended": "Diese Veranstaltung ist beendet",
       "private": "Diese Veranstaltung ist privat",
+      "canceled": "Diese Veranstaltung wird abgesagt",
       "soldOut": "Ausverkauft"
     },
     "ticket": {
