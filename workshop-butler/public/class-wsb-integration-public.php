@@ -235,7 +235,7 @@ class WSB_Integration_Public {
 	 */
 	protected function get_event_title( $default_title ) {
 		$dict           = new WSB_Dictionary();
-		$may_be_event = $dict->get_event();
+		$may_be_event   = $dict->get_event();
 		if ( is_a( $may_be_event, 'WorkshopButler\Event' ) ) {
 			return $may_be_event->title;
 		} elseif ( is_wp_error( $may_be_event ) ) {
@@ -344,7 +344,7 @@ class WSB_Integration_Public {
 
 
 	/**
-	 * Check if it is an internal page
+	 * Check if it is a reserved page
 	 *
 	 * @return bool
 	 */
@@ -370,7 +370,7 @@ class WSB_Integration_Public {
 		if(! $this->is_reserved_page()) return;
 
 		$dict           = new WSB_Dictionary();
-		$may_be_event = $dict->get_event();
+		$may_be_event   = $dict->get_event();
 		$may_be_trainer = $dict->get_trainer();
 		if ( is_a( $may_be_event, 'WorkshopButler\Event' ) ) {
 			$image_container->add_image_by_url( $may_be_event->cover_image->url );
@@ -381,6 +381,11 @@ class WSB_Integration_Public {
 
 	/**
 	 * Filter Yoast meta-tags presenters
+	 *
+	 * Empirically we found the optimal subset of Yoast presenters
+	 *
+	 * Find more information about presenters in docs
+	 * https://developer.yoast.com/customization/apis/metadata-api/
 	 *
 	 * @param string[] $presenters Yoast\WP\SEO\Presenters\* presenters.
 	 *
