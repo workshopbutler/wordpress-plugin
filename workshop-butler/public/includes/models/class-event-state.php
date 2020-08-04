@@ -28,12 +28,22 @@ class Event_State {
 	protected $event;
 
 	/**
+	* True if the state is canceled
+	*
+	* @since   2.13.3
+	* @var     boolean $canceled
+	*/
+	protected $canceled;
+
+
+	/**
 	 * Initialises a new state
 	 *
 	 * @param Event $event Related event.
 	 */
-	public function __construct( $event ) {
+	public function __construct( $event, $canceled = False) {
 		$this->event = $event;
+		$this->canceled = $canceled;
 	}
 
 	/**
@@ -57,7 +67,7 @@ class Event_State {
 			return true;
 		} elseif ( $this->event->private ) {
 			return true;
-		} elseif ( $this->event->canceled ) {
+		} elseif ( $this->canceled ) {
 			return true;
 		} elseif ( ! $this->event->tickets ) {
 			return false;
@@ -88,7 +98,7 @@ class Event_State {
 			return 'event.state.ended';
 		} elseif ( $this->event->private ) {
 			return 'event.state.private';
-		} elseif ( $this->event->canceled ) {
+		} elseif ( $this->canceled ) {
 			return 'event.state.canceled';
 		} elseif ( ! $this->event->tickets ) {
 			return null;
