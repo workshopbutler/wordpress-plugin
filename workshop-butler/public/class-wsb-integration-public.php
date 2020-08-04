@@ -235,10 +235,10 @@ class WSB_Integration_Public {
 	 */
 	protected function get_event_title( $default_title ) {
 		$dict           = new WSB_Dictionary();
-		$may_be_trainer = $dict->get_event();
-		if ( is_a( $may_be_trainer, 'WorkshopButler\Event' ) ) {
-			return $may_be_trainer->title;
-		} elseif ( is_wp_error( $may_be_trainer ) ) {
+		$may_be_event   = $dict->get_event();
+		if ( is_a( $may_be_event, 'WorkshopButler\Event' ) ) {
+			return $may_be_event->title;
+		} elseif ( is_wp_error( $may_be_event ) ) {
 			return $default_title;
 		} elseif ( empty( $_GET['id'] ) ) {
 			return $default_title;
@@ -341,4 +341,71 @@ class WSB_Integration_Public {
 		add_action( 'wp_ajax_nopriv_wsb_pre_register', array( 'WorkshopButler\WSB_Ajax', 'pre_register' ) );
 		add_action( 'wp_ajax_wsb_pre_register', array( 'WorkshopButler\WSB_Ajax', 'pre_register' ) );
 	}
+
+
+	/**
+	 * Check if it is a reserved page
+	 *
+	 * @return bool
+	 */
+	protected function is_reserved_page() {
+		$options = new WSB_Options();
+		global $post;
+		$reserved_ids = array(
+			intval( $options->get( WSB_Options::EVENT_PAGE ) ),
+			intval( $options->get( WSB_Options::REGISTRATION_PAGE ) ),
+			intval( $options->get( WSB_Options::TRAINER_PROFILE_PAGE ) ),
+		);
+
+		return in_array( $post->ID, $reserved_ids, true);
+	}
+
+	/**
+	 * Add opengraph image
+	 *
+	 * @param \Yoast\WP\SEO\Values\Open_Graph\Images $image_container The image container.
+	 *
+	 */
+	public function wpseo_add_opengraph_additional_images($image_container) {
+		if(! $this->is_reserved_page()) return;
+
+		$dict           = new WSB_Dictionary();
+		$may_be_event   = $dict->get_event();
+		$may_be_trainer = $dict->get_trainer();
+		if ( is_a( $may_be_event, 'WorkshopButler\Event' ) ) {
+			$image_container->add_image_by_url( $may_be_event->cover_image->url );
+		} elseif ( is_a( $may_be_trainer, 'WorkshopButler\Trainer' ) ) {
+			$image_container->add_image_by_url( $may_be_trainer->photo );
+		}
+	}
+
+	/**
+	 * Filter Yoast meta-tags presenters
+	 *
+	 * Empirically we found the optimal subset of Yoast presenters
+	 *
+	 * Find more information about presenters in docs
+	 * https://developer.yoast.com/customization/apis/metadata-api/
+	 *
+	 * @param string[] $presenters Yoast\WP\SEO\Presenters\* presenters.
+	 *
+	 * @return string[] The presenters.
+	 */
+	public function wpseo_frontend_presenters($presenters){
+
+		$keep[] = 'Yoast\WP\SEO\Presenters\Title_Presenter';
+		$keep[] = 'Yoast\WP\SEO\Presenters\Meta_Description_Presenter';
+		$keep[] = 'Yoast\WP\SEO\Presenters\Robots_Presenter';
+		$keep[] = 'Yoast\WP\SEO\Presenters\Meta_Description_Presenter';
+		$keep[] = 'Yoast\WP\SEO\Presenters\Open_Graph\Image_Presenter';
+		$keep[] = 'Yoast\WP\SEO\Presenters\Open_Graph\Description_Presenter';
+		$keep[] = 'Yoast\WP\SEO\Presenters\Open_Graph\Site_Name_Presenter';
+		$keep[] = 'Yoast\WP\SEO\Presenters\Open_Graph\Title_Presenter';
+		$keep[] = 'Yoast\WP\SEO\Presenters\Twitter\Card_Presenter';
+
+		if($this->is_reserved_page()) return $keep;
+
+		return $presenters;
+	}
+
 }
