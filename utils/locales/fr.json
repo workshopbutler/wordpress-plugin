@@ -348,6 +348,7 @@
     "state": {
       "ended": "Cet événement a pris fin",
       "private": "Cet événement est privé",
+      "canceled": "Cet événement est annulé",
       "soldOut": "Épuisé"
     },
     "ticket": {
