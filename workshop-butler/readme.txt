@@ -71,6 +71,7 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 = 2.13.3 =
 * Fixes registration on canceled event
 * Fixes Yoast SEO compatibility
+* Fixes an issue with incorrect featured event highlighting
 
 = 2.13.2 =
 * Fixes an issue with incorrect error handling from server
