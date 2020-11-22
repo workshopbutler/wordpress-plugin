@@ -94,7 +94,7 @@ class Event_List {
 		}
 		// newer version of the attribute rewrites the old one.
 		if ( ! is_null( $attrs['event_types'] ) ) {
-			$query['typeIds'] = $attrs['event_types'];
+			$query['typeIds'] = preg_replace('/\s/', '', $attrs['event_types']);
 		}
 
 		return $query;
