@@ -34,10 +34,7 @@ class WSB_Integration_Upgrade {
 		if ( WSB_INTEGRATION_VERSION === $self->get_version() ) {
 			return;
 		}
-		$new_key = WSB_Options::get_option( WSB_Options::API_KEY );
-		if ( empty( $new_key ) ) {
-			$self->transfer_settings();
-		}
+
 		$self->update_templates();
 		$self->update_settings();
 		$self->save_internal_settings( $self->get_version() );
@@ -144,21 +141,6 @@ class WSB_Integration_Upgrade {
 	private function update_state() {
 		WSB_Options::set_internal_option( WSB_Options::INT_STATE, true );
 		$this->set_version();
-	}
-
-	/**
-	 * Transfers the API key to a new storage place from version 1.2 to version 2.0.0
-	 *
-	 * @return bool
-	 */
-	protected function transfer_settings() {
-		$old_key = get_option( WSB_Options::OLD_API_KEY );
-		if ( empty( $old_key ) ) {
-			return false;
-		}
-		WSB_Options::set_option( WSB_Options::API_KEY, $old_key );
-
-		return true;
 	}
 
 	/**
