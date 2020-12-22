@@ -114,8 +114,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 			'theme'    => $this->get_theme(),
 		);
 
-		$custom_template = $this->settings->get( WSB_Options::TRAINER_LIST_TEMPLATE );
-		$template        = $this->get_template( 'trainer-list-page', $custom_template );
+		$template = $this->settings->get( WSB_Options::TRAINER_LIST_TEMPLATE );
 
 		$GLOBALS['wsb_trainers'] = $trainers;
 		$processed_template      = do_shortcode( $template );
@@ -181,7 +180,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 		if ( is_null( $trainers ) ) {
 			return '';
 		}
-		$template = $this->get_template( 'filters', null );
+		$template = $this->get_template( 'filters' );
 		if ( is_null( $template ) ) {
 			return '';
 		}
@@ -211,7 +210,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 		if ( is_null( $trainers ) ) {
 			return '';
 		}
-		$item_template = $this->get_template( 'trainer-list-item', null );
+		$item_template = $this->get_template( 'trainer-list-item' );
 		if ( ! $item_template ) {
 			return '';
 		}
@@ -231,7 +230,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 			$this->dict->clear_trainer();
 		}
 
-		$list_template = $this->get_template( 'trainer-list', null );
+		$list_template = $this->get_template( 'trainer-list' );
 		if ( ! $list_template ) {
 			return '';
 		}
@@ -271,7 +270,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
 		}
-		$template = $this->get_template( 'trainer-list/' . $name, null );
+		$template = $this->get_template( 'trainer-list/' . $name );
 		if ( ! $template ) {
 			return '[wsb_trainer_list_' . $name . ']';
 		}

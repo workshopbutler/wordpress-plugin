@@ -79,23 +79,4 @@ class WSB_Integration_Admin {
 		require_once plugin_dir_path( __FILE__ ) . '/../includes/class-wsb-options.php';
 		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wsb-settings.php';
 	}
-
-	/**
-	 * Register the stylesheets for the admin area.
-	 *
-	 * @since    2.0.0
-	 */
-	public function enqueue_styles() {
-		// empty.
-	}
-
-	/**
-	 * Register the JavaScript for the admin area.
-	 *
-	 * @since 2.0.0
-	 */
-	public function enqueue_scripts() {
-		// empty.
-	}
-
 }

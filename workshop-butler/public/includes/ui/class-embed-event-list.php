@@ -81,7 +81,7 @@ class Embed_Event_List extends WSB_Page {
 	 * @since 2.12.0
 	 */
 	private function load_templates() {
-		$tag = $this->get_template( 'schedule/tag', null );
+		$tag = $this->get_template( 'schedule/tag' );
 		$this->twig->loader->setTemplate( 'tag.twig', $tag );
 	}
 
@@ -133,7 +133,7 @@ class Embed_Event_List extends WSB_Page {
 			'highlight_featured' => $highlight_featured,
 			'tags'               => $tags,
 		);
-		$template      = $this->get_template( 'sidebar', null );
+		$template      = $this->get_template( 'sidebar' );
 
 		return $this->compile_string( $template, $template_data );
 	}

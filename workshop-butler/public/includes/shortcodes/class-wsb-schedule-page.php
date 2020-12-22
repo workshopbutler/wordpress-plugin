@@ -59,7 +59,7 @@ class WSB_Schedule_Page extends WSB_Page {
 	 * @since 2.12.0
 	 */
 	private function load_templates() {
-		$tag = $this->get_template( 'schedule/tag', null );
+		$tag = $this->get_template( 'schedule/tag' );
 		$this->twig->loader->setTemplate( 'tag.twig', $tag );
 	}
 
@@ -161,12 +161,9 @@ class WSB_Schedule_Page extends WSB_Page {
 		if ( $content ) {
 			$template = $content;
 		} else {
-			if ( 'table' === $this->get_list_type() ) {
-				$custom_template = $this->settings->get( WSB_Options::SCHEDULE_TABLE_TEMPLATE );
-			} else {
-				$custom_template = $this->settings->get( WSB_Options::SCHEDULE_TILE_TEMPLATE );
-			}
-			$template = $this->get_template( 'schedule-page', $custom_template );
+			$template = 'table' === $this->get_list_type() ?
+				$this->settings->get( WSB_Options::SCHEDULE_TABLE_TEMPLATE ):
+				$this->settings->get( WSB_Options::SCHEDULE_TILE_TEMPLATE );
 		}
 
 		$this->dict->set_events( $events );
@@ -190,7 +187,7 @@ class WSB_Schedule_Page extends WSB_Page {
 		if ( null === $events ) {
 			return '';
 		}
-		$template = $this->get_template( 'filters', null );
+		$template = $this->get_template( 'filters' );
 		if ( is_null( $template ) ) {
 			return '';
 		}
@@ -261,7 +258,7 @@ class WSB_Schedule_Page extends WSB_Page {
 		if ( is_null( $events ) ) {
 			return '';
 		}
-		$item_template = $this->get_template( 'schedule/item', null );
+		$item_template = $this->get_template( 'schedule/item' );
 		if ( ! $item_template ) {
 			return '';
 		}
@@ -280,7 +277,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			$this->dict->clear_event();
 		}
 
-		$list_template = $this->get_template( 'schedule/layout', null );
+		$list_template = $this->get_template( 'schedule/layout' );
 		if ( ! $list_template ) {
 			return '';
 		}
@@ -307,7 +304,7 @@ class WSB_Schedule_Page extends WSB_Page {
 		if ( ! is_a( $event, 'WorkshopButler\Event' ) ) {
 			return '';
 		}
-		$template = $this->get_template( 'schedule/' . $name, null );
+		$template = $this->get_template( 'schedule/' . $name );
 		if ( ! $template ) {
 			return '[wsb_schedule_' . $name . ']';
 		}

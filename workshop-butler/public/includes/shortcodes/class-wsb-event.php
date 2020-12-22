@@ -69,7 +69,7 @@ class WSB_Event extends WSB_Page {
 		if ( ! is_a( $event, 'WorkshopButler\Event' ) ) {
 			return '';
 		}
-		$template = $this->get_template( 'event/' . $name, null );
+		$template = $this->get_template( 'event/' . $name);
 		if ( ! $template ) {
 			return '[wsb_event_' . $name . ']';
 		}

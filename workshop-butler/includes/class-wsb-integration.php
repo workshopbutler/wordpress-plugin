@@ -163,9 +163,6 @@ class WSB_Integration {
 
 		$plugin_admin = new WSB_Integration_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'redux/options/wsb-settings/saved', $plugin_admin, 'save_internal_settings' );
 		$this->loader->add_action( 'init', $plugin_admin, 'init' );
 
 		$upgrader = new WSB_Integration_Upgrade();

@@ -103,8 +103,7 @@ class WSB_Trainer_Page extends WSB_Page {
 			'theme'   => $this->get_theme(),
 		);
 
-		$custom_template = $this->settings->get( WSB_Options::TRAINER_TEMPLATE );
-		$template        = $this->get_template( 'trainer-page', $custom_template );
+		$template = $this->settings->get( WSB_Options::TRAINER_TEMPLATE );
 
 		$processed_template = do_shortcode( $template );
 		$content            = $this->compile_string( $processed_template, $template_data );
@@ -140,7 +139,7 @@ class WSB_Trainer_Page extends WSB_Page {
 		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
 		}
-		$template = $this->get_template( 'trainer/' . $name, null );
+		$template = $this->get_template( 'trainer/' . $name );
 		if ( ! $template ) {
 			return '[wsb_trainer_' . $name . ']';
 		}

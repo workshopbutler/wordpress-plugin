@@ -242,8 +242,8 @@ abstract class WSB_Page {
 	 * @return null|string
 	 * @since  2.0.0
 	 */
-	protected function get_template( $name, $content ) {
-		if ( empty( $content ) ) {
+	protected function get_template( $name, $content = null) {
+		if ( ! $content ) {
 			$filename = plugin_dir_path( dirname( __FILE__ ) ) . '../views/' . $name . '.twig';
 			$content  = file_get_contents( $filename );
 			if ( ! $content ) {

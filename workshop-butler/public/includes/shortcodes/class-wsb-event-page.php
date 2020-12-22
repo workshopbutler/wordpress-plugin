@@ -129,8 +129,7 @@ class WSB_Event_Page extends WSB_Page {
 	 * @return string
 	 */
 	private function render_page( $event ) {
-		$custom_template = $this->settings->get( WSB_Options::EVENT_TEMPLATE );
-		$template        = $this->get_template( 'event-page', $custom_template );
+		$template = $this->settings->get( WSB_Options::EVENT_TEMPLATE );
 
 		$template_data = array(
 			'event' => $event,

@@ -47,12 +47,12 @@ class WSB_Registration_Page extends WSB_Page {
 	 * @since 2.7.0
 	 */
 	private function load_templates() {
-		$field           = $this->get_template( 'registration/field', null );
-		$label           = $this->get_template( 'registration/label', null );
-		$input           = $this->get_template( 'registration/input', null );
-		$ticket          = $this->get_template( 'registration/ticket', null );
-		$ticket_section  = $this->get_template( 'registration/ticket-section', null );
-		$payment_section = $this->get_template( 'registration/payment-section', null );
+		$field           = $this->get_template( 'registration/field' );
+		$label           = $this->get_template( 'registration/label' );
+		$input           = $this->get_template( 'registration/input' );
+		$ticket          = $this->get_template( 'registration/ticket' );
+		$ticket_section  = $this->get_template( 'registration/ticket-section' );
+		$payment_section = $this->get_template( 'registration/payment-section' );
 		$this->twig->loader->setTemplate( 'field.twig', $field );
 		$this->twig->loader->setTemplate( 'label.twig', $label );
 		$this->twig->loader->setTemplate( 'input.twig', $input );
@@ -179,9 +179,7 @@ class WSB_Registration_Page extends WSB_Page {
 	 * @return string
 	 */
 	private function render_page( $event ) {
-		$custom_template = $this->settings->get( WSB_Options::REGISTRATION_TEMPLATE );
-		$template        = $this->get_template( 'registration-page', $custom_template );
-
+		$template = $this->settings->get( WSB_Options::REGISTRATION_TEMPLATE );
 		$template_data = array(
 			'event' => $event,
 			'theme' => $this->get_theme(),
@@ -469,7 +467,7 @@ class WSB_Registration_Page extends WSB_Page {
 		if ( ! is_a( $event, 'WorkshopButler\Event' ) ) {
 			return '';
 		}
-		$template = $this->get_template( 'registration/' . $name, null );
+		$template = $this->get_template( 'registration/' . $name );
 		if ( ! $template ) {
 			return '[wsb_registration_' . $name . ']';
 		}

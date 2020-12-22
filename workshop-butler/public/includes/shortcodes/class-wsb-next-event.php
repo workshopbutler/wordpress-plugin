@@ -112,13 +112,10 @@ class WSB_Next_Event extends WSB_Page {
 			'theme' => $this->get_theme(),
 		);
 
-		if ( $content ) {
-			$template = $content;
-		} else {
-			$template = $this->get_template( 'next-event/element', $content );
-		}
 		$this->dict->set_event( $event );
-		$processed_template = do_shortcode( $template );
+		$processed_template = do_shortcode(
+			$this->get_template( 'next-event/element', $content )
+		);
 		$content            = $this->compile_string( $processed_template, $template_data );
 		$this->dict->clear_event();
 
@@ -141,7 +138,7 @@ class WSB_Next_Event extends WSB_Page {
 		if ( ! is_a( $event, 'WorkshopButler\Event' ) ) {
 			$event = null;
 		}
-		$template = $this->get_template( 'next-event/' . $name, null );
+		$template = $this->get_template( 'next-event/' . $name );
 		if ( ! $template ) {
 			return '[wsb_next_event_' . $name . ']';
 		}

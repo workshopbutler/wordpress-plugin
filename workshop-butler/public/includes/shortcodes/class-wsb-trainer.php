@@ -34,7 +34,7 @@ class WSB_Trainer extends WSB_Page {
 		if ( ! is_a( $trainer, 'WorkshopButler\Trainer' ) ) {
 			return '';
 		}
-		$template = $this->get_template( 'badges', null );
+		$template = $this->get_template( 'badges' );
 		if ( is_null( $template ) ) {
 			return '';
 		}

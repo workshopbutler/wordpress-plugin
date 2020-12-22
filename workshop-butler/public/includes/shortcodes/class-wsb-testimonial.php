@@ -109,7 +109,7 @@ class WSB_Testimonial extends WSB_Page {
 		if ( is_null( $testimonial ) ) {
 			return '';
 		}
-		$template = $this->get_template( 'testimonial/' . $name, null );
+		$template = $this->get_template( 'testimonial/' . $name );
 		if ( ! $template ) {
 			return '[wsb_testimonial_' . $name . ']';
 		}
