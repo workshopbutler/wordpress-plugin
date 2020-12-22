@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.14.0 =
+* Expose templates fingerprint for the future upgrade
+
 = 2.13.3 =
 * Fixes registration on canceled event
 * Fixes Yoast SEO compatibility
