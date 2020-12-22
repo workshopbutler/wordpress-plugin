@@ -172,4 +172,15 @@ class WSB_Ajax {
 
 		return $form_data;
 	}
+
+	/**
+	 * Exposes plugin state data
+	 */
+	public static function state() {
+		wp_send_json(  array(
+			'version' => WSB_INTEGRATION_VERSION,
+			WSB_Options::REPORT_ERRORS => !! WSB_Options::get_option(WSB_Options::REPORT_ERRORS),
+			'template_fingerprints' => WSB_Options::get_template_fingerprints(),
+		), 200 );
+	}
 }

@@ -128,9 +128,6 @@ class WSB_Integration_Upgrade {
 		if ( WSB_INTEGRATION_VERSION !== $previous_version ) {
 			$this->set_version();
 		}
-		if ( ! WSB_Options::get_template_version() ) {
-			WSB_Options::set_template_version();
-		}
 	}
 
 	/**

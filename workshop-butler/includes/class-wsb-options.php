@@ -32,7 +32,6 @@ class WSB_Options {
 
 	const INT_STATE            = '_state';
 	const INT_VERSION          = '_version';
-	const INT_TEMPLATE_VERSION = '_tmpl_version';
 
 	const API_KEY = 'api-key';
 
@@ -148,25 +147,6 @@ class WSB_Options {
 	}
 
 	/**
-	 * Returns the active template version or false if there is no version yet
-	 *
-	 * @return bool|string
-	 * @since 2.9.0
-	 */
-	public static function get_template_version() {
-		return self::get_internal_option( self::INT_TEMPLATE_VERSION );
-	}
-
-	/**
-	 * Updates the stored version
-	 *
-	 * @since 2.9.0
-	 */
-	public static function set_template_version() {
-		self::set_internal_option( self::INT_TEMPLATE_VERSION, WSB_INTEGRATION_VERSION );
-	}
-
-	/**
 	 * Returns the value of the option, or false if the option is not set
 	 *
 	 * @param string $name Name of the option.
@@ -250,5 +230,43 @@ class WSB_Options {
 	 */
 	public function is_featured_events_active() {
 		return $this->get( self::FEATURED_EVENTS, false );
+	}
+
+	/**
+	 * Returns fingerprint of the option
+	 *
+	 * @return string|null
+	 * @since 2.14.0
+	 */
+	public static function get_fingerprint( $name ) {
+		$content = self::get_option( $name );
+
+		if( ! $content ) {
+			return null;
+		}
+
+		// clean content from multiple spaces
+		$content = trim(preg_replace('/\s+/', ' ', $content));
+
+		return sha1($content);
+
+	}
+
+	/**
+	 * Returns an array with template fingerprints
+	 *
+	 * @return array
+	 * @since 2.14.0
+	 */
+	public static function get_template_fingerprints() {
+
+		return array(
+			self::SCHEDULE_TILE_TEMPLATE => self::get_fingerprint(self::SCHEDULE_TILE_TEMPLATE),
+			self::SCHEDULE_TABLE_TEMPLATE => self::get_fingerprint(self::SCHEDULE_TABLE_TEMPLATE),
+			self::EVENT_TEMPLATE => self::get_fingerprint(self::EVENT_TEMPLATE),
+			self::REGISTRATION_TEMPLATE => self::get_fingerprint(self::REGISTRATION_TEMPLATE),
+			self::TRAINER_LIST_TEMPLATE => self::get_fingerprint(self::TRAINER_LIST_TEMPLATE),
+			self::TRAINER_TEMPLATE => self::get_fingerprint(self::TRAINER_TEMPLATE),
+		);
 	}
 }

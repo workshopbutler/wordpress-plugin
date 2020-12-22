@@ -340,6 +340,9 @@ class WSB_Integration_Public {
 
 		add_action( 'wp_ajax_nopriv_wsb_pre_register', array( 'WorkshopButler\WSB_Ajax', 'pre_register' ) );
 		add_action( 'wp_ajax_wsb_pre_register', array( 'WorkshopButler\WSB_Ajax', 'pre_register' ) );
+
+		add_action( 'wp_ajax_nopriv_wsb_state', array( 'WorkshopButler\WSB_Ajax', 'state' ) );
+		add_action( 'wp_ajax_wsb_state', array( 'WorkshopButler\WSB_Ajax', 'state' ) );
 	}
 
 

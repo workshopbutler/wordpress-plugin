@@ -193,7 +193,6 @@ class WSB_Requests {
 		array_push( $parameters, 'w' );
 		array_push( $parameters, WSB_INTEGRATION_VERSION );
 		array_push( $parameters, $this->settings->get( WSB_Options::THEME, 'alfred' ) );
-		array_push( $parameters, WSB_Options::get_template_version() );
 
 		return implode( ';', $parameters );
 	}
