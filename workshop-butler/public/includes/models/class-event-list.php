@@ -9,6 +9,7 @@
 namespace WorkshopButler;
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . '../../includes/class-wsb-options.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-event.php';
 
 /**
  * Contains a list of methods to work with the list of events
