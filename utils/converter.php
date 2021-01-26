@@ -13,11 +13,9 @@ run();
  * The main function, which executes the conversion of locales
  */
 function run() {
-	$converted_dir_name = 'converted';
-	$src_dir_name       = 'locales';
-
-	clean_converted_dir( $converted_dir_name );
-	convert_files( $src_dir_name, $converted_dir_name );
+	$src_dir_name = $_SERVER['argv'][1];
+	$dst_dir_name = $_SERVER['argv'][2];
+	convert_files( $src_dir_name, $dst_dir_name );
 }
 
 /**
@@ -133,26 +131,5 @@ function convert_files( $src_dir_name, $converted_dir_name ) {
 		print "All files were converted\n";
 	} else {
 		print 'ERROR: Cannot find directory ' . $src_dir_name . "\n";
-	}
-}
-
-/**
- * Removes all converted files
- *
- * @param string $dir_name Name of the directory with converted JSON files.
- */
-function clean_converted_dir( $dir_name ) {
-	$dir = dir( $dir_name );
-	if ( $dir ) {
-		$entry = $dir->read();
-		while ( false !== $entry ) {
-			if ( is_file( $entry ) ) {
-				unlink( $entry );
-			}
-			$entry = $dir->read();
-		}
-		print "Old converted files were removed\n";
-	} else {
-		print 'ERROR: Cannot find directory ' . $dir_name . "\n";
 	}
 }

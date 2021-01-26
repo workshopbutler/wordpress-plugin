@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-08-03T21:26:05.668Z\n"
-"PO-Revision-Date: 2020-08-03T21:26:05.668Z\n"
+"POT-Creation-Date: 2021-01-26T18:55:24.143Z\n"
+"PO-Revision-Date: 2021-01-26T18:55:24.143Z\n"
 "Language: nn\n"
 
 msgid "attendees.empty"
@@ -777,23 +777,20 @@ msgstr "Arabisk"
 msgid "language.BG"
 msgstr "Bulgarian"
 
-msgid "language.ZH"
-msgstr "Kinesisk"
-
-msgid "language.HR"
-msgstr "Kroatisk"
-
 msgid "language.CS"
 msgstr "Czech"
 
 msgid "language.DA"
 msgstr "Dansk"
 
-msgid "language.NL"
-msgstr "Nederlandsk"
+msgid "language.DE"
+msgstr "Tysk"
 
 msgid "language.EN"
 msgstr "Engelsk"
+
+msgid "language.ES"
+msgstr "Spansk"
 
 msgid "language.FI"
 msgstr "Finsk"
@@ -801,17 +798,32 @@ msgstr "Finsk"
 msgid "language.FR"
 msgstr "Fransk"
 
-msgid "language.DE"
-msgstr "Tysk"
+msgid "language.HE"
+msgstr "Hebraisk"
+
+msgid "language.HR"
+msgstr "Kroatisk"
+
+msgid "language.HU"
+msgstr "Ungarsk"
 
 msgid "language.IT"
 msgstr "Italiensk"
 
-msgid "language.SL"
-msgstr "Slovensk"
-
 msgid "language.JA"
 msgstr "Japansk"
+
+msgid "language.KA"
+msgstr "Georgisk"
+
+msgid "language.KO"
+msgstr "Koreansk"
+
+msgid "language.MK"
+msgstr "Makedonsk"
+
+msgid "language.NL"
+msgstr "Nederlandsk"
 
 msgid "language.NO"
 msgstr "Norsk"
@@ -828,14 +840,17 @@ msgstr "Rumensk"
 msgid "language.RU"
 msgstr "Russisk"
 
-msgid "language.ES"
-msgstr "Spansk"
+msgid "language.SK"
+msgstr "Slovakisk"
 
-msgid "language.SV"
-msgstr "Svensk"
+msgid "language.SL"
+msgstr "Slovensk"
 
 msgid "language.SR"
 msgstr "Serbisk"
+
+msgid "language.SV"
+msgstr "Svensk"
 
 msgid "language.TR"
 msgstr "Turkish"
@@ -843,20 +858,8 @@ msgstr "Turkish"
 msgid "language.VI"
 msgstr "Vietnamesisk"
 
-msgid "language.KA"
-msgstr "Georgisk"
-
-msgid "language.SK"
-msgstr "Slovakisk"
-
-msgid "language.HU"
-msgstr "Ungarsk"
-
-msgid "language.KO"
-msgstr "Koreansk"
-
-msgid "language.HE"
-msgstr "Hebraisk"
+msgid "language.ZH"
+msgstr "Kinesisk"
 
 msgid "rating.one"
 msgstr "Mer enn 1"

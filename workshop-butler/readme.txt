@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.13.5 =
+* Fixes translations and support for Macedonian, Hungarian and Hebrew languages
+
 = 2.13.4 =
 * Fixes a critical error visible in the logs but not affecting any behaviour
 

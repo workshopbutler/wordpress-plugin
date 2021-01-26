@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"POT-Creation-Date: 2020-08-03T21:26:03.025Z\n"
-"PO-Revision-Date: 2020-08-03T21:26:03.025Z\n"
+"POT-Creation-Date: 2021-01-26T18:55:23.637Z\n"
+"PO-Revision-Date: 2021-01-26T18:55:23.637Z\n"
 "Language: fr\n"
 
 msgid "attendees.empty"
@@ -816,23 +816,20 @@ msgstr "arabe"
 msgid "language.BG"
 msgstr "bulgare"
 
-msgid "language.ZH"
-msgstr "chinois"
-
-msgid "language.HR"
-msgstr "croate"
-
 msgid "language.CS"
 msgstr "Tchèque"
 
 msgid "language.DA"
 msgstr "danois"
 
-msgid "language.NL"
-msgstr "Néerlandais"
+msgid "language.DE"
+msgstr "allemand"
 
 msgid "language.EN"
 msgstr "Anglais"
+
+msgid "language.ES"
+msgstr "Espagnol"
 
 msgid "language.FI"
 msgstr "Finlandais"
@@ -840,17 +837,32 @@ msgstr "Finlandais"
 msgid "language.FR"
 msgstr "French"
 
-msgid "language.DE"
-msgstr "allemand"
+msgid "language.HE"
+msgstr "Hébreu"
+
+msgid "language.HR"
+msgstr "croate"
+
+msgid "language.HU"
+msgstr "Hongrois"
 
 msgid "language.IT"
 msgstr "Italien"
 
-msgid "language.SL"
-msgstr "Slovenian"
-
 msgid "language.JA"
 msgstr "Japonais"
+
+msgid "language.KA"
+msgstr "Géorgien"
+
+msgid "language.KO"
+msgstr "Coréen"
+
+msgid "language.MK"
+msgstr "Macédonien"
+
+msgid "language.NL"
+msgstr "Néerlandais"
 
 msgid "language.NO"
 msgstr "Norwegian"
@@ -867,14 +879,17 @@ msgstr "Romanian"
 msgid "language.RU"
 msgstr "Russian"
 
-msgid "language.ES"
-msgstr "Espagnol"
+msgid "language.SK"
+msgstr "Slovaque"
 
-msgid "language.SV"
-msgstr "Suédois"
+msgid "language.SL"
+msgstr "Slovenian"
 
 msgid "language.SR"
 msgstr "Serbian"
+
+msgid "language.SV"
+msgstr "Suédois"
 
 msgid "language.TR"
 msgstr "Turc"
@@ -882,20 +897,8 @@ msgstr "Turc"
 msgid "language.VI"
 msgstr "Vietnamien"
 
-msgid "language.KA"
-msgstr "Géorgien"
-
-msgid "language.SK"
-msgstr "Slovaque"
-
-msgid "language.HU"
-msgstr "Hongrois"
-
-msgid "language.KO"
-msgstr "Coréen"
-
-msgid "language.HE"
-msgstr "Hébreu"
+msgid "language.ZH"
+msgstr "chinois"
 
 msgid "rating.one"
 msgstr "Plus de 1"
