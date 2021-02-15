@@ -200,7 +200,7 @@ class WSB_Integration {
 		if ( ! is_admin() ) {
 			$this->loader->add_action( 'init', $plugin_public, 'init' );
 			$this->loader->add_filter( 'pre_get_document_title', $plugin_public, 'set_document_title', 99 );
-			$this->loader->add_filter( 'the_title', $plugin_public, 'set_title', 10, 2 );
+			$this->loader->add_filter( 'the_title', $plugin_public, 'set_title', 10 );
 			// Yoast SEO hooks
 			$this->loader->add_filter( 'wpseo_frontend_presenter_classes', $plugin_public, 'wpseo_frontend_presenters', 10, 1 );
 			$this->loader->add_filter( 'wpseo_opengraph_title', $plugin_public, 'set_document_title');

@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.13.6 =
+* Fixes a fatal error happening on some pages when Buddyboss is installed
+
 = 2.13.5 =
 * Fixes translations and support for Macedonian, Hungarian and Hebrew languages
 
