@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.13.7 =
+* Rolls back the changes from the previous fix and uses another way to fix a fatal error with Buddyboss
+
 = 2.13.6 =
 * Fixes a fatal error happening on some pages when Buddyboss is installed
 
