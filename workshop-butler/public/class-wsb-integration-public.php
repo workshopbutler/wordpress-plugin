@@ -141,20 +141,19 @@ class WSB_Integration_Public {
 	 * Updates the title of the page
 	 *
 	 * @param string $title Current page title.
+	 * @param int    $id ID of the page.
 	 *
 	 * @return string
 	 * @since 2.0.0
 	 */
-	public function set_title( $title ) {
+	public function set_title( $title, $id = null ) {
 		$options      = new WSB_Options();
 		$reserved_ids = array(
 			intval( $options->get( WSB_Options::EVENT_PAGE ) ),
 			intval( $options->get( WSB_Options::REGISTRATION_PAGE ) ),
 			intval( $options->get( WSB_Options::TRAINER_PROFILE_PAGE ) ),
 		);
-
-		$id = get_the_ID();
-		if ( is_int( $id ) && in_array( $id, $reserved_ids, true ) ) {
+		if ( in_array( $id, $reserved_ids, true ) ) {
 			return $this->get_title( $title );
 		} else {
 			return $title;
