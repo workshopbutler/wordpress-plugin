@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.13.8 =
+* Fixes a JS error on the registration form when jQuery doesn't work in some rare cases
+
 = 2.13.7 =
 * Rolls back the changes from the previous fix and uses another way to fix a fatal error with Buddyboss
 

@@ -306,7 +306,7 @@ var EventRegistrationForm = /*#__PURE__*/function () {
   };
 
   _proto._onChangeAgreed = function _onChangeAgreed(e) {
-    var isAgreedForm = $(e.currentTarget).prop('checked');
+    var isAgreedForm = jQuery(e.currentTarget).prop('checked');
     this.locals.$btnSubmit.prop('disabled', !isAgreedForm);
   };
 
@@ -559,7 +559,7 @@ var EventRegistrationForm = /*#__PURE__*/function () {
 
   _proto._sendFormData = function _sendFormData(url, data) {
     data._ajax_nonce = wsb_event.nonce;
-    return $.ajax({
+    return jQuery.ajax({
       url: url,
       data: data,
       method: 'POST',
@@ -571,7 +571,7 @@ var EventRegistrationForm = /*#__PURE__*/function () {
     var $elems = jQuery(selector);
     if (!$elems.length) return;
     return $elems.each(function (index, el) {
-      var $element = $(el);
+      var $element = jQuery(el);
       var data = $element.data('widget.server.detail');
 
       if (!data) {
