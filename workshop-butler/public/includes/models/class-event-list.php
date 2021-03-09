@@ -88,7 +88,7 @@ class Event_List {
 			'per_page' => $per_page,
 		);
 		if ( ! is_null( $attrs['category'] ) ) {
-			$query['categoryId'] = $attrs['category'];
+			$query['categoryIds'] = $attrs['category'];
 		}
 		if ( ! is_null( $attrs['event_type'] ) ) {
 			$query['typeIds'] = $attrs['event_type'];
@@ -96,6 +96,9 @@ class Event_List {
 		// newer version of the attribute rewrites the old one.
 		if ( ! is_null( $attrs['event_types'] ) ) {
 			$query['typeIds'] = preg_replace('/\s/', '', $attrs['event_types']);
+		}
+		if ( ! is_null( $attrs['categories'] ) ) {
+			$query['categoryIds'] = preg_replace('/\s/', '', $attrs['categories']);
 		}
 
 		return $query;

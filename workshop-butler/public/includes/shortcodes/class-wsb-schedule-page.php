@@ -117,7 +117,8 @@ class WSB_Schedule_Page extends WSB_Page {
 	private function get_attrs( $attrs ) {
 
 		$defaults = array(
-			'category'        => null,
+			'category'        => null, // DEPRECATED.
+			'categories'      => null,
 			'event_type'      => null, // DEPRECATED.
 			'event_types'     => null,
 			'layout'          => $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' ),
