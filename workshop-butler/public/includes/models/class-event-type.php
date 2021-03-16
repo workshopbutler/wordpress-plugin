@@ -49,7 +49,7 @@ class Event_Type {
 	 */
 	public function __construct( $json_data ) {
 		$this->name  = $json_data->name;
-		$this->badge = $json_data->badge;
+		$this->badge = isset( $json_data->badge ) ? $json_data->badge : null;
 		$this->id    = $json_data->id;
 	}
 

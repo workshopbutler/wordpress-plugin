@@ -27,9 +27,12 @@ class Ticket_Price {
 	 * @return Ticket_Price
 	 */
 	static function from_json( $json ) {
-		$amount = $json->amount / 100;
 
-		return new Ticket_Price( $amount, $json->currency, $json->sign );
+		return new Ticket_Price(
+			$json->amount / 100,
+			$json->currency,
+			isset( $json->sig ) ? $json->sig : null
+		);
 	}
 
 	/**
