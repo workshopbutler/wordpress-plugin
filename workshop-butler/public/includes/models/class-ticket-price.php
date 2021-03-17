@@ -31,7 +31,7 @@ class Ticket_Price {
 		return new Ticket_Price(
 			$json->amount / 100,
 			$json->currency,
-			isset( $json->sig ) ? $json->sig : null
+			isset( $json->sign ) ? $json->sign : null
 		);
 	}
 
