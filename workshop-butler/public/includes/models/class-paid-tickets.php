@@ -165,14 +165,10 @@ class Paid_Tickets {
 				}
 			);
 
-			return empty( $filtered ) ? null : $filtered[0];
+			return empty( $filtered ) ? null : current( $filtered );
 		} else {
 			$active = $this->active();
-			if ( empty( $active ) ) {
-				return null;
-			} else {
-				return $active[0];
-			}
+			return empty( $active ) ? null : current( $active );
 		}
 	}
 

@@ -224,16 +224,16 @@ class Event {
 		$this->title       = $json_data->title;
 		$this->type        = $json_data->type ? new Event_Type( $json_data->type ) : Event_Type::create_empty();
 		$this->language    = Language::from_json( $json_data->language );
-		$this->rating      = $json_data->rating;
+		$this->rating      = isset( $json_data->rating ) ? $json_data->rating : null;
 		$this->confirmed   = $json_data->confirmed;
 		$this->free        = $json_data->free;
-		$this->private     = $json_data->private;
+		$this->private     = isset( $json_data->private ) ? $json_data->private : null;
 		$this->description = $json_data->description;
 		$this->sold_out    = $json_data->sold_out;
 		$this->schedule    = new Schedule( $json_data->schedule );
 		$this->location    = Location::from_json( $json_data->location );
 
-		if ( $json_data->custom_settings && $json_data->custom_settings->title_url ) {
+		if ( isset( $json_data->custom_settings ) && $json_data->custom_settings->title_url ) {
 			$this->url = Event_Url::external( $json_data->custom_settings->title_url );
 		} elseif ( $event_page_url ) {
 			$this->url = Event_Url::internal( $event_page_url . '?id=' . $this->hashed_id );

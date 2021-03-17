@@ -61,7 +61,7 @@ class WSB_Response {
 			$this->http_code = 422;
 			$this->error     = 'Response does not contain `body` attribute';
 		} else {
-			$body = json_decode( $response['body'] );
+			$body = json_decode( $response['body'], false );
 			if ( null === $body ) {
 				$this->http_code = 422;
 				$this->error     = 'Unprocessable Entity';

@@ -167,10 +167,10 @@ class Trainer {
 		$this->photo               = $json_data->avatar;
 		$this->bio                 = $json_data->bio;
 		$this->email               = $json_data->email;
-		$this->years_of_experience = $json_data->years_of_experience;
-		$this->number_of_events    = $json_data->number_of_events;
+		$this->years_of_experience = isset( $json_data->years_of_experience ) ? $json_data->years_of_experience : null;
+		$this->number_of_events    = isset( $json_data->number_of_events ) ? $json_data->number_of_events : null;
 		$this->badges              = array();
-		if ( $json_data->badges && is_array( $json_data->badges ) ) {
+		if ( isset( $json_data->badges ) && is_array( $json_data->badges ) ) {
 			foreach ( $json_data->badges as $badge ) {
 				array_push( $this->badges, Badge::from_json( $badge ) );
 			}
@@ -188,13 +188,13 @@ class Trainer {
 
 		$this->country_code = $json_data->address->country;
 		$this->languages    = array();
-		if ( $json_data->languages && is_array( $json_data->languages ) ) {
+		if ( isset( $json_data->languages ) && is_array( $json_data->languages ) ) {
 			foreach ( $json_data->languages as $lang ) {
 				array_push( $this->languages, get_lang_code( $lang ) );
 			}
 		}
 
-		$this->works_in = $json_data->countries && is_array( $json_data->countries ) ? $json_data->countries : array();
+		$this->works_in = isset( $json_data->countries ) && is_array( $json_data->countries ) ? $json_data->countries : array();
 	}
 
 	/**
