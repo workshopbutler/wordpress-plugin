@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.13.9 =
+* Fixes undefined property error notice
+
 = 2.13.8 =
 * Fixes a JS error on the registration form when jQuery doesn't work in some rare cases
 * Adds filter by multiple categories.
