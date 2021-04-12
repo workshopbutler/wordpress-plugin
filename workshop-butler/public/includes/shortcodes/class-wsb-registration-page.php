@@ -97,9 +97,12 @@ class WSB_Registration_Page extends WSB_Page {
 			return $this->format_error( $may_be_event->get_error_message() );
 		}
 		wp_enqueue_script( 'wsb-registration-page' );
-		if ( $may_be_event->payment ) {
+		if ( $may_be_event->card_payment ) {
 			wp_enqueue_script( 'stripe' );
-			$this->add_payment_config( $may_be_event );
+			$this->add_card_payment_config( $may_be_event );
+		}
+		if ( $may_be_event->paypal_payment ) {
+			$this->add_paypal_payment_config( $may_be_event );
 		}
 
 		$this->add_theme_fonts();
@@ -109,14 +112,15 @@ class WSB_Registration_Page extends WSB_Page {
 	}
 
 	/**
-	 * Returns true if the payment is in test mode
+	 * Returns true if the card payment is in test mode
 	 *
-	 * @param Payment $payment Payment configuration.
+	 * @param CardPayment $card_payment CardPayment configuration.
 	 *
 	 * @return bool
 	 */
-	protected function is_test( $payment ) {
-		return strpos( $payment->stripe_public_key, 'pk_test_' ) === 0;
+	protected function is_test( $card_payment ) {
+		return true;
+		return strpos( $card_payment->stripe_public_key, 'pk_test_' ) === 0;
 	}
 
 	/**
@@ -149,23 +153,44 @@ class WSB_Registration_Page extends WSB_Page {
 	}
 
 	/**
-	 * Adds payment configuration to the registration page
+	 * Adds card payment configuration to the registration page
 	 *
 	 * @param Event $event Event.
 	 *
-	 * @since 2.8.0
+	 * @since 2.14.0
 	 */
-	protected function add_payment_config( $event ) {
-		if ( $event->payment ) {
+	protected function add_card_payment_config( $event ) {
+		if ( $event->card_payment ) {
 			wp_localize_script(
 				'wsb-registration-page',
 				'wsb_payment',
 				array(
-					'active'            => $event->payment->active,
+					'active'            => $event->card_payment->active,
 					'free'              => $event->free,
-					'test'              => $this->is_test( $event->payment ),
-					'stripe_public_key' => $event->payment->stripe_public_key,
-					'stripe_client_id'  => $event->payment->stripe_client_id,
+					'test'              => $this->is_test( $event->card_payment ),
+					'stripe_public_key' => $event->card_payment->stripe_public_key,
+					'stripe_client_id'  => $event->card_payment->stripe_client_id,
+				)
+			);
+		}
+	}
+
+	/**
+	 * Adds PayPal payment configuration to the registration page
+	 *
+	 * @param Event $event Event.
+	 *
+	 * @since 2.14.0
+	 */
+	protected function add_paypal_payment_config( $event ) {
+		if ( $event->paypal_payment ) {
+			wp_localize_script(
+				'wsb-registration-page',
+				'wsb_paypal_payment',
+				array(
+					'active'    => $event->paypal_payment->active,
+					'free'      => $event->free,
+					'client_id' => $event->paypal_payment->client_id,
 				)
 			);
 		}

@@ -203,12 +203,20 @@ class Event {
 	private $url;
 
 	/**
-	 * Payment configuration
+	 * Card payment configuration
 	 *
-	 * @since 2.8.0
-	 * @var Payment|null $payment
+	 * @since 2.14.0
+	 * @var CardPayment|null $card_payment
 	 */
-	public $payment;
+	public $card_payment;
+
+	/**
+	 * PayPal payment configuration
+	 *
+	 * @since 2.14.0
+	 * @var PayPalPayment|null $paypal_payment
+	 */
+	public $paypal_payment;
 
 	/**
 	 * Creates a new object
@@ -253,7 +261,8 @@ class Event {
 
 		$this->trainers = $this->get_trainers( $json_data, $trainer_page_url );
 		$this->state    = new Event_State( $this, $json_data->state === 'canceled' );
-		$this->payment  = Payment::from_json( $json_data->card_payment );
+		$this->card_payment  = CardPayment::from_json( $json_data->card_payment );
+		$this->paypal_payment  = PayPalPayment::from_json( $json_data->paypal_payment );
 		$this->featured = $json_data->featured ? $json_data->featured : false;
 	}
 
