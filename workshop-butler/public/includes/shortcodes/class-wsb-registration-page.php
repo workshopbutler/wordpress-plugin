@@ -119,7 +119,6 @@ class WSB_Registration_Page extends WSB_Page {
 	 * @return bool
 	 */
 	protected function is_test( $card_payment ) {
-		return true;
 		return strpos( $card_payment->stripe_public_key, 'pk_test_' ) === 0;
 	}
 
