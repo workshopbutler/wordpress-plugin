@@ -251,7 +251,7 @@ var EventRegistrationForm = /*#__PURE__*/function () {
       { $controls: this.root.find('[data-control]')}, getTranslatedErrorMessages());
     this.cardSection = this.root.find('[data-card-section]');
     this.submitBtn = this.root.find('[type="submit"]');
-    this.successMessage = this.root.find('#wsb-success');
+    this.successMessage = jQuery('#wsb-success');
     this.stripeCard = null;
     this.cardPaymentEnabled = this.initStripeCard();
     this.payPalPaymentEnabled = this.initPayPal();
@@ -270,7 +270,6 @@ var EventRegistrationForm = /*#__PURE__*/function () {
   _proto.init = function init() {
     this.successMessage.hide();
     this.initPromoActivation();
-    //this.initActiveRadioSelection();
     this.initActiveTicketSelection();
     this.deactivateCardPayment();
     this.lockIfNoPaymentMethod();
