@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 2.14.0 =
+* Add PayPal payments
+
 = 2.13.9 =
 * Fixes undefined property error notice
 

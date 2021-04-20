@@ -12,24 +12,24 @@ namespace WorkshopButler;
 
 
 /**
- * Trainer class which represents a payment object in event
+ * Trainer class which represents a card payment object in event
  *
  * @since      2.8.0
  * @package    WorkshopButler
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
-class Payment {
+class CardPayment {
 
 	/**
-	 * Creates Payment object from JSON
+	 * Creates CardPayment object from JSON
 	 *
 	 * @param object $json JSON to convert.
 	 *
-	 * @return Payment|null
+	 * @return CardPayment|null
 	 * @since 2.8.0
 	 */
 	static function from_json( $json ) {
-		return $json ? new Payment( $json->active, $json->stripe->key, $json->stripe->client_id ) : null;
+		return $json ? new CardPayment( $json->active, $json->stripe->key, $json->stripe->client_id ) : null;
 	}
 
 	/**
@@ -57,7 +57,7 @@ class Payment {
 	public $stripe_client_id;
 
 	/**
-	 * Payment constructor.
+	 * CardPayment constructor.
 	 *
 	 * @param boolean $active True if card payments are activated.
 	 * @param string  $stripe_public_key Workshop Butler public Stripe key.
@@ -69,5 +69,59 @@ class Payment {
 		$this->active            = $active;
 		$this->stripe_public_key = $stripe_public_key;
 		$this->stripe_client_id  = $stripe_client_id;
+	}
+}
+
+
+
+
+/**
+ * Trainer class which represents a paypal payment object in event
+ *
+ * @since      2.14.0
+ * @package    WorkshopButler
+ */
+class PayPalPayment {
+
+	/**
+	 * Creates PayPalPayment object from JSON
+	 *
+	 * @param object $json JSON to convert.
+	 *
+	 * @return PayPalPayment|null
+	 * @since 2.14.0
+	 */
+	static function from_json( $json ) {
+		return $json ? new PayPalPayment( $json->active, $json->client_id ) : null;
+	}
+
+	/**
+	 * True if paypal payments are active
+	 *
+	 * @since   2.14.0
+	 * @var     boolean $active Activity flag
+	 */
+	public $active;
+
+
+	/**
+	 * PayPal client id
+	 *
+	 * @since 2.14.0
+	 * @var string $stripe_client_id
+	 */
+	public $client_id;
+
+	/**
+	 * PayPalPayment constructor.
+	 *
+	 * @param boolean $active True if paypal payments are activated.
+	 * @param string  $client_id PayPal client id of connected account.
+	 *
+	 * @since 2.14.0
+	 */
+	function __construct( $active, $client_id ) {
+		$this->active     = $active;
+		$this->client_id  = $client_id;
 	}
 }

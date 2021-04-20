@@ -3,7 +3,7 @@
 /**
  * Sends GA event on registration
  */
-function submit_ga_event() {
+function submitGaEvent() {
 	let wsb_ga_key = wsb_ga.google_analytics_key;
 
 	if (wsb_ga_key !== '') {
@@ -32,15 +32,19 @@ function submit_ga_event() {
 	}
 }
 
+/**
+ * Logs the error in a correct format to the console
+ *
+ */
+function logInfo(msg) {
+  console.log('Workshop Butler INFO: '+msg);
+}
 
 /**
  * Creates a Stripe payment form
  *
- * @returns {{validateInputs: validateInputs, clearCardInput: clearCardInput, createPaymentMethod: createPaymentMethod, disableCardInput: (function(*=): card|void|undefined|Promise<void>|*|IDBRequest<IDBValidKey>), confirmCardPayment: confirmCardPayment, stripeClient: *}}
  */
-
-
-function create_stripe_card(stripeHolderEl, publicKey, stripeAccount) {
+function createStripeCard(stripeHolderEl, publicKey, stripeAccount) {
   var x = function x(tagName, attrs) {
     if (attrs === void 0) {
       attrs = null;
@@ -153,14 +157,81 @@ function create_stripe_card(stripeHolderEl, publicKey, stripeAccount) {
     }
   };
 }
+
+function createPayPalButton(selector, registrationForm) {
+  window.paypal.Buttons({
+    // Button style
+    style: {
+      color: 'blue',
+      shape: 'pill',
+      label: 'pay',
+      height: 50
+    },
+    // Set up the transaction
+    createOrder: function createOrder(data, actions) {
+      var ticket = registrationForm.getTotalAmount();
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: ticket.amount,
+            // it doesn't change the selected currency, but works like assert
+            currency_code: ticket.currency
+          }
+        }]
+      });
+    },
+    // Finalize the transaction
+    onApprove: function onApprove(data, actions) {
+      return actions.order.capture().then(function (details) {
+        registrationForm.showSubmitError('Payment has been accepted. Completing the registration...'); // Complete registration
+
+        registrationForm.submitRegistration();
+      });
+    },
+    onInit: function onInit(data, actions) {
+      actions.disable();
+      registrationForm.root[0].addEventListener('change', function (event) {
+        if (registrationForm.root[0].checkValidity()) {
+          actions.enable();
+        } else {
+          actions.disable();
+        }
+      });
+    },
+    onClick: function onClick(data, actions) {
+      if (!registrationForm.root[0].checkValidity()) {
+        registrationForm.root[0].reportValidity();
+        return false;
+      } // validate pre-registration here
+
+      var formData = registrationForm.formHelper.getFormData();
+      var url = wsb_event.ajax_url;
+
+      return new Promise(function (resolve, reject) {
+        registrationForm._sendFormData(url, registrationForm._prepareFormData(formData, true)).done(
+            function (data) {
+              resolve(actions.resolve());
+          }).fail(function (response) {
+            registrationForm.processFailResponse(response)
+            resolve(actions.reject());
+          });
+      });
+    },
+    onCancel: function onCancel(data) {
+      registrationForm.showSubmitError('Payment has been canceled');
+    },
+    onError: function onError(err) {
+      registrationForm.showSubmitError('Checkout error');
+    }
+  }).render(selector);
+}
+
 /**
  * Returns a set of translated error messages for a form helper
  *
  * @return {{required: *, email: *, url: *, date: *, nospace: *, digits: *}}
  */
-
-
-function get_translated_error_messages() {
+function getTranslatedErrorMessages() {
   return {
     required: wsb_event.error_required,
     email: wsb_event.error_email,
@@ -175,17 +246,19 @@ function get_translated_error_messages() {
 
 var EventRegistrationForm = /*#__PURE__*/function () {
   function EventRegistrationForm(selector) {
-    this.$root = jQuery(selector);
-    this.locals = this._getDom();
-    this.formHelper = new FormHelper({
-      $controls: this.locals.$formControls
-    }, get_translated_error_messages());
-    this.cardPaymentEnabled = this._initStripeCard();
-    this.invoicePaymentEnabled = !this._isPaymentActive() || this._invoicePaymentAllowed();
-
-    this._assignEvents();
-
-    this._init();
+    this.root = jQuery(selector);
+    this.formHelper = new FormHelper(
+      { $controls: this.root.find('[data-control]')}, getTranslatedErrorMessages());
+    this.cardSection = this.root.find('[data-card-section]');
+    this.submitBtn = this.root.find('[type="submit"]');
+    this.successMessage = jQuery('#wsb-success');
+    this.stripeCard = null;
+    this.cardPaymentEnabled = this.initStripeCard();
+    this.payPalPaymentEnabled = this.initPayPal();
+    this.invoicePaymentEnabled = !this.isCardPaymentActive() || this.invoicePaymentAllowed();
+    this.formIsLocked = false;
+    this.activateEvents();
+    this.init();
   }
   /**
    * @private
@@ -194,241 +267,179 @@ var EventRegistrationForm = /*#__PURE__*/function () {
 
   var _proto = EventRegistrationForm.prototype;
 
-  _proto._getDom = function _getDom() {
-    var $root = this.$root;
-    return {
-      $formControls: $root.find('[data-control]'),
-      $btnSubmit: $root.find('[type="submit"]'),
-      $cardSection: $root.find('[data-card-section]'),
-      $success: jQuery('#wsb-success')
-    };
-  };
-
-  _proto._init = function _init() {
-    this.locals.$success.hide();
+  _proto.init = function init() {
+    this.successMessage.hide();
     this.initPromoActivation();
     this.initActiveTicketSelection();
-
-    this._isNotSecure();
-
-    this._checkPaymentMethods();
+    this.deactivateCardPayment();
+    this.lockIfNoPaymentMethod();
   };
 
-  _proto._checkPaymentMethods = function _checkPaymentMethods() {
-    if (this.cardPaymentEnabled || this.invoicePaymentEnabled || this._isFree()) {
+  _proto.activateEvents = function activateEvents() {
+    this.root
+      .on('click', '[data-widget-submit]', this.onSubmitForm.bind(this))
+      .on('change', '[data-control][name="payment_type"]', this.onChangePaymentType.bind(this));
+    this.root.on('submit', this.onSubmitForm.bind(this));
+  }
+
+  _proto.initStripeCard = function initStripeCard() {
+    if (!(this.cardPaymentAllowed() && this.isCardPaymentActive() && this.isPageSecure())) {
+      return false;
+    }
+
+    this.stripeCard = createStripeCard(this.root.find("#stripe-placeholder")[0], wsb_payment.stripe_public_key, wsb_payment.stripe_client_id);
+    this.displayCardSection(this.cardPaymentSelected());
+    return true;
+  }
+
+  _proto.initPayPal = function initPayPal() {
+    var self = this;
+
+    if (!(this.isPayPalActive() && this.payPalPaymentAllowed())) {
+      return false;
+    } // here we are guessing currency by the selected ticket
+
+    var currency = this.getTotalAmount().currency;
+    var el = document.createElement('script');
+    el.setAttribute('src', "https://www.paypal.com/sdk/js?currency=" + currency + "&client-id=" + wsb_paypal_payment.client_id);
+    el.addEventListener('load', function () {
+      return createPayPalButton('#paypal-button-container', self);
+    });
+    document.head.appendChild(el);
+    this.displayPayPalButton(this.payPalPaymentSelected());
+    return true;
+  }
+
+  _proto.deactivateCardPayment = function deactivateCardPayment() {
+    if (this.isCardPaymentActive() && !this.isPageSecure()) {
+      this.root.addClass('wsb-form-not-secure');
+      this.root.find('[data-control]select[name="payment_type"] option[value="Card"]').prop('disabled', 'disabled').removeProp('selected');
+      this.root.find('[data-control]input[name="payment_type"][value="Card"]').prop('disabled', 'disabled').removeProp('checked');
+    }
+  }
+
+  _proto.lockIfNoPaymentMethod = function lockIfNoPaymentMethod() {
+    if (this.cardPaymentEnabled || this.invoicePaymentEnabled || this.payPalPaymentEnabled || this._isFree()) {
       return;
     }
 
-    this.$root.addClass('wsb-form-without-payment');
-    this.$root.find('[data-payment-section]').hide();
+    this.root.addClass('wsb-form-without-payment');
+    this.root.find('[data-payment-section]').hide();
     this.formIsLocked = true;
-    this.locals.$btnSubmit.prop('disabled', true);
-  };
-
-  _proto._isNotSecure = function _isNotSecure() {
-    if (this._isPaymentActive() && !this._isPageSecure()) {
-      this.$root.addClass('wsb-form-not-secure');
-
-      this._getCardPaymentOption().prop('disabled', 'disabled').removeProp('selected');
-    }
-  };
-
-  _proto._getCardPaymentOption = function _getCardPaymentOption() {
-    return this.$root.find('[data-control][name="payment_type"] option[value="Card"]');
+    this.submitBtn.prop('disabled', true);
   }
-  /**
-   * Returns true if the event is free
-   * @return {boolean}
-   * @private
-   */
-  ;
 
   _proto._isFree = function _isFree() {
     return wsb_payment && wsb_payment.free;
   }
-  /**
-   * Returns true if the payment configuration is available
-   * @returns boolean
-   * @private
-   */
-  ;
 
-  _proto._isPaymentActive = function _isPaymentActive() {
+
+  _proto.cardPaymentAllowed = function cardPaymentAllowed() {
+    var paymentTypeSelector = '[data-control][name="payment_type"]'; // check both radio and select variants
+
+    return !!(this.root.find(paymentTypeSelector + ' option[value="Card"]').length || this.root.find(paymentTypeSelector + '[value="Card"]').length);
+  }
+
+  _proto.isPageSecure = function isPageSecure() {
+    return window.location.href.lastIndexOf('https', 0) === 0 || wsb_payment.test;
+  }
+
+  _proto.isCardPaymentActive = function isCardPaymentActive() {
     return wsb_payment && wsb_payment.active && wsb_payment.stripe_client_id && wsb_payment.stripe_public_key;
   }
-  /**
-   * Returns true if it's allowed to use card payments on this page
-   * @returns boolean
-   * @private
-   */
-  ;
 
-  _proto._isPageSecure = function _isPageSecure() {
-    return window.location.href.lastIndexOf('https', 0) === 0 || wsb_payment.test;
-  };
-
-  _proto._cardPaymentAllowed = function _cardPaymentAllowed() {
-    return !!this._getCardPaymentOption().length;
-  };
-
-  _proto._invoicePaymentAllowed = function _invoicePaymentAllowed() {
-    return !!this.$root.find('[data-control][name="payment_type"] option[value="Invoice"]').length;
-  };
-
-  _proto._cardPaymentSelected = function _cardPaymentSelected() {
-    return this.$root.find('[data-control][name="payment_type"]').first().val() === "Card";
-  };
-
-  _proto._displayCardSection = function _displayCardSection(state) {
-    if (state) {
-      this.locals.$cardSection.removeAttr("style");
-    } else {
-      this.locals.$cardSection.css("display", "none");
-    }
-  };
-
-  _proto._initStripeCard = function _initStripeCard() {
-    if (!(this._cardPaymentAllowed() && this._isPaymentActive() && this._isPageSecure())) return false;
-    this.stripeCard = create_stripe_card(this.$root.find("#stripe-placeholder")[0], wsb_payment.stripe_public_key, wsb_payment.stripe_client_id);
-
-    this._displayCardSection(this._cardPaymentSelected());
-
-    return true;
+  _proto.isPayPalActive = function isPayPalActive() {
+    return wsb_paypal_payment && wsb_paypal_payment.client_id !== undefined;
   }
-  /**
-   * @private
-   */
-  ;
 
-  _proto._assignEvents = function _assignEvents() {
-    this.$root.on('change', '[data-widget-agreed]', this._onChangeAgreed.bind(this)).on('click', '[data-widget-submit]', this._onSubmitForm.bind(this)).on('change', '[data-control][name="payment_type"]', this._onChangePaymentType.bind(this));
-    this.$root.on('submit', this._onSubmitForm.bind(this));
-  };
+  _proto.invoicePaymentAllowed = function invoicePaymentAllowed() {
+    var paymentTypeSelector = '[data-control][name="payment_type"]'; // check both radio and select variants
 
-  _proto._onChangeAgreed = function _onChangeAgreed(e) {
-    var isAgreedForm = jQuery(e.currentTarget).prop('checked');
-    this.locals.$btnSubmit.prop('disabled', !isAgreedForm);
-  };
+    return !!(this.root.find(paymentTypeSelector + ' option[value="Invoice"]').length || this.root.find(paymentTypeSelector + '[value="Invoice"]').length);
+  }
 
-  _proto._onChangePaymentType = function _onChangePaymentType(e) {
-    console.log('Card payment selected: ' + this._cardPaymentSelected());
-    if (!this.cardPaymentEnabled) return;
-    this.stripeCard.clearCardInput();
+  _proto.payPalPaymentAllowed = function payPalPaymentAllowed() {
+    var paymentTypeSelector = '[data-control][name="payment_type"]'; // check both radio and select variants
 
-    this._displayCardSection(this._cardPaymentSelected());
-  };
+    return !!(this.root.find(paymentTypeSelector + ' option[value="PayPal"]').length || this.root.find(paymentTypeSelector + '[value="PayPal"]').length);
+  }
 
-  _proto._submitSucceed = function _submitSucceed() {
-    window.scrollTo({
-      top: this.locals.$success.scrollTop(),
-      behavior: 'smooth'
-    });
-    this.locals.$success.show();
-    this.$root.hide(); // clear form and errors here
+  _proto.cardPaymentSelected = function cardPaymentSelected() {
+    return !!this.root.find('[data-control][name="payment_type"] option[value="Card"]:checked').length;
+  }
 
-    this.formHelper.clearForm();
+  _proto.payPalPaymentSelected = function payPalPaymentSelected() {
+    return !!this.root.find('[data-control][name="payment_type"] option[value="PayPal"]:checked').length;
+  }
 
-    this._unlockFromSubmit();
+  _proto.displayCardSection = function displayCardSection(state) {
+    if (state) {
+      this.cardSection.removeAttr('style');
+    } else {
+      this.cardSection.css('display', 'none');
+    }
+  }
 
-    this.cardPaymentEnabled && this.stripeCard.clearCardInput();
-    submit_ga_event();
-  };
+  _proto.displayPayPalButton = function displayPayPalButton(state) {
+    if (state) {
+      this.root.find('#paypal-button-container').removeAttr('style');
+      this.root.find('#default-submit-button').css('display', 'none');
+    } else {
+      this.root.find('#default-submit-button').removeAttr('style');
+      this.root.find('#paypal-button-container').css('display', 'none');
+    }
+  }
 
-  _proto._submitFail = function _submitFail(message) {
-    this._showSubmitError(message);
+  _proto.onChangePaymentType = function onChangePaymentType() {
+    if (this.cardPaymentEnabled) {
+      this.stripeCard.clearCardInput();
+      this.displayCardSection(this.cardPaymentSelected());
+    }
 
-    this._unlockFromSubmit();
-  };
+    if (this.payPalPaymentEnabled) {
+      this.displayPayPalButton(this.payPalPaymentSelected());
+    }
+  }
 
-  _proto._showSubmitError = function _showSubmitError(message) {
-    this.$root.find('[data-form-major-error]').text(message || "");
-  };
-
-  _proto._lockFormSubmit = function _lockFormSubmit() {
-    this.formIsLocked = true; // show preloader above button
-
-    this.locals.$btnSubmit.find("i").css("display", "inline-block");
-  };
-
-  _proto._unlockFromSubmit = function _unlockFromSubmit() {
-    this.formIsLocked = false;
-    this.locals.$btnSubmit.find("i").css("display", "none");
-  };
-
-  _proto._onSubmitForm = function _onSubmitForm(e) {
+  _proto.onSubmitForm = function onSubmitForm(e) {
     e.preventDefault();
-    console.log("SUBMIT");
-    if (this.formIsLocked) return; // clear message
 
-    this._showSubmitError();
+    if (this.formIsLocked) {
+      return;
+    } // clear message
 
-    console.log("Form submitted");
+
+    this.showSubmitError('');
 
     if (!this.formHelper.isValidFormData()) {
       return;
     }
 
-    if (this._cardPaymentSelected() && !this.cardPaymentEnabled) {
-      this._showSubmitError("Payment method not allowed.");
-
+    if (this.payPalPaymentSelected() || this.cardPaymentSelected() && !this.cardPaymentEnabled) {
+      this.showSubmitError('Payment method not allowed');
       return;
     }
 
-    if (this._cardPaymentSelected()) {
-      this._payAndSubmitRegistration();
+    if (this.cardPaymentSelected()) {
+      this.payAndSubmitRegistration();
     } else {
-      this._submitRegistration();
+      this.submitRegistration();
     }
-  };
-
-  _proto._payAndSubmitRegistration = function _payAndSubmitRegistration() {
-    var self = this;
-    console.log("Enter card payment flow");
-
-    if (!self.stripeCard.validateInputs()) {
-      console.log("Failed card inputs validation");
-      return;
-    }
-
-    var formData = self.formHelper.getFormData();
-    var url = wsb_event.ajax_url;
-
-    self._lockFormSubmit();
-
-    self._sendFormData(url, this._prepareFormData(formData, true)).done(function (data) {
-      var stripeClientSecret = data && data.data && data.data.stripe_client_secret;
-      if(!stripeClientSecret){
-        self._submitFail("Can't initiate payment");
-        return;
-      }
-      self._processCardPayment(url, formData, stripeClientSecret);
-    }).fail(function (response) {
-      self._processFailResponse(response)
-    });
-  };
-
-  _proto._submitRegistration = function _submitRegistration() {
-    var self = this;
-    console.log("Enter simple registration flow");
-    var formData = self.formHelper.getFormData();
-    var registrationUrl = wsb_event.ajax_url;
-
-    self._lockFormSubmit();
-
-    self._sendFormData(registrationUrl, this._prepareFormData(formData, false)).done(function () {
-      self._submitSucceed();
-    }).fail(function (response) {
-      self._processFailResponse(response);
-    });
   }
-  /**
-   * Removes empty values from data, sent to the server
-   *
-   * @param data {object} Form data
-   * @param preRegister {boolean} True if the call is to pre-register
-   * @return {object}
-   */
-  ;
+
+  _proto.showSubmitError = function showSubmitError(message) {
+    this.root.find('[data-form-major-error]').text(message || '');
+  }
+
+  _proto._sendFormData = function _sendFormData(url, data) {
+    data._ajax_nonce = wsb_event.nonce;
+    return jQuery.ajax({
+      url: url,
+      data: data,
+      method: 'POST',
+      dataType: 'json'
+    });
+  };
 
   _proto._prepareFormData = function _prepareFormData(data, preRegister) {
     data.action = preRegister ? 'wsb_pre_register' : 'wsb_register';
@@ -444,7 +455,134 @@ var EventRegistrationForm = /*#__PURE__*/function () {
     return data;
   };
 
-  _proto._processFailResponse = function _processFailResponse(response) {
+  _proto.payAndSubmitRegistration = function payAndSubmitRegistration() {
+    var self = this;
+
+    logInfo('Enter card payment flow');
+
+    if (!self.stripeCard.validateInputs()) {
+      logInfo('Failed card inputs validation');
+      return;
+    }
+
+    var formData = self.formHelper.getFormData();
+    var url = wsb_event.ajax_url;
+    this.lockFormSubmit();
+
+
+    self._sendFormData(url, this._prepareFormData(formData, true)).done(function (data) {
+      var stripeClientSecret = data && data.data && data.data.stripe_client_secret;
+      if(!stripeClientSecret){
+        self.submitFail("Can't initiate payment");
+        return;
+      }
+      self.processCardPayment(url, formData, stripeClientSecret);
+    }).fail(function (response) {
+      self.processFailResponse(response)
+    });
+  }
+
+  _proto.lockFormSubmit = function lockFormSubmit() {
+    this.formIsLocked = true; // show preloader above button
+
+    this.submitBtn.find('i').css('display', 'inline-block');
+  }
+
+  _proto.unlockFromSubmit = function unlockFromSubmit() {
+    this.formIsLocked = false;
+    this.submitBtn.find('i').css('display', 'none');
+  }
+
+
+  _proto.getTotalAmount = function getTotalAmount() {
+    var ticket = this.root.find('[name="ticket"]:checked');
+    return {
+      amount: ticket.data('amount'),
+      currency: ticket.data('currency')
+    };
+  }
+
+  _proto.processCardPayment = function processCardPayment(url, formData, clientSecret) {
+    var self = this;
+
+    this.lockFormSubmit();
+    this.stripeCard.confirmCardPayment(clientSecret, {
+      billing_details: this.prepareBillingDetails(formData)
+    }).then(function (result) {
+      if (result.error) {
+        // Show error to customer (e.g., insufficient funds)
+        self.submitFail(result.error.message);
+        return;
+      } // The payment has been processed!
+
+
+      if (result.paymentIntent && result.paymentIntent.status !== 'succeeded') {
+        self.submitFail(result.paymentIntent.status);
+        return;
+      }
+
+      formData.intent_id = result.paymentIntent.id;
+      self._sendFormData(url, self._prepareFormData(formData, false)).done(function () {
+        self.submitSucceed();
+      }).fail(function (response) {
+        // it shouldn't happen in any case
+        self.submitFail("Due to unexpected reason we can't complete the registration. " + "Please contact our support to resolve it manually");
+      });
+    });
+  }
+
+  _proto.prepareBillingDetails = function prepareBillingDetails(formData) {
+    return {
+      address: {
+        city: formData['billing.city'] || null,
+        country: formData['billing.country'] || null,
+        line1: formData['billing.street_1'] || null,
+        line2: formData['billing.street_2'] || null,
+        postal_code: formData['billing.postcode'] || null,
+        state: formData['billing.province'] || null
+      },
+      name: (formData.first_name || '') + '' + (formData.last_name || '')
+    };
+  }
+
+  _proto.submitFail = function submitFail(message) {
+    this.showSubmitError(message);
+    this.unlockFromSubmit();
+  }
+
+  _proto.submitSucceed = function _submitSucceed() {
+    window.scrollTo({
+      top: this.successMessage.scrollTop(),
+      behavior: 'smooth'
+    });
+    this.successMessage.show();
+    this.root.hide(); // clear form and errors here
+
+    this.formHelper.clearForm();
+
+    this.unlockFromSubmit();
+
+    this.cardPaymentEnabled && this.stripeCard.clearCardInput();
+    submitGaEvent();
+  };
+
+
+  _proto.submitRegistration = function submitRegistration() {
+    var self = this;
+
+    logInfo('Enter simple registration flow');
+    var formData = self.formHelper.getFormData();
+    var registrationUrl = wsb_event.ajax_url;
+    this.lockFormSubmit();
+
+    self._sendFormData(registrationUrl, this._prepareFormData(formData, false)).done(function () {
+      self.submitSucceed();
+    }).fail(function (response) {
+      self.processFailResponse(response);
+    });
+  }
+
+  _proto.processFailResponse = function _processFailResponse(response) {
     var data = {}
 
     try {
@@ -454,97 +592,41 @@ var EventRegistrationForm = /*#__PURE__*/function () {
       data.message = "Can't recognize server response";
     }
 
-    this._submitFail(data.message);
+    this.submitFail(data.message);
 
     if (!data.info) return;
     var missedErrors = this.formHelper.setErrors(data.info);
     if (missedErrors.length > 0) {
-      this._submitFail(missedErrors);
-    }
-  };
-
-  _proto._prepareBillingDetails = function _prepareBillingDetails(formData) {
-    return {
-      "address": {
-        "city": formData["billing.city"] || null,
-        "country": formData["billing.country"] || null,
-        "line1": formData["billing.street_1"] || null,
-        "line2": formData["billing.street_2"] || null,
-        "postal_code": formData["billing.postcode"] || null,
-        "state": formData["billing.province"] || null
-      },
-      "name": (formData.first_name || "") + " " + (formData.last_name || "")
-    };
-  };
-
-  _proto._processCardPayment = function _processCardPayment(url, formData, clientSecret) {
-    var _this = this;
-
-    var self = this;
-
-    self._lockFormSubmit();
-
-    this.stripeCard.confirmCardPayment(clientSecret, {
-      billing_details: self._prepareBillingDetails(formData)
-    }).then(function (result) {
-      if (result.error) {
-        // Show error to customer (e.g., insufficient funds)
-        self._submitFail(result.error.message);
-
-        return;
-      } // The payment has been processed!
-
-
-      if (result.paymentIntent && result.paymentIntent.status !== 'succeeded') {
-        self._submitFail(result.paymentIntent.status);
-
-        return;
-      }
-
-      formData['intent_id'] = result.paymentIntent.id;
-
-      self._sendFormData(url, _this._prepareFormData(formData, false)).done(function () {
-        self._submitSucceed();
-      }).fail(function (response) {
-        // it shouldn't happen in any case
-        self._submitFail("Due to unexpected reason we can't complete the registration. " + "Please contact our support to resolve it manually");
-      });
-    });
-  };
-
-  _proto.initActiveTicketSelection = function initActiveTicketSelection() {
-    var _this2 = this;
-
-    var tickets = this.$root.find('#wsb-tickets input');
-    tickets.on('change', function () {
-      _this2.toggleTicket(tickets.not(':checked'), false);
-
-      _this2.toggleTicket(tickets.filter(':checked'), true);
-    });
-
-    if (tickets.length > 0) {
-      var activeTicket = tickets.first();
-      this.toggleTicket(activeTicket, true);
+      this.submitFail(missedErrors);
     }
   };
 
   _proto.initPromoActivation = function initPromoActivation() {
-    var _this3 = this;
+    var self = this;
 
-    this.$root.find('[data-promo-link]').on('click', function (e) {
+    this.root.find('[data-promo-link]').on('click', function (e) {
       e.preventDefault();
 
-      _this3.$root.find('[data-promo-code]').toggle();
+      self.root.find('[data-promo-code]').toggle();
     });
   }
-  /**
-   * Switches active ticket
-   * @param tickets {JQuery<HTMLElement>}
-   * @param on {boolean}
-   */
-  ;
 
-  _proto.toggleTicket = function toggleTicket(tickets, on) {
+  _proto.initActiveTicketSelection = function initActiveTicketSelection() {
+    var _this2 = this;
+
+    var tickets = this.root.find('#wsb-tickets input');
+    tickets.on('change', function () {
+      _this2.toggleRadio(tickets.not(':checked'), false);
+      _this2.toggleRadio(tickets.filter(':checked'), true);
+    });
+
+    if (tickets.length > 0) {
+      var activeTicket = tickets.first();
+      this.toggleRadio(activeTicket, true);
+    }
+  };
+
+  _proto.toggleRadio = function toggleRadio(tickets, on) {
     var name = 'wsb-active';
 
     if (on) {
@@ -554,17 +636,6 @@ var EventRegistrationForm = /*#__PURE__*/function () {
       tickets.removeProp('checked');
       tickets.parent().removeClass(name);
     }
-  } // transport
-  ;
-
-  _proto._sendFormData = function _sendFormData(url, data) {
-    data._ajax_nonce = wsb_event.nonce;
-    return jQuery.ajax({
-      url: url,
-      data: data,
-      method: 'POST',
-      dataType: 'json'
-    });
   };
 
   EventRegistrationForm.plugin = function plugin(selector) {
@@ -768,15 +839,23 @@ var FormHelper = /*#__PURE__*/function () {
   ;
 
   _proto2.getFormData = function getFormData() {
-    var _this5 = this;
-
     var formData = {};
     this.$controls.each(function (index, el) {
       var $el = jQuery(el);
       var name = $el.attr('name');
 
-      if (name && formData[name] === undefined) {
-        formData[name] = _this5.getControlValue($el);
+      if (!(name && formData[name] === undefined)) {
+        return;
+      }
+
+      if ($el.is(':checkbox')) {
+        formData[name] = $el.prop('checked');
+      } else if ($el.is(':radio')) {
+        if ($el.prop('checked')) {
+          formData[name] = $el.val();
+        }
+      } else {
+        formData[name] = $el.val();
       }
     });
     return formData;

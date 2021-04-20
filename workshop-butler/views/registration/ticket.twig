@@ -3,11 +3,15 @@
         {% if ticket.active() %}
             <div class="wsb-form__ticket">
                 <input id="{{ ticket.id }}" name="{{ field.name }}" title="{{ field.label }}" type="radio"
-                       data-control required value="{{ ticket.id }}"
+                        data-control required value="{{ ticket.id }}"
+                        data-amount="{{ ticket.price.amount }}"
+                        data-currency="{{ ticket.price.currency }}"
+                        {% if not next_loop %} checked {% endif %}
                         {% if disabled %} disabled {% endif %} />
 
                 <label for="{{ ticket.id }}" class="wsb-label"><strong>{{ wsb_f(ticket, 'price') }}</strong> {{ ticket.name }}</label>
             </div>
+            {% set next_loop = true %}
         {% endif %}
     {% endfor %}
     <div class="wsb-form__tax">
