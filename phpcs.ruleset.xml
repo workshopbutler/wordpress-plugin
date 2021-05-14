@@ -2,11 +2,17 @@
 <ruleset name="Coding Standards for Workshop Butler WordPress Plugins">
 	<description>Code style rules, inherited from WordPress core rules and slightly modified</description>
 
-	<rule ref="WordPress-Core">
-		<exclude name="WordPress.WP.I18n"/>
+	<rule ref="WordPress-Extra"/>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array" value="wsbintegration" />
+		</properties>
 	</rule>
 
 	<rule ref="WordPress-Docs" />
+
+	<config name="minimum_supported_wp_version" value="5.2" />
 
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>

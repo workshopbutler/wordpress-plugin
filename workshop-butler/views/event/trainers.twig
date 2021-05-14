@@ -9,9 +9,9 @@
                 {% endif %}
                 <div class="wsb-profile__name">
                     {% if trainer.url %}
-                        <a href="{{ trainer.url }}">{{ trainer.full_name() }}</a>
+                        <a href="{{ trainer.url }}">{{ trainer.get_full_name() }}</a>
                     {% else %}
-                        {{ trainer.full_name() }}
+                        {{ trainer.get_full_name() }}
                     {% endif %}
                     <div class="wsb-profile__rating">
                         {% if trainer.stats.total.public_stats.rating > 0 %}

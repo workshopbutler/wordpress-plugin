@@ -259,21 +259,122 @@ class Event {
 		);
 		$this->cover_image       = Cover_Image::from_json( $json_data->cover_image );
 
-		$this->trainers = $this->get_trainers( $json_data, $trainer_page_url );
-		$this->state    = new Event_State( $this, $json_data->state === 'canceled' );
-		$this->card_payment  = CardPayment::from_json( $json_data->card_payment );
-		$this->paypal_payment  = PayPalPayment::from_json( $json_data->paypal_payment );
-		$this->featured = $json_data->featured ? $json_data->featured : false;
+		$this->trainers       = $this->get_trainers( $json_data, $trainer_page_url );
+		$this->state          = new Event_State( $this, $json_data->state === 'canceled' );
+		$this->card_payment   = CardPayment::from_json( $json_data->card_payment );
+		$this->paypal_payment = PayPalPayment::from_json( $json_data->paypal_payment );
+		$this->featured       = $json_data->featured ? $json_data->featured : false;
 	}
 
 	/**
 	 * Returns the URL for the event's page
 	 *
 	 * @return string
-	 * @since 2.1.0
+	 * @since 3.0.0
 	 */
-	public function url() {
+	public function get_url() {
 		return $this->url->url;
+	}
+
+	/**
+	 * Returns the cover image object for the event. The object always exists but the urls
+	 * could be null
+	 *
+	 * @return Cover_Image
+	 * @since 3.0.0
+	 */
+	public function get_cover_image() {
+		return $this->cover_image;
+	}
+
+	/**
+	 * Returns the language object of the event
+	 *
+	 * @return Language
+	 * @since 3.0.0
+	 */
+	public function get_language() {
+		return $this->language;
+	}
+
+	/**
+	 * Returns title of the event
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_title() {
+		return $this->title;
+	}
+
+	/**
+	 * Returns the type of the event
+	 *
+	 * @return Event_Type
+	 * @since 3.0.0
+	 */
+	public function get_event_type() {
+		return $this->type;
+	}
+
+	/**
+	 * Returns country's code
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_country_code() {
+		return $this->location->country_code;
+	}
+
+	/**
+	 * Returns the list of spoken languages
+	 *
+	 * @return string[]
+	 * @since 3.0.0
+	 */
+	public function get_spoken_languages() {
+		return $this->language->spoken;
+	}
+
+	/**
+	 * Returns the location
+	 *
+	 * @return Location
+	 * @since 3.0.0
+	 */
+	public function get_location() {
+		return $this->location;
+	}
+
+	/**
+	 * Returns the schedule
+	 *
+	 * @return Schedule
+	 * @since 3.0.0
+	 */
+	public function get_schedule() {
+		return $this->schedule;
+	}
+
+	/**
+	 * Returns true if the event is free
+	 *
+	 * @return bool
+	 * @since 3.0.0
+	 */
+	public function is_free() {
+		return $this->free;
+	}
+
+	/**
+	 * Returns true if the event is featured
+	 *
+	 * @return bool
+	 * @since 3.0.0
+	 */
+	public function is_featured() {
+		return $this->featured;
 	}
 
 	/**
@@ -294,10 +395,10 @@ class Event {
 	 * @return string[]
 	 * @since  2.0.0
 	 */
-	public function names_of_trainers() {
+	public function get_names_of_trainers() {
 		return array_map(
 			function ( $trainer ) {
-				return $trainer->full_name();
+				return $trainer->get_full_name();
 			},
 			$this->trainers
 		);

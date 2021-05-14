@@ -10,6 +10,11 @@
 
 namespace WorkshopButler;
 
+require_once WSB_ABSPATH . 'public/includes/class-wsb-page.php';
+require_once WSB_ABSPATH . 'public/includes/config/class-event-calendar-config.php';
+
+use WorkshopButler\Config\Event_Calendar_Config;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 
 /**
@@ -77,15 +82,15 @@ class WSB_Schedule_Page extends WSB_Page {
 		$this->add_localized_script();
 		$this->add_theme_fonts();
 
-		$attrs = $this->get_attrs( $attrs );
+		$config = new Event_Calendar_Config( $attrs );
 
 		$method = 'events';
-		$query  = Event_List::prepare_query( $attrs, - 1 );
+		$query  = Event_List::prepare_query( $config, - 1 );
 
-		$this->dict->set_schedule_attrs( $attrs );
+		$this->dict->set_schedule_config( $config );
 		$response = $this->requests->get( $method, $query );
 
-		return $this->render_list( $response, $attrs, $content );
+		return $this->render_list( $response, $config, $content );
 	}
 
 	/**
@@ -108,45 +113,22 @@ class WSB_Schedule_Page extends WSB_Page {
 	}
 
 	/**
-	 * Returns widget's attributes
-	 *
-	 * @param array $attrs User attributes.
-	 *
-	 * @return array
-	 */
-	private function get_attrs( $attrs ) {
-
-		$defaults = array(
-			'category'        => null, // DEPRECATED.
-			'categories'      => null,
-			'event_type'      => null, // DEPRECATED.
-			'event_types'     => null,
-			'layout'          => $this->settings->get( WSB_Options::SCHEDULE_LAYOUT, 'table' ),
-			'wrapper'         => false,
-			'only_featured'   => false,
-			'featured_on_top' => $this->settings->is_featured_events_active() && $this->settings->get( WSB_Options::FEATURED_ON_TOP, false ),
-		);
-
-		return shortcode_atts( $defaults, $attrs );
-	}
-
-	/**
 	 * Renders the list of events
 	 *
-	 * @param WSB_Response  $response Workshop Butler API response.
-	 * @param array         $attrs Shortcodes's attributes.
-	 * @param string | null $content Content of the wsb_schedule shortcode.
+	 * @param WSB_Response          $response Workshop Butler API response.
+	 * @param Event_Calendar_Config $config Widget's config.
+	 * @param string | null         $content Content of the wsb_schedule shortcode.
 	 *
 	 * @return string
 	 * @since  2.0.0
 	 */
-	private function render_list( $response, $attrs, $content ) {
+	private function render_list( $response, $config, $content ) {
 		if ( $response->is_error() ) {
 			return $this->format_error( $response->error );
 		}
 
-		$events = Event_List::from_json( $response->body->data, $this->settings, $attrs['only_featured'] );
-		if ( true === filter_var( $attrs['featured_on_top'], FILTER_VALIDATE_BOOLEAN ) ) {
+		$events = Event_List::from_json( $response->body->data, $this->settings, $config->is_only_featured() );
+		if ( true === filter_var( $config->is_featured_on_top(), FILTER_VALIDATE_BOOLEAN ) ) {
 			$events = Event_List::put_featured_on_top( $events );
 		}
 
@@ -159,10 +141,47 @@ class WSB_Schedule_Page extends WSB_Page {
 			'theme'  => $this->get_theme(),
 		);
 
+		$this->dict->set_events( $events );
+		if ( true ) {
+			$content = $this->render_new_template( $template_data, $config );
+		} else {
+			$content = $this->render_old_template( $content, $template_data, $config );
+		}
+		$this->dict->clear_events();
+
+		return $this->add_custom_styles( $content );
+	}
+
+	/**
+	 * Render the schedule using new templates
+	 *
+	 * @param array                 $template_data Data to pass to the template.
+	 * @param Event_Calendar_Config $config Widget configuration.
+	 *
+	 * @return false|string
+	 * @since 3.0.0
+	 */
+	protected function render_new_template( $template_data, $config ) {
+		$content = $config->is_table_layout() ? 'templates/schedule-table-page.php' : 'templates/schedule-tiles-page.php';
+		$theme   = $this->get_theme();
+		ob_start();
+		include WSB()->plugin_path() . '/' . $content;
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Renders the schedule using old Twig templates
+	 *
+	 * @param string|null           $content Content of wsb_schedule shortcode.
+	 * @param array                 $template_data Data passed to the template.
+	 * @param Event_Calendar_Config $config Configuration.
+	 */
+	protected function render_old_template( $content, $template_data, $config ) {
 		if ( $content ) {
 			$template = $content;
 		} else {
-			if ( 'table' === $this->get_list_type() ) {
+			if ( $config->is_table_layout() ) {
 				$custom_template = $this->settings->get( WSB_Options::SCHEDULE_TABLE_TEMPLATE );
 			} else {
 				$custom_template = $this->settings->get( WSB_Options::SCHEDULE_TILE_TEMPLATE );
@@ -170,12 +189,9 @@ class WSB_Schedule_Page extends WSB_Page {
 			$template = $this->get_template( 'schedule-page', $custom_template );
 		}
 
-		$this->dict->set_events( $events );
 		$processed_template = do_shortcode( $template );
-		$content            = $this->compile_string( $processed_template, $template_data );
-		$this->dict->clear_events();
 
-		return $this->add_custom_styles( $content );
+		return $this->compile_string( $processed_template, $template_data );
 	}
 
 	/**
@@ -224,8 +240,8 @@ class WSB_Schedule_Page extends WSB_Page {
 				);
 			case 'item':
 				return array(
-					'tags'               => $this->settings->is_featured_events_active() ? 'all' : 'free',
-					'highlight_featured' => $this->settings->is_featured_events_active(),
+					'tags'               => $this->settings->is_highlight_featured() ? 'all' : 'free',
+					'highlight_featured' => $this->settings->is_highlight_featured(),
 				);
 			case 'filters':
 				return array( 'filters' => 'location,trainer,language,type' );
@@ -277,7 +293,7 @@ class WSB_Schedule_Page extends WSB_Page {
 			$item_attrs['event']    = $event;
 			$item_attrs['content']  = $processed_item_content;
 			$item_attrs['layout']   = $this->get_list_type();
-			$html                   .= $this->compile_string( $item_template, $item_attrs );
+			$html                  .= $this->compile_string( $item_template, $item_attrs );
 			$this->dict->clear_event();
 		}
 
@@ -327,12 +343,12 @@ class WSB_Schedule_Page extends WSB_Page {
 	 * @since  2.0.0
 	 */
 	private function get_list_type() {
-		$attrs = $this->dict->get_schedule_attrs();
-		if ( is_null( $attrs ) || is_null( $attrs['layout'] ) ) {
+		$config = $this->dict->get_schedule_config();
+		if ( is_null( $config ) ) {
 			return 'table';
 		}
 
-		return $attrs['layout'];
+		return $config->get_layout();
 	}
 
 	/**

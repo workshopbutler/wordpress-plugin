@@ -66,4 +66,13 @@ class Location {
 		$this->country_code = $this->online ? '00' : $country_code;
 		$this->city         = $city;
 	}
+
+	/**
+	 * Returns true if the location is online
+	 *
+	 * @return bool
+	 */
+	public function is_online() {
+		return $this->online;
+	}
 }

@@ -248,7 +248,7 @@ class WSB_Options {
 	 * @return bool
 	 * @since 2.12.0
 	 */
-	public function is_featured_events_active() {
+	public function is_highlight_featured() {
 		return $this->get( self::FEATURED_EVENTS, false );
 	}
 }

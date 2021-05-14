@@ -53,4 +53,24 @@ class Cover_Image {
 		$this->url       = $url;
 		$this->thumbnail = $thumbnail;
 	}
+
+	/**
+	 * Returns the url to the full-size cover image
+	 *
+	 * @since 3.0.0
+	 * @return string|null
+	 */
+	public function get_url() {
+		return $this->url;
+	}
+
+	/**
+	 * Returns the url to the thumbnail of the cover image
+	 *
+	 * @since 3.0.0
+	 * @return string|null
+	 */
+	public function get_thumbnail_url() {
+		return $this->thumbnail;
+	}
 }

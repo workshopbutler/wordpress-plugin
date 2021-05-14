@@ -33,7 +33,7 @@ services:
     - "./bin/install-wp.sh:/usr/local/bin/install-wp:ro"
     - "./workshop-butler:/var/www/html/wp-content/plugins/workshop-butler:ro"
   mysql:
-    image: "mariadb:10.2"
+    image: "mariadb:10.6"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: "wordpress"

@@ -105,19 +105,37 @@ class WSB_Integration_Public {
 	 */
 	public function enqueue_scripts() {
 		wp_register_script( 'wsb-all-trainers-scripts', plugin_dir_url( __FILE__ ) . 'js/all-trainers-scripts.js', array( 'jquery' ), $this->version, true );
-		wp_register_script( 'wsb-event-page', plugin_dir_url( __FILE__ ) . 'js/event-page.js', array(
-			'jquery',
-			'wsb-dateformat'
-		), $this->version, true );
-		wp_register_script( 'wsb-registration-page', plugin_dir_url( __FILE__ ) . 'js/registration-page.js', array(
-			'jquery',
-			'wsb-dateformat'
-		), $this->version, true );
+		wp_register_script(
+			'wsb-event-page',
+			plugin_dir_url( __FILE__ ) . 'js/event-page.js',
+			array(
+				'jquery',
+				'wsb-dateformat',
+			),
+			$this->version,
+			true
+		);
+		wp_register_script(
+			'wsb-registration-page',
+			plugin_dir_url( __FILE__ ) . 'js/registration-page.js',
+			array(
+				'jquery',
+				'wsb-dateformat',
+			),
+			$this->version,
+			true
+		);
 
-		wp_register_script( 'wsb-single-trainer-scripts', plugin_dir_url( __FILE__ ) . 'js/single-trainer-scripts.js', array(
-			'jquery',
-			'wsb-dateformat'
-		), $this->version, true );
+		wp_register_script(
+			'wsb-single-trainer-scripts',
+			plugin_dir_url( __FILE__ ) . 'js/single-trainer-scripts.js',
+			array(
+				'jquery',
+				'wsb-dateformat',
+			),
+			$this->version,
+			true
+		);
 
 		wp_register_script( 'wsb-dateformat', plugin_dir_url( __FILE__ ) . 'js/jquery-dateFormat.min.js', array( 'jquery' ), $this->version, true );
 		wp_register_script( 'wsb-all-events-scripts', plugin_dir_url( __FILE__ ) . 'js/all-events-scripts.js', array( 'jquery' ), $this->version, true );
@@ -209,7 +227,7 @@ class WSB_Integration_Public {
 		$dict           = new WSB_Dictionary();
 		$may_be_trainer = $dict->get_trainer();
 		if ( is_a( $may_be_trainer, 'WorkshopButler\Trainer' ) ) {
-			return $may_be_trainer->full_name();
+			return $may_be_trainer->get_full_name();
 		} elseif ( is_wp_error( $may_be_trainer ) ) {
 			return $default_title;
 		} elseif ( empty( $_GET['id'] ) ) {
@@ -220,7 +238,7 @@ class WSB_Integration_Public {
 			if ( is_wp_error( $response ) ) {
 				return $default_title;
 			} else {
-				return $response->full_name();
+				return $response->get_full_name();
 			}
 		}
 	}
@@ -233,8 +251,8 @@ class WSB_Integration_Public {
 	 * @return string
 	 */
 	protected function get_event_title( $default_title ) {
-		$dict           = new WSB_Dictionary();
-		$may_be_event   = $dict->get_event();
+		$dict         = new WSB_Dictionary();
+		$may_be_event = $dict->get_event();
 		if ( is_a( $may_be_event, 'WorkshopButler\Event' ) ) {
 			return $may_be_event->title;
 		} elseif ( is_wp_error( $may_be_event ) ) {
@@ -289,7 +307,7 @@ class WSB_Integration_Public {
 		add_shortcode( 'wsb_trainer_list_badges', array( 'WorkshopButler\WSB_Trainer_List_Page', 'tag' ) );
 		add_shortcode( 'wsb_trainer_list_rating', array( 'WorkshopButler\WSB_Trainer_List_Page', 'tag' ) );
 
-		add_shortcode( 'wsb_event_title', array( 'WorkshopButler\WSB_Event', 'tag' ) );
+		add_shortcode( 'wsb_event_title', array( ' WorkshopButler\WSB_Event', 'tag' ) );
 		add_shortcode( 'wsb_event_registration_button', array( 'WorkshopButler\WSB_Event', 'tag' ) );
 		add_shortcode( 'wsb_event_schedule', array( 'WorkshopButler\WSB_Event', 'tag' ) );
 		add_shortcode( 'wsb_event_image', array( 'WorkshopButler\WSB_Event', 'tag' ) );
@@ -356,17 +374,18 @@ class WSB_Integration_Public {
 			intval( $options->get( WSB_Options::TRAINER_PROFILE_PAGE ) ),
 		);
 
-		return in_array( $post->ID, $reserved_ids, true);
+		return in_array( $post->ID, $reserved_ids, true );
 	}
 
 	/**
 	 * Add opengraph image
 	 *
 	 * @param \Yoast\WP\SEO\Values\Open_Graph\Images $image_container The image container.
-	 *
 	 */
-	public function wpseo_add_opengraph_additional_images($image_container) {
-		if(! $this->is_reserved_page()) return;
+	public function wpseo_add_opengraph_additional_images( $image_container ) {
+		if ( ! $this->is_reserved_page() ) {
+			return;
+		}
 
 		$dict           = new WSB_Dictionary();
 		$may_be_event   = $dict->get_event();
@@ -390,7 +409,7 @@ class WSB_Integration_Public {
 	 *
 	 * @return string[] The presenters.
 	 */
-	public function wpseo_frontend_presenters($presenters){
+	public function wpseo_frontend_presenters( $presenters ) {
 
 		$keep[] = 'Yoast\WP\SEO\Presenters\Title_Presenter';
 		$keep[] = 'Yoast\WP\SEO\Presenters\Meta_Description_Presenter';
@@ -402,7 +421,9 @@ class WSB_Integration_Public {
 		$keep[] = 'Yoast\WP\SEO\Presenters\Open_Graph\Title_Presenter';
 		$keep[] = 'Yoast\WP\SEO\Presenters\Twitter\Card_Presenter';
 
-		if($this->is_reserved_page()) return $keep;
+		if ( $this->is_reserved_page() ) {
+			return $keep;
+		}
 
 		return $presenters;
 	}

@@ -11,14 +11,21 @@
  * Plugin URI:        https://github.com/workshopbutler/wordpress-plugin
  * Description:       This plugin integrates Workshop Butler Events, Trainers and Testimonials to your WordPress
  *     website.
- * Version:           2.14.0
+ * Version:           3.0.0-dev
  * Author:            Workshop Butler
  * Author URI:        https://workshopbutler.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       wsbintegration
  * Domain Path:       /languages
+ * Requires PHP: 7.1
  */
+
+require 'vendor/autoload.php';
+
+use WorkshopButler\WSB_Integration;
+
+defined( 'ABSPATH' ) || exit;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -28,12 +35,20 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'WSB_INTEGRATION_VERSION', '2.14.0' );
+define( 'WSB_INTEGRATION_VERSION', '3.0.0' );
 
 /**
  * Version of Workshop Butler API, used by this plugin
  */
 define( 'WSB_API_VERSION', '2021-01-12' );
+
+if ( ! defined( 'WSB_PLUGIN_FILE' ) ) {
+	define( 'WSB_PLUGIN_FILE', __FILE__ );
+}
+if ( ! defined( 'WSB_ABSPATH' ) ) {
+	define( 'WSB_ABSPATH', dirname( WSB_PLUGIN_FILE ) . '/' );
+}
+
 
 /**
  * The code that runs during plugin activation.
@@ -73,19 +88,14 @@ register_uninstall_hook( __FILE__, 'remove_wsb_integration' );
 require plugin_dir_path( __FILE__ ) . 'includes/class-wsb-integration.php';
 
 /**
- * Begins execution of the plugin.
+ * Returns the main instance of WSB.
  *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    2.0.0
+ * @return WSB_Integration
+ * @since    3.0.0
  */
-function run_wsb_integration() {
-
-	$plugin = new WorkshopButler\WSB_Integration();
-	$plugin->run();
-
+function WSB() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+	return WSB_Integration::instance();
 }
 
-run_wsb_integration();
+// Global for backwards compatibility.
+$GLOBALS['workshopbutler'] = WSB();

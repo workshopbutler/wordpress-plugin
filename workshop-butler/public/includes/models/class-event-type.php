@@ -38,7 +38,7 @@ class Event_Type {
 	 * URL to the badge of the type
 	 *
 	 * @since  2.0.0
-	 * @var    string $badge URL to the badge of the type
+	 * @var    string|null $badge URL to the badge of the type
 	 */
 	public $badge;
 
@@ -54,6 +54,42 @@ class Event_Type {
 	}
 
 	/**
+	 * Returns type's id
+	 *
+	 * @return int
+	 */
+	public function get_id() {
+		return $this->id;
+	}
+
+	/**
+	 * Returns type's name
+	 *
+	 * @return int
+	 */
+	public function get_name() {
+		return $this->name;
+	}
+
+	/**
+	 * Returns the URL to the type's badge
+	 *
+	 * @return string|null
+	 */
+	public function get_badge_url() {
+		return $this->badge;
+	}
+
+	/**
+	 * Returns true if badge exists for the type
+	 *
+	 * @return bool
+	 */
+	public function has_badge() {
+		return ! empty( $this->badge );
+	}
+
+	/**
 	 * Creates an empty type
 	 *
 	 * @return Event_Type
@@ -63,6 +99,7 @@ class Event_Type {
 		$empty_type->name  = '';
 		$empty_type->id    = 0;
 		$empty_type->badge = '';
+
 		return new Event_Type( $empty_type );
 	}
 }

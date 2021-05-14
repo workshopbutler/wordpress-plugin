@@ -224,7 +224,27 @@ class Trainer {
 	 * @since 2.2.0
 	 */
 	protected function get_trainer_url( $base_url ) {
-		return $base_url . '?id=' . $this->id . '&full_name=' . $this->full_name();
+		return $base_url . '?id=' . $this->id . '&full_name=' . $this->get_full_name();
+	}
+
+	/**
+	 * Returns the url to trainer's avatar
+	 *
+	 * @return string|null
+	 * @since 3.0.0
+	 */
+	public function get_photo() {
+		return $this->photo;
+	}
+
+	/**
+	 * Returns the url to trainer's profile
+	 *
+	 * @return string|null
+	 * @since 3.0.0
+	 */
+	public function get_url() {
+		return $this->url;
 	}
 
 	/**
@@ -233,7 +253,7 @@ class Trainer {
 	 * @return string
 	 * @since  2.0.0
 	 */
-	public function full_name() {
+	public function get_full_name() {
 		return $this->first_name . ' ' . $this->last_name;
 	}
 

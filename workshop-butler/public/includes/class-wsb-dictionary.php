@@ -10,6 +10,8 @@
 
 namespace WorkshopButler;
 
+use WorkshopButler\Config\Event_Calendar_Config;
+
 /**
  * Dictionary class which provides an access to entities, loaded from API
  *
@@ -98,10 +100,10 @@ class WSB_Dictionary {
 	/**
 	 * Returns the attributes for a currently-processed event or null
 	 *
+	 * @return Event_Calendar_Config|null
 	 * @since 2.0.0
-	 * @return array|null
 	 */
-	public function get_schedule_attrs() {
+	public function get_schedule_config() {
 		if ( ! isset( $GLOBALS['wsb_schedule_attrs'] ) ) {
 			return null;
 		}
@@ -111,11 +113,12 @@ class WSB_Dictionary {
 	/**
 	 * Sets new schedule attributes
 	 *
-	 * @param array $attrs New schedule attrs.
+	 * @param Event_Calendar_Config $config New schedule config.
+	 *
 	 * @since 2.0.0
 	 */
-	public function set_schedule_attrs( $attrs ) {
-		$GLOBALS['wsb_schedule_attrs'] = $attrs;
+	public function set_schedule_config( $config ) {
+		$GLOBALS['wsb_schedule_attrs'] = $config;
 	}
 
 
