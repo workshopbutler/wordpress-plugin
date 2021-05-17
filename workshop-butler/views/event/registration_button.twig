@@ -1,8 +1,8 @@
 <div>
-    {% if event.state.closed() %}
-        <button class="wsb-sidebar__register" disabled>{{ wsb_f(event.state) }}</button>
+    {% if event.get_state().closed() %}
+        <button class="wsb-sidebar__register" disabled>{{ wsb_f(event.get_state()) }}</button>
     {% else %}
-        <a href="{{ event.registration_page.url }}" target="{{ target }}"
+        <a href="{{ event.get_registration_url }}" target="{{ target }}"
            class="wsb-sidebar__register">{{ wsb_t('event.register') }}</a>
     {% endif %}
 </div>

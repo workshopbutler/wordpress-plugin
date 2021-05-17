@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "WorkshopButler\\Hooks\\": "workshop-butler/public"
+            "WorkshopButler\\Hooks\\": "workshop-butler/public/includes/hooks"
         }
     }
 }

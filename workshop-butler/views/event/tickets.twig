@@ -1,6 +1,6 @@
 {% if event.with_tickets %}
     <div class="wsb-tickets wsb-info">
-        {% if event.free %}
+        {% if event.is_free %}
             <div class="wsb-ticket">
                 <div class="wsb-ticket__val">
                     {{ wsb_t('event.ticket.free') }}
@@ -13,7 +13,7 @@
                 </div>
             </div>
         {% else %}
-            {% for ticket in event.tickets.types %}
+            {% for ticket in event.get_tickets.get_types %}
                 {% set visible = show_expired_tickets or ticket.active() or ticket.in_future() %}
                 {% if visible %}
                     <div class="wsb-ticket {% if not ticket.active %} state-closed {% endif %}">
@@ -21,7 +21,7 @@
                             {{ wsb_f(ticket, 'price') }}
                         </div>
                         <div class="wsb-ticket__name">
-                            {{ ticket.name }}
+                            {{ ticket.get_name }}
                         </div>
                         {% set ticketDescr = wsb_f(ticket, 'desc') %}
                         {% if ticketDescr %}

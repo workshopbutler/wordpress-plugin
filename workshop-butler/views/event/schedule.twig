@@ -1,9 +1,9 @@
 <div class="wsb-info">
     <div class="wsb-info__title">{{ __('event.info.date', 'wsbintegration') }}:</div>
-    {% if event.schedule.at_one_day() %}
-        {{ wsb_f(event.schedule, 'full_long') }} {{ wsb_f(event.schedule, 'timezone_short') }}
+    {% if event.get_schedule.at_one_day() %}
+        {{ wsb_f(event.get_schedule, 'full_long') }} {{ wsb_f(event.get_schedule, 'timezone_short') }}
     {% else %}
-        {{ wsb_f(event.schedule, 'start_long') }}
-        —<br>{{ wsb_f(event.schedule, 'end_long') }} {{ wsb_f(event.schedule, 'timezone_short') }}
+        {{ wsb_f(event.get_schedule, 'start_long') }}
+        —<br>{{ wsb_f(event.get_schedule, 'end_long') }} {{ wsb_f(event.get_schedule, 'timezone_short') }}
     {% endif %}
 </div>

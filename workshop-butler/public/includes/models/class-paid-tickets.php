@@ -81,6 +81,16 @@ class Paid_Tickets {
 	}
 
 	/**
+	 * Returns the list of paid ticket types
+	 *
+	 * @return Paid_Ticket_Type[]
+	 * @since 3.0.0
+	 */
+	public function get_types() {
+		return $this->types;
+	}
+
+	/**
 	 * Returns only active ticket types.
 	 *
 	 * @return Paid_Ticket_Type[]

@@ -11,6 +11,7 @@
 namespace WorkshopButler;
 
 use WorkshopButler\Config\Event_Calendar_Config;
+use WorkshopButler\Config\Single_Event_Config;
 
 /**
  * Dictionary class which provides an access to entities, loaded from API
@@ -60,8 +61,8 @@ class WSB_Dictionary {
 	/**
 	 * Returns a currently-processed trainer or WP_Error if an API request failed
 	 *
-	 * @since  2.0.0
 	 * @return Trainer|null|\WP_Error
+	 * @since  2.0.0
 	 */
 	public function get_trainer() {
 		if ( ! isset( $GLOBALS['wsb_trainer'] ) ) {
@@ -74,14 +75,15 @@ class WSB_Dictionary {
 		if ( ! is_a( $may_be_trainer, 'WorkshopButler\Trainer' ) ) {
 			return null;
 		}
+
 		return $may_be_trainer;
 	}
 
 	/**
 	 * Returns a currently-processed event or WP_Error if an API request failed
 	 *
-	 * @since  2.0.0
 	 * @return Event|\WP_Error|null
+	 * @since  2.0.0
 	 */
 	public function get_event() {
 		if ( ! isset( $GLOBALS['wsb_event'] ) ) {
@@ -94,6 +96,7 @@ class WSB_Dictionary {
 		if ( ! is_a( $may_be_event, 'WorkshopButler\Event' ) ) {
 			return null;
 		}
+
 		return $may_be_event;
 	}
 
@@ -107,7 +110,33 @@ class WSB_Dictionary {
 		if ( ! isset( $GLOBALS['wsb_schedule_attrs'] ) ) {
 			return null;
 		}
+
 		return $GLOBALS['wsb_schedule_attrs'];
+	}
+
+	/**
+	 * Returns the config for the single event page
+	 *
+	 * @return Single_Event_Config|null
+	 * @since 3.0.0
+	 */
+	public function get_single_event_config() {
+		if ( ! isset( $GLOBALS['wsb_single_event_config'] ) ) {
+			return null;
+		}
+
+		return $GLOBALS['wsb_single_event_config'];
+	}
+
+	/**
+	 * Sets new single page config
+	 *
+	 * @param Single_Event_Config $config New event config.
+	 *
+	 * @since 3.0.0
+	 */
+	public function set_single_event_config( $config ) {
+		$GLOBALS['wsb_single_event_config'] = $config;
 	}
 
 	/**
@@ -125,13 +154,14 @@ class WSB_Dictionary {
 	/**
 	 * Returns the attributes for a currently-processed event or null
 	 *
-	 * @since 2.12.0
 	 * @return array|null
+	 * @since 2.12.0
 	 */
 	public function get_item_attrs() {
 		if ( ! isset( $GLOBALS['wsb_item_attrs'] ) ) {
 			return null;
 		}
+
 		return $GLOBALS['wsb_item_attrs'];
 	}
 
@@ -139,6 +169,7 @@ class WSB_Dictionary {
 	 * Sets new item attributes
 	 *
 	 * @param array $attrs New item attrs.
+	 *
 	 * @since 2.12.0
 	 */
 	public function set_item_attrs( $attrs ) {
@@ -148,39 +179,42 @@ class WSB_Dictionary {
 	/**
 	 * Returns a list of processed events
 	 *
-	 * @since  2.0.0
 	 * @return Event[]|null
+	 * @since  2.0.0
 	 */
 	public function get_events() {
 		if ( ! isset( $GLOBALS['wsb_events'] ) || ! is_array( $GLOBALS['wsb_events'] ) ) {
 			return null;
 		}
+
 		return $GLOBALS['wsb_events'];
 	}
 
 	/**
 	 * Returns a list of processed trainers
 	 *
-	 * @since  2.0.0
 	 * @return Trainer[]|null
+	 * @since  2.0.0
 	 */
 	public function get_trainers() {
 		if ( ! isset( $GLOBALS['wsb_trainers'] ) || ! is_array( $GLOBALS['wsb_trainers'] ) ) {
 			return null;
 		}
+
 		return $GLOBALS['wsb_trainers'];
 	}
 
 	/**
 	 * Returns a currently-processed testimonial
 	 *
-	 * @since  2.0.0
 	 * @return object|null
+	 * @since  2.0.0
 	 */
 	public function get_testimonial() {
 		if ( ! isset( $GLOBALS['wsb_testimonial'] ) || ! is_object( $GLOBALS['wsb_testimonial'] ) ) {
 			return null;
 		}
+
 		return $GLOBALS['wsb_testimonial'];
 	}
 
@@ -210,6 +244,7 @@ class WSB_Dictionary {
 	 * Adds loaded events to the dictionary
 	 *
 	 * @param Event[] $events Retrieved events.
+	 *
 	 * @since 2.0.0
 	 */
 	public function set_events( $events ) {

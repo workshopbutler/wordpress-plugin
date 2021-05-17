@@ -248,7 +248,7 @@ class Event {
 		} else {
 			$this->url = Event_Url::external( 'https://workshopbutler.com/public/event/' . $this->hashed_id );
 		}
-		$this->tickets = $this->get_tickets( $this->free, $json_data->tickets );
+		$this->tickets = $this->get_tickets_from_json( $this->free, $json_data->tickets );
 
 		$this->registration_form = Form::from_json( $json_data->form, $this );
 
@@ -259,7 +259,7 @@ class Event {
 		);
 		$this->cover_image       = Cover_Image::from_json( $json_data->cover_image );
 
-		$this->trainers       = $this->get_trainers( $json_data, $trainer_page_url );
+		$this->trainers       = $this->get_trainers_from_json( $json_data, $trainer_page_url );
 		$this->state          = new Event_State( $this, $json_data->state === 'canceled' );
 		$this->card_payment   = CardPayment::from_json( $json_data->card_payment );
 		$this->paypal_payment = PayPalPayment::from_json( $json_data->paypal_payment );
@@ -277,6 +277,16 @@ class Event {
 	}
 
 	/**
+	 * Returns the list of trainers running the event
+	 *
+	 * @return mixed|Trainer[]
+	 * @since 3.0.0
+	 */
+	public function get_trainers() {
+		return $this->trainers;
+	}
+
+	/**
 	 * Returns the cover image object for the event. The object always exists but the urls
 	 * could be null
 	 *
@@ -285,6 +295,46 @@ class Event {
 	 */
 	public function get_cover_image() {
 		return $this->cover_image;
+	}
+
+	/**
+	 * Returns tickets' object
+	 *
+	 * @return mixed|Free_Ticket_Type|Paid_Tickets|null
+	 * @since 3.0.0
+	 */
+	public function get_tickets() {
+		return $this->tickets;
+	}
+
+	/**
+	 * Returns the description of the event
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_description() {
+		return $this->description;
+	}
+
+	/**
+	 * Returns the state object of the event
+	 *
+	 * @return Event_State
+	 * @since 3.0.0
+	 */
+	public function get_state() {
+		return $this->state;
+	}
+
+	/**
+	 * Returns the url to the registration page of the event
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_registration_url() {
+		return $this->registration_page->get_url();
 	}
 
 	/**
@@ -429,7 +479,7 @@ class Event {
 	 *
 	 * @return null|Paid_Tickets|Free_Ticket_Type
 	 */
-	private function get_tickets( $free, $tickets ) {
+	private function get_tickets_from_json( $free, $tickets ) {
 		if ( $tickets->free || $tickets->paid ) {
 			return $free ?
 				Free_Ticket_Type::from_json( $tickets->free ) :
@@ -447,7 +497,7 @@ class Event {
 	 *
 	 * @return Trainer[]
 	 */
-	private function get_trainers( $json_data, $trainer_page_url ) {
+	private function get_trainers_from_json( $json_data, $trainer_page_url ) {
 		if ( $json_data->trainers ) {
 			$trainers = array();
 			foreach ( $json_data->trainers as $trainer ) {

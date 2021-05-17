@@ -6,6 +6,8 @@
  * @version 3.0.0
  */
 
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
+
 $event = WSB()->dict->get_event();
 is_a( $event, 'WorkshopButler\Event' ) || exit();
 $settings      = WSB()->settings;
