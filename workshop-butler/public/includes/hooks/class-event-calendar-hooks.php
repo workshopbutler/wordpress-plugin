@@ -111,9 +111,9 @@ class Event_Calendar_Hooks {
 	public static function item() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'schedule/table/row.php' );
+			wsb_get_template( 'calendar/table/row.php' );
 		} else {
-			wsb_get_template( 'schedule/tiles/tile.php' );
+			wsb_get_template( 'calendar/tiles/tile.php' );
 		}
 	}
 
@@ -123,9 +123,9 @@ class Event_Calendar_Hooks {
 	public static function title() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'schedule/table/title.php' );
+			wsb_get_template( 'calendar/table/title.php' );
 		} else {
-			wsb_get_template( 'schedule/tiles/title.php' );
+			wsb_get_template( 'calendar/tiles/title.php' );
 		}
 	}
 
@@ -135,9 +135,9 @@ class Event_Calendar_Hooks {
 	public static function trainers() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'schedule/table/trainers.php' );
+			wsb_get_template( 'calendar/table/trainers.php' );
 		} else {
-			wsb_get_template( 'schedule/tiles/trainers.php' );
+			wsb_get_template( 'calendar/tiles/trainers.php' );
 		}
 	}
 
@@ -147,9 +147,9 @@ class Event_Calendar_Hooks {
 	public static function location() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'schedule/table/location.php' );
+			wsb_get_template( 'calendar/table/location.php' );
 		} else {
-			wsb_get_template( 'schedule/tiles/location.php' );
+			wsb_get_template( 'calendar/tiles/location.php' );
 		}
 	}
 
@@ -159,9 +159,9 @@ class Event_Calendar_Hooks {
 	public static function schedule() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'schedule/table/schedule.php' );
+			wsb_get_template( 'calendar/table/schedule.php' );
 		} else {
-			wsb_get_template( 'schedule/tiles/schedule.php' );
+			wsb_get_template( 'calendar/tiles/schedule.php' );
 		}
 	}
 
@@ -171,9 +171,9 @@ class Event_Calendar_Hooks {
 	public static function time() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'schedule/table/time.php' );
+			wsb_get_template( 'calendar/table/time.php' );
 		} else {
-			wsb_get_template( 'schedule/tiles/time.php' );
+			wsb_get_template( 'calendar/tiles/time.php' );
 		}
 	}
 
@@ -183,9 +183,9 @@ class Event_Calendar_Hooks {
 	public static function date() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'schedule/table/date.php' );
+			wsb_get_template( 'calendar/table/date.php' );
 		} else {
-			wsb_get_template( 'schedule/tiles/date.php' );
+			wsb_get_template( 'calendar/tiles/date.php' );
 		}
 	}
 
@@ -195,7 +195,7 @@ class Event_Calendar_Hooks {
 	public static function image() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( ! $config->is_table_layout() ) {
-			wsb_get_template( 'schedule/tiles/image.php' );
+			wsb_get_template( 'calendar/tiles/image.php' );
 		}
 	}
 
@@ -205,9 +205,9 @@ class Event_Calendar_Hooks {
 	public static function language() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'schedule/table/language.php' );
+			wsb_get_template( 'calendar/table/language.php' );
 		} else {
-			wsb_get_template( 'schedule/tiles/language.php' );
+			wsb_get_template( 'calendar/tiles/language.php' );
 		}
 	}
 
@@ -217,9 +217,9 @@ class Event_Calendar_Hooks {
 	public static function register() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'schedule/table/register.php' );
+			wsb_get_template( 'calendar/table/register.php' );
 		} else {
-			wsb_get_template( 'schedule/tiles/register.php' );
+			wsb_get_template( 'calendar/tiles/register.php' );
 		}
 	}
 
@@ -232,9 +232,9 @@ class Event_Calendar_Hooks {
 		$args   = array( 'mobile' => $row_level_tag );
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'schedule/table/tag.php', $args );
+			wsb_get_template( 'calendar/table/tag.php', $args );
 		} else {
-			wsb_get_template( 'schedule/tiles/tag.php' );
+			wsb_get_template( 'calendar/tiles/tag.php' );
 		}
 	}
 }
