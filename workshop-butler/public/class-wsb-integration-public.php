@@ -307,7 +307,7 @@ class WSB_Integration_Public {
 		add_shortcode( 'wsb_trainer_list_badges', array( 'WorkshopButler\WSB_Trainer_List_Page', 'tag' ) );
 		add_shortcode( 'wsb_trainer_list_rating', array( 'WorkshopButler\WSB_Trainer_List_Page', 'tag' ) );
 
-		add_shortcode( 'wsb_event_title', array( ' WorkshopButler\WSB_Event', 'tag' ) );
+		add_shortcode( 'wsb_event_title', array( 'WorkshopButler\WSB_Event', 'tag' ) );
 		add_shortcode( 'wsb_event_registration_button', array( 'WorkshopButler\WSB_Event', 'tag' ) );
 		add_shortcode( 'wsb_event_schedule', array( 'WorkshopButler\WSB_Event', 'tag' ) );
 		add_shortcode( 'wsb_event_image', array( 'WorkshopButler\WSB_Event', 'tag' ) );
