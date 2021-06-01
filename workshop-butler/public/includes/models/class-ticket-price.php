@@ -71,4 +71,24 @@ class Ticket_Price {
 		$this->currency = $currency;
 		$this->sign     = $sign;
 	}
+
+	/**
+	 * Returns the price's amount
+	 *
+	 * @since 3.0.0
+	 * @return float
+	 */
+	public function get_amount() {
+		return $this->amount;
+	}
+
+	/**
+	 * Returns the currency of the price
+	 *
+	 * @since 3.0.0
+	 * @return string
+	 */
+	public function get_currency() {
+		return $this->currency;
+	}
 }

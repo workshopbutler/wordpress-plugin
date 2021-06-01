@@ -177,4 +177,23 @@ class Paid_Ticket_Type extends Ticket_Type {
 		return false;
 	}
 
+	/**
+	 * Returns the id
+	 *
+	 * @since 3.0.0
+	 * @return string
+	 */
+	public function get_id() {
+		return $this->id;
+	}
+
+	/**
+	 * Returns the price of the ticket
+	 *
+	 * @since 3.0.0
+	 * @return Ticket_Price
+	 */
+	public function get_price() {
+		return $this->price;
+	}
 }

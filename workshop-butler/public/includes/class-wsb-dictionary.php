@@ -241,6 +241,82 @@ class WSB_Dictionary {
 	}
 
 	/**
+	 * Adds a section to the dictionary
+	 *
+	 * @param Section $section Section of the registration form.
+	 *
+	 * @since 3.0.0
+	 */
+	public function set_form_section( $section ) {
+		$GLOBALS['wsb_form_section'] = $section;
+	}
+
+	/**
+	 * Cleans a section from the dictionary
+	 *
+	 * @since 3.0.0
+	 */
+	public function clear_form_section() {
+		unset( $GLOBALS['wsb_form_section'] );
+	}
+
+	/**
+	 * Returns a currently-processed section
+	 *
+	 * @return Section|null
+	 * @since  3.0.0
+	 */
+	public function get_form_section() {
+		if ( ! isset( $GLOBALS['wsb_form_section'] ) ) {
+			return null;
+		}
+		$may_be_section = $GLOBALS['wsb_form_section'];
+		if ( ! is_a( $may_be_section, 'WorkshopButler\Section' ) ) {
+			return null;
+		}
+
+		return $may_be_section;
+	}
+
+	/**
+	 * Adds a field to the dictionary
+	 *
+	 * @param Field $field Field of the registration form.
+	 *
+	 * @since 3.0.0
+	 */
+	public function set_form_field( $field ) {
+		$GLOBALS['wsb_form_field'] = $field;
+	}
+
+	/**
+	 * Cleans a field from the dictionary
+	 *
+	 * @since 3.0.0
+	 */
+	public function clear_form_field() {
+		unset( $GLOBALS['wsb_form_field'] );
+	}
+
+	/**
+	 * Returns a currently-processed field
+	 *
+	 * @return Field|Select|null
+	 * @since  3.0.0
+	 */
+	public function get_form_field() {
+		if ( ! isset( $GLOBALS['wsb_form_field'] ) ) {
+			return null;
+		}
+		$may_be_field = $GLOBALS['wsb_form_field'];
+		if ( ! is_a( $may_be_field, 'WorkshopButler\Field' ) ) {
+			return null;
+		}
+
+		return $may_be_field;
+	}
+
+	/**
 	 * Adds loaded events to the dictionary
 	 *
 	 * @param Event[] $events Retrieved events.

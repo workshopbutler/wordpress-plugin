@@ -71,4 +71,23 @@ class Form {
 		}
 	}
 
+	/**
+	 * Returns the fill-in instructions for the form
+	 *
+	 * @since 3.0.0
+	 * @return string|null
+	 */
+	public function get_instructions() {
+		return $this->instructions;
+	}
+
+	/**
+	 * Returns the sections which the form consists of
+	 *
+	 * @since 3.0.0
+	 * @return Section[]
+	 */
+	public function get_sections() {
+		return $this->sections;
+	}
 }

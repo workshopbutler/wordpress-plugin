@@ -10,6 +10,7 @@ namespace WorkshopButler\Hooks;
 
 require_once WSB_ABSPATH . '/public/includes/hooks/class-event-calendar-hooks.php';
 require_once WSB_ABSPATH . '/public/includes/hooks/class-single-event-hooks.php';
+require_once WSB_ABSPATH . '/public/includes/hooks/class-registration-form-hooks.php';
 
 /**
  * Class All_Hooks
@@ -25,5 +26,6 @@ class All_Hooks {
 	public static function init() {
 		Event_Calendar_Hooks::init();
 		Single_Event_Hooks::init();
+		Registration_Form_Hooks::init();
 	}
 }

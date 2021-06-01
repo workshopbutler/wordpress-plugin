@@ -76,6 +76,26 @@ class Section {
 	}
 
 	/**
+	 * Returns the id of the section
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_id() {
+		return $this->id;
+	}
+
+	/**
+	 * Returns the list of fields
+	 *
+	 * @since 3.0.0
+	 * @return Field[]
+	 */
+	public function get_fields() {
+		return $this->fields;
+	}
+
+	/**
 	 * Creates any field, including tickets
 	 *
 	 * @param object $field_data JSON field data.

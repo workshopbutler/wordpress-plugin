@@ -455,6 +455,16 @@ class Event {
 	}
 
 	/**
+	 * Returns the registration form for the event
+	 *
+	 * @since 3.0.0
+	 * @return Form|null
+	 */
+	public function get_registration_form() {
+		return $this->registration_form;
+	}
+
+	/**
 	 * Returns true if tickets are available
 	 *
 	 * @return bool
