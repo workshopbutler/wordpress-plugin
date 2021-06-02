@@ -1,6 +1,6 @@
 {
     "name": "workshopbutler/wordpress-plugin",
-    "description": " This plugin integrates Workshop Butler Events, Trainers and Testimonials to your WordPress website.",
+    "description": "This plugin integrates Workshop Butler Events, Trainers and Testimonials to your WordPress website.",
     "homepage": "https://workshopbutler.com/",
     "type": "wordpress-plugin",
     "license": "GPL-2.0+",

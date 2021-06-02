@@ -11,6 +11,7 @@
 namespace WorkshopButler;
 
 use WorkshopButler\Config\Event_Calendar_Config;
+use WorkshopButler\Config\Next_Event_Config;
 use WorkshopButler\Config\Single_Event_Config;
 
 /**
@@ -138,6 +139,32 @@ class WSB_Dictionary {
 	public function set_single_event_config( $config ) {
 		$GLOBALS['wsb_single_event_config'] = $config;
 	}
+
+	/**
+	 * Returns the config for the next event widget
+	 *
+	 * @return Next_Event_Config|null
+	 * @since 3.0.0
+	 */
+	public function get_next_event_config() {
+		if ( ! isset( $GLOBALS['wsb_next_event_config'] ) ) {
+			return null;
+		}
+
+		return $GLOBALS['wsb_next_event_config'];
+	}
+
+	/**
+	 * Sets new next event config
+	 *
+	 * @param Next_Event_Config $config Next event config.
+	 *
+	 * @since 3.0.0
+	 */
+	public function set_next_event_config( $config ) {
+		$GLOBALS['wsb_next_event_config'] = $config;
+	}
+
 
 	/**
 	 * Sets new schedule attributes

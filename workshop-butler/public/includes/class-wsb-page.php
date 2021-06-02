@@ -125,7 +125,7 @@ abstract class WSB_Page {
 	 *
 	 * @return array
 	 */
-	private static function convert_booleans( $attrs ) {
+	protected static function convert_booleans( $attrs ) {
 		foreach ( $attrs as $key => $value ) {
 			switch ( $value ) {
 				case 'true':

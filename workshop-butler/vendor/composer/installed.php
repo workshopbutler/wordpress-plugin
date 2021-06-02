@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'a058c4a0ff2f9256e6feef53f64783df1277eeca',
+    'reference' => '4ebed3f164802ea92529e17e4b3401b403e596ca',
     'name' => 'workshopbutler/wordpress-plugin',
   ),
   'versions' => 
@@ -318,7 +318,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'a058c4a0ff2f9256e6feef53f64783df1277eeca',
+      'reference' => '4ebed3f164802ea92529e17e4b3401b403e596ca',
     ),
     'wp-coding-standards/wpcs' => 
     array (

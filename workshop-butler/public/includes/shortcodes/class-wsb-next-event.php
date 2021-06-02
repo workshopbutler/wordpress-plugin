@@ -10,7 +10,12 @@
 
 namespace WorkshopButler;
 
+use WorkshopButler\Config\Event_Calendar_Config;
+use WorkshopButler\Config\Next_Event_Config;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
+require_once WSB_ABSPATH . 'public/includes/config/class-next-event-config.php';
+require_once WSB_ABSPATH . 'public/includes/config/class-event-calendar-config.php';
 
 /**
  * Handles the execution of the 'Next event' shortcode
@@ -70,8 +75,12 @@ class WSB_Next_Event extends WSB_Page {
 	private function get_attrs( $attrs ) {
 
 		$defaults = array(
-			'categories'  => null,
-			'event_types' => null,
+			'categories'     => null,
+			'event_types'    => null,
+			'registration'   => false,
+			'target'         => '_self',
+			'title'          => null,
+			'no_event_title' => null,
 		);
 
 		return shortcode_atts( $defaults, $attrs );
@@ -92,7 +101,8 @@ class WSB_Next_Event extends WSB_Page {
 		$attrs = $this->get_attrs( $attrs );
 
 		$method = 'events';
-		$query  = Event_List::prepare_query( $attrs, 1 );
+		$config = new Event_Calendar_Config( $attrs );
+		$query  = Event_List::prepare_query( $config, 1 );
 
 		$response = $this->requests->get( $method, $query );
 		if ( $response->is_error() ) {
@@ -107,22 +117,61 @@ class WSB_Next_Event extends WSB_Page {
 			$event = $events[0];
 		}
 
-		$template_data = array(
-			'event' => $event,
-			'theme' => $this->get_theme(),
-		);
+		$this->dict->set_event( $event );
+		$processed_attrs = is_array( $attrs ) ? self::convert_booleans( $attrs ) : array();
 
+		$with_default_values = shortcode_atts( $this->get_default_attrs( 'button' ), $processed_attrs );
+		$this->dict->set_next_event_config( new Next_Event_Config( $with_default_values ) );
+
+		if ( false ) {
+			$content = $this->render_old_template( $event, $content );
+		} else {
+			$content = $this->render_new_template();
+		}
+		$this->dict->clear_event();
+
+		return $content;
+	}
+
+	/**
+	 * Render the Next Event element using the new template
+	 *
+	 * @return false|string
+	 * @since 3.0.0
+	 */
+	protected function render_new_template() {
+		$content = 'templates/next-event.php';
+		$theme   = $this->get_theme();
+		ob_start();
+		include WSB()->plugin_path() . '/' . $content;
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Renders the old Next Event element
+	 *
+	 * @param Event|null  $event Current event.
+	 * @param string|null $content May be content of the shortcode.
+	 *
+	 * @return string
+	 * @deprecated
+	 * @since 3.0.0
+	 */
+	private function render_old_template( $event, $content ): string {
 		if ( $content ) {
 			$template = $content;
 		} else {
 			$template = $this->get_template( 'next-event/element', $content );
 		}
-		$this->dict->set_event( $event );
-		$processed_template = do_shortcode( $template );
-		$content            = $this->compile_string( $processed_template, $template_data );
-		$this->dict->clear_event();
+		$template_data = array(
+			'event' => $event,
+			'theme' => $this->get_theme(),
+		);
 
-		return $content;
+		$processed_template = do_shortcode( $template );
+
+		return $this->compile_string( $processed_template, $template_data );
 	}
 
 
