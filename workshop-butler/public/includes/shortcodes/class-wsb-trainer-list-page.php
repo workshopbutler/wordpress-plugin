@@ -109,6 +109,41 @@ class WSB_Trainer_List_Page extends WSB_Page {
 			$trainers  = $this->filter_by_badges( $trainers, $badge_ids );
 		}
 
+		$this->dict->set_trainers( $trainers );
+		if ( false ) {
+			$content = $this->render_old_template( $trainers );
+		} else {
+			$content = $this->render_new_template();
+		}
+		$this->dict->clear_trainers();
+
+		return $this->add_custom_styles( $content );
+	}
+
+	/**
+	 * Render the list of trainers using new templates
+	 *
+	 * @return false|string
+	 * @since 3.0.0
+	 */
+	protected function render_new_template() {
+		$content = 'templates/trainer-list.php';
+		$theme   = $this->get_theme();
+		ob_start();
+		include WSB()->plugin_path() . '/' . $content;
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Renders the old list of trainers
+	 *
+	 * @param  Trainer[] $trainers List of trainers.
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	private function render_old_template( $trainers ): string {
 		$template_data = array(
 			'trainers' => $trainers,
 			'theme'    => $this->get_theme(),
@@ -117,13 +152,10 @@ class WSB_Trainer_List_Page extends WSB_Page {
 		$custom_template = $this->settings->get( WSB_Options::TRAINER_LIST_TEMPLATE );
 		$template        = $this->get_template( 'trainer-list-page', $custom_template );
 
-		$GLOBALS['wsb_trainers'] = $trainers;
 		$processed_template      = do_shortcode( $template );
-		$content                 = $this->compile_string( $processed_template, $template_data );
-		unset( $GLOBALS['wsb_trainers'] );
-
-		return $this->add_custom_styles( $content );
+		return $this->compile_string( $processed_template, $template_data );
 	}
+
 
 	/**
 	 * Returns list of trainers who contains at least one of given badges.

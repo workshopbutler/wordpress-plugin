@@ -12,6 +12,7 @@ require_once WSB_ABSPATH . '/public/includes/hooks/class-event-calendar-hooks.ph
 require_once WSB_ABSPATH . '/public/includes/hooks/class-single-event-hooks.php';
 require_once WSB_ABSPATH . '/public/includes/hooks/class-registration-form-hooks.php';
 require_once WSB_ABSPATH . '/public/includes/hooks/class-next-event-hooks.php';
+require_once WSB_ABSPATH . '/public/includes/hooks/class-trainer-list-hooks.php';
 require_once WSB_ABSPATH . '/public/includes/hooks/class-single-trainer-hooks.php';
 
 /**
@@ -31,5 +32,6 @@ class All_Hooks {
 		Registration_Form_Hooks::init();
 		Next_Event_Hooks::init();
 		Single_Trainer_Hooks::init();
+		Trainer_List_Hooks::init();
 	}
 }
