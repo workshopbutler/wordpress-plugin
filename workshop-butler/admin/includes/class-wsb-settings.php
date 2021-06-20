@@ -104,17 +104,19 @@ class WSB_Settings {
 				'fields'           => $this->get_trainer_settings(),
 			)
 		);
-		Redux::setSection(
-			$this->opt_name,
-			array(
-				'title'            => __( 'Pages', 'wsbintegration' ),
-				'id'               => 'pages',
-				'customizer_width' => '500px',
-				'icon'             => 'el el-edit',
-			)
-		);
+		if (WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING )) {
+			Redux::setSection(
+				$this->opt_name,
+				array(
+					'title'            => __( 'Old Templates (deprecated)', 'wsbintegration' ),
+					'id'               => 'pages',
+					'customizer_width' => '500px',
+					'icon'             => 'el el-edit',
+				)
+			);
 
-		$this->get_pages_settings();
+			$this->get_pages_settings();
+		}
 
 		Redux::setSection(
 			$this->opt_name,
@@ -279,9 +281,6 @@ class WSB_Settings {
 					'alfred'  => 'Alfred',
 					'britton' => 'Britton',
 					'custom'  => 'Custom',
-					'dacota'  => 'Dacota',
-					'hayes'   => 'Hayes',
-					'gatsby'  => 'Gatbsy',
 				),
 				'default' => 'alfred',
 			),
@@ -305,6 +304,23 @@ class WSB_Settings {
 				'title'   => 'Report failed requests',
 				'desc'    => 'When a request to Workshop Butler API fails, the plugin sends this information to our logging servers helping us to find the source of the problem faster. We do not collect any personal information, only detailed error reports.',
 				'default' => true,
+			),
+			WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING )?array(
+				'id'      => WSB_Options::USE_OLD_TEMPLATES,
+				'type'    => 'switch',
+				'title'   => 'Use old templates',
+				'desc'    => 'Allows manually switching to a new template system with a modern design',
+				'default' => true,
+			):array(),
+			// !FIXME: hide next section too
+			array(
+				'id'      => WSB_Options::ALLOW_TEMPLATE_SWITCHING,
+				'type'    => 'switch',
+				'title'   => 'Completely disable template switching',
+				'desc'    => 'Once you disable template switching, the option will no longer available',
+				'default' => true,
+				'on' => 'Enable',
+				'off' => 'Disable',
 			),
 		);
 	}
@@ -386,8 +402,8 @@ class WSB_Settings {
 				'id'   => 'schedule_info_id',
 				'type' => 'info',
 				'desc' => '<h3>Filters</h3> In some rare cases, you may need to change the name of query string parameters for schedule filter. For example,
-					a default parameter for <b>Location</b> filter is <code>location</code> and the url with an applied filter would look like 
-					<code>https://example.com/schedule?location=DE</code>. If you change <code>location</code> to <code>loc</code>, then 
+					a default parameter for <b>Location</b> filter is <code>location</code> and the url with an applied filter would look like
+					<code>https://example.com/schedule?location=DE</code>. If you change <code>location</code> to <code>loc</code>, then
 					the url with an applied filter becomes <code>https://example.com/schedule?loc=DE</code>.<br><br>
 					We recommend changing these values only if the default ones do not work due to other plugins.',
 			),

@@ -99,7 +99,7 @@ class WSB_Trainer_Page extends WSB_Page {
 	 */
 	private function render_profile( $trainer ) {
 		$this->dict->set_trainer( $trainer );
-		if ( false ) {
+		if ( $this->settings->use_old_templates() ) {
 			$content = $this->render_old_template( $trainer );
 		} else {
 			$content = $this->render_new_template();

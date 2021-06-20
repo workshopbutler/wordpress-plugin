@@ -42,6 +42,22 @@ class WSB_Integration_Public {
 	private $version;
 
 	/**
+	 * Plugin dictionary
+	 *
+	 * @var		WSB_Dictionary $dict
+	 * @since	3.0.0
+	 */
+	public $dict;
+
+	/**
+	 * Plugin settings
+	 *
+	 * @since   3.0.0
+	 * @var     WSB_Options $settings Plugin settings
+	 */
+	public $settings;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @param string $plugin_name The name of the plugin.
@@ -75,6 +91,21 @@ class WSB_Integration_Public {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-event.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-next-event.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-ajax.php';
+
+		/**
+		 * The class responsible for providing an access to entities, loaded from API
+		 */
+		require_once WSB_ABSPATH . 'public/includes/class-wsb-dictionary.php';
+
+		$this->dict = new WSB_Dictionary();
+
+		/**
+		 * The class responsible for all plugin-related options
+		 * core plugin.
+		 */
+		require_once WSB_ABSPATH . 'includes/class-wsb-options.php';
+
+		$this->settings = new WSB_Options();
 	}
 
 	/**
@@ -83,9 +114,16 @@ class WSB_Integration_Public {
 	 * @since    2.0.0
 	 */
 	public function enqueue_styles() {
-		wp_register_style( 'wsb-fontawesome-styles', plugin_dir_url( __FILE__ ) . 'css/fontawesome-all.min.css', array(), $this->version );
-		wp_register_style( 'wsb-themes', plugin_dir_url( __FILE__ ) . 'css/styles.1.12.1.min.css', array(), $this->version );
-		wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb.wordpress.css', array(), $this->version );
+		if( $this->settings->get( WSB_Options::USE_OLD_TEMPLATES )) {
+			wp_register_style( 'wsb-fontawesome-styles', plugin_dir_url( __FILE__ ) . 'css/fontawesome-all.min.css' );
+			wp_register_style( 'wsb-themes', plugin_dir_url( __FILE__ ) . 'css/styles.1.12.1.min.css' );
+			wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb.wordpress.css' );
+		} else {
+			// !FIXME: set new styles here
+			wp_register_style( 'wsb-fontawesome-styles', plugin_dir_url( __FILE__ ) . 'css/fontawesome-all.min.css' );
+			wp_register_style( 'wsb-themes', plugin_dir_url( __FILE__ ) . 'css/styles.1.12.1.min.css' );
+			wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb.wordpress.css' );
+		}
 
 		wp_register_style( 'wsb-font-arapey', 'https://fonts.googleapis.com/css?family=Arapey' );
 		wp_register_style( 'wsb-font-montserrat', 'https://fonts.googleapis.com/css?family=Montserrat' );
@@ -147,7 +185,7 @@ class WSB_Integration_Public {
 
 		wp_register_script( 'stripe', 'https://js.stripe.com/v3/' );
 
-		$ga_key = WSB_Options::get_option( WSB_Options::GA_API_KEY );
+		$ga_key = $this->settings->get( WSB_Options::GA_API_KEY );
 		wp_localize_script(
 			'wsb-registration-page',
 			'wsb_ga',
@@ -165,11 +203,10 @@ class WSB_Integration_Public {
 	 * @since 2.0.0
 	 */
 	public function set_title( $title, $id = null ) {
-		$options      = new WSB_Options();
 		$reserved_ids = array(
-			intval( $options->get( WSB_Options::EVENT_PAGE ) ),
-			intval( $options->get( WSB_Options::REGISTRATION_PAGE ) ),
-			intval( $options->get( WSB_Options::TRAINER_PROFILE_PAGE ) ),
+			intval( $this->settings->get( WSB_Options::EVENT_PAGE ) ),
+			intval( $this->settings->get( WSB_Options::REGISTRATION_PAGE ) ),
+			intval( $this->settings->get( WSB_Options::TRAINER_PROFILE_PAGE ) ),
 		);
 		if ( in_array( $id, $reserved_ids, true ) ) {
 			return $this->get_title( $title );
@@ -204,12 +241,10 @@ class WSB_Integration_Public {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-requests.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/models/class-event.php';
 
-		$options = new WSB_Options();
-
 		$post_url = get_permalink( $post );
-		if ( $post_url === $options->get_event_page_url() || $post_url === $options->get_registration_page_url() ) {
+		if ( $post_url === $this->settings->get_event_page_url() || $post_url === $this->settings->get_registration_page_url() ) {
 			return $this->get_event_title( $title );
-		} elseif ( $post_url === $options->get_trainer_page_url() ) {
+		} elseif ( $post_url === $this->settings->get_trainer_page_url() ) {
 			return $this->get_trainer_name( $title );
 		} else {
 			return $title;
@@ -224,8 +259,7 @@ class WSB_Integration_Public {
 	 * @return string
 	 */
 	protected function get_trainer_name( $default_title ) {
-		$dict           = new WSB_Dictionary();
-		$may_be_trainer = $dict->get_trainer();
+		$may_be_trainer = $this->dict->get_trainer();
 		if ( is_a( $may_be_trainer, 'WorkshopButler\Trainer' ) ) {
 			return $may_be_trainer->get_full_name();
 		} elseif ( is_wp_error( $may_be_trainer ) ) {
@@ -251,8 +285,7 @@ class WSB_Integration_Public {
 	 * @return string
 	 */
 	protected function get_event_title( $default_title ) {
-		$dict         = new WSB_Dictionary();
-		$may_be_event = $dict->get_event();
+		$may_be_event = $this->dict->get_event();
 		if ( is_a( $may_be_event, 'WorkshopButler\Event' ) ) {
 			return $may_be_event->title;
 		} elseif ( is_wp_error( $may_be_event ) ) {
@@ -366,12 +399,11 @@ class WSB_Integration_Public {
 	 * @return bool
 	 */
 	protected function is_reserved_page() {
-		$options = new WSB_Options();
 		global $post;
 		$reserved_ids = array(
-			intval( $options->get( WSB_Options::EVENT_PAGE ) ),
-			intval( $options->get( WSB_Options::REGISTRATION_PAGE ) ),
-			intval( $options->get( WSB_Options::TRAINER_PROFILE_PAGE ) ),
+			intval( $this->settings->get( WSB_Options::EVENT_PAGE ) ),
+			intval( $this->settings->get( WSB_Options::REGISTRATION_PAGE ) ),
+			intval( $this->settings->get( WSB_Options::TRAINER_PROFILE_PAGE ) ),
 		);
 
 		return in_array( $post->ID, $reserved_ids, true );
@@ -387,9 +419,9 @@ class WSB_Integration_Public {
 			return;
 		}
 
-		$dict           = new WSB_Dictionary();
-		$may_be_event   = $dict->get_event();
-		$may_be_trainer = $dict->get_trainer();
+
+		$may_be_event   = $this->dict->get_event();
+		$may_be_trainer = $this->dict->get_trainer();
 		if ( is_a( $may_be_event, 'WorkshopButler\Event' ) ) {
 			$image_container->add_image_by_url( $may_be_event->cover_image->url );
 		} elseif ( is_a( $may_be_trainer, 'WorkshopButler\Trainer' ) ) {

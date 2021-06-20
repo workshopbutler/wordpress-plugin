@@ -210,7 +210,7 @@ class WSB_Registration_Page extends WSB_Page {
 	private function render_page( $event ) {
 		$this->dict->set_event( $event );
 		$this->dict->set_single_event_config( new Single_Event_Config() );
-		if ( false ) {
+		if ( $this->settings->use_old_templates() ) {
 			$content = $this->render_old_template( $event );
 		} else {
 			$content = $this->render_new_template();

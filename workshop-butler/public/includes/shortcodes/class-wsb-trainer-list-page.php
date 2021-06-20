@@ -110,7 +110,7 @@ class WSB_Trainer_List_Page extends WSB_Page {
 		}
 
 		$this->dict->set_trainers( $trainers );
-		if ( false ) {
+		if ( $this->settings->use_old_templates() ) {
 			$content = $this->render_old_template( $trainers );
 		} else {
 			$content = $this->render_new_template();

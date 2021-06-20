@@ -142,10 +142,10 @@ class WSB_Schedule_Page extends WSB_Page {
 		);
 
 		$this->dict->set_events( $events );
-		if ( true ) {
-			$content = $this->render_new_template( $template_data, $config );
-		} else {
+		if ( $this->settings->use_old_templates() ) {
 			$content = $this->render_old_template( $content, $template_data, $config );
+		} else {
+			$content = $this->render_new_template( $template_data, $config );
 		}
 		$this->dict->clear_events();
 

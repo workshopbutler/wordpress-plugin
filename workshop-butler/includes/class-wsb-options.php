@@ -49,6 +49,8 @@ class WSB_Options {
 	const CUSTOM_THEME  = 'custom-theme';
 	const GA_API_KEY    = 'google-analytics-key';
 	const REPORT_ERRORS = 'report-errors';
+	const USE_OLD_TEMPLATES = 'use-old-templates';
+	const ALLOW_TEMPLATE_SWITCHING = 'allow-template-switching';
 
 	const CUSTOM_EVENT_DETAILS    = 'custom-event-page';
 	const SHOW_EXPIRED_TICKETS    = 'show-expired-tickets';
@@ -250,5 +252,15 @@ class WSB_Options {
 	 */
 	public function is_highlight_featured() {
 		return $this->get( self::FEATURED_EVENTS, false );
+	}
+
+	/**
+	 * Return true in case of old template rendering
+	 *
+	 * @return bool
+	 * @since 3.0.0
+	 */
+	public function use_old_templates() {
+		return $this->get( self::ALLOW_TEMPLATE_SWITCHING, false ) && $this->get( self::USE_OLD_TEMPLATES, false );
 	}
 }

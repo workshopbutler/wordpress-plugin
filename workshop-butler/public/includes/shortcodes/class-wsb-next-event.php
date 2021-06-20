@@ -123,7 +123,7 @@ class WSB_Next_Event extends WSB_Page {
 		$with_default_values = shortcode_atts( $this->get_default_attrs( 'button' ), $processed_attrs );
 		$this->dict->set_next_event_config( new Next_Event_Config( $with_default_values ) );
 
-		if ( false ) {
+		if ( $this->settings->use_old_templates() ) {
 			$content = $this->render_old_template( $event, $content );
 		} else {
 			$content = $this->render_new_template();

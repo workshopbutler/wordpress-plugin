@@ -38,7 +38,6 @@ class WSB_Integration_Upgrade {
 		if ( empty( $new_key ) ) {
 			$self->transfer_settings();
 		}
-		$self->update_templates();
 		$self->update_settings();
 		$self->save_internal_settings( $self->get_version() );
 
@@ -74,30 +73,19 @@ class WSB_Integration_Upgrade {
 		if ( $this->get_version() && $this->get_version() < '2.11.0' ) {
 			WSB_Options::set_option( WSB_Options::REPORT_ERRORS, true );
 		}
-	}
 
-	/**
-	 * Updates the classes that changed in version 2.7.1 for all related pages
-	 */
-	protected function update_templates() {
-		if ( $this->get_version() && $this->get_version() < '2.7.1' ) {
-			$this->update_classes_2_7_1( WSB_Options::EVENT_TEMPLATE );
-			$this->update_classes_2_7_1( WSB_Options::TRAINER_TEMPLATE );
-			$this->update_classes_2_7_1( WSB_Options::REGISTRATION_TEMPLATE );
+		if ( $this->get_version() && $this->get_version() < '3.0.0' ) {
+			// use old templates
+			WSB_Options::set_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING, true );
+			WSB_Options::set_option( WSB_Options::USE_OLD_TEMPLATES, true );
+
+			// set deprecated themes as custom
+			$theme = WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING);
+			if (in_array($theme, array('dacota', 'gatsby', 'hayes'))) {
+				WSB_Options::set_option( WSB_Options::THEME, 'custom' );
+				WSB_Options::set_option( WSB_Options::CUSTOM_THEME, $theme );
+			}
 		}
-	}
-
-	/**
-	 * Updates the classes that changed in version 2.7.0 for one template
-	 *
-	 * @param string $option Name of the template.
-	 */
-	protected function update_classes_2_7_1( $option ) {
-		$template = WSB_Options::get_option( $option );
-		$template = str_replace( 'wsb-left-col', 'wsb-description', $template );
-		$template = preg_replace( '/wsb-right-col/', 'wsb-toolbar wsb-first', $template, 1 );
-		$template = preg_replace( '/wsb-right-col/', 'wsb-toolbar wsb-second', $template, 1 );
-		WSB_Options::set_option( $option, $template );
 	}
 
 	/**
