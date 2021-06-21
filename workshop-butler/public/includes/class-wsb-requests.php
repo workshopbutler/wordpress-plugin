@@ -194,6 +194,7 @@ class WSB_Requests {
 		array_push( $parameters, WSB_INTEGRATION_VERSION );
 		array_push( $parameters, $this->settings->get( WSB_Options::THEME, 'alfred' ) );
 		array_push( $parameters, WSB_Options::get_template_version() );
+		array_push( $parameters, $this->settings->use_old_templates() ? 't' : 'f' );
 
 		return implode( ';', $parameters );
 	}
