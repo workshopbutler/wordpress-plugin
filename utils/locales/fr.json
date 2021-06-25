@@ -275,17 +275,17 @@
     "AX": "Åland Islands"
   },
   "language": {
-    "AR": "arabe",
-    "BG": "bulgare",
+    "AR": "Arabe",
+    "BG": "Bulgare",
     "CS": "Tchèque",
-    "DA": "danois",
-    "DE": "allemand",
+    "DA": "Danois",
+    "DE": "Allemand",
     "EN": "Anglais",
     "ES": "Espagnol",
     "FI": "Finlandais",
     "FR": "French",
     "HE": "Hébreu",
-    "HR": "croate",
+    "HR": "Croate",
     "HU": "Hongrois",
     "IT": "Italien",
     "JA": "Japonais",
@@ -304,7 +304,10 @@
     "SV": "Suédois",
     "TR": "Turc",
     "VI": "Vietnamien",
-    "ZH": "chinois"
+    "ZH": "Chinois",
+    "EL": "Grecque",
+    "ID": "Indonésien",
+    "MS": "Malais"
   },
   "rating": {
     "one": "Plus de 1",
@@ -321,10 +324,11 @@
     "noEvents": "Aucun événement n'a été trouvé",
     "when": "Quand",
     "where": "Où",
+    "language": "Langue",
     "what": "Quelle",
     "who": "Qui",
     "event": {
-      "register": "Registre",
+      "register": "S'Inscrire",
       "soldOut": "Épuisé",
       "free": "Gratuit"
     }
@@ -333,7 +337,7 @@
     "noTrainers": "Aucun formateur n'a été trouvé"
   },
   "event": {
-    "register": "Inscrire maintenant",
+    "register": "S'Inscrire",
     "soldOut": "Épuisé",
     "free": "Gratuit",
     "featured": "En vedette",
@@ -342,6 +346,8 @@
       "loc": "Emplacement",
       "oneLang": "L'événement est en langue $t(language.{{lang}})",
       "twoLangs": "L'événement est en langue  $t(language.{{first}}) et en $t(language.{{second}})",
+      "oneLangShort": "En $t(language.{{lang}})",
+      "twoLangsShort": "En $t(language.{{first}}) and $t(language.{{second}})",
       "materials": ", Tous les matériaux et documents sont en langue $t(language.{{lang}})",
       "now": "Heure actuelle en {{zone}}",
       "tickets": "Billets"
@@ -366,7 +372,7 @@
     "share": "Partager l'événement",
     "form": {
       "title": "Inscrivez-vous pour l'événement",
-      "button": "Registre"
+      "button": "S'Inscrire"
     }
   },
   "trainer": {
@@ -471,7 +477,26 @@
     "noEvents": "Pas d'événements"
   },
   "nextEvent": {
-    "register": "Registre",
+    "register": "S'Inscrire",
     "notAvailable": "Aucun événement prévu"
+  },
+  "promo": {
+    "register": "S'inscrire maintenant",
+    "info": {
+      "loc": "Emplacement",
+      "date": "Date",
+      "trainer": "Formateur",
+      "trainer_plural": "Formateurs"
+    },
+    "header": {
+      "prefixIn": "Commence en",
+      "prefixOn": "Commence le",
+      "tomorrow": "Commence demain"
+    },
+    "timer": {
+      "days": "journées",
+      "hours": "heures",
+      "minutes": "minutes"
+    }
   }
 }

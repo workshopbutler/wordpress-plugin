@@ -50,7 +50,10 @@ function get_lang_code( $lang ) {
 		'Swedish'    => 'SV',
 		'Turkish'    => 'TR',
 		'Vietnamese' => 'VI',
-		'Chinese'    => 'ZH'
+		'Chinese'    => 'ZH',
+		'Greek'      => 'EL',
+		'Indonesian' => 'ID',
+		'Malay'      => 'MS'
 	);
 	$code  = $langs[ $lang ];
 	return $code ? $code : $lang;
