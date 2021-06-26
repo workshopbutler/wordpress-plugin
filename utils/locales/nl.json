@@ -304,7 +304,10 @@
     "SV": "Zweeds",
     "TR": "Turks",
     "VI": "Vietnamees",
-    "ZH": "Chinees"
+    "ZH": "Chinees",
+    "EL": "Grieks",
+    "ID": "Indonesisch",
+    "MS": "Maleis"
   },
   "rating": {
     "one": "Meer dan 1",
@@ -321,6 +324,7 @@
     "noEvents": "Er zijn geen evenementen gevonden",
     "when": "Wanneer",
     "where": "Waar",
+    "language": "Taal",
     "what": "Wat",
     "who": "Wie",
     "event": {
@@ -342,6 +346,8 @@
       "loc": "Locatie",
       "oneLang": "Evenement is in $t(language.{{lang}})",
       "twoLangs": "Evenement is in $t(language.{{first}}) en $t(language.{{second}})",
+      "oneLangShort": "In $t(language.{{lang}})",
+      "twoLangsShort": "In $t(language.{{first}}) and $t(language.{{second}})",
       "materials": ", alle materialen en handouts staan in $t(language.{{lang}})",
       "now": "Huidige tijd in {{zone}}",
       "tickets": "Tickets"
@@ -474,5 +480,24 @@
   "nextEvent": {
     "register": "Registreren",
     "notAvailable": "Geen geplande evenementen"
+  },
+  "promo": {
+    "register": "Registreer nu",
+    "info": {
+      "loc": "Locatie",
+      "date": "Datum",
+      "trainer": "Trainer",
+      "trainer_plural": "Trainers"
+    },
+    "header": {
+      "prefixIn": "Begint over",
+      "prefixOn": "Begint op",
+      "tomorrow": "Begint morgen"
+    },
+    "timer": {
+      "days": "dagen",
+      "hours": "uren",
+      "minutes": "minuten"
+    }
   }
 }

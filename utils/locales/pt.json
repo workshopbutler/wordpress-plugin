@@ -304,7 +304,10 @@
     "SV": "sueco",
     "TR": "turco",
     "VI": "vietnamita",
-    "ZH": "chinês"
+    "ZH": "chinês",
+    "EL": "grego",
+    "ID": "indonésio",
+    "MS": "malaio"
   },
   "rating": {
     "one": "Mais de 1",
@@ -321,6 +324,7 @@
     "noEvents": "Nenhum evento foi encontrado",
     "when": "Quando",
     "where": "Onde",
+    "language": "Língua",
     "what": "Que",
     "who": "Quem",
     "event": {
@@ -342,6 +346,8 @@
       "loc": "Localização",
       "oneLang": "O evento é em $t(language.{{lang}})",
       "twoLangs": "O evento é em $t(language.{{first}}) e $t(language.{{second}})",
+      "oneLangShort": "Em $t(language.{{lang}})",
+      "twoLangsShort": "Em $t(language.{{first}}) and $t(language.{{second}})",
       "materials": ", todos os materiais e folhetos são em $t(language.{{lang}})",
       "now": "Hora exata em {{zone}}",
       "tickets": "Bilhetes"
@@ -473,5 +479,24 @@
   "nextEvent": {
     "register": "Registrar",
     "notAvailable": "Nenhum evento planejado"
+  },
+  "promo": {
+    "register": "Registrar agora",
+    "info": {
+      "loc": "Localização",
+      "date": "Data",
+      "trainer": "Treinador",
+      "trainer_plural": "Treinadores"
+    },
+    "header": {
+      "prefixIn": "Começa em",
+      "prefixOn": "Começa em",
+      "tomorrow": "Começa amanhã"
+    },
+    "timer": {
+      "days": "dias",
+      "hours": "horas",
+      "minutes": "minutos"
+    }
   }
 }
