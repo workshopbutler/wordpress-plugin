@@ -101,34 +101,34 @@ class Event {
 	/**
 	 * True if the event is confirmed
 	 *
-	 * @since   2.0.0
-	 * @var     boolean $confirmed
+	 * @since   3.0.0
+	 * @var     boolean $is_confirmed
 	 */
-	public $confirmed;
+	public $is_confirmed;
 
 	/**
 	 * True if the event is private
 	 *
-	 * @since   2.0.0
-	 * @var     boolean $private
+	 * @since   3.0.0
+	 * @var     boolean $is_private
 	 */
-	public $private;
+	public $is_private;
 
 	/**
 	 * True if the event is free
 	 *
-	 * @since   2.0.0
-	 * @var     boolean $free
+	 * @since   3.0.0
+	 * @var     boolean $is_free
 	 */
-	public $free;
+	public $is_free;
 
 	/**
 	 * True if there is no tickets left
 	 *
-	 * @since   2.0.0
-	 * @var     boolean $sold_out
+	 * @since   3.0.0
+	 * @var     boolean $is_sold_out
 	 */
-	public $sold_out;
+	public $is_sold_out;
 
 	/**
 	 * Tickets to the event
@@ -157,10 +157,10 @@ class Event {
 	/**
 	 * True if the event is featured.
 	 *
-	 * @var boolean $featured
-	 * @since 2.11.0
+	 * @var boolean $is_featured
+	 * @since 3.0.0
 	 */
-	public $featured;
+	public $is_featured;
 
 	/**
 	 * Registration form
@@ -195,14 +195,6 @@ class Event {
 	public $cover_image;
 
 	/**
-	 * The url to the event
-	 *
-	 * @since   2.0.0
-	 * @var     Event_Url $url
-	 */
-	private $url;
-
-	/**
 	 * Card payment configuration
 	 *
 	 * @since 2.14.0
@@ -219,6 +211,54 @@ class Event {
 	public $paypal_payment;
 
 	/**
+	 * The url to the event
+	 *
+	 * @since   2.0.0
+	 * @var     Event_Url $url
+	 */
+	private $url;
+
+	/**
+	 * The map of the deprecated/renamed properties
+	 *
+	 * Format:
+	 *   old_name => new property/method name
+	 *
+	 * @since 3.0.0
+	 * @var array $deprecated_properties
+	 */
+	private $deprecated_properties = array(
+		'free' => 'is_free',
+		'confirmed' => 'is_confirmed',
+		'private' => 'is_private',
+		'sold_out' => 'is_sold_out',
+		'featured' => 'is_featured',
+	);
+
+	/**
+	 * Checks undefined properties in deprecation list
+	 *
+	 * @since 3.0.0
+	 * @param string $name Property name
+	 */
+	public function __get($name) {
+        if ( !array_key_exists( $name, $this->deprecated_properties ) ) {
+			throw new \Exception( "Property '$name' is not defined" );
+        }
+		$alt_name = $this->deprecated_properties[$name];
+
+		if ( property_exists( $this, $alt_name ) ) {
+			return $this->$alt_name;
+		}
+
+		if ( method_exists( $this, $alt_name ) ) {
+			return $this->$alt_name();
+		}
+
+		throw new \Exception("Property or method '$alt_name' is not defined");
+	}
+
+	/**
 	 * Creates a new object
 	 *
 	 * @param object      $json_data JSON data from Workshop Butler API.
@@ -233,11 +273,11 @@ class Event {
 		$this->type        = $json_data->type ? new Event_Type( $json_data->type ) : Event_Type::create_empty();
 		$this->language    = Language::from_json( $json_data->language );
 		$this->rating      = isset( $json_data->rating ) ? $json_data->rating : null;
-		$this->confirmed   = $json_data->confirmed;
-		$this->free        = $json_data->free;
-		$this->private     = isset( $json_data->private ) ? $json_data->private : null;
+		$this->is_confirmed   = $json_data->confirmed;
+		$this->is_free     = $json_data->free;
+		$this->is_private  = isset( $json_data->private ) ? $json_data->private : null;
 		$this->description = $json_data->description;
-		$this->sold_out    = $json_data->sold_out;
+		$this->is_sold_out = $json_data->sold_out;
 		$this->schedule    = new Schedule( $json_data->schedule );
 		$this->location    = Location::from_json( $json_data->location );
 
@@ -263,7 +303,7 @@ class Event {
 		$this->state          = new Event_State( $this, $json_data->state === 'canceled' );
 		$this->card_payment   = CardPayment::from_json( $json_data->card_payment );
 		$this->paypal_payment = PayPalPayment::from_json( $json_data->paypal_payment );
-		$this->featured       = $json_data->featured ? $json_data->featured : false;
+		$this->is_featured       = $json_data->featured ? $json_data->featured : false;
 	}
 
 	/**
@@ -277,57 +317,6 @@ class Event {
 	}
 
 	/**
-	 * Returns the list of trainers running the event
-	 *
-	 * @return mixed|Trainer[]
-	 * @since 3.0.0
-	 */
-	public function get_trainers() {
-		return $this->trainers;
-	}
-
-	/**
-	 * Returns the cover image object for the event. The object always exists but the urls
-	 * could be null
-	 *
-	 * @return Cover_Image
-	 * @since 3.0.0
-	 */
-	public function get_cover_image() {
-		return $this->cover_image;
-	}
-
-	/**
-	 * Returns tickets' object
-	 *
-	 * @return mixed|Free_Ticket_Type|Paid_Tickets|null
-	 * @since 3.0.0
-	 */
-	public function get_tickets() {
-		return $this->tickets;
-	}
-
-	/**
-	 * Returns the description of the event
-	 *
-	 * @return string
-	 * @since 3.0.0
-	 */
-	public function get_description() {
-		return $this->description;
-	}
-
-	/**
-	 * Returns the state object of the event
-	 *
-	 * @return Event_State
-	 * @since 3.0.0
-	 */
-	public function get_state() {
-		return $this->state;
-	}
-
-	/**
 	 * Returns the url to the registration page of the event
 	 *
 	 * @return string
@@ -335,36 +324,6 @@ class Event {
 	 */
 	public function get_registration_url() {
 		return $this->registration_page->get_url();
-	}
-
-	/**
-	 * Returns the language object of the event
-	 *
-	 * @return Language
-	 * @since 3.0.0
-	 */
-	public function get_language() {
-		return $this->language;
-	}
-
-	/**
-	 * Returns title of the event
-	 *
-	 * @return string
-	 * @since 3.0.0
-	 */
-	public function get_title() {
-		return $this->title;
-	}
-
-	/**
-	 * Returns the type of the event
-	 *
-	 * @return Event_Type
-	 * @since 3.0.0
-	 */
-	public function get_event_type() {
-		return $this->type;
 	}
 
 	/**
@@ -385,46 +344,6 @@ class Event {
 	 */
 	public function get_spoken_languages() {
 		return $this->language->spoken;
-	}
-
-	/**
-	 * Returns the location
-	 *
-	 * @return Location
-	 * @since 3.0.0
-	 */
-	public function get_location() {
-		return $this->location;
-	}
-
-	/**
-	 * Returns the schedule
-	 *
-	 * @return Schedule
-	 * @since 3.0.0
-	 */
-	public function get_schedule() {
-		return $this->schedule;
-	}
-
-	/**
-	 * Returns true if the event is free
-	 *
-	 * @return bool
-	 * @since 3.0.0
-	 */
-	public function is_free() {
-		return $this->free;
-	}
-
-	/**
-	 * Returns true if the event is featured
-	 *
-	 * @return bool
-	 * @since 3.0.0
-	 */
-	public function is_featured() {
-		return $this->featured;
 	}
 
 	/**
@@ -452,16 +371,6 @@ class Event {
 			},
 			$this->trainers
 		);
-	}
-
-	/**
-	 * Returns the registration form for the event
-	 *
-	 * @since 3.0.0
-	 * @return Form|null
-	 */
-	public function get_registration_form() {
-		return $this->registration_form;
 	}
 
 	/**

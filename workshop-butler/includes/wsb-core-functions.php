@@ -48,12 +48,12 @@ function wsb_get_template( $template_name, $args = array(), $template_path = '',
 	}
 
 	// Allow 3rd party plugin filter template file from their plugin.
-	$filter_template = apply_filters( 'wc_get_template', $template, $template_name, $args, $template_path, $default_path );
+	$filter_template = apply_filters( 'wsb_get_template', $template, $template_name, $args, $template_path, $default_path );
 
 	if ( $filter_template !== $template ) {
 		if ( ! file_exists( $filter_template ) ) {
 			/* translators: %s template */
-			wsb_doing_it_wrong( __FUNCTION__, sprintf( __( '%s does not exist.', 'workshopbutler' ), '<code>' . $filter_template . '</code>' ), '2.1' );
+			wsb_doing_it_wrong( __FUNCTION__, sprintf( __( '%s does not exist.', 'workshopbutler' ), '<code>' . $filter_template . '</code>' ), '3.0.0' );
 
 			return;
 		}
@@ -71,8 +71,8 @@ function wsb_get_template( $template_name, $args = array(), $template_path = '',
 		if ( isset( $args['action_args'] ) ) {
 			wsb_doing_it_wrong(
 				__FUNCTION__,
-				__( 'action_args should not be overwritten when calling wc_get_template.', 'workshopbutler' ),
-				'3.6.0'
+				__( 'action_args should not be overwritten when calling wsb_get_template.', 'workshopbutler' ),
+				'3.0.0'
 			);
 			unset( $args['action_args'] );
 		}
@@ -323,4 +323,3 @@ function wsb_doing_it_wrong( $function, $message, $version ) {
 	}
 	// @codingStandardsIgnoreEnd
 }
-

@@ -162,11 +162,12 @@ class WSB_Schedule_Page extends WSB_Page {
 	 * @since 3.0.0
 	 */
 	protected function render_new_template( $template_data, $config ) {
-		$content = $config->is_table_layout() ? 'templates/calendar-table.php' : 'templates/calendar-tiles.php';
-		$theme   = $this->get_theme();
-		ob_start();
-		include WSB()->plugin_path() . '/' . $content;
+		$template = $config->is_table_layout() ? 'calendar-table.php' : 'calendar-tiles.php';
 
+		ob_start();
+		wsb_get_template( $template, array(
+			'theme' => $this->get_theme(),
+		));
 		return ob_get_clean();
 	}
 

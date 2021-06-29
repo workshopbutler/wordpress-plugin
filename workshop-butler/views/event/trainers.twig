@@ -1,14 +1,14 @@
 <div class="wsb-trainers">
-    {% for trainer in event.get_trainers %}
+    {% for trainer in event.trainers %}
         <div class="wsb-trainer">
             <div class="wsb-profile">
                 {% if trainer.url %}
-                    <a class="wsb-profile_img" href="{{ trainer.get_url }}" style="background-image: url({{ trainer.get_photo }});"></a>
+                    <a class="wsb-profile_img" href="{{ trainer.url }}" style="background-image: url({{ trainer.photo }});"></a>
                 {% else %}
-                    <div class="wsb-profile_img"><img src="{{ trainer.get_photo }}"/></div>
+                    <div class="wsb-profile_img"><img src="{{ trainer.photo }}"/></div>
                 {% endif %}
                 <div class="wsb-profile__name">
-                    {% if trainer.get_url %}
+                    {% if trainer.url %}
                         <a href="{{ trainer.url }}">{{ trainer.get_full_name() }}</a>
                     {% else %}
                         {{ trainer.get_full_name() }}

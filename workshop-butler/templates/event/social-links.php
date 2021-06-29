@@ -4,23 +4,22 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
+ * @global Event $event
+ * @global Single_Event_Config $config
  */
 
 use WorkshopButler\Formatter;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-$event = WSB()->dict->get_event();
-is_a( $event, 'WorkshopButler\Event' ) || exit();
-
-$summary = $event->get_title() . '. ' . Formatter::format( $event->get_schedule() ) . ', ' . Formatter::format( $event->get_location() );
+$summary = $event->title . '. ' . Formatter::format( $event->schedule ) . ', ' . Formatter::format( $event->location );
 ?>
 <div class="wsb-events">
 	<div class="wsb-events__title">
-		<?php echo esc_html__( 'event.share', 'wsbintegration' ); ?>:
+		<?= esc_html__( 'event.share', 'wsbintegration' ); ?>:
 	</div>
-	<div class="wsb-sharing js-sharing" data-title="<?php echo esc_attr( $event->get_title() ); ?>"
-			data-summary="<?php echo esc_attr( $summary ); ?>"
+	<div class="wsb-sharing js-sharing" data-title="<?= esc_attr( $event->title ); ?>"
+			data-summary="<?= esc_attr( $summary ); ?>"
 			data-hashtags="training">
 		<a href=""
 				onclick="window.open('http://twitter.com/intent/tweet?url=' + window.location.href + '&text=' + jQuery(this).parent('div').data('summary'), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"

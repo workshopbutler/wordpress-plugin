@@ -111,9 +111,9 @@ class Event_Calendar_Hooks {
 	public static function item() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'calendar/table/row.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/table/row.php' );
 		} else {
-			wsb_get_template( 'calendar/tiles/tile.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/tiles/tile.php' );
 		}
 	}
 
@@ -123,9 +123,9 @@ class Event_Calendar_Hooks {
 	public static function title() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'calendar/table/title.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/table/title.php' );
 		} else {
-			wsb_get_template( 'calendar/tiles/title.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/tiles/title.php' );
 		}
 	}
 
@@ -135,9 +135,9 @@ class Event_Calendar_Hooks {
 	public static function trainers() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'calendar/table/trainers.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/table/trainers.php' );
 		} else {
-			wsb_get_template( 'calendar/tiles/trainers.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/tiles/trainers.php' );
 		}
 	}
 
@@ -147,9 +147,9 @@ class Event_Calendar_Hooks {
 	public static function location() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'calendar/table/location.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/table/location.php' );
 		} else {
-			wsb_get_template( 'calendar/tiles/location.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/tiles/location.php' );
 		}
 	}
 
@@ -159,9 +159,9 @@ class Event_Calendar_Hooks {
 	public static function schedule() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'calendar/table/schedule.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/table/schedule.php' );
 		} else {
-			wsb_get_template( 'calendar/tiles/schedule.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/tiles/schedule.php' );
 		}
 	}
 
@@ -171,9 +171,9 @@ class Event_Calendar_Hooks {
 	public static function time() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'calendar/table/time.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/table/time.php' );
 		} else {
-			wsb_get_template( 'calendar/tiles/time.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/tiles/time.php' );
 		}
 	}
 
@@ -183,9 +183,9 @@ class Event_Calendar_Hooks {
 	public static function date() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'calendar/table/date.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/table/date.php' );
 		} else {
-			wsb_get_template( 'calendar/tiles/date.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/tiles/date.php' );
 		}
 	}
 
@@ -195,7 +195,7 @@ class Event_Calendar_Hooks {
 	public static function image() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( ! $config->is_table_layout() ) {
-			wsb_get_template( 'calendar/tiles/image.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/tiles/image.php' );
 		}
 	}
 
@@ -205,9 +205,9 @@ class Event_Calendar_Hooks {
 	public static function language() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'calendar/table/language.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/table/language.php' );
 		} else {
-			wsb_get_template( 'calendar/tiles/language.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/tiles/language.php' );
 		}
 	}
 
@@ -217,9 +217,9 @@ class Event_Calendar_Hooks {
 	public static function register() {
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'calendar/table/register.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/table/register.php' );
 		} else {
-			wsb_get_template( 'calendar/tiles/register.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/tiles/register.php' );
 		}
 	}
 
@@ -232,9 +232,23 @@ class Event_Calendar_Hooks {
 		$args   = array( 'mobile' => $row_level_tag );
 		$config = WSB()->dict->get_schedule_config();
 		if ( $config->is_table_layout() ) {
-			wsb_get_template( 'calendar/table/tag.php', $args );
+			Event_Calendar_Hooks::with_default_context( 'calendar/table/tag.php', $args );
 		} else {
-			wsb_get_template( 'calendar/tiles/tag.php' );
+			Event_Calendar_Hooks::with_default_context( 'calendar/tiles/tag.php' );
 		}
+	}
+
+	private static function with_default_context( $template, $args = array() ) {
+		$event = WSB()->dict->get_event();
+		if( !is_a( $event, 'WorkshopButler\Event' )) {
+			return false;
+		}
+		wsb_get_template( $template, array_merge(
+			array(
+			'event' => $event,
+			'config' => WSB()->dict->get_schedule_config(),
+			),
+			$args
+		));
 	}
 }

@@ -1,5 +1,5 @@
-{% set url = type == 'thumbnail' ? event.get_cover_image.get_thumbnail_url : event.cover_image.get_url %}
+{% set url = type == 'thumbnail' ? event.cover_image.thumbnail : event.cover_image.url %}
 {% if url %}
-    <img src="{{ url }}" alt="{{ event.get_title }}" width="{{ width }}" height="{{ height }}"
+    <img src="{{ url }}" alt="{{ event.title }}" width="{{ width }}" height="{{ height }}"
         {% if class %} class="{{ class }}" {% endif %}/>
 {% endif %}

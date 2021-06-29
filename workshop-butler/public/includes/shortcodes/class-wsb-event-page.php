@@ -165,11 +165,16 @@ class WSB_Event_Page extends WSB_Page {
 	 * @since 3.0.0
 	 */
 	protected function render_new_template() {
-		$content = 'templates/single-event.php';
-		$theme   = $this->get_theme();
-		ob_start();
-		include WSB()->plugin_path() . '/' . $content;
+		$event = WSB()->dict->get_event();
+		if( !is_a( $event, 'WorkshopButler\Event' )) {
+			return false;
+		}
 
+		ob_start();
+		wsb_get_template( 'single-event.php', array(
+			'theme' => $this->get_theme(),
+			'event' => $event,
+		));
 		return ob_get_clean();
 	}
 

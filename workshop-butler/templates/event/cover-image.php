@@ -4,18 +4,18 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
+ * @global Event $event
+ * @global Single_Event_Config $config
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-$event = WSB()->dict->get_event();
-is_a( $event, 'WorkshopButler\Event' ) || exit();
 
-$url = $event->get_cover_image()->get_url();
+$url = $event->cover_image->url;
 
 if ( $url ) {
 	?>
-	<img src="<?php echo esc_attr( $url ); ?>"
-			alt="<?php echo esc_attr( $event->get_title() ); ?>" width="100%"/>
+	<img src="<?= esc_attr( $url ); ?>"
+			alt="<?= esc_attr( $event->title ); ?>" width="100%"/>
 	<?php
 }

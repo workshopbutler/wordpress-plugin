@@ -15,17 +15,17 @@ is_a( $event, 'WorkshopButler\Event' ) || exit();
 
 ?>
 <input type="checkbox" value="yes" data-control
-		name="<?php echo esc_attr( $field->get_name() ); ?>"
-		title="<?php echo esc_attr( $field->get_label() ); ?>"
+		name="<?= esc_attr( $field->get_name() ); ?>"
+		title="<?= esc_attr( $field->get_label() ); ?>"
 	<?php
 	if ( $field->is_required() ) {
 		echo 'required';
 	}
-	if ( $event->get_state()->closed() ) {
+	if ( $event->state->closed() ) {
 		echo 'disabled';
 	}
 	?>
 />
-<label class="wsb-checkbox" for="<?php echo esc_attr( $field->get_name() ); ?>">
-	<?php echo $field->get_label(); ?>
+<label class="wsb-checkbox" for="<?= esc_attr( $field->get_name() ); ?>">
+	<?= $field->get_label(); ?>
 </label>

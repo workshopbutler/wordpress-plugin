@@ -4,21 +4,20 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
+ * @global Trainer $trainer
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-$trainer = WSB()->dict->get_trainer();
-is_a( $trainer, 'WorkshopButler\Trainer' ) || exit();
 ?>
 
-<h3><?php echo esc_html__('trainer.feedback', 'wsbintegration'); ?></h3>
+<h3><?= esc_html__('trainer.feedback', 'wsbintegration'); ?></h3>
 <div>
     <?php foreach ( $trainer->testimonials as $testimonial ) { ?>
         <div class="wsb-testimonial">
 
             <span class="wsb-cite">
-                <strong><?php echo esc_html( $testimonial->attendee ); ?></strong>
+                <strong><?= esc_html( $testimonial->attendee ); ?></strong>
                 <?php  if ( $testimonial->company ) { echo ", ".esc_html( $testimonial->company ); } ?>
             </span>
             <?php  if ( $testimonial->rating ) {  ?>
@@ -37,7 +36,7 @@ is_a( $trainer, 'WorkshopButler\Trainer' ) || exit();
                 } ?>
             </div>
             <?php } ?>
-            <p class="wsb-testimonial-text"><?php echo esc_html( $testimonial->content ); ?></p>
+            <p class="wsb-testimonial-text"><?= esc_html( $testimonial->content ); ?></p>
         </div>
     <?php } ?>
 </div>

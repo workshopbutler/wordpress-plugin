@@ -40,7 +40,7 @@ class Single_Event_Hooks {
 	 * @see Single_Event_Hooks::init() for the hook
 	 */
 	public static function register_button() {
-		wsb_get_template( 'event/register-button.php' );
+		Single_Event_Hooks::with_default_context( 'event/register-button.php' );
 	}
 
 	/**
@@ -49,7 +49,7 @@ class Single_Event_Hooks {
 	 * @see Single_Event_Hooks::init() for the hook
 	 */
 	public static function cover_image() {
-		wsb_get_template( 'event/cover-image.php' );
+		Single_Event_Hooks::with_default_context( 'event/cover-image.php' );
 	}
 
 	/**
@@ -58,48 +58,59 @@ class Single_Event_Hooks {
 	 * @see Single_Event_Hooks::init() for the hook
 	 */
 	public static function tickets() {
-		wsb_get_template( 'event/tickets.php' );
+		Single_Event_Hooks::with_default_context( 'event/tickets.php' );
 	}
 
 	/**
 	 * Renders the event's trainers
 	 */
 	public static function trainers() {
-		wsb_get_template( 'event/trainers.php' );
+		Single_Event_Hooks::with_default_context( 'event/trainers.php' );
 	}
 
 	/**
 	 * Renders the event's location
 	 */
 	public static function location() {
-		wsb_get_template( 'event/location.php' );
+		Single_Event_Hooks::with_default_context( 'event/location.php' );
 	}
 
 	/**
 	 * Renders the event's description
 	 */
 	public static function description() {
-		wsb_get_template( 'event/description.php' );
+		Single_Event_Hooks::with_default_context( 'event/description.php' );
 	}
 
 	/**
 	 * Renders the event's schedule
 	 */
 	public static function schedule() {
-		wsb_get_template( 'event/schedule.php' );
+		Single_Event_Hooks::with_default_context( 'event/schedule.php' );
 	}
 
 	/**
 	 * Renders the event's social links
 	 */
 	public static function social_links() {
-		wsb_get_template( 'event/social-links.php' );
+		Single_Event_Hooks::with_default_context( 'event/social-links.php' );
 	}
 
 	/**
 	 * Renders the list of events
 	 */
 	public static function events() {
-		wsb_get_template( 'event/events.php' );
+		Single_Event_Hooks::with_default_context( 'event/events.php' );
+	}
+
+	private static function with_default_context( $template ) {
+		$event = WSB()->dict->get_event();
+		if( !is_a( $event, 'WorkshopButler\Event' )) {
+			return false;
+		}
+		wsb_get_template( $template, array(
+			'event' => $event,
+			'config' => WSB()->dict->get_single_event_config(),
+		));
 	}
 }

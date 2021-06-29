@@ -13,12 +13,13 @@
  * @see         https://docs.woocommerce.com/document/template-structure/
  * @package     WooCommerce\Templates
  * @version     1.6.4
+ * @global string $theme
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 ?>
-<div class="<?php echo esc_attr( $theme ); ?>">
+<div class="<?= esc_attr( $theme ); ?>">
 	<div class="wsb-content">
 		<?php do_action( 'wsb_filters' ); ?>
 		<div class="wsb-schedule">
@@ -28,7 +29,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 				<?php do_action( 'workshopbutler_after_schedule' ); ?>
 			</div>
 			<div class="wsb-no-events">
-				<?php echo esc_html__( 'schedule.noEvents', 'wsbintegration' ); ?>
+				<?= esc_html__( 'schedule.noEvents', 'wsbintegration' ); ?>
 			</div>
 		</div>
 	</div>

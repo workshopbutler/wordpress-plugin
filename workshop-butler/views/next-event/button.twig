@@ -1,5 +1,5 @@
 {% if event %}
-    <a href="{% if registration == 'true' %} {{ event.get_registration_url }} {% else %} {{ event.url }} {% endif %}"
+    <a href="{% if registration == 'true' %} {{ event.registration_page.url }} {% else %} {{ event.url }} {% endif %}"
        target="{{ target }}" class="wsb-next-element-button">
         {% if title %} {{ title }} {% else %} {{ wsb_t('nextEvent.register') }} {% endif %}
     </a>

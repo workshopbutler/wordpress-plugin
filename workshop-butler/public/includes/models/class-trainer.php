@@ -228,26 +228,6 @@ class Trainer {
 	}
 
 	/**
-	 * Returns the url to trainer's avatar
-	 *
-	 * @return string|null
-	 * @since 3.0.0
-	 */
-	public function get_photo() {
-		return $this->photo;
-	}
-
-	/**
-	 * Returns the url to trainer's profile
-	 *
-	 * @return string|null
-	 * @since 3.0.0
-	 */
-	public function get_url() {
-		return $this->url;
-	}
-
-	/**
 	 * Returns the full name of the trainer
 	 *
 	 * @return string

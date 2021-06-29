@@ -13,7 +13,7 @@ is_a( $event, 'WorkshopButler\Event' ) || exit();
 $settings = WSB()->settings;
 $theme    = $settings->get_theme();
 ?>
-<div class="<?php echo esc_attr( $theme ); ?>">
+<div class="<?= esc_attr( $theme ); ?>">
 	<div class="wsb-content">
 		<div class="wsb-page wsb-event-page">
 			<div class="wsb-body">

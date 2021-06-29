@@ -4,17 +4,15 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
+ * @global Trainer $trainer
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
-
-$trainer = WSB()->dict->get_trainer();
-is_a( $trainer, 'WorkshopButler\Trainer' ) || exit();
 
 $url = $trainer->photo;
 
 if ( $url ) {
 ?>
-<img src="<?php echo esc_attr( $url ); ?>"
-	alt="<?php echo esc_attr( $trainer->get_full_name() ); ?>" width="100%"/>
+<img src="<?= esc_attr( $url ); ?>"
+	alt="<?= esc_attr( $trainer->get_full_name() ); ?>" width="100%"/>
 <?php } ?>

@@ -14,7 +14,7 @@ is_a( $section, 'WorkshopButler\Section' ) || exit();
 ?>
 <section class="wsb-ticket-section">
 	<div class="wsb-form__section-title">
-		<?php echo esc_html__( strtolower( 'form.section.' . $section->get_id() ), 'wsbintegration' ); ?>
+		<?= esc_html__( strtolower( 'form.section.' . $section->get_id() ), 'wsbintegration' ); ?>
 	</div>
 	<?php
 	foreach ( $section->get_fields() as $field ) {

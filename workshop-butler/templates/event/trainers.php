@@ -4,33 +4,32 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
+ * @global Event $event
+ * @global Single_Event_Config $config
  */
 
 use WorkshopButler\Formatter;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-$event = WSB()->dict->get_event();
-
-is_a( $event, 'WorkshopButler\Event' ) || exit();
 ?>
 <div class="wsb-trainers">
-	<?php foreach ( $event->get_trainers() as $trainer ) { ?>
+	<?php foreach ( $event->trainers as $trainer ) { ?>
 		<div class="wsb-trainer">
 			<div class="wsb-profile">
-				<?php if ( $trainer->get_url() ) { ?>
-					<a href="<?php echo esc_attr( $trainer->get_url() ); ?>"
+				<?php if ( $trainer->url ) { ?>
+					<a href="<?= esc_attr( $trainer->url ); ?>"
 							class="wsb-profile_img"
-							style="background-image: url(<?php echo esc_attr( $trainer->get_photo() ); ?>);"></a>
+							style="background-image: url(<?= esc_attr( $trainer->photo ); ?>);"></a>
 				<?php } else { ?>
 					<div class="wsb-profile-img">
-						<img src="<?php echo esc_attr( $trainer->get_photo() ); ?>"
-								alt="<?php echo esc_attr( $trainer->get_full_name() ); ?>"/>
+						<img src="<?= esc_attr( $trainer->photo ); ?>"
+								alt="<?= esc_attr( $trainer->get_full_name() ); ?>"/>
 					</div>
 				<?php } ?>
 				<div class="wsb-profile__name">
-					<?php if ( $trainer->get_url() ) { ?>
-						<a href="<?php echo esc_attr( $trainer->get_url() ); ?>"><?php echo esc_html( $trainer->get_full_name() ); ?></a>
+					<?php if ( $trainer->url ) { ?>
+						<a href="<?= esc_attr( $trainer->url ); ?>"><?= esc_html( $trainer->get_full_name() ); ?></a>
 						<?php
 					} else {
 						echo esc_html( $trainer->get_full_name() );
@@ -71,4 +70,3 @@ is_a( $event, 'WorkshopButler\Event' ) || exit();
 		</div>
 	<?php } ?>
 </div>
-

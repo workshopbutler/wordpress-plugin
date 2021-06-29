@@ -4,16 +4,14 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
+ * @global Trainer $trainer
+ * @global string $theme
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-$trainer = WSB()->dict->get_trainer();
-is_a( $trainer, 'WorkshopButler\Trainer' ) || exit();
-$settings = WSB()->settings;
-$theme    = $settings->get_theme();
 ?>
-<div class="<?php echo esc_attr( $theme ); ?>">
+<div class="<?= esc_attr( $theme ); ?>">
     <div class="wsb-content">
         <div class="wsb-page">
             <div class="wsb-body wsb-trainer-profile">

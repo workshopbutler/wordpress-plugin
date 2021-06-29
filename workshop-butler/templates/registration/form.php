@@ -12,14 +12,14 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 $event = WSB()->dict->get_event();
 is_a( $event, 'WorkshopButler\Event' ) || exit();
-$form = $event->get_registration_form();
+$form = $event->registration_form;
 ?>
 <div class="wsb-congratulation" id="wsb-success" style="display: none;">
 	<h2 class="wsb-congratulation__title">
-		<?php echo esc_html__( 'registration.successTitle', 'wsbintegration' ); ?>
+		<?= esc_html__( 'registration.successTitle', 'wsbintegration' ); ?>
 	</h2>
 	<div class="wsb-congratulation__p">
-		<?php echo esc_html__( 'registration.successMsg', 'wsbintegration' ); ?>
+		<?= esc_html__( 'registration.successMsg', 'wsbintegration' ); ?>
 	</div>
 </div>
 
@@ -29,7 +29,7 @@ $form = $event->get_registration_form();
 		if ( $form ) {
 			if ( $form->get_instructions() ) {
 				?>
-				<div class="wsb-form__instructions"><?php echo esc_html( $form->get_instructions() ); ?></div>
+				<div class="wsb-form__instructions"><?= esc_html( $form->get_instructions() ); ?></div>
 				<?php
 			}
 		}
@@ -52,7 +52,7 @@ $form = $event->get_registration_form();
 				<section>
 					<?php if ( 'footer' !== $section->get_id() ) { ?>
 						<div class="wsb-form__section-title">
-							<?php echo esc_html__( strtolower( 'form.section.' . $section->get_id() ), 'wsbintegration' ); ?>
+							<?= esc_html__( strtolower( 'form.section.' . $section->get_id() ), 'wsbintegration' ); ?>
 						</div>
 						<?php
 					}
@@ -69,13 +69,13 @@ $form = $event->get_registration_form();
 		}
 		?>
 		<div class="wsb-form__error" data-form-major-error></div>
-		<?php if ( $event->get_state()->closed() ) { ?>
+		<?php if ( $event->state->closed() ) { ?>
 			<button class="wsb-form__btn"
-					disabled><?php echo esc_html( Formatter::format( $event->get_state() ) ); ?></button>
+					disabled><?= esc_html( Formatter::format( $event->state ) ); ?></button>
 		<?php } else { ?>
 			<button type="submit" class="wsb-form__btn" id="default-submit-button">
 				<i class="fa fa-spinner fa-spin" style="display: none;"></i>
-				<?php echo esc_html__( 'event.form.button', 'wsbintegration' ); ?>
+				<?= esc_html__( 'event.form.button', 'wsbintegration' ); ?>
 			</button>
 			<div id="paypal-button-container" style="display:none;"></div>
 			<?php

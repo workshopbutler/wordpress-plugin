@@ -42,7 +42,7 @@ class Single_Trainer_Hooks {
 	 * @see Single_Trainer_Hooks::init() for the hook
 	 */
 	public static function photo() {
-		wsb_get_template( 'trainer/photo.php' );
+		Single_Trainer_Hooks::with_default_context( 'trainer/photo.php' );
 	}
 
 	/**
@@ -51,7 +51,7 @@ class Single_Trainer_Hooks {
 	 * @see Single_Trainer_Hooks::init() for the hook
 	 */
 	public static function email() {
-		wsb_get_template( 'trainer/email.php' );
+		Single_Trainer_Hooks::with_default_context( 'trainer/email.php' );
 	}
 
 	/**
@@ -60,7 +60,7 @@ class Single_Trainer_Hooks {
 	 * @see Single_Trainer_Hooks::init() for the hook
 	 */
 	public static function country() {
-		wsb_get_template( 'trainer/country.php' );
+		Single_Trainer_Hooks::with_default_context( 'trainer/country.php' );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class Single_Trainer_Hooks {
 	 * @see Single_Trainer_Hooks::init() for the hook
 	 */
 	public static function badges() {
-		wsb_get_template( 'trainer/badges.php' );
+		Single_Trainer_Hooks::with_default_context( 'trainer/badges.php' );
 	}
 
 	/**
@@ -78,7 +78,7 @@ class Single_Trainer_Hooks {
 	 * @see Single_Trainer_Hooks::init() for the hook
 	 */
 	public static function bio() {
-		wsb_get_template( 'trainer/bio.php' );
+		Single_Trainer_Hooks::with_default_context( 'trainer/bio.php' );
 	}
 
 	/**
@@ -87,7 +87,7 @@ class Single_Trainer_Hooks {
 	 * @see Single_Trainer_Hooks::init() for the hook
 	 */
 	public static function testimonials() {
-		wsb_get_template( 'trainer/testimonials.php' );
+		Single_Trainer_Hooks::with_default_context( 'trainer/testimonials.php' );
 	}
 
 	/**
@@ -96,7 +96,7 @@ class Single_Trainer_Hooks {
 	 * @see Single_Trainer_Hooks::init() for the hook
 	 */
 	public static function future_events() {
-		wsb_get_template( 'trainer/future-events.php' );
+		Single_Trainer_Hooks::with_default_context( 'trainer/future-events.php' );
 	}
 
 	/**
@@ -105,7 +105,7 @@ class Single_Trainer_Hooks {
 	 * @see Single_Trainer_Hooks::init() for the hook
 	 */
 	public static function past_events() {
-		wsb_get_template( 'trainer/past-events.php' );
+		Single_Trainer_Hooks::with_default_context( 'trainer/past-events.php' );
 	}
 
 	/**
@@ -114,7 +114,7 @@ class Single_Trainer_Hooks {
 	 * @see Single_Trainer_Hooks::init() for the hook
 	 */
 	public static function social_links() {
-		wsb_get_template( 'trainer/social-links.php' );
+		Single_Trainer_Hooks::with_default_context( 'trainer/social-links.php' );
 	}
 
 	/**
@@ -123,6 +123,16 @@ class Single_Trainer_Hooks {
 	 * @see Single_Trainer_Hooks::init() for the hook
 	 */
 	public static function stats() {
-		wsb_get_template( 'trainer/stats.php' );
+		Single_Trainer_Hooks::with_default_context( 'trainer/stats.php' );
+	}
+
+	private static function with_default_context( $template ) {
+		$trainer = WSB()->dict->get_trainer();
+		if( !is_a( $trainer, 'WorkshopButler\Trainer' )) {
+			return false;
+		}
+		wsb_get_template( $template, array(
+			'trainer' => $trainer,
+		));
 	}
 }

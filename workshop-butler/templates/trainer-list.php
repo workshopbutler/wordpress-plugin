@@ -4,14 +4,13 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
+ * @global string $theme
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-$settings = WSB()->settings;
-$theme    = $settings->get_theme();
 ?>
-<div class="<?php echo esc_attr( $theme ); ?>">
+<div class="<?= esc_attr( $theme ); ?>">
     <div class="wsb-content">
         <?php do_action( 'wsb_trainer_list_filters' ); ?>
         <div class="wsb-trainer-list">

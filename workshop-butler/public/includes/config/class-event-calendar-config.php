@@ -58,6 +58,14 @@ class Event_Calendar_Config {
 	protected $featured_on_top = false;
 
 	/**
+	 * Highlight featured events
+	 *
+	 * @var bool
+	 * @since 3.0.0
+	 */
+	protected $highlight_featured = false;
+
+	/**
 	 * List of filters for the schedule
 	 *
 	 * @var array
@@ -131,6 +139,7 @@ class Event_Calendar_Config {
 			'wrapper'           => false,
 			'only_featured'     => false,
 			'featured_on_top'   => WSB()->settings->is_highlight_featured() && WSB()->settings->get( WSB_Options::FEATURED_ON_TOP, false ),
+			'highlight_featured'=> WSB()->settings->is_highlight_featured(),
 			'filters'           => array( 'location', 'language', 'trainer', 'type' ),
 			'tag_type'          => WSB()->settings->is_highlight_featured() ? 'all' : 'free',
 			'skip_event_page'   => false,
@@ -242,6 +251,15 @@ class Event_Calendar_Config {
 	}
 
 	/**
+	 * Returns true if featured events should be highlighted
+	 *
+	 * @return bool
+	 */
+	public function is_highlight_featured() {
+		return $this->highlight_featured;
+	}
+
+	/**
 	 * Returns true if only featured events should be rendered
 	 *
 	 * @return bool
@@ -288,6 +306,7 @@ class Event_Calendar_Config {
 			$this->event_type_ids = preg_replace( '/\s/', '', $attrs['event_types'] );
 		}
 		$this->featured_on_top   = $attrs['featured_on_top'];
+		$this->highlight_featured= $attrs['highlight_featured'];
 		$this->layout            = $attrs['layout'];
 		$this->only_featured     = $attrs['only_featured'];
 		$this->filters           = $attrs['filters'];

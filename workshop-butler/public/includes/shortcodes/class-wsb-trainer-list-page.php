@@ -127,11 +127,10 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	 * @since 3.0.0
 	 */
 	protected function render_new_template() {
-		$content = 'templates/trainer-list.php';
-		$theme   = $this->get_theme();
 		ob_start();
-		include WSB()->plugin_path() . '/' . $content;
-
+		wsb_get_template( 'trainer-list.php', array(
+			'theme' => $this->get_theme(),
+		));
 		return ob_get_clean();
 	}
 

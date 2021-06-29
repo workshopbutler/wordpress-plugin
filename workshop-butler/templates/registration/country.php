@@ -19,21 +19,21 @@ is_a( $event, 'WorkshopButler\Event' ) || exit();
 
 ?>
 <select data-control
-		name="<?php echo esc_attr( $field->get_name() ); ?>"
-		title="<?php echo esc_attr( $field->get_label() ); ?>"
+		name="<?= esc_attr( $field->get_name() ); ?>"
+		title="<?= esc_attr( $field->get_label() ); ?>"
 	<?php
 	if ( $field->is_required() ) {
 		echo 'required';
 	}
-	if ( $event->get_state()->closed() ) {
+	if ( $event->state->closed() ) {
 		echo 'disabled';
 	}
 	?>
 >
-	<option value="" selected disabled><?php echo esc_html__( 'form.country', 'wsbintegration' ); ?></option>
+	<option value="" selected disabled><?= esc_html__( 'form.country', 'wsbintegration' ); ?></option>
 	<?php
 	foreach ( Countries::get() as $code => $name ) {
 		?>
-		<option value="<?php echo esc_attr( $code ); ?>"><?php echo esc_attr( $name ); ?></option>
+		<option value="<?= esc_attr( $code ); ?>"><?= esc_attr( $name ); ?></option>
 	<?php } ?>
 </select>

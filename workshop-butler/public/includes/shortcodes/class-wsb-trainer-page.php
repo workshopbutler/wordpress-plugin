@@ -153,11 +153,16 @@ class WSB_Trainer_Page extends WSB_Page {
 	 * @since 3.0.0
 	 */
 	protected function render_new_template() {
-		$content = 'templates/single-trainer.php';
-		$theme   = $this->get_theme();
-		ob_start();
-		include WSB()->plugin_path() . '/' . $content;
+		$trainer = WSB()->dict->get_trainer();
+		if( !is_a( $trainer, 'WorkshopButler\Trainer' )) {
+			return false;
+		}
 
+		ob_start();
+		wsb_get_template( 'single-trainer.php', array(
+			'theme' => $this->get_theme(),
+			'trainer' => $trainer,
+		));
 		return ob_get_clean();
 	}
 

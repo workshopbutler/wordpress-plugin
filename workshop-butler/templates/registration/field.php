@@ -15,8 +15,8 @@ is_a( $field, 'WorkshopButler\Field' ) || exit();
 
 ?>
 
-<div class="wsb-form__field <?php echo esc_attr( $field->get_type() ); ?>"
-		id="<?php echo esc_attr( 'wsb-form-field-' . $field->get_name() ); ?>">
+<div class="wsb-form__field <?= esc_attr( $field->get_type() ); ?>"
+		id="<?= esc_attr( 'wsb-form-field-' . $field->get_name() ); ?>">
 	<?php
 	do_action( 'wsb_registration_form_label' );
 	if ( 'textarea' === $field->get_type() ) {

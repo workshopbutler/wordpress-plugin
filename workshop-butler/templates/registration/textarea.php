@@ -14,13 +14,13 @@ $event = WSB()->dict->get_event();
 is_a( $event, 'WorkshopButler\Event' ) || exit();
 
 ?>
-<textarea name="<?php echo esc_attr( $field->get_name() ); ?>" data-control
-		title="<?php echo esc_attr( $field->get_label() ); ?>"
+<textarea name="<?= esc_attr( $field->get_name() ); ?>" data-control
+		title="<?= esc_attr( $field->get_label() ); ?>"
 	<?php
 	if ( $field->is_required() ) {
 		echo 'required';
 	}
-	if ( $event->get_state()->closed() ) {
+	if ( $event->state->closed() ) {
 		echo 'disabled';
 	}
 	?>

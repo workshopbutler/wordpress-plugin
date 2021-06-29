@@ -4,15 +4,15 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
+ * @global Event $event
+ * @global Event_Calendar_Config $config
  */
 
 use WorkshopButler\Formatter;
 
-$event = WSB()->dict->get_event();
-is_a( $event, 'WorkshopButler\Event' ) || exit();
 ?>
 <div class="wsb-tile-info wsb-schedule-language">
 	<?php
-	echo esc_html( Formatter::format( $event->get_language(), 'short' ) );
+	echo esc_html( Formatter::format( $event->language, 'short' ) );
 	?>
 </div>

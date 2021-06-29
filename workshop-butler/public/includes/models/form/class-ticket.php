@@ -55,16 +55,6 @@ class Ticket extends Field {
 	}
 
 	/**
-	 * Returns tickets
-	 *
-	 * @since 3.0.0
-	 * @return Paid_Tickets|Tickets
-	 */
-	public function get_tickets() {
-		return $this->tickets;
-	}
-
-	/**
 	 * Returns true if the tax should be excluded from the price
 	 *
 	 * @since 3.0.0

@@ -4,18 +4,17 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
+ * @global Event $event
+ * @global Event_Calendar_Config $config
  */
 
-$event = WSB()->dict->get_event();
-is_a( $event, 'WorkshopButler\Event' ) || exit();
-
-$thumbnail_url = $event->get_cover_image()->get_thumbnail_url();
+$thumbnail_url = $event->cover_image->get_thumbnail_url();
 
 if ( $thumbnail_url ) {
 	?>
-	<a href="<?php echo esc_attr( $event->get_url() ); ?>">
-		<img src="<?php echo esc_attr( $thumbnail_url ); ?>"
-				alt="<?php echo esc_attr( $event->get_title() ); ?>" width="300" height="200"/>
+	<a href="<?= esc_attr( $event->get_url() ); ?>">
+		<img src="<?= esc_attr( $thumbnail_url ); ?>"
+				alt="<?= esc_attr( $event->title ); ?>" width="300" height="200"/>
 	</a>
 
 	<?php

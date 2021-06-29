@@ -53,27 +53,27 @@ class Trainer_List_Hooks {
 	 * @see Trainer_List_Hooks::init() for the hook
 	 */
 	public static function item() {
-		wsb_get_template( 'trainer/list/item.php' );
+		Trainer_List_Hooks::with_default_context( 'trainer/list/item.php' );
 	}
 
 	public static function item_photo() {
-		wsb_get_template( 'trainer/list/photo.php' );
+		Trainer_List_Hooks::with_default_context( 'trainer/list/photo.php' );
 	}
 
 	public static function item_name() {
-		wsb_get_template( 'trainer/list/name.php' );
+		Trainer_List_Hooks::with_default_context( 'trainer/list/name.php' );
 	}
 
 	public static function item_country() {
-		wsb_get_template( 'trainer/list/country.php' );
+		Trainer_List_Hooks::with_default_context( 'trainer/list/country.php' );
 	}
 
 	public static function item_badges() {
-		wsb_get_template( 'trainer/list/badges.php' );
+		Trainer_List_Hooks::with_default_context( 'trainer/list/badges.php' );
 	}
 
 	public static function item_rating() {
-		wsb_get_template( 'trainer/list/rating.php' );
+		Trainer_List_Hooks::with_default_context( 'trainer/list/rating.php' );
 	}
 
 	public static function list_items() {
@@ -84,5 +84,14 @@ class Trainer_List_Hooks {
 		}
 	}
 
+	private static function with_default_context( $template ) {
+		$trainer = WSB()->dict->get_trainer();
+		if( !is_a( $trainer, 'WorkshopButler\Trainer' )) {
+			return false;
+		}
+		wsb_get_template( $template, array(
+			'trainer' => $trainer,
+		));
+	}
 
 }
