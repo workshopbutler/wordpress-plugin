@@ -119,9 +119,10 @@ class WSB_Integration_Public {
 			wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb.wordpress.css' );
 		} else {
 			// !FIXME: set new styles here
-			wp_register_style( 'wsb-fontawesome-styles', plugin_dir_url( __FILE__ ) . 'css/fontawesome-all.min.css' );
-			wp_register_style( 'wsb-themes', plugin_dir_url( __FILE__ ) . 'css/styles.1.12.1.min.css' );
-			wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb.wordpress.css' );
+			wp_register_style( 'wsb-fontawesome-styles', 'https://use.fontawesome.com/releases/v5.0.8/css/all.css' );
+			wp_register_style( 'wsb-flag-icons', 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/css/flag-icon.min.css' );
+			wp_register_style( 'wsb-themes', 'https://cdn.workshopbutler.com/widgets.1.15.5.min.css' );
+			//wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb.wordpress.css' );
 		}
 
 		wp_register_style( 'wsb-font-arapey', 'https://fonts.googleapis.com/css?family=Arapey' );
@@ -133,6 +134,7 @@ class WSB_Integration_Public {
 		wp_enqueue_style( 'wsb-themes' );
 		wp_enqueue_style( 'wsb-wordpress-themes' );
 		wp_enqueue_style( 'wsb-fontawesome-styles' );
+		wp_enqueue_style( 'wsb-flag-icons' );
 	}
 
 	/**

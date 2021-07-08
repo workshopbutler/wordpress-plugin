@@ -4,12 +4,14 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
- * @global Trainer $trainer
+ * @global WorkshopButler\Trainer $trainer
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 if ( $trainer->stats->total->public_stats->rating > 0 ) { ?>
-    <i class="fas fa-star"></i>
-    <?= esc_html($trainer->stats->total->public_stats->rating) ?>
+    <div class="wsb-trainer-tile__rating">
+        <?= $trainer->stats->total->public_stats->get_rounded_rating() ?>
+        <i class="fas fa-star"></i>
+    </div>
 <?php }

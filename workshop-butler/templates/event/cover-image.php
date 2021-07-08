@@ -4,8 +4,8 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
- * @global Event $event
- * @global Single_Event_Config $config
+ * @global WorkshopButler\Event $event
+ * @global WorkshopButler\Single_Event_Config $config
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
@@ -13,9 +13,8 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 $url = $event->cover_image->url;
 
-if ( $url ) {
-	?>
-	<img src="<?= esc_attr( $url ); ?>"
-			alt="<?= esc_attr( $event->title ); ?>" width="100%"/>
-	<?php
+if ( !$url ) {
+	return;
 }
+?>
+<img src="<?= esc_attr( $url ); ?>" alt="<?= esc_attr( $event->title ); ?>" class="wsb-cover-image"/>

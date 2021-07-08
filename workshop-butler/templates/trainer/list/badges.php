@@ -4,12 +4,14 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
- * @global Trainer $trainer
+ * @global WorkshopButler\Trainer $trainer
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 ?>
-<?php foreach ( $trainer->badges as $badge ) { ?>
-    <img src="<?= esc_attr($badge->url) ?>" width="30px"/>
-<?php } ?>
+<div class="wsb-trainer-tile__badges">
+    <?php foreach ( $trainer->badges as $badge ) { ?>
+        <img src="<?= esc_attr($badge->url) ?>" width="30px"/>
+    <?php } ?>
+</div>

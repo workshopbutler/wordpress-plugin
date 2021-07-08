@@ -4,12 +4,11 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
+ * @global WorkshopButler\Event $event
+ * @global WorkshopButler\Field $field
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
-
-$field = WSB()->dict->get_form_field();
-is_a( $field, 'WorkshopButler\Field' ) || exit();
 
 /**
  * This is a quite dirty hack. In 'converter.php' we replace 'street_1' and 'street_2' with

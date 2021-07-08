@@ -4,7 +4,7 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
- * @global Trainer $trainer
+ * @global WorkshopButler\Trainer $trainer
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
@@ -18,10 +18,11 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
      data-trainer-badge="<?= esc_attr(implode(",", $trainer->name_of_badges())) ?>"
      data-trainer-trainer="<?= esc_attr($trainer->get_full_name()) ?>">
     <?php do_action( 'wsb_trainer_list_item_photo' ); ?>
+    <?php do_action( 'wsb_trainer_list_item_rating' ); ?>
     <div class="wsb-trainer-tile__info">
         <?php do_action( 'wsb_trainer_list_item_name' ); ?>
         <?php do_action( 'wsb_trainer_list_item_country' ); ?>
         <?php do_action( 'wsb_trainer_list_item_badge' ); ?>
-        <?php do_action( 'wsb_trainer_list_item_rating' ); ?>
+
     </div>
 </div>

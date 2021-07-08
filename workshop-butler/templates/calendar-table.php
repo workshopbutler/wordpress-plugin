@@ -32,5 +32,6 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 				<?= esc_html__( 'schedule.noEvents', 'wsbintegration' ); ?>
 			</div>
 		</div>
+		<div class="wsb-copyright"><a href="https://workshopbutler.com/" target="_blank">Powered by Workshop Butler</a></div>
 	</div>
 </div>

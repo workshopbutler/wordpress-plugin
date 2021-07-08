@@ -4,14 +4,11 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
+ * @global WorkshopButler\Event $event
+ * @global WorkshopButler\Field $field
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
-
-$field = WSB()->dict->get_form_field();
-is_a( $field, 'WorkshopButler\Field' ) || exit();
-$event = WSB()->dict->get_event();
-is_a( $event, 'WorkshopButler\Event' ) || exit();
 
 ?>
 <input type="checkbox" value="yes" data-control

@@ -4,8 +4,8 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
- * @global Event $event
- * @global Single_Event_Config $config
+ * @global WorkshopButler\Event $event
+ * @global WorkshopButler\Single_Event_Config $config
  */
 
 use WorkshopButler\Formatter;

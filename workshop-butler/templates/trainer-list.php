@@ -19,10 +19,10 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
                 <?php do_action( 'wsb_trainer_list_items' ); ?>
                 <?php do_action( 'workshopbutler_after_trainer_list' ); ?>
             </div>
-            <div class="wsb-no-trainers">
+            <div class="wsb-no-trainers" data-empty-list>
                 <?= esc_html__( 'schedule.noEvents', 'wsbintegration' ); ?>
             </div>
          </div>
-
+         <div class="wsb-copyright"><a href="https://workshopbutler.com/" target="_blank">Powered by Workshop Butler</a></div>
     </div>
 </div>

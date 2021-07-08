@@ -75,6 +75,10 @@ class Social_Links {
 	 */
 	public $facebook;
 
+	public function is_empty() {
+		return !! ( $this->website || $this->blog || $this->facebook || $this->twitter || $this->linked_in );
+	}
+
 	/**
 	 * Social_Links constructor.
 	 *

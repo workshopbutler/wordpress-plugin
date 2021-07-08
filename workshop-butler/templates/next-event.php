@@ -12,8 +12,8 @@
  *
  * @package     WorkshopButler\Templates
  * @version     3.0.0
- * @global Event $event
- * @global Event_Calendar_Config $config
+ * @global WorkshopButler\Event $event
+ * @global WorkshopButler\Event_Calendar_Config $config
  * @global string $theme
  */
 

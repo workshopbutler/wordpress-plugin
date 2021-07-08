@@ -24,8 +24,7 @@ class Single_Event_Hooks {
 	 */
 	public static function init() {
 		add_action( 'wsb_event_register_button', array( 'WorkshopButler\Hooks\Single_Event_Hooks', 'register_button' ), 10 );
-		add_action( 'wsb_event_schedule', array( 'WorkshopButler\Hooks\Single_Event_Hooks', 'schedule' ), 10 );
-		add_action( 'wsb_event_location', array( 'WorkshopButler\Hooks\Single_Event_Hooks', 'location' ), 10 );
+		add_action( 'wsb_event_info', array( 'WorkshopButler\Hooks\Single_Event_Hooks', 'info' ), 10 );
 		add_action( 'wsb_event_trainers', array( 'WorkshopButler\Hooks\Single_Event_Hooks', 'trainers' ), 10 );
 		add_action( 'wsb_event_description', array( 'WorkshopButler\Hooks\Single_Event_Hooks', 'description' ), 10 );
 		add_action( 'wsb_event_cover_image', array( 'WorkshopButler\Hooks\Single_Event_Hooks', 'cover_image' ), 10 );
@@ -69,13 +68,6 @@ class Single_Event_Hooks {
 	}
 
 	/**
-	 * Renders the event's location
-	 */
-	public static function location() {
-		Single_Event_Hooks::with_default_context( 'event/location.php' );
-	}
-
-	/**
 	 * Renders the event's description
 	 */
 	public static function description() {
@@ -83,10 +75,10 @@ class Single_Event_Hooks {
 	}
 
 	/**
-	 * Renders the event's schedule
+	 * Renders the event's info
 	 */
-	public static function schedule() {
-		Single_Event_Hooks::with_default_context( 'event/schedule.php' );
+	public static function info() {
+		Single_Event_Hooks::with_default_context( 'event/info.php' );
 	}
 
 	/**

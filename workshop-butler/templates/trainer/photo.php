@@ -4,15 +4,13 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
- * @global Trainer $trainer
+ * @global WorkshopButler\Trainer $trainer
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-$url = $trainer->photo;
+$url = $trainer->photo ?  $trainer->photo : 'default-trainer.svg';
 
-if ( $url ) {
 ?>
-<img src="<?= esc_attr( $url ); ?>"
-	alt="<?= esc_attr( $trainer->get_full_name() ); ?>" width="100%"/>
-<?php } ?>
+
+<img src="<?= esc_attr( $url  ); ?>" alt="<?= esc_attr( $trainer->get_full_name() ); ?>"width="100%"/>

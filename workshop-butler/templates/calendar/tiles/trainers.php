@@ -4,35 +4,19 @@
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
- * @global Event $event
- * @global Event_Calendar_Config $config
+ * @global WorkshopButler\Event $event
+ * @global WorkshopButler\Event_Calendar_Config $config
  */
 
 ?>
 <div class="wsb-tile-content">
 	<?php foreach ( $event->trainers as $trainer ) { ?>
 		<div class="wsb-trainer">
-			<?php if ( $trainer->url ) { ?>
-				<a href="<?= esc_attr( $trainer->url ); ?>">
-					<img class="wsb-photo" src="<?= esc_attr( $trainer->photo ); ?>"
-							alt="<?= esc_attr( $trainer->get_full_name() ); ?>"/>
-				</a>
-				<a class="wsb-name" href=" <?= esc_attr( $trainer->url ); ?>">
-					<?php
-					if ( $config->is_show_trainer_name() ) {
-						echo esc_html( $trainer->get_full_name() );
-					}
-					?>
-				</a>
-			<?php } else { ?>
-				<img class="wsb-photo" src="<?= esc_attr( $trainer->photo ); ?>"
-						alt="<?= esc_attr( $trainer->get_full_name() ); ?>"/>
-				<?php
-				if ( $config->is_show_trainer_name() ) {
-					echo esc_html( $trainer->get_full_name() );
-				}
-				?>
-			<?php } ?>
+			<img class="wsb-photo" src="<?= esc_attr( $trainer->photo ); ?>"
+					alt="<?= esc_attr( $trainer->get_full_name() ); ?>"/>
+			<?php if ( $config->is_show_trainer_name() ) {
+				echo esc_html( $trainer->get_full_name() );
+			} ?>
 		</div>
 	<?php } ?>
 </div>

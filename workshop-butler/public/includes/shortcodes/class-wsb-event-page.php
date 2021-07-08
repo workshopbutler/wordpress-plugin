@@ -174,6 +174,7 @@ class WSB_Event_Page extends WSB_Page {
 		wsb_get_template( 'single-event.php', array(
 			'theme' => $this->get_theme(),
 			'event' => $event,
+			'config' => WSB()->dict->get_single_event_config(),
 		));
 		return ob_get_clean();
 	}
