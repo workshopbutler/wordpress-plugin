@@ -15,7 +15,7 @@ $without_name = $config->is_show_trainer_name() ? '' : 'without-name';
 		<div class="wsb-trainer">
 			<?php if ( $trainer->url ) { ?>
 				<a href="<?= esc_attr( $trainer->url ); ?>">
-					<img class="wsb-photo" src="<?= esc_attr( $trainer->photo ); ?>"
+					<img class="wsb-photo" src="<?= esc_attr( $trainer->get_photo_or_default() ); ?>"
 							alt="<?= esc_attr( $trainer->get_full_name() ); ?>"/>
 				</a>
 				<a class="wsb-name" href="<?= esc_attr( $trainer->url ); ?>">
@@ -26,7 +26,7 @@ $without_name = $config->is_show_trainer_name() ? '' : 'without-name';
 					?>
 				</a>
 			<?php } else { ?>
-				<img class="wsb-photo" src="<?= esc_attr( $trainer->photo ); ?>"
+				<img class="wsb-photo" src="<?= esc_attr( $trainer->get_photo_or_default() ); ?>"
 						alt="<?= esc_attr( $trainer->get_full_name() ); ?>"/>
 				<?php
 				if ( $config->is_show_trainer_name() ) {

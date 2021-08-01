@@ -25,7 +25,7 @@ class Single_Trainer_Hooks {
 	public static function init() {
 		add_action( 'wsb_trainer_photo', array( 'WorkshopButler\Hooks\Single_Trainer_Hooks', 'photo' ), 10 );
 		add_action( 'wsb_trainer_email', array( 'WorkshopButler\Hooks\Single_Trainer_Hooks', 'email' ), 10 );
-		add_action( 'wsb_trainer_email', array( 'WorkshopButler\Hooks\Single_Trainer_Hooks', 'country' ), 10 );
+		add_action( 'wsb_trainer_country', array( 'WorkshopButler\Hooks\Single_Trainer_Hooks', 'country' ), 10 );
 		add_action( 'wsb_trainer_badges', array( 'WorkshopButler\Hooks\Single_Trainer_Hooks', 'badges' ), 10 );
 		add_action( 'wsb_trainer_bio', array( 'WorkshopButler\Hooks\Single_Trainer_Hooks', 'bio' ), 10 );
 		add_action( 'wsb_trainer_testimonials', array( 'WorkshopButler\Hooks\Single_Trainer_Hooks', 'testimonials' ), 10 );

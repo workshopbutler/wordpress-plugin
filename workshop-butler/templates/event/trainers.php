@@ -19,10 +19,10 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 			<?php if ( $trainer->url ) { ?>
 				<a href="<?= esc_attr( $trainer->url ); ?>"
 						class="wsb-profile__img"
-						style="background-image: url(<?= esc_attr( $trainer->photo ); ?>);"></a>
+						style="background-image: url(<?= esc_attr( $trainer->get_photo_or_default() ); ?>);"></a>
 			<?php } else { ?>
 				<div class="wsb-profile__img"
-				style="background-image: url(<?= esc_attr( $trainer->photo ); ?>);"></div>
+				style="background-image: url(<?= esc_attr( $trainer->get_photo_or_default() ); ?>);"></div>
 			<?php } ?>
 
 

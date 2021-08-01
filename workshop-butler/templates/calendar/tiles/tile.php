@@ -23,7 +23,7 @@ $show_featured = $config->is_highlight_featured() && $event->is_featured ? 'wsb-
 
 	<?php if( $event->cover_image->thumbnail ) { ?>
 		<img class="wsb-tile-image" alt="<?= esc_attr( $event->title ); ?>"
-	  		src="<?= esc_attr( $event->cover_image->thumbnail ); ?>" />
+	  		src="<?= esc_attr( $event->cover_image->thumbnail ); ?>" loading="lazy" />
 	<?php } ?>
 
     <div class="wsb-tile-header with-stub">

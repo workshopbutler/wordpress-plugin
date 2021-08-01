@@ -271,7 +271,8 @@ var EventRegistrationForm = /*#__PURE__*/function () {
     this.successMessage.hide();
     this.initPromoActivation();
     this.initActiveTicketSelection();
-    this.deactivateCardPayment();
+    // Since stripe supports TLS-less pages we don't need it anymore
+    // this.deactivateCardPayment();
     this.lockIfNoPaymentMethod();
   };
 

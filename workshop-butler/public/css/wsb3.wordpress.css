@@ -1,0 +1,21 @@
+.b-error {
+  position: absolute;
+  right: 0px;
+  top: 32px;
+  font-size: 10px;
+  color: #E73B2B;
+}
+
+.wsb-content .wsb-form__payment-alert {
+  background-color: #E73B2B;
+  color: white;
+  padding: 1em;
+}
+.wsb-content .wsb-not-secure-alert,
+.wsb-content .wsb-no-payment-method {
+  display: none;
+}
+
+.wsb-content .wsb-event-page .wsb-header h1 {
+  display: none;
+}

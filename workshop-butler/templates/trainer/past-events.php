@@ -11,8 +11,8 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 ?>
 
-<div class="wsb-workshops" id="past-events">
-    <div class="wsb-workshops__title">
+<div class="wsb-events" id="past-events">
+    <div class="wsb-events__title">
     <?= esc_html__('sidebar.past', 'wsbintegration'); ?>
     </div>
     <div data-events-list>

@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
                     <div class="trainer-profile-header">
                         <?php do_action( 'wsb_trainer_photo' ); ?>
                         <div class="wsb-trainer-title">
-                            <h1 class="wsb-trainer-name"><?= esc_html( $trainer->get_full_name() ); ?></h1>
+                            <h2 class="wsb-trainer-name"><?= esc_html( $trainer->get_full_name() ); ?></h2>
                             <?php do_action( 'wsb_trainer_country' ); ?>
                         </div>
                         <div class="wsb-trainer-buttons">

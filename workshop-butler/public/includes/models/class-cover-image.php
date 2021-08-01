@@ -24,7 +24,7 @@ class Cover_Image {
 	 * @return Cover_Image
 	 */
 	static function from_json( $json ) {
-		return $json ? new Cover_Image( $json->url, $json->thumbnail ) : new Cover_Image( null, null );
+		return $json ? new Cover_Image( $json->url, $json->thumbnail_m ) : new Cover_Image( null, null );
 	}
 
 	/**

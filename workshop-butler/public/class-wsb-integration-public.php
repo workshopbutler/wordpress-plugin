@@ -114,17 +114,14 @@ class WSB_Integration_Public {
 	 */
 	public function enqueue_styles() {
 		if( $this->settings->get( WSB_Options::USE_OLD_TEMPLATES )) {
-			wp_register_style( 'wsb-fontawesome-styles', plugin_dir_url( __FILE__ ) . 'css/fontawesome-all.min.css' );
 			wp_register_style( 'wsb-themes', plugin_dir_url( __FILE__ ) . 'css/styles.1.12.1.min.css' );
 			wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb.wordpress.css' );
 		} else {
-			// !FIXME: set new styles here
-			wp_register_style( 'wsb-fontawesome-styles', 'https://use.fontawesome.com/releases/v5.0.8/css/all.css' );
 			wp_register_style( 'wsb-flag-icons', 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/css/flag-icon.min.css' );
-			wp_register_style( 'wsb-themes', 'https://cdn.workshopbutler.com/widgets.1.15.5.min.css' );
-			//wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb.wordpress.css' );
+			wp_register_style( 'wsb-themes', plugin_dir_url( __FILE__ ) . 'css/widgets.1.15.5.min.css' );
+			wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb3.wordpress.css' );
 		}
-
+		wp_register_style( 'wsb-fontawesome-styles', plugin_dir_url( __FILE__ ) . 'css/fontawesome-all.min.css' );
 		wp_register_style( 'wsb-font-arapey', 'https://fonts.googleapis.com/css?family=Arapey' );
 		wp_register_style( 'wsb-font-montserrat', 'https://fonts.googleapis.com/css?family=Montserrat' );
 		wp_register_style( 'wsb-font-droid-sans', 'https://fonts.googleapis.com/css?family=Droid+Sans' );
@@ -171,14 +168,15 @@ class WSB_Integration_Public {
 			array(
 				'jquery',
 				'wsb-dateformat',
+				'wsb-owl-carousel',
 			),
 			$this->version,
 			true
 		);
 
+		wp_register_script( 'wsb-owl-carousel', plugin_dir_url( __FILE__ ) . 'js/owl.carousel.min.js', array( 'jquery' ), $this->version, true );
 		wp_register_script( 'wsb-dateformat', plugin_dir_url( __FILE__ ) . 'js/jquery-dateFormat.min.js', array( 'jquery' ), $this->version, true );
 		wp_register_script( 'wsb-all-events-scripts', plugin_dir_url( __FILE__ ) . 'js/all-events-scripts.js', array( 'jquery' ), $this->version, true );
-
 		wp_register_script( 'wsb-next-event', plugin_dir_url( __FILE__ ) . 'js/next-event.js', array( 'jquery' ), $this->version, true );
 		wp_deregister_script( 'jquery' );
 		wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', false, null );

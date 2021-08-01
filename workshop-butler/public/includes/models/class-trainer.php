@@ -252,4 +252,8 @@ class Trainer {
 		return $names;
 	}
 
+	public function get_photo_or_default() {
+		return $this->photo ?  $this->photo : plugin_dir_url( __FILE__ ) . '../../img/stub-trainer-photo.svg';
+	}
+
 }

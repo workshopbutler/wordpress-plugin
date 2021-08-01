@@ -15,9 +15,8 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 <div class="<?= esc_attr( $theme ); ?>">
 	<div class="wsb-content">
 		<div class="wsb-page wsb-event-page">
-			<!-- !FIXME: cover image -->
 			<div class="wsb-header">
-				<?php if ( $event->confirmed ) { ?><div style="color:#819D44;">Confirmed <i class="fas fa-check"></i></div><?php } ?>
+				<?php if ( 1 || $event->confirmed ) { ?><div style="color:#819D44;">Confirmed <i class="fas fa-check"></i></div><?php } ?>
 				<h1><?= esc_html( $event->title ) ?></h1>
 			</div>
 			<div class="wsb-body">
@@ -25,7 +24,6 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 					<?php do_action( 'wsb_event_cover_image' ); ?>
 					<?php do_action( 'wsb_event_info' ); ?>
 					<?php do_action( 'wsb_event_register_button' ); ?>
-					<!-- !FIXME: testimonials -->
 					<?php do_action( 'wsb_event_description' ); ?>
 				</div>
 

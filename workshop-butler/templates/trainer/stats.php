@@ -31,7 +31,7 @@ $render_based_on = function ($evaluations) {
 
     <div class="wsb-trainer-number-box">
         <span class="wsb-big-number">
-        <?= esc_html( $trainer->stats->total->public_stats->rating ) ?>
+        <?= esc_html( $trainer->stats->total->public_stats->get_rounded_rating() ) ?>
         </span>
 
         <i class="fas fa-star"></i>
@@ -51,7 +51,7 @@ $render_based_on = function ($evaluations) {
 
     <div class="wsb-trainer-number-box">
         <span class="wsb-big-number">
-        <?= esc_html( $trainer->stats->total->private_stats->rating ) ?>
+        <?= esc_html( $trainer->stats->total->private_stats->get_rounded_rating() ) ?>
         </span>
 
         <i class="fas fa-star"></i>
