@@ -12,6 +12,6 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 if ( $event->description ) {
 	?>
-	<div class="wsb-description-text"><?= esc_html($event->description); ?></div>
+	<div class="wsb-description-text"><?= $event->description ?></div>
 	<?php
 }
