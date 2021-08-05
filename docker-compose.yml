@@ -2,8 +2,7 @@ version: "3.5"
 
 services:
   wordpress:
-#    image: "wordpress:${WP_VERSION:-4.9.6}-php${PHP_VERSION:-7.2}-apache"
-    build: .
+    image: "wordpress:${WP_VERSION:-5.8}-php${PHP_VERSION:-7.4}-apache"
     environment:
       VIRTUAL_HOST: "${DOCKER_DEV_DOMAIN:-project.test}"
       WORDPRESS_DB_HOST: "mysql"
@@ -20,7 +19,7 @@ services:
       - "wp:/var/www/html:rw"
       - "./workshop-butler:/var/www/html/wp-content/plugins/workshop-butler:ro"
   wp-cli:
-    image: "wordpress:cli-php${PHP_VERSION:-7.2}"
+    image: "wordpress:cli-php${PHP_VERSION:-7.4}"
     environment:
     - APACHE_RUN_USER="www-data"
     - APACHE_RUN_GROUP="www-data"
@@ -30,7 +29,6 @@ services:
     - "back"
     volumes:
     - "wp:/var/www/html:rw"
-    - "./bin/install-wp.sh:/usr/local/bin/install-wp:ro"
     - "./workshop-butler:/var/www/html/wp-content/plugins/workshop-butler:ro"
   mysql:
     image: "mariadb:10.6"

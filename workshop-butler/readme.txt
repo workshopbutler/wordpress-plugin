@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: workshopbutlers
 Tags: event management, training management, event schedule, workshop crm, online registrations
-Requires at least: 4.6
-Tested up to: 5.6
-Requires PHP: 5.3
+Requires at least: 5.2
+Tested up to: 5.8
+Requires PHP: 7.2.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,6 +68,10 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 3.0.0 =
+* Completely new template system
+* New templates layout
+
 = 2.14.0 =
 * Add PayPal payments
 

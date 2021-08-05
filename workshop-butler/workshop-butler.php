@@ -11,17 +11,18 @@
  * Plugin URI:        https://github.com/workshopbutler/wordpress-plugin
  * Description:       This plugin integrates Workshop Butler Events, Trainers and Testimonials to your WordPress
  *     website.
- * Version:           3.0.0-dev
+ * Version:           3.0.0
  * Author:            Workshop Butler
  * Author URI:        https://workshopbutler.com/
  * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * License URI:       https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
  * Text Domain:       wsbintegration
  * Domain Path:       /languages
- * Requires PHP: 7.1
+ * Requires PHP:      7.2.5
  */
 
-require 'vendor/autoload.php';
+// Load composer modules
+require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
 use WorkshopButler\WSB_Integration;
 

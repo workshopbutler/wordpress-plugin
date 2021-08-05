@@ -248,7 +248,7 @@ class WSB_Options {
 	 * Returns true if featured events are active
 	 *
 	 * @return bool
-	 * @since 2.12.0
+	 * @since 3.0.0
 	 */
 	public function is_highlight_featured() {
 		return $this->get( self::FEATURED_EVENTS, false );

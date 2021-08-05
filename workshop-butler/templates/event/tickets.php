@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 if ( $event->with_tickets() ) {
 	?>
-	<div class="wsb-tickets wsb-info">
+	<div class="wsb-tickets">
 		<?php if ( $event->is_free ) { ?>
 			<div class="wsb-ticket">
 				<div class="wsb-ticket__val">
@@ -41,21 +41,21 @@ if ( $event->with_tickets() ) {
 						<div class="wsb-ticket__name">
 							<?= esc_html( $ticket->name ); ?>
 						</div>
+						<div class="wsb-ticket__footer">
 						<?php
-						$description = Formatter::format( $ticket, 'desc' );
-						if ( $description ) {
-							?>
-							<div class="wsb-ticket__desc">
-								<?= esc_html( $description ); ?>
-							</div>
-							<?php
-						}
-						if ( ! $ticket->ended() && $config->is_show_number_of_tickets() ) {
-							?>
-							<div class="wsb-ticket__footer">
-								<?= esc_html( Formatter::format( $ticket, 'state' ) ); ?>
-							</div>
-						<?php } ?>
+							$description = Formatter::format( $ticket, 'desc' );
+							if ( $description ) {
+								echo esc_html( $description );
+							}
+
+							if ( ! $ticket->ended() && $config->is_show_number_of_tickets() ) {
+								if ( $description ) {
+									echo ' • ';
+								}
+								echo esc_html( Formatter::format( $ticket, 'state' ) );
+
+							} ?>
+						</div>
 					</div>
 					<?php
 				}

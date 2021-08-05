@@ -3,7 +3,7 @@
     {% if without_url %}
         <img src="{{ url }}" alt="{{ event.title }}" width="{{ width }}" height="{{ height }}"/>
     {% else %}
-        <a href="{{ event.url }}">
+        <a href="{{ event.get_url() }}">
             <img src="{{ url }}" alt="{{ event.title }}"  width="{{ width }}" height="{{ height }}"/>
         </a>
     {% endif %}

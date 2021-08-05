@@ -33,7 +33,7 @@ function wsb_get_template( $template_name, $args = array(), $template_path = '',
 			)
 		)
 	);
-	$template  = (string) wp_cache_get( $cache_key, 'workshopbutler' );
+	$template  = (string) wp_cache_get( $cache_key, 'wsbintegration' );
 
 	if ( ! $template ) {
 		$template = wsb_locate_template( $template_name, $template_path, $default_path );
@@ -53,7 +53,7 @@ function wsb_get_template( $template_name, $args = array(), $template_path = '',
 	if ( $filter_template !== $template ) {
 		if ( ! file_exists( $filter_template ) ) {
 			/* translators: %s template */
-			wsb_doing_it_wrong( __FUNCTION__, sprintf( __( '%s does not exist.', 'workshopbutler' ), '<code>' . $filter_template . '</code>' ), '3.0.0' );
+			wsb_doing_it_wrong( __FUNCTION__, sprintf( __( '%s does not exist.', 'wsbintegration' ), '<code>' . $filter_template . '</code>' ), WSB()->get_version() );
 
 			return;
 		}
@@ -69,21 +69,17 @@ function wsb_get_template( $template_name, $args = array(), $template_path = '',
 
 	if ( ! empty( $args ) && is_array( $args ) ) {
 		if ( isset( $args['action_args'] ) ) {
-			wsb_doing_it_wrong(
-				__FUNCTION__,
-				__( 'action_args should not be overwritten when calling wsb_get_template.', 'workshopbutler' ),
-				'3.0.0'
-			);
+			wsb_doing_it_wrong( __FUNCTION__, __( 'action_args should not be overwritten when calling wsb_get_template.', 'wsbintegration' ), WSB()->get_version() );
 			unset( $args['action_args'] );
 		}
 		extract( $args ); // @codingStandardsIgnoreLine
 	}
 
-	do_action( 'workshopbutler_before_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
+	do_action( 'wsb_before_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
 
 	include $action_args['located'];
 
-	do_action( 'workshopbutler_after_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
+	do_action( 'wsb_after_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
 }
 
 /**
@@ -138,7 +134,7 @@ function wsb_locate_template( $template_name, $template_path = '', $default_path
 	}
 
 	// Return what we found.
-	return apply_filters( 'workshopbutler_locate_template', $template, $template_name, $template_path );
+	return apply_filters( 'wsb_locate_template', $template, $template_name, $template_path );
 }
 
 /**
@@ -153,7 +149,7 @@ function wsb_locate_template( $template_name, $template_path = '', $default_path
  */
 function wsb_get_template_part( $slug, $name = '' ) {
 	$cache_key = sanitize_key( implode( '-', array( 'template-part', $slug, $name, WSB()->get_version() ) ) );
-	$template  = (string) wp_cache_get( $cache_key, 'workshopbutler' );
+	$template  = (string) wp_cache_get( $cache_key, 'wsbintegration' );
 
 	if ( ! $template ) {
 		if ( $name ) {
@@ -171,7 +167,7 @@ function wsb_get_template_part( $slug, $name = '' ) {
 		}
 
 		if ( ! $template ) {
-			// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/workshopbutler/slug.php.
+			// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/workshop-butler/slug.php.
 			$template = WSB_TEMPLATE_DEBUG_MODE ? '' : locate_template(
 				array(
 					"{$slug}.php",
@@ -190,7 +186,7 @@ function wsb_get_template_part( $slug, $name = '' ) {
 	}
 
 	// Allow 3rd party plugins to filter template file from their plugin.
-	$template = apply_filters( 'wc_get_template_part', $template, $slug, $name );
+	$template = apply_filters( 'wsb_get_template_part', $template, $slug, $name );
 
 	if ( $template ) {
 		load_template( $template, false );
@@ -220,7 +216,7 @@ function wsb_get_path_define_tokens() {
 		}
 	}
 
-	return apply_filters( 'workshopbutler_get_path_define_tokens', $path_tokens );
+	return apply_filters( 'wsb_get_path_define_tokens', $path_tokens );
 }
 
 /**
@@ -232,16 +228,16 @@ function wsb_get_path_define_tokens() {
  * @since 3.0.0
  */
 function wsb_set_template_cache( $cache_key, $template ) {
-	wp_cache_set( $cache_key, $template, 'workshopbutler' );
+	wp_cache_set( $cache_key, $template, 'wsbintegration' );
 
-	$cached_templates = wp_cache_get( 'cached_templates', 'workshopbutler' );
+	$cached_templates = wp_cache_get( 'cached_templates', 'wsbintegration' );
 	if ( is_array( $cached_templates ) ) {
 		$cached_templates[] = $cache_key;
 	} else {
 		$cached_templates = array( $cache_key );
 	}
 
-	wp_cache_set( 'cached_templates', $cached_templates, 'workshopbutler' );
+	wp_cache_set( 'cached_templates', $cached_templates, 'wsbintegration' );
 }
 
 /**
@@ -315,7 +311,7 @@ function wsb_doing_it_wrong( $function, $message, $version ) {
 	// @codingStandardsIgnoreStart
 	$message .= ' Backtrace: ' . wp_debug_backtrace_summary();
 
-	if ( is_ajax() || WSB()->is_rest_api_request() ) {
+	if ( wp_doing_ajax() || WSB()->is_rest_api_request() ) {
 		do_action( 'doing_it_wrong_run', $function, $message, $version );
 		error_log( "{$function} was called incorrectly. {$message}. This message was added in version {$version}." );
 	} else {

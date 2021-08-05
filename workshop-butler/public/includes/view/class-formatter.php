@@ -40,7 +40,7 @@ class Formatter {
 			return Language_Formatter::format( $object, $type );
 		}
 		if ( $object instanceof Ticket_Type ) {
-			return esc_html_e( Ticket_Formatter::format( $object, $type ) );
+			return esc_html__( Ticket_Formatter::format( $object, $type ) );
 		}
 		if ( $object instanceof Event_State ) {
 			return Event_State_Formatter::format( $object );

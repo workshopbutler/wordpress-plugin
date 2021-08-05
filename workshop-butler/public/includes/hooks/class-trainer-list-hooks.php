@@ -11,7 +11,6 @@ namespace WorkshopButler\Hooks;
 use WorkshopButler\Trainer_Filters;
 
 require_once WSB_ABSPATH . '/includes/wsb-core-functions.php';
-require_once WSB_ABSPATH . '/includes/wsb-conditional-functions.php';
 
 /**
  * Class Trainer_List_Hooks

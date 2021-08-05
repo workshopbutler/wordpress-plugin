@@ -9,7 +9,6 @@
 namespace WorkshopButler\Hooks;
 
 require_once WSB_ABSPATH . '/includes/wsb-core-functions.php';
-require_once WSB_ABSPATH . '/includes/wsb-conditional-functions.php';
 
 /**
  * Class Registration_Form_Hooks

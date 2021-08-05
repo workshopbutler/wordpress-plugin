@@ -8,8 +8,6 @@
 
 namespace WorkshopButler\Config;
 
-require WSB_ABSPATH . 'vendor/autoload.php';
-
 /**
  * Class Calendar_Item_Elements
  *

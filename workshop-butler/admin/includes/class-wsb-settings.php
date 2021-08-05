@@ -266,6 +266,48 @@ class WSB_Settings {
 	protected function get_general_settings() {
 		return array(
 			array(
+				'id' => 'info_old_template',
+				'type' => 'info',
+				'notice' => false,
+				'style' => 'critical',
+				'title' => 'Please, upgrade to the new template system',
+				'desc'  => 'Upgrade to the new template system by turning off the old templates. Reade more in the <a href="https://workshopbutler.com" target="_blank">upgrade guide</a>',
+				'required' => array(
+					array(WSB_Options::ALLOW_TEMPLATE_SWITCHING, 'equals', true),
+					array(WSB_Options::USE_OLD_TEMPLATES, 'equals', true)
+				)
+			),
+			array(
+				'id' => 'info_templates_switch',
+				'type' => 'info',
+				'notice' => false,
+				'style' => 'warning',
+				'title' => 'Complete the upgrade to the new template system',
+				'desc'  => 'Ensure that everything works well and complete the upgrade by disabling the template switching',
+				'required' => array(
+					array(WSB_Options::ALLOW_TEMPLATE_SWITCHING, 'equals', true),
+					array(WSB_Options::USE_OLD_TEMPLATES, 'equals', false)
+				)
+			),
+			WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING )?array(
+				'id'      => WSB_Options::USE_OLD_TEMPLATES,
+				'type'    => 'switch',
+				'title'   => 'Old templates',
+				'desc'    => 'Switch to a new template system with a modern design',
+				'default' => true,
+				'required' => array(WSB_Options::ALLOW_TEMPLATE_SWITCHING, 'equals', true)
+			):array(),
+			// !FIXME: hide next section too
+			array(
+				'id'      => WSB_Options::ALLOW_TEMPLATE_SWITCHING,
+				'type'    => 'switch',
+				'title'   => 'Template switching',
+				'desc'    => 'Once you disable template switching, the option will no longer be available',
+				'default' => false,
+				'on' => 'Enabled',
+				'off' => 'Disabled',
+			),
+			array(
 				'id'         => WSB_Options::API_KEY,
 				'type'       => 'text',
 				'title'      => __( 'Workshop Butler API Key', 'wsbintegration' ),
@@ -304,23 +346,6 @@ class WSB_Settings {
 				'title'   => 'Report failed requests',
 				'desc'    => 'When a request to Workshop Butler API fails, the plugin sends this information to our logging servers helping us to find the source of the problem faster. We do not collect any personal information, only detailed error reports.',
 				'default' => true,
-			),
-			WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING )?array(
-				'id'      => WSB_Options::USE_OLD_TEMPLATES,
-				'type'    => 'switch',
-				'title'   => 'Use old templates',
-				'desc'    => 'Allows manually switching to a new template system with a modern design',
-				'default' => true,
-			):array(),
-			// !FIXME: hide next section too
-			array(
-				'id'      => WSB_Options::ALLOW_TEMPLATE_SWITCHING,
-				'type'    => 'switch',
-				'title'   => 'Completely disable template switching',
-				'desc'    => 'Once you disable template switching, the option will no longer available',
-				'default' => true,
-				'on' => 'Enable',
-				'off' => 'Disable',
 			),
 		);
 	}

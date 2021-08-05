@@ -23,8 +23,8 @@ function render_link($link, $content) {
     }
 }
 
-render_link($trainer->social_links->website, 'Website');
-render_link($trainer->social_links->blog, 'Blog');
+render_link($trainer->social_links->website, '<i class="fas fa-globe"></i>');
+render_link($trainer->social_links->blog, '<i class="fab fa-wordpress-simple"></i>');
 render_link($trainer->social_links->twitter, '<i class="fab fa-twitter"></i>');
 render_link($trainer->social_links->facebook, '<i class="fab fa-facebook"></i>');
 render_link($trainer->social_links->linked_in, '<i class="fab fa-linkedin"></i>');

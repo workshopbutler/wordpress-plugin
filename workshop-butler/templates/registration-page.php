@@ -1,6 +1,8 @@
 <?php
 /**
- * Template for the registration form page.
+ * The Template for displaying registration page
+ *
+ * This template can be overridden by copying it to yourtheme/workshop-butler/registration-page.php.
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates

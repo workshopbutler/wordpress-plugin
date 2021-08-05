@@ -38,7 +38,7 @@ if ( !$testimonials ) {
         <?php } ?>
 
         <div class="wsb-testimonials-desc">
-            <?= esc_html( $testimonial->content ); ?>
+            <?= esc_html( wp_trim_words($testimonial->content, 35, '...') ); ?>
         </div>
 
         <div class="wsb-cite">

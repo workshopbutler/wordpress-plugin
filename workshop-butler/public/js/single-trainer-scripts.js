@@ -22,9 +22,13 @@ jQuery( document ).ready(
             items: 1,
             dots: false,
             nav: true,
+			loop: true,
         });
         owl.on('changed.owl.carousel', function(e) {
-            jQuery('.wsb-testimonials-counter .current').text(+e.item.index + 1);
+            jQuery('.wsb-testimonials-counter .current').text(
+				// workaround for incorrect counter in loop mode
+				1 + e.item.index - jQuery(e.target).find('.active:first').prevAll('.cloned').length
+			);
         });
 
 		function wsb_load_events(type, callback) {

@@ -56,7 +56,6 @@ abstract class WSB_Page {
 	 * @since 2.0.0
 	 */
 	public function __construct() {
-		require_once plugin_dir_path( __FILE__ ) . '../../vendor/autoload.php';
 		$this->load_dependencies();
 	}
 

@@ -1,6 +1,8 @@
 <?php
 /**
- * Template for the single event.
+ * The Template for displaying single event.
+ *
+ * This template can be overridden by copying it to yourtheme/workshop-butler/single-event.php.
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates

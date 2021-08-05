@@ -1,5 +1,5 @@
 {% if layout == 'tile' %}
-    <a href="{{ event.url }}" class="wsb-tile-title"
+    <a href="{{ event.get_url() }}" class="wsb-tile-title"
         {% if event.is_url_external %} target="_blank" {% endif %}>
         {% if truncate > 0 %}
             {{ event.title|truncate(truncate) }}...
@@ -12,7 +12,7 @@
         {% if event.type.badge %}
             <img class="wsb-table__img" src="{{ event.type.badge }}">
         {% endif %}
-        <a href="{{ event.url }}" class="wsb-table__link" {% if event.is_url_external %} target="_blank" {% endif %}>
+        <a href="{{ event.get_url() }}" class="wsb-table__link" {% if event.is_url_external %} target="_blank" {% endif %}>
             {{ event.title }}
         </a>
         &nbsp;{{ include('tag.twig') }}

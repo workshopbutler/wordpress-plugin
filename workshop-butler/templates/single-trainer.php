@@ -1,6 +1,9 @@
 <?php
+
 /**
- * Template for the single trainer.
+ * The Template for displaying single trainer.
+ *
+ * This template can be overridden by copying it to yourtheme/workshop-butler/single-trainer.php.
  *
  * @version 3.0.0
  * @package WorkshopButler\Templates
@@ -29,8 +32,8 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
                     </div>
                     <?php do_action( 'wsb_trainer_stats' ); ?>
                     <?php do_action( 'wsb_trainer_badges' ); ?>
-					<?php do_action( 'wsb_trainer_bio' ); ?>
-					<?php do_action( 'wsb_trainer_testimonials' ); ?>
+                    <?php do_action( 'wsb_trainer_testimonials' ); ?>
+                    <?php do_action( 'wsb_trainer_bio' ); ?>
                 </div>
                 <div class="wsb-aside">
                     <?php do_action( 'wsb_trainer_badges' ); ?>
