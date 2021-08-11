@@ -59,17 +59,18 @@ $render_based_on = function ($evaluations) {
     </div>
 <?php } ?>
 
-<?php if ( $trainer->number_of_events ) { ?>
+<?php if ( $trainer->stats->total->total ) { ?>
     <div class="wsb-trainer-details-fact">
     <span class="wsb-fact-description"><?= esc_html__('trainer.experience.events', 'wsbintegration') ?></span>
-    <span class="wsb-big-number wsb-trainer-number-box"><?= esc_html( $trainer->number_of_events ) ?></span>
+    <span class="wsb-big-number wsb-trainer-number-box"><?= esc_html(
+        $trainer->stats->total->total ) ?></span>
     </div>
     <?php } ?>
 
-<?php if ( $trainer->years_of_experience ) { ?>
+<?php if ( $trainer->stats->years_of_experience ) { ?>
     <div class="wsb-trainer-details-fact">
     <span class="wsb-fact-description"><?= esc_html__('trainer.experience.years', 'wsbintegration') ?></span>
-    <span class="wsb-big-number wsb-trainer-number-box"><?= esc_html( $trainer->years_of_experience ) ?></span>
+    <span class="wsb-big-number wsb-trainer-number-box"><?= esc_html( $trainer->stats->years_of_experience ) ?></span>
     </div>
 <?php } ?>
 </div>

@@ -98,23 +98,6 @@ class Trainer {
 	public $languages;
 
 	/**
-	 * Years of experience for the trainer. It's more than 0 only when you work with the profiles of trainers,
-	 * licensed by certification body
-	 *
-	 * @since 2.0.0
-	 * @var int
-	 */
-	public $years_of_experience;
-
-	/**
-	 * Total number of workshops the trainer had
-	 *
-	 * @since 2.0.0
-	 * @var int
-	 */
-	public $number_of_events;
-
-	/**
 	 * List of badges the trainer earned
 	 *
 	 * @since 2.0.0
@@ -167,8 +150,6 @@ class Trainer {
 		$this->photo               = $json_data->avatar;
 		$this->bio                 = $json_data->bio;
 		$this->email               = $json_data->email;
-		$this->years_of_experience = isset( $json_data->years_of_experience ) ? $json_data->years_of_experience : null;
-		$this->number_of_events    = isset( $json_data->number_of_events ) ? $json_data->number_of_events : null;
 		$this->badges              = array();
 		if ( isset( $json_data->badges ) && is_array( $json_data->badges ) ) {
 			foreach ( $json_data->badges as $badge ) {
