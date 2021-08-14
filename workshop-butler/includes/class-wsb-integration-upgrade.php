@@ -80,8 +80,8 @@ class WSB_Integration_Upgrade {
 			WSB_Options::set_option( WSB_Options::USE_OLD_TEMPLATES, true );
 
 			// set deprecated themes as custom
-			$theme = WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING);
-			if (in_array($theme, array('dacota', 'gatsby', 'hayes'))) {
+			$theme = WSB_Options::get_option( WSB_Options::THEME );
+			if ( in_array( $theme, array( 'dacota', 'gatsby', 'hayes' ) ) ) {
 				WSB_Options::set_option( WSB_Options::THEME, 'custom' );
 				WSB_Options::set_option( WSB_Options::CUSTOM_THEME, $theme );
 			}

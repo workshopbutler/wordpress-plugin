@@ -241,7 +241,13 @@ class WSB_Options {
 	 * @since 2.7.0
 	 */
 	public function get_theme() {
-		return $this->get( self::THEME, 'alfred' );
+		$theme = $this->get( self::THEME, 'alfred' );
+		if ( $theme == 'custom' ) {
+			$custom_theme = $this->get( self::CUSTOM_THEME );
+			// when custom_theme is empty, we expose word 'custom'
+			$theme = $custom_theme ? $custom_theme : $theme;
+		}
+		return $theme;
 	}
 
 	/**
