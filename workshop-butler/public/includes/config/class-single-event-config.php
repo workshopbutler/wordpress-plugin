@@ -8,6 +8,8 @@
 
 namespace WorkshopButler\Config;
 
+use WorkshopButler\WSB_Options;
+
 /**
  * Class Single_Event_Config
  *
@@ -44,7 +46,10 @@ class Single_Event_Config {
 	 * Single_Event_Config constructor
 	 */
 	public function __construct() {
-		$this->registration_page_target = '_self';
+		$this->registration_page_target = WSB()->settings->get(
+			WSB_Options::REGISTRATION_PAGE_NEW_TAB, false ) ? '_blank' : '_self';
+		$this->show_expired_tickets = WSB()->settings->get( WSB_Options::SHOW_EXPIRED_TICKETS, true );
+		$this->show_number_of_tickets = WSB()->settings->get( WSB_Options::SHOW_NUMBER_OF_TICKETS, true );
 	}
 
 	/**

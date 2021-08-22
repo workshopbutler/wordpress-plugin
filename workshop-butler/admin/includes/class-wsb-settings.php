@@ -477,6 +477,13 @@ class WSB_Settings {
 	private function get_event_page_settings() {
 		return array(
 			array(
+				'id'       => WSB_Options::REGISTRATION_PAGE_NEW_TAB,
+				'type'     => 'switch',
+				'title'    => 'Open registration page in a new tab',
+				'subtitle' => 'Switch to ON to open registration page in a new tab',
+				'default'  => false,
+			),
+			array(
 				'id'       => WSB_Options::CUSTOM_EVENT_DETAILS,
 				'type'     => 'switch',
 				'title'    => 'Integrated Event Page',
