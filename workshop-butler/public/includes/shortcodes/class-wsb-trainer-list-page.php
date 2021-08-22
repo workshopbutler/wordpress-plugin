@@ -11,6 +11,9 @@
 namespace WorkshopButler;
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
+require_once WSB_ABSPATH . 'public/includes/config/class-trainer-list-config.php';
+
+use WorkshopButler\Config\Trainer_List_Config;
 
 /**
  * Trainer List page class which handles the rendering and logic for the list of trainers
@@ -64,22 +67,19 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	 * Renders the list of trainers
 	 *
 	 * @param array  $attrs Shortcode attributes.
-	 * @param string $content Shortcode content.
 	 *
 	 * @return string
 	 * @since  2.0.0
 	 */
-	public function render_page( $attrs = array(), $content = null ) {
+	public function render_page( $attrs = array() ) {
 		// Load styles and scripts only on demand.
 		wp_enqueue_script( 'wsb-all-trainers-scripts' );
 		$this->add_theme_fonts();
 
-		$method = 'facilitators';
-		$query  = array(
-			'per_page' => '-1',
+		$response = $this->requests->get(
+			'facilitators',
+			array( 'per_page' => '-1' )
 		);
-
-		$response = $this->requests->get( $method, $query );
 
 		return $this->render_list( $response, $attrs, $this->settings->get_trainer_page_url() );
 	}
@@ -97,6 +97,8 @@ class WSB_Trainer_List_Page extends WSB_Page {
 		if ( $response->is_error() ) {
 			return $this->format_error( $response->error );
 		}
+
+		$this->dict->set_trainer_list_config( new Trainer_List_Config( $attrs ) );
 
 		$trainers = array();
 		foreach ( $response->body->data as $json_trainer_data ) {

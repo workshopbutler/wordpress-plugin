@@ -40,9 +40,11 @@ class Trainer_List_Hooks {
 	 * @see Trainer_List_Hooks::init() for the hook
 	 */
 	public static function filters() {
-		$trainers  = WSB()->dict->get_trainers();
+		$trainers = WSB()->dict->get_trainers();
 
-		$filters = (new Trainer_Filters( $trainers, array( 'location', 'trainer', 'language', 'rating', 'badge' )))->get_filters();
+		$filters_config = WSB()->dict->get_trainer_list_config()->get_filters();
+
+		$filters = (new Trainer_Filters( $trainers, $filters_config ))->get_filters();
 		wsb_get_template( 'filters.php', array( 'filters' => $filters ) );
 	}
 

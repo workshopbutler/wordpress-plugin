@@ -141,6 +141,31 @@ class WSB_Dictionary {
 	}
 
 	/**
+	 * Returns the config for the trainer list page
+	 *
+	 * @return Trainer_List_Config|null
+	 * @since 3.0.0
+	 */
+	public function get_trainer_list_config() {
+		if ( ! isset( $GLOBALS['wsb_trainer_list_config'] ) ) {
+			return null;
+		}
+
+		return $GLOBALS['wsb_trainer_list_config'];
+	}
+
+	/**
+	 * Sets new trainer list config
+	 *
+	 * @param Trainer_List_Config $config New trainer list config.
+	 *
+	 * @since 3.0.0
+	 */
+	public function set_trainer_list_config( $config ) {
+		$GLOBALS['wsb_trainer_list_config'] = $config;
+	}
+
+	/**
 	 * Returns the config for the next event widget
 	 *
 	 * @return Next_Event_Config|null
