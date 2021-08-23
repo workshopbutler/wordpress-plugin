@@ -309,7 +309,12 @@ class Event_Calendar_Config {
 		$this->highlight_featured= $attrs['highlight_featured'];
 		$this->layout            = $attrs['layout'];
 		$this->only_featured     = $attrs['only_featured'];
-		$this->filters           = $attrs['filters'];
+		$this->filters           = array_map(
+										function ( $name ) {
+											return trim( $name );
+										},
+										explode( ',', $attrs['filters'] )
+									);
 		$this->tag_type          = $attrs['tag_type'];
 		$this->skip_event_page   = $attrs['skip_event_page'];
 		$this->show_trainer_name = $attrs['show_trainer_name'];

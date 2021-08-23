@@ -29,7 +29,12 @@ class Trainer_List_Config {
 	 */
 	public function __construct( $attrs = array() ) {
 		if ( isset( $attrs['filters'] ) ) {
-			$this->filters = $attrs['filters'];
+			$this->filters = array_map(
+				function ( $name ) {
+					return trim( $name );
+				},
+				explode( ',', $attrs['filters'] )
+			);
 		}
 	}
 
