@@ -269,9 +269,9 @@ class WSB_Settings {
 				'id' => 'info_old_template',
 				'type' => 'info',
 				'notice' => false,
-				'style' => 'critical',
-				'title' => 'Please, upgrade to the new template system',
-				'desc'  => 'Upgrade to the new template system by turning off the old templates. Reade more in the <a href="https://workshopbutler.com" target="_blank">upgrade guide</a>',
+				'style' => 'warning',
+				'title' => 'Upgrade to the new template system',
+				'desc'  => 'In the version 3.0.0, we introduce a modern layout with a new template system instead of the old Twig templates you are currently using. To get the benefits of the new layout, please turn off the old templates below. Read more in the <a href="https://support.workshopbutler.com/article/229-upgrade-templates" target="_blank">upgrade guide</a>',
 				'required' => array(
 					array(WSB_Options::ALLOW_TEMPLATE_SWITCHING, 'equals', true),
 					array(WSB_Options::USE_OLD_TEMPLATES, 'equals', true)
@@ -281,7 +281,7 @@ class WSB_Settings {
 				'id' => 'info_templates_switch',
 				'type' => 'info',
 				'notice' => false,
-				'style' => 'warning',
+				'style' => 'success',
 				'title' => 'Complete the upgrade to the new template system',
 				'desc'  => 'Ensure that everything works well and complete the upgrade by disabling the template switching',
 				'required' => array(
@@ -293,20 +293,19 @@ class WSB_Settings {
 				'id'      => WSB_Options::USE_OLD_TEMPLATES,
 				'type'    => 'switch',
 				'title'   => 'Old templates',
-				'desc'    => 'Switch to a new template system with a modern design',
+				'desc'    => 'Switch to the new template system with a modern layout by turning off the old one',
 				'default' => true,
 				'required' => array(WSB_Options::ALLOW_TEMPLATE_SWITCHING, 'equals', true)
 			):array(),
-			// !FIXME: hide next section too
-			array(
+			WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING )?array(
 				'id'      => WSB_Options::ALLOW_TEMPLATE_SWITCHING,
 				'type'    => 'switch',
 				'title'   => 'Template switching',
-				'desc'    => 'Once you disable template switching, the option will no longer be available',
+				'desc'    => 'Disable switching to old templates to complete the upgrade. This action is irreversible',
 				'default' => false,
 				'on' => 'Enabled',
 				'off' => 'Disabled',
-			),
+			):array(),
 			array(
 				'id'         => WSB_Options::API_KEY,
 				'type'       => 'text',

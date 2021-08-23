@@ -192,10 +192,14 @@ class WSB_Requests {
 		$parameters = array();
 		array_push( $parameters, 'w' );
 		array_push( $parameters, WSB_INTEGRATION_VERSION );
-		array_push( $parameters, $this->settings->get( WSB_Options::THEME, 'alfred' ) );
+		array_push( $parameters, $this->settings->get_theme() );
 		array_push( $parameters, WSB_Options::get_template_version() );
-		array_push( $parameters, $this->settings->use_old_templates() ? 't' : 'f' );
-
+		// expose the stage of templates migration
+		if ( $this->settings->get( WSB_Options::ALLOW_TEMPLATE_SWITCHING ) ) {
+			array_push( $parameters, $this->settings->get( WSB_Options::USE_OLD_TEMPLATES ) ? 'a' : 'b' );
+		} else {
+			array_push( $parameters, 'c' );
+		}
 		return implode( ';', $parameters );
 	}
 
