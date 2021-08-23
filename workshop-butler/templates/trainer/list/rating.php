@@ -9,9 +9,9 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-if ( $trainer->stats->total->public_stats->rating > 0 ) { ?>
+if ( $trainer->get_displayed_public_rating() ) { ?>
     <div class="wsb-trainer-tile__rating">
-        <?= $trainer->stats->total->public_stats->get_rounded_rating() ?>
+        <?= $trainer->get_displayed_public_rating() ?>
         <i class="fas fa-star"></i>
     </div>
 <?php }

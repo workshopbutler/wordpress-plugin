@@ -78,6 +78,12 @@ class WSB_Options {
 	const TRAINER_LIST_PAGE    = 'trainer-list-page-id';
 	const TRAINER_PROFILE_PAGE = 'trainer-page-id';
 
+	const TRAINER_DISPLAY_PRIVATE_RATING = 'trainer-display-private-rating';
+	const TRAINER_DISPLAY_PUBLIC_RATING  = 'trainer-display-public_rating';
+	const TRAINER_DISPLAY_YEARS          = 'trainer-display-years';
+	const TRAINER_DISPLAY_EVENTS_HELD    = 'trainer-display-events_held';
+
+
 	/**
 	 * Removes plugin options
 	 *

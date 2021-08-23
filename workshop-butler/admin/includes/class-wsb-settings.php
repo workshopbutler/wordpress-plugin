@@ -381,6 +381,34 @@ class WSB_Settings {
 				'required' => array( WSB_Options::TRAINER_MODULE, '=', true ),
 				'desc'     => 'To make it work, add [wsb_trainer] shortcode to the page when you complete the setup',
 			),
+			array(
+				'id'       => WSB_Options::TRAINER_DISPLAY_PUBLIC_RATING,
+				'type'     => 'switch',
+				'title'    => 'Public rating',
+				'subtitle' => 'Switch to ON to display public rating everywhere on trainer profile',
+				'default'  => true,
+			),
+			array(
+				'id'       => WSB_Options::TRAINER_DISPLAY_PRIVATE_RATING,
+				'type'     => 'switch',
+				'title'    => 'Private rating',
+				'subtitle' => 'Switch to ON to display private rating on the trainer page',
+				'default'  => true,
+			),
+			array(
+				'id'       => WSB_Options::TRAINER_DISPLAY_EVENTS_HELD,
+				'type'     => 'switch',
+				'title'    => 'Events held',
+				'subtitle' => 'Switch to ON to display numbers of events held on the trainer page',
+				'default'  => true,
+			),
+			array(
+				'id'       => WSB_Options::TRAINER_DISPLAY_YEARS,
+				'type'     => 'switch',
+				'title'    => 'Years as trainer',
+				'subtitle' => 'Switch to ON to display amount years as a trainer on the trainer page',
+				'default'  => false,
+			),
 		);
 	}
 

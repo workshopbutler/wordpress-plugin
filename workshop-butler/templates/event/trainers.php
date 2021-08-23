@@ -26,9 +26,9 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 			<?php } ?>
 
 
-			<?php if ( $trainer->stats->total->public_stats->rating > 0 ) { ?>
+			<?php if ( $trainer->get_displayed_public_rating() ) { ?>
 				<div class="wsb-profile__rating">
-					<?= $trainer->stats->total->public_stats->get_rounded_rating() ?>
+					<?= $trainer->get_displayed_public_rating() ?>
 					<i class="fas fa-star"></i>
 				</div>
 			<?php } ?>

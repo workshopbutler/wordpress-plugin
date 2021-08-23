@@ -16,6 +16,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-testimonial.
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-badge.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'utils/language.php';
 
+use WorkshopButler\WSB_Options;
 
 /**
  * Trainer class which represents a trainer profile in Workshop Butler
@@ -235,6 +236,48 @@ class Trainer {
 
 	public function get_photo_or_default() {
 		return $this->photo ?  $this->photo : plugin_dir_url( __FILE__ ) . '../../img/stub-trainer-photo.svg';
+	}
+
+	public function get_displayed_public_rating() {
+		if ( ! WSB()->settings->get( WSB_Options::TRAINER_DISPLAY_PUBLIC_RATING ) ) {
+			return null;
+		}
+		return $this->stats->total->public_stats->get_rounded_rating();
+	}
+
+	public function get_displayed_private_rating() {
+		if ( ! WSB()->settings->get( WSB_Options::TRAINER_DISPLAY_PRIVATE_RATING ) ) {
+			return null;
+		}
+		return $this->stats->total->private_stats->get_rounded_rating();
+	}
+
+	public function get_displayed_public_evaluations() {
+		if ( ! WSB()->settings->get( WSB_Options::TRAINER_DISPLAY_PUBLIC_RATING ) ) {
+			return null;
+		}
+		return $this->stats->total->public_stats->evaluations;
+	}
+
+	public function get_displayed_private_evaluations() {
+		if ( ! WSB()->settings->get( WSB_Options::TRAINER_DISPLAY_PRIVATE_RATING ) ) {
+			return null;
+		}
+		return $this->stats->total->private_stats->evaluations;
+	}
+
+	public function get_displayed_years_of_experience() {
+		if ( ! WSB()->settings->get( WSB_Options::TRAINER_DISPLAY_YEARS ) ) {
+			return null;
+		}
+		return $this->stats->years_of_experience;
+	}
+
+	public function get_displayed_events_held() {
+		if ( ! WSB()->settings->get( WSB_Options::TRAINER_DISPLAY_EVENTS_HELD ) ) {
+			return null;
+		}
+		return $this->stats->total->total;
 	}
 
 }
