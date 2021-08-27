@@ -36,6 +36,20 @@ class Select extends Field {
 	 */
 	public function __construct( $json_data ) {
 		parent::__construct( $json_data );
-		$this->options = $json_data->options;
+		$this->options = array();
+		foreach ( $json_data->options as $option ) {
+			array_push( $this->options, new Option( $option->label, $option->value ) );
+		}
 	}
+
+	/**
+	 * Returns the options of the field
+	 *
+	 * @return Option[]
+	 * @since 3.0.0
+	 */
+	public function get_options() {
+		return $this->options;
+	}
+
 }

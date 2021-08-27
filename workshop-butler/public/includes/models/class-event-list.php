@@ -8,6 +8,8 @@
 
 namespace WorkshopButler;
 
+use WorkshopButler\Config\Event_Calendar_Config;
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . '../../includes/class-wsb-options.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-event.php';
 
@@ -76,29 +78,22 @@ class Event_List {
 	/**
 	 * Returns query parameters for request to API
 	 *
-	 * @param array $attrs Shortcode attributes.
-	 * @param int   $per_page Number of events per request.
+	 * @param Event_Calendar_Config $config Config.
+	 * @param int                   $per_page Number of events per request.
 	 *
 	 * @return array
 	 */
-	static public function prepare_query( $attrs, $per_page ) {
+	static public function prepare_query( $config, $per_page ) {
 		$query = array(
 			'dates'    => 'future',
 			'public'   => true,
 			'per_page' => $per_page,
 		);
-		if ( ! is_null( $attrs['category'] ) ) {
-			$query['categoryIds'] = $attrs['category'];
+		if ( ! is_null( $config->get_category_ids() ) ) {
+			$query['categoryIds'] = $config->get_category_ids();
 		}
-		if ( ! is_null( $attrs['event_type'] ) ) {
-			$query['typeIds'] = $attrs['event_type'];
-		}
-		// newer version of the attribute rewrites the old one.
-		if ( ! is_null( $attrs['event_types'] ) ) {
-			$query['typeIds'] = preg_replace('/\s/', '', $attrs['event_types']);
-		}
-		if ( ! is_null( $attrs['categories'] ) ) {
-			$query['categoryIds'] = preg_replace('/\s/', '', $attrs['categories']);
+		if ( ! is_null( $config->get_event_type_ids() ) ) {
+			$query['typeIds'] = $config->get_event_type_ids();
 		}
 
 		return $query;

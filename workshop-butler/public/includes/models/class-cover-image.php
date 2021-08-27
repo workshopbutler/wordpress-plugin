@@ -24,7 +24,7 @@ class Cover_Image {
 	 * @return Cover_Image
 	 */
 	static function from_json( $json ) {
-		return $json ? new Cover_Image( $json->url, $json->thumbnail ) : new Cover_Image( null, null );
+		return $json ? new Cover_Image( $json->url, $json->thumbnail_m ) : new Cover_Image( null, null );
 	}
 
 	/**
@@ -52,5 +52,25 @@ class Cover_Image {
 	public function __construct( $url, $thumbnail ) {
 		$this->url       = $url;
 		$this->thumbnail = $thumbnail;
+	}
+
+	/**
+	 * Returns the url to the full-size cover image
+	 *
+	 * @since 3.0.0
+	 * @return string|null
+	 */
+	public function get_url() {
+		return $this->url;
+	}
+
+	/**
+	 * Returns the url to the thumbnail of the cover image
+	 *
+	 * @since 3.0.0
+	 * @return string|null
+	 */
+	public function get_thumbnail_url() {
+		return $this->thumbnail;
 	}
 }

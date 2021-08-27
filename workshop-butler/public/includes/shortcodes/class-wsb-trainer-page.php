@@ -98,16 +98,13 @@ class WSB_Trainer_Page extends WSB_Page {
 	 * @return string
 	 */
 	private function render_profile( $trainer ) {
-		$template_data = array(
-			'trainer' => $trainer,
-			'theme'   => $this->get_theme(),
-		);
-
-		$custom_template = $this->settings->get( WSB_Options::TRAINER_TEMPLATE );
-		$template        = $this->get_template( 'trainer-page', $custom_template );
-
-		$processed_template = do_shortcode( $template );
-		$content            = $this->compile_string( $processed_template, $template_data );
+		$this->dict->set_trainer( $trainer );
+		if ( $this->settings->use_old_templates() ) {
+			$content = $this->render_old_template( $trainer );
+		} else {
+			$content = $this->render_new_template();
+		}
+		$this->dict->clear_trainer();
 
 		return $this->add_custom_styles( $content );
 	}
@@ -149,4 +146,44 @@ class WSB_Trainer_Page extends WSB_Page {
 	}
 
 
+	/**
+	 * Render the event using new templates
+	 *
+	 * @return false|string
+	 * @since 3.0.0
+	 */
+	protected function render_new_template() {
+		$trainer = WSB()->dict->get_trainer();
+		if( !is_a( $trainer, 'WorkshopButler\Trainer' )) {
+			return false;
+		}
+
+		ob_start();
+		wsb_get_template( 'single-trainer.php', array(
+			'theme' => $this->get_theme(),
+			'trainer' => $trainer,
+		));
+		return ob_get_clean();
+	}
+
+	/**
+	 * Renders the old event page
+	 *
+	 * @param Event $event Current event.
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	private function render_old_template( $trainer ): string {
+		$template_data = array(
+			'trainer' => $trainer,
+			'theme'   => $this->get_theme(),
+		);
+
+		$custom_template = $this->settings->get( WSB_Options::TRAINER_TEMPLATE );
+		$template        = $this->get_template( 'trainer-page', $custom_template );
+
+		$processed_template = do_shortcode( $template );
+		return $this->compile_string( $processed_template, $template_data );
+	}
 }

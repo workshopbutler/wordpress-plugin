@@ -1,5 +1,5 @@
 {% if trainer.url %}
-    <a href="{{ trainer.url }}">{{ trainer.full_name() }}</a>
+    <a href="{{ trainer.url }}">{{ trainer.get_full_name() }}</a>
 {% else %}
-    <div>{{ trainer.full_name() }}</div>
+    <div>{{ trainer.get_full_name() }}</div>
 {% endif %}

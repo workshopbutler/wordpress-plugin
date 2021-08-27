@@ -81,6 +81,16 @@ class Paid_Tickets {
 	}
 
 	/**
+	 * Returns the list of paid ticket types
+	 *
+	 * @return Paid_Ticket_Type[]
+	 * @since 3.0.0
+	 */
+	public function get_types() {
+		return $this->types;
+	}
+
+	/**
 	 * Returns only active ticket types.
 	 *
 	 * @return Paid_Ticket_Type[]
@@ -185,5 +195,25 @@ class Paid_Tickets {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * Returns true if the tax should be excluded from the price
+	 *
+	 * @since 3.0.0
+	 * @return bool
+	 */
+	public function is_tax_excluded() {
+		return $this->excluded_tax;
+	}
+
+	/**
+	 * Returns the size of sales tax
+	 *
+	 * @since 3.0.0
+	 * @return number|null
+	 */
+	public function get_tax() {
+		return $this->tax;
 	}
 }

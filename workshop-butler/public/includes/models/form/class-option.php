@@ -39,11 +39,32 @@ class Option {
 	 *
 	 * @param string $label Label.
 	 * @param string $value Value.
+	 *
 	 * @since 2.0.0
 	 */
 	public function __construct( $label, $value ) {
 		$this->label = $label;
 		$this->value = $value;
+	}
+
+	/**
+	 * Returns the value
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_value() {
+		return $this->value;
+	}
+
+	/**
+	 * Returns the label
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_label() {
+		return $this->label;
 	}
 }
 

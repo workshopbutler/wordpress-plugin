@@ -127,7 +127,7 @@ class Event_Filters extends List_Filters {
 		$values = array();
 		foreach ( $events as $event ) {
 			foreach ( $event->trainers as $trainer ) {
-				$value = new Filter_Value( $trainer->full_name(), $trainer->full_name() );
+				$value = new Filter_Value( $trainer->get_full_name(), $trainer->get_full_name() );
 				array_push( $values, $value );
 			}
 		}

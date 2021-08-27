@@ -101,34 +101,34 @@ class Event {
 	/**
 	 * True if the event is confirmed
 	 *
-	 * @since   2.0.0
-	 * @var     boolean $confirmed
+	 * @since   3.0.0
+	 * @var     boolean $is_confirmed
 	 */
-	public $confirmed;
+	public $is_confirmed;
 
 	/**
 	 * True if the event is private
 	 *
-	 * @since   2.0.0
-	 * @var     boolean $private
+	 * @since   3.0.0
+	 * @var     boolean $is_private
 	 */
-	public $private;
+	public $is_private;
 
 	/**
 	 * True if the event is free
 	 *
-	 * @since   2.0.0
-	 * @var     boolean $free
+	 * @since   3.0.0
+	 * @var     boolean $is_free
 	 */
-	public $free;
+	public $is_free;
 
 	/**
 	 * True if there is no tickets left
 	 *
-	 * @since   2.0.0
-	 * @var     boolean $sold_out
+	 * @since   3.0.0
+	 * @var     boolean $is_sold_out
 	 */
-	public $sold_out;
+	public $is_sold_out;
 
 	/**
 	 * Tickets to the event
@@ -157,10 +157,10 @@ class Event {
 	/**
 	 * True if the event is featured.
 	 *
-	 * @var boolean $featured
-	 * @since 2.11.0
+	 * @var boolean $is_featured
+	 * @since 3.0.0
 	 */
-	public $featured;
+	public $is_featured;
 
 	/**
 	 * Registration form
@@ -195,14 +195,6 @@ class Event {
 	public $cover_image;
 
 	/**
-	 * The url to the event
-	 *
-	 * @since   2.0.0
-	 * @var     Event_Url $url
-	 */
-	private $url;
-
-	/**
 	 * Card payment configuration
 	 *
 	 * @since 2.14.0
@@ -219,6 +211,54 @@ class Event {
 	public $paypal_payment;
 
 	/**
+	 * The url to the event
+	 *
+	 * @since   2.0.0
+	 * @var     Event_Url $url
+	 */
+	private $url;
+
+	/**
+	 * The map of the deprecated/renamed properties
+	 *
+	 * Format:
+	 *   old_name => new property/method name
+	 *
+	 * @since 3.0.0
+	 * @var array $deprecated_properties
+	 */
+	private $deprecated_properties = array(
+		'free' => 'is_free',
+		'confirmed' => 'is_confirmed',
+		'private' => 'is_private',
+		'sold_out' => 'is_sold_out',
+		'featured' => 'is_featured',
+	);
+
+	/**
+	 * Checks undefined properties in deprecation list
+	 *
+	 * @since 3.0.0
+	 * @param string $name Property name
+	 */
+	public function __get($name) {
+        if ( !array_key_exists( $name, $this->deprecated_properties ) ) {
+			throw new \Exception( "Property '$name' is not defined" );
+        }
+		$alt_name = $this->deprecated_properties[$name];
+
+		if ( property_exists( $this, $alt_name ) ) {
+			return $this->$alt_name;
+		}
+
+		if ( method_exists( $this, $alt_name ) ) {
+			return $this->$alt_name();
+		}
+
+		throw new \Exception("Property or method '$alt_name' is not defined");
+	}
+
+	/**
 	 * Creates a new object
 	 *
 	 * @param object      $json_data JSON data from Workshop Butler API.
@@ -233,11 +273,11 @@ class Event {
 		$this->type        = $json_data->type ? new Event_Type( $json_data->type ) : Event_Type::create_empty();
 		$this->language    = Language::from_json( $json_data->language );
 		$this->rating      = isset( $json_data->rating ) ? $json_data->rating : null;
-		$this->confirmed   = $json_data->confirmed;
-		$this->free        = $json_data->free;
-		$this->private     = isset( $json_data->private ) ? $json_data->private : null;
+		$this->is_confirmed   = $json_data->confirmed;
+		$this->is_free     = $json_data->free;
+		$this->is_private  = isset( $json_data->private ) ? $json_data->private : null;
 		$this->description = $json_data->description;
-		$this->sold_out    = $json_data->sold_out;
+		$this->is_sold_out = $json_data->sold_out;
 		$this->schedule    = new Schedule( $json_data->schedule );
 		$this->location    = Location::from_json( $json_data->location );
 
@@ -248,7 +288,7 @@ class Event {
 		} else {
 			$this->url = Event_Url::external( 'https://workshopbutler.com/public/event/' . $this->hashed_id );
 		}
-		$this->tickets = $this->get_tickets( $this->free, $json_data->tickets );
+		$this->tickets = $this->get_tickets_from_json( $this->free, $json_data->tickets );
 
 		$this->registration_form = Form::from_json( $json_data->form, $this );
 
@@ -259,21 +299,51 @@ class Event {
 		);
 		$this->cover_image       = Cover_Image::from_json( $json_data->cover_image );
 
-		$this->trainers = $this->get_trainers( $json_data, $trainer_page_url );
-		$this->state    = new Event_State( $this, $json_data->state === 'canceled' );
-		$this->card_payment  = CardPayment::from_json( $json_data->card_payment );
-		$this->paypal_payment  = PayPalPayment::from_json( $json_data->paypal_payment );
-		$this->featured = $json_data->featured ? $json_data->featured : false;
+		$this->trainers       = $this->get_trainers_from_json( $json_data, $trainer_page_url );
+		$this->state          = new Event_State( $this, $json_data->state === 'canceled' );
+		$this->card_payment   = CardPayment::from_json( $json_data->card_payment );
+		$this->paypal_payment = PayPalPayment::from_json( $json_data->paypal_payment );
+		$this->is_featured       = $json_data->featured ? $json_data->featured : false;
 	}
 
 	/**
 	 * Returns the URL for the event's page
 	 *
 	 * @return string
-	 * @since 2.1.0
+	 * @since 3.0.0
 	 */
-	public function url() {
+	public function get_url() {
 		return $this->url->url;
+	}
+
+	/**
+	 * Returns the url to the registration page of the event
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_registration_url() {
+		return $this->registration_page->get_url();
+	}
+
+	/**
+	 * Returns country's code
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_country_code() {
+		return $this->location->country_code;
+	}
+
+	/**
+	 * Returns the list of spoken languages
+	 *
+	 * @return string[]
+	 * @since 3.0.0
+	 */
+	public function get_spoken_languages() {
+		return $this->language->spoken;
 	}
 
 	/**
@@ -294,10 +364,10 @@ class Event {
 	 * @return string[]
 	 * @since  2.0.0
 	 */
-	public function names_of_trainers() {
+	public function get_names_of_trainers() {
 		return array_map(
 			function ( $trainer ) {
-				return $trainer->full_name();
+				return $trainer->get_full_name();
 			},
 			$this->trainers
 		);
@@ -328,7 +398,7 @@ class Event {
 	 *
 	 * @return null|Paid_Tickets|Free_Ticket_Type
 	 */
-	private function get_tickets( $free, $tickets ) {
+	private function get_tickets_from_json( $free, $tickets ) {
 		if ( $tickets->free || $tickets->paid ) {
 			return $free ?
 				Free_Ticket_Type::from_json( $tickets->free ) :
@@ -346,7 +416,7 @@ class Event {
 	 *
 	 * @return Trainer[]
 	 */
-	private function get_trainers( $json_data, $trainer_page_url ) {
+	private function get_trainers_from_json( $json_data, $trainer_page_url ) {
 		if ( $json_data->trainers ) {
 			$trainers = array();
 			foreach ( $json_data->trainers as $trainer ) {

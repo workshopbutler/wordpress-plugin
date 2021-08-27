@@ -69,6 +69,10 @@ class Workshop_Stats {
 	 */
 	public $votes;
 
+	public function get_rounded_rating() {
+		return round( $this->rating, 1, PHP_ROUND_HALF_DOWN );
+	}
+
 	/**
 	 * Workshop_Stats constructor.
 	 *

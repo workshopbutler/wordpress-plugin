@@ -5,7 +5,7 @@
                 {{ wsb_t('schedule.event.soldOut') }}
             </button>
         {% else %}
-            <a href="{% if registration == 'true' %} {{ event.registration_page.url }} {% else %} {{ event.url }} {% endif %}"
+            <a href="{% if registration == 'true' %} {{ event.registration_page.url }} {% else %} {{ event.get_url() }} {% endif %}"
                class="wsb-btn wsb-btn-primary wsb-tile-btn">
                 {{ wsb_t('schedule.event.register') }}
             </a>
@@ -18,7 +18,7 @@
                 {{ wsb_t('schedule.event.soldOut') }}
             </a>
         {% else %}
-            <a href="{% if registration == 'true' %} {{ event.registration_page.url }} {% else %} {{ event.url }} {% endif %}"
+            <a href="{% if registration == 'true' %} {{ event.registration_page.url }} {% else %} {{ event.get_url() }} {% endif %}"
                class="wsb-table__btn">
                 {{ wsb_t('schedule.event.register') }}
             </a>

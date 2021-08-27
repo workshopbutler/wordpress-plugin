@@ -121,6 +121,16 @@ class Paid_Ticket_Type extends Ticket_Type {
 	}
 
 	/**
+	 * Returns the name of the ticket type
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_name() {
+		return $this->name;
+	}
+
+	/**
 	 * Returns true if the tickets of this type can be bought
 	 *
 	 * @return boolean
@@ -137,7 +147,7 @@ class Paid_Ticket_Type extends Ticket_Type {
 	 * @since  2.0.0
 	 */
 	public function in_future() {
-		return $this->start ? $this->start > new DateTime( 'now' ) : false;
+		return $this->start && $this->start > new DateTime( 'now' );
 	}
 
 	/**
@@ -157,7 +167,7 @@ class Paid_Ticket_Type extends Ticket_Type {
 	 * @since  2.0.0
 	 */
 	public function ended() {
-		return $this->end ? $this->end < new DateTime( 'now' ) : false;
+		return $this->end && $this->end < new DateTime( 'now' );
 	}
 
 	/**
@@ -167,4 +177,23 @@ class Paid_Ticket_Type extends Ticket_Type {
 		return false;
 	}
 
+	/**
+	 * Returns the id
+	 *
+	 * @since 3.0.0
+	 * @return string
+	 */
+	public function get_id() {
+		return $this->id;
+	}
+
+	/**
+	 * Returns the price of the ticket
+	 *
+	 * @since 3.0.0
+	 * @return Ticket_Price
+	 */
+	public function get_price() {
+		return $this->price;
+	}
 }

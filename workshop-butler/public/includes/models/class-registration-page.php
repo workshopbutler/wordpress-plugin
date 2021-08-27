@@ -25,7 +25,7 @@ class Registration_Page {
 	/**
 	 * The registration url
 	 *
-	 * @var string|null $url
+	 * @var string $url
 	 * @since 2.0.0
 	 */
 	public $url;
@@ -33,9 +33,9 @@ class Registration_Page {
 	/**
 	 * Registration_Page constructor
 	 *
-	 * @param object      $json_data        JSON from WorkshopButler API.
+	 * @param object      $json_data JSON from WorkshopButler API.
 	 * @param string|null $registration_url URL to the page with [wsb_registration] shortcode.
-	 * @param int         $event_id         ID of the event.
+	 * @param int         $event_id ID of the event.
 	 */
 	public function __construct( $json_data, $registration_url, $event_id ) {
 		if ( $json_data ) {
@@ -48,10 +48,21 @@ class Registration_Page {
 	}
 
 	/**
+	 * Returns the registration page URL
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_url() {
+		return $this->url;
+	}
+
+	/**
 	 * Returns a correctly formed url for a registration page of the event
 	 *
 	 * @param string $registration_page_url Url of the page with RegistrationPage widget.
-	 * @param string $event_id              Hashed event id.
+	 * @param string $event_id Hashed event id.
+	 *
 	 * @return string
 	 */
 	protected static function get_internal_url( $registration_page_url, $event_id ) {

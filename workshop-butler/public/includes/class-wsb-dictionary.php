@@ -10,6 +10,10 @@
 
 namespace WorkshopButler;
 
+use WorkshopButler\Config\Event_Calendar_Config;
+use WorkshopButler\Config\Next_Event_Config;
+use WorkshopButler\Config\Single_Event_Config;
+
 /**
  * Dictionary class which provides an access to entities, loaded from API
  *
@@ -58,8 +62,8 @@ class WSB_Dictionary {
 	/**
 	 * Returns a currently-processed trainer or WP_Error if an API request failed
 	 *
-	 * @since  2.0.0
 	 * @return Trainer|null|\WP_Error
+	 * @since  2.0.0
 	 */
 	public function get_trainer() {
 		if ( ! isset( $GLOBALS['wsb_trainer'] ) ) {
@@ -72,14 +76,15 @@ class WSB_Dictionary {
 		if ( ! is_a( $may_be_trainer, 'WorkshopButler\Trainer' ) ) {
 			return null;
 		}
+
 		return $may_be_trainer;
 	}
 
 	/**
 	 * Returns a currently-processed event or WP_Error if an API request failed
 	 *
-	 * @since  2.0.0
 	 * @return Event|\WP_Error|null
+	 * @since  2.0.0
 	 */
 	public function get_event() {
 		if ( ! isset( $GLOBALS['wsb_event'] ) ) {
@@ -92,43 +97,123 @@ class WSB_Dictionary {
 		if ( ! is_a( $may_be_event, 'WorkshopButler\Event' ) ) {
 			return null;
 		}
+
 		return $may_be_event;
 	}
 
 	/**
 	 * Returns the attributes for a currently-processed event or null
 	 *
+	 * @return Event_Calendar_Config|null
 	 * @since 2.0.0
-	 * @return array|null
 	 */
-	public function get_schedule_attrs() {
+	public function get_schedule_config() {
 		if ( ! isset( $GLOBALS['wsb_schedule_attrs'] ) ) {
 			return null;
 		}
+
 		return $GLOBALS['wsb_schedule_attrs'];
 	}
 
 	/**
+	 * Returns the config for the single event page
+	 *
+	 * @return Single_Event_Config|null
+	 * @since 3.0.0
+	 */
+	public function get_single_event_config() {
+		if ( ! isset( $GLOBALS['wsb_single_event_config'] ) ) {
+			return null;
+		}
+
+		return $GLOBALS['wsb_single_event_config'];
+	}
+
+	/**
+	 * Sets new single page config
+	 *
+	 * @param Single_Event_Config $config New event config.
+	 *
+	 * @since 3.0.0
+	 */
+	public function set_single_event_config( $config ) {
+		$GLOBALS['wsb_single_event_config'] = $config;
+	}
+
+	/**
+	 * Returns the config for the trainer list page
+	 *
+	 * @return Trainer_List_Config|null
+	 * @since 3.0.0
+	 */
+	public function get_trainer_list_config() {
+		if ( ! isset( $GLOBALS['wsb_trainer_list_config'] ) ) {
+			return null;
+		}
+
+		return $GLOBALS['wsb_trainer_list_config'];
+	}
+
+	/**
+	 * Sets new trainer list config
+	 *
+	 * @param Trainer_List_Config $config New trainer list config.
+	 *
+	 * @since 3.0.0
+	 */
+	public function set_trainer_list_config( $config ) {
+		$GLOBALS['wsb_trainer_list_config'] = $config;
+	}
+
+	/**
+	 * Returns the config for the next event widget
+	 *
+	 * @return Next_Event_Config|null
+	 * @since 3.0.0
+	 */
+	public function get_next_event_config() {
+		if ( ! isset( $GLOBALS['wsb_next_event_config'] ) ) {
+			return null;
+		}
+
+		return $GLOBALS['wsb_next_event_config'];
+	}
+
+	/**
+	 * Sets new next event config
+	 *
+	 * @param Next_Event_Config $config Next event config.
+	 *
+	 * @since 3.0.0
+	 */
+	public function set_next_event_config( $config ) {
+		$GLOBALS['wsb_next_event_config'] = $config;
+	}
+
+
+	/**
 	 * Sets new schedule attributes
 	 *
-	 * @param array $attrs New schedule attrs.
+	 * @param Event_Calendar_Config $config New schedule config.
+	 *
 	 * @since 2.0.0
 	 */
-	public function set_schedule_attrs( $attrs ) {
-		$GLOBALS['wsb_schedule_attrs'] = $attrs;
+	public function set_schedule_config( $config ) {
+		$GLOBALS['wsb_schedule_attrs'] = $config;
 	}
 
 
 	/**
 	 * Returns the attributes for a currently-processed event or null
 	 *
-	 * @since 2.12.0
 	 * @return array|null
+	 * @since 2.12.0
 	 */
 	public function get_item_attrs() {
 		if ( ! isset( $GLOBALS['wsb_item_attrs'] ) ) {
 			return null;
 		}
+
 		return $GLOBALS['wsb_item_attrs'];
 	}
 
@@ -136,6 +221,7 @@ class WSB_Dictionary {
 	 * Sets new item attributes
 	 *
 	 * @param array $attrs New item attrs.
+	 *
 	 * @since 2.12.0
 	 */
 	public function set_item_attrs( $attrs ) {
@@ -145,39 +231,42 @@ class WSB_Dictionary {
 	/**
 	 * Returns a list of processed events
 	 *
-	 * @since  2.0.0
 	 * @return Event[]|null
+	 * @since  2.0.0
 	 */
 	public function get_events() {
 		if ( ! isset( $GLOBALS['wsb_events'] ) || ! is_array( $GLOBALS['wsb_events'] ) ) {
 			return null;
 		}
+
 		return $GLOBALS['wsb_events'];
 	}
 
 	/**
 	 * Returns a list of processed trainers
 	 *
-	 * @since  2.0.0
 	 * @return Trainer[]|null
+	 * @since  2.0.0
 	 */
 	public function get_trainers() {
 		if ( ! isset( $GLOBALS['wsb_trainers'] ) || ! is_array( $GLOBALS['wsb_trainers'] ) ) {
 			return null;
 		}
+
 		return $GLOBALS['wsb_trainers'];
 	}
 
 	/**
 	 * Returns a currently-processed testimonial
 	 *
-	 * @since  2.0.0
 	 * @return object|null
+	 * @since  2.0.0
 	 */
 	public function get_testimonial() {
 		if ( ! isset( $GLOBALS['wsb_testimonial'] ) || ! is_object( $GLOBALS['wsb_testimonial'] ) ) {
 			return null;
 		}
+
 		return $GLOBALS['wsb_testimonial'];
 	}
 
@@ -204,9 +293,86 @@ class WSB_Dictionary {
 	}
 
 	/**
+	 * Adds a section to the dictionary
+	 *
+	 * @param Section $section Section of the registration form.
+	 *
+	 * @since 3.0.0
+	 */
+	public function set_form_section( $section ) {
+		$GLOBALS['wsb_form_section'] = $section;
+	}
+
+	/**
+	 * Cleans a section from the dictionary
+	 *
+	 * @since 3.0.0
+	 */
+	public function clear_form_section() {
+		unset( $GLOBALS['wsb_form_section'] );
+	}
+
+	/**
+	 * Returns a currently-processed section
+	 *
+	 * @return Section|null
+	 * @since  3.0.0
+	 */
+	public function get_form_section() {
+		if ( ! isset( $GLOBALS['wsb_form_section'] ) ) {
+			return null;
+		}
+		$may_be_section = $GLOBALS['wsb_form_section'];
+		if ( ! is_a( $may_be_section, 'WorkshopButler\Section' ) ) {
+			return null;
+		}
+
+		return $may_be_section;
+	}
+
+	/**
+	 * Adds a field to the dictionary
+	 *
+	 * @param Field $field Field of the registration form.
+	 *
+	 * @since 3.0.0
+	 */
+	public function set_form_field( $field ) {
+		$GLOBALS['wsb_form_field'] = $field;
+	}
+
+	/**
+	 * Cleans a field from the dictionary
+	 *
+	 * @since 3.0.0
+	 */
+	public function clear_form_field() {
+		unset( $GLOBALS['wsb_form_field'] );
+	}
+
+	/**
+	 * Returns a currently-processed field
+	 *
+	 * @return Field|Select|null
+	 * @since  3.0.0
+	 */
+	public function get_form_field() {
+		if ( ! isset( $GLOBALS['wsb_form_field'] ) ) {
+			return null;
+		}
+		$may_be_field = $GLOBALS['wsb_form_field'];
+		if ( ! is_a( $may_be_field, 'WorkshopButler\Field' ) ) {
+			return null;
+		}
+
+		return $may_be_field;
+	}
+
+	/**
 	 * Adds loaded events to the dictionary
 	 *
 	 * @param Event[] $events Retrieved events.
+	 *
 	 * @since 2.0.0
 	 */
 	public function set_events( $events ) {

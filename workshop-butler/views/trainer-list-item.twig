@@ -3,6 +3,6 @@
      data-trainer-language="{{ trainer.languages |join(',') }}"
      data-trainer-rating={{ trainer.stats.total.public_stats.rating }}
      data-trainer-badge="{{ trainer.name_of_badges |join(',') }}"
-     data-trainer-trainer="{{ trainer.full_name }}">
+     data-trainer-trainer="{{ trainer.get_full_name }}">
     {{ content | raw }}
 </div>

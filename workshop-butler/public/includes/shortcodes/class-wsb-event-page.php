@@ -12,6 +12,9 @@ namespace WorkshopButler;
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'utils/log-error.php';
+require_once WSB_ABSPATH . 'public/includes/config/class-single-event-config.php';
+
+use WorkshopButler\Config\Single_Event_Config;
 
 /**
  * Event Page class which handles the rendering and logic for the event page
@@ -129,16 +132,14 @@ class WSB_Event_Page extends WSB_Page {
 	 * @return string
 	 */
 	private function render_page( $event ) {
-		$custom_template = $this->settings->get( WSB_Options::EVENT_TEMPLATE );
-		$template        = $this->get_template( 'event-page', $custom_template );
-
-		$template_data = array(
-			'event' => $event,
-			'theme' => $this->get_theme(),
-		);
-
-		$processed_template = do_shortcode( $template );
-		$content            = $this->compile_string( $processed_template, $template_data );
+		$this->dict->set_event( $event );
+		$this->dict->set_single_event_config( new Single_Event_Config() );
+		if ( $this->settings->use_old_templates() ) {
+			$content = $this->render_old_template( $event );
+		} else {
+			$content = $this->render_new_template();
+		}
+		$this->dict->clear_event();
 
 		return $this->add_custom_styles( $content );
 	}
@@ -155,5 +156,48 @@ class WSB_Event_Page extends WSB_Page {
 		$page = new WSB_Event_Page();
 
 		return $page->render( $attrs, $content );
+	}
+
+	/**
+	 * Render the event using new templates
+	 *
+	 * @return false|string
+	 * @since 3.0.0
+	 */
+	protected function render_new_template() {
+		$event = WSB()->dict->get_event();
+		if( !is_a( $event, 'WorkshopButler\Event' )) {
+			return false;
+		}
+
+		ob_start();
+		wsb_get_template( 'single-event.php', array(
+			'theme' => $this->get_theme(),
+			'event' => $event,
+			'config' => WSB()->dict->get_single_event_config(),
+		));
+		return ob_get_clean();
+	}
+
+	/**
+	 * Renders the old event page
+	 *
+	 * @param Event $event Current event.
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	private function render_old_template( $event ): string {
+		$custom_template = $this->settings->get( WSB_Options::EVENT_TEMPLATE );
+		$template        = $this->get_template( 'event-page', $custom_template );
+
+		$template_data = array(
+			'event' => $event,
+			'theme' => $this->get_theme(),
+		);
+
+		$processed_template = do_shortcode( $template );
+
+		return $this->compile_string( $processed_template, $template_data );
 	}
 }

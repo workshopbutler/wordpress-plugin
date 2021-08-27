@@ -93,22 +93,22 @@ class Sidebar_Widget extends \WP_Widget {
 				case 'eventtype':
 					?>
                     <p>
-                        <label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
-                        <input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
-                               name="<?php echo $this->get_field_name( $name ); ?>"
-                               type="<?php echo $this->get_field_name( $field->type ); ?>"
-                               value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
+                        <label for="<?= $this->get_field_id( $name ); ?>"><?= $field->description; ?></label>
+                        <input class="widefat" id="<?= $this->get_field_id( $name ); ?>"
+                               name="<?= $this->get_field_name( $name ); ?>"
+                               type="<?= $this->get_field_name( $field->type ); ?>"
+                               value="<?= esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
                     </p>
 					<?php
 					break;
 				default:
 					?>
                     <p>
-                        <label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $field->description; ?></label>
-                        <input class="widefat" id="<?php echo $this->get_field_id( $name ); ?>"
-                               name="<?php echo $this->get_field_name( $name ); ?>"
-                               type="<?php echo $this->get_field_name( $field->type ); ?>"
-                               value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
+                        <label for="<?= $this->get_field_id( $name ); ?>"><?= $field->description; ?></label>
+                        <input class="widefat" id="<?= $this->get_field_id( $name ); ?>"
+                               name="<?= $this->get_field_name( $name ); ?>"
+                               type="<?= $this->get_field_name( $field->type ); ?>"
+                               value="<?= esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
                     </p>
 				<?php
 			}
@@ -223,7 +223,7 @@ class Sidebar_Widget extends \WP_Widget {
 			$content .= '<li>' .
 						Formatter::format( $event->schedule, 'full_short' ) . ', ' .
 						Formatter::format( $event->location ) . '<br>' .
-						'<a href="' . $event->url() . '" ' . $target . '>' .
+						'<a href="' . $event->get_url() . '" ' . $target . '>' .
 						$event->title . '</a></li>';
 		}
 		$content .= '</ul>';

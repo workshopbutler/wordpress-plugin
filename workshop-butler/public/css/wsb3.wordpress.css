@@ -1,0 +1,4 @@
+.wsb-content .wsb-event-page .wsb-header h1,
+.wsb-content .wsb-registration-page .wsb-header h1 {
+    display: none;
+}

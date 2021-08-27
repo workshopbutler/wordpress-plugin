@@ -14,6 +14,23 @@ jQuery( document ).ready(
 			}
 		);
 
+        // init owl carousel
+        const owl = jQuery('.owl-carousel-testimonial');
+        jQuery('.wsb-testimonials-counter').show();
+        jQuery('.wsb-testimonials-counter .total').text(owl.find('> div').length);
+        owl.owlCarousel({
+            items: 1,
+            dots: false,
+            nav: true,
+			loop: true,
+        });
+        owl.on('changed.owl.carousel', function(e) {
+            jQuery('.wsb-testimonials-counter .current').text(
+				// workaround for incorrect counter in loop mode
+				1 + e.item.index - jQuery(e.target).find('.active:first').prevAll('.cloned').length
+			);
+        });
+
 		function wsb_load_events(type, callback) {
 			var data = {
 				action : 'wsb_get_values',

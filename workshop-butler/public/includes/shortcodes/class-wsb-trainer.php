@@ -143,7 +143,7 @@ EOD;
 			case 'events':
 				return array(
 					'description' => 'trainer.experience.events',
-					'parameter'   => $trainer->number_of_events,
+					'parameter'   => $trainer->stats->total->total,
 				);
 			case 'public-rating':
 				return array(
@@ -162,7 +162,7 @@ EOD;
 			default:
 				return array(
 					'description' => 'trainer.experience.years',
-					'parameter'   => $trainer->years_of_experience,
+					'parameter'   => $trainer->stats->years_of_experience,
 				);
 		}
 	}

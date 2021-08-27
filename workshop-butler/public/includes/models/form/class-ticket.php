@@ -53,4 +53,14 @@ class Ticket extends Field {
 			}
 		}
 	}
+
+	/**
+	 * Returns true if the tax should be excluded from the price
+	 *
+	 * @since 3.0.0
+	 * @return bool
+	 */
+	public function is_tax_excluded() {
+		return $this->excluded_tax;
+	}
 }

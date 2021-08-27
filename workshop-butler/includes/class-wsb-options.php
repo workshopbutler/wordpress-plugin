@@ -49,10 +49,13 @@ class WSB_Options {
 	const CUSTOM_THEME  = 'custom-theme';
 	const GA_API_KEY    = 'google-analytics-key';
 	const REPORT_ERRORS = 'report-errors';
+	const USE_OLD_TEMPLATES = 'use-old-templates';
+	const ALLOW_TEMPLATE_SWITCHING = 'allow-template-switching';
 
 	const CUSTOM_EVENT_DETAILS    = 'custom-event-page';
 	const SHOW_EXPIRED_TICKETS    = 'show-expired-tickets';
 	const SHOW_NUMBER_OF_TICKETS  = 'show-number-of-tickets';
+	const REGISTRATION_PAGE_NEW_TAB  = 'registration-page-new-tab';
 	const SCHEDULE_NO_EVENTS      = 'no-events-caption';
 	const SCHEDULE_LAYOUT         = 'event-list-layout';
 	const SCHEDULE_PAGE           = 'event-list-page-id';
@@ -74,6 +77,12 @@ class WSB_Options {
 	const TRAINER_MODULE       = 'trainer-module';
 	const TRAINER_LIST_PAGE    = 'trainer-list-page-id';
 	const TRAINER_PROFILE_PAGE = 'trainer-page-id';
+
+	const TRAINER_DISPLAY_PRIVATE_RATING = 'trainer-display-private-rating';
+	const TRAINER_DISPLAY_PUBLIC_RATING  = 'trainer-display-public_rating';
+	const TRAINER_DISPLAY_YEARS          = 'trainer-display-years';
+	const TRAINER_DISPLAY_EVENTS_HELD    = 'trainer-display-events_held';
+
 
 	/**
 	 * Removes plugin options
@@ -239,16 +248,32 @@ class WSB_Options {
 	 * @since 2.7.0
 	 */
 	public function get_theme() {
-		return $this->get( self::THEME, 'alfred' );
+		$theme = $this->get( self::THEME, 'alfred' );
+		if ( $theme == 'custom' ) {
+			$custom_theme = $this->get( self::CUSTOM_THEME );
+			// when custom_theme is empty, we expose word 'custom'
+			$theme = $custom_theme ? $custom_theme : $theme;
+		}
+		return $theme;
 	}
 
 	/**
 	 * Returns true if featured events are active
 	 *
 	 * @return bool
-	 * @since 2.12.0
+	 * @since 3.0.0
 	 */
-	public function is_featured_events_active() {
+	public function is_highlight_featured() {
 		return $this->get( self::FEATURED_EVENTS, false );
+	}
+
+	/**
+	 * Return true in case of old template rendering
+	 *
+	 * @return bool
+	 * @since 3.0.0
+	 */
+	public function use_old_templates() {
+		return $this->get( self::ALLOW_TEMPLATE_SWITCHING, false ) && $this->get( self::USE_OLD_TEMPLATES, false );
 	}
 }

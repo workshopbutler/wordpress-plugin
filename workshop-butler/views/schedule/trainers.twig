@@ -6,9 +6,9 @@
                     <a href="{{ trainer.url }}">
                         <img class="wsb-photo" src="{{ trainer.photo }}"/>
                     </a>
-                    <a class="wsb-name" href="{{ trainer.url }}"> {% if name %} {{ trainer.full_name }} {% endif %}</a>
+                    <a class="wsb-name" href="{{ trainer.url }}"> {% if name %} {{ trainer.get_full_name }} {% endif %}</a>
                 {% else %}
-                    <img class="wsb-photo" src="{{ trainer.photo }}"/>{% if name %} {{ trainer.full_name }} {% endif %}
+                    <img class="wsb-photo" src="{{ trainer.photo }}"/>{% if name %} {{ trainer.get_full_name }} {% endif %}
                 {% endif %}
             </div>
         {% endfor %}
@@ -21,9 +21,9 @@
                     <a href="{{ trainer.url }}">
                         <img class="wsb-photo" src="{{ trainer.photo }}"/>
                     </a>
-                    <a class="wsb-name" href="{{ trainer.url }}"> {% if name %} {{ trainer.full_name }} {% endif %}</a>
+                    <a class="wsb-name" href="{{ trainer.url }}"> {% if name %} {{ trainer.get_full_name }} {% endif %}</a>
                 {% else %}
-                    <img class="wsb-photo" src="{{ trainer.photo }}"/>{% if name %} {{ trainer.full_name }} {% endif %}
+                    <img class="wsb-photo" src="{{ trainer.photo }}"/>{% if name %} {{ trainer.get_full_name }} {% endif %}
                 {% endif %}
             </div>
         {% endfor %}

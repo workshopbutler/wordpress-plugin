@@ -56,7 +56,6 @@ abstract class WSB_Page {
 	 * @since 2.0.0
 	 */
 	public function __construct() {
-		require_once plugin_dir_path( __FILE__ ) . '../../vendor/autoload.php';
 		$this->load_dependencies();
 	}
 
@@ -125,7 +124,7 @@ abstract class WSB_Page {
 	 *
 	 * @return array
 	 */
-	private static function convert_booleans( $attrs ) {
+	protected static function convert_booleans( $attrs ) {
 		foreach ( $attrs as $key => $value ) {
 			switch ( $value ) {
 				case 'true':

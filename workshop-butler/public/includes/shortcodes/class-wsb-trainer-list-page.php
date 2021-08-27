@@ -11,6 +11,9 @@
 namespace WorkshopButler;
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-wsb-page.php';
+require_once WSB_ABSPATH . 'public/includes/config/class-trainer-list-config.php';
+
+use WorkshopButler\Config\Trainer_List_Config;
 
 /**
  * Trainer List page class which handles the rendering and logic for the list of trainers
@@ -64,22 +67,19 @@ class WSB_Trainer_List_Page extends WSB_Page {
 	 * Renders the list of trainers
 	 *
 	 * @param array  $attrs Shortcode attributes.
-	 * @param string $content Shortcode content.
 	 *
 	 * @return string
 	 * @since  2.0.0
 	 */
-	public function render_page( $attrs = array(), $content = null ) {
+	public function render_page( $attrs = array() ) {
 		// Load styles and scripts only on demand.
 		wp_enqueue_script( 'wsb-all-trainers-scripts' );
 		$this->add_theme_fonts();
 
-		$method = 'facilitators';
-		$query  = array(
-			'per_page' => '-1',
+		$response = $this->requests->get(
+			'facilitators',
+			array( 'per_page' => '-1' )
 		);
-
-		$response = $this->requests->get( $method, $query );
 
 		return $this->render_list( $response, $attrs, $this->settings->get_trainer_page_url() );
 	}
@@ -98,6 +98,8 @@ class WSB_Trainer_List_Page extends WSB_Page {
 			return $this->format_error( $response->error );
 		}
 
+		$this->dict->set_trainer_list_config( new Trainer_List_Config( $attrs ) );
+
 		$trainers = array();
 		foreach ( $response->body->data as $json_trainer_data ) {
 			$trainer = new Trainer( $json_trainer_data, $trainer_url );
@@ -109,6 +111,40 @@ class WSB_Trainer_List_Page extends WSB_Page {
 			$trainers  = $this->filter_by_badges( $trainers, $badge_ids );
 		}
 
+		$this->dict->set_trainers( $trainers );
+		if ( $this->settings->use_old_templates() ) {
+			$content = $this->render_old_template( $trainers );
+		} else {
+			$content = $this->render_new_template();
+		}
+		$this->dict->clear_trainers();
+
+		return $this->add_custom_styles( $content );
+	}
+
+	/**
+	 * Render the list of trainers using new templates
+	 *
+	 * @return false|string
+	 * @since 3.0.0
+	 */
+	protected function render_new_template() {
+		ob_start();
+		wsb_get_template( 'trainer-list.php', array(
+			'theme' => $this->get_theme(),
+		));
+		return ob_get_clean();
+	}
+
+	/**
+	 * Renders the old list of trainers
+	 *
+	 * @param  Trainer[] $trainers List of trainers.
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	private function render_old_template( $trainers ): string {
 		$template_data = array(
 			'trainers' => $trainers,
 			'theme'    => $this->get_theme(),
@@ -117,13 +153,10 @@ class WSB_Trainer_List_Page extends WSB_Page {
 		$custom_template = $this->settings->get( WSB_Options::TRAINER_LIST_TEMPLATE );
 		$template        = $this->get_template( 'trainer-list-page', $custom_template );
 
-		$GLOBALS['wsb_trainers'] = $trainers;
 		$processed_template      = do_shortcode( $template );
-		$content                 = $this->compile_string( $processed_template, $template_data );
-		unset( $GLOBALS['wsb_trainers'] );
-
-		return $this->add_custom_styles( $content );
+		return $this->compile_string( $processed_template, $template_data );
 	}
+
 
 	/**
 	 * Returns list of trainers who contains at least one of given badges.

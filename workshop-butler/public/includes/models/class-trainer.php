@@ -16,6 +16,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-testimonial.
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'models/class-badge.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'utils/language.php';
 
+use WorkshopButler\WSB_Options;
 
 /**
  * Trainer class which represents a trainer profile in Workshop Butler
@@ -98,23 +99,6 @@ class Trainer {
 	public $languages;
 
 	/**
-	 * Years of experience for the trainer. It's more than 0 only when you work with the profiles of trainers,
-	 * licensed by certification body
-	 *
-	 * @since 2.0.0
-	 * @var int
-	 */
-	public $years_of_experience;
-
-	/**
-	 * Total number of workshops the trainer had
-	 *
-	 * @since 2.0.0
-	 * @var int
-	 */
-	public $number_of_events;
-
-	/**
 	 * List of badges the trainer earned
 	 *
 	 * @since 2.0.0
@@ -167,8 +151,6 @@ class Trainer {
 		$this->photo               = $json_data->avatar;
 		$this->bio                 = $json_data->bio;
 		$this->email               = $json_data->email;
-		$this->years_of_experience = isset( $json_data->years_of_experience ) ? $json_data->years_of_experience : null;
-		$this->number_of_events    = isset( $json_data->number_of_events ) ? $json_data->number_of_events : null;
 		$this->badges              = array();
 		if ( isset( $json_data->badges ) && is_array( $json_data->badges ) ) {
 			foreach ( $json_data->badges as $badge ) {
@@ -224,7 +206,7 @@ class Trainer {
 	 * @since 2.2.0
 	 */
 	protected function get_trainer_url( $base_url ) {
-		return $base_url . '?id=' . $this->id . '&full_name=' . $this->full_name();
+		return $base_url . '?id=' . $this->id . '&full_name=' . $this->get_full_name();
 	}
 
 	/**
@@ -233,7 +215,7 @@ class Trainer {
 	 * @return string
 	 * @since  2.0.0
 	 */
-	public function full_name() {
+	public function get_full_name() {
 		return $this->first_name . ' ' . $this->last_name;
 	}
 
@@ -250,6 +232,52 @@ class Trainer {
 		}
 
 		return $names;
+	}
+
+	public function get_photo_or_default() {
+		return $this->photo ?  $this->photo : plugin_dir_url( __FILE__ ) . '../../img/stub-trainer-photo.svg';
+	}
+
+	public function get_displayed_public_rating() {
+		if ( ! WSB()->settings->get( WSB_Options::TRAINER_DISPLAY_PUBLIC_RATING ) ) {
+			return null;
+		}
+		return $this->stats->total->public_stats->get_rounded_rating();
+	}
+
+	public function get_displayed_private_rating() {
+		if ( ! WSB()->settings->get( WSB_Options::TRAINER_DISPLAY_PRIVATE_RATING ) ) {
+			return null;
+		}
+		return $this->stats->total->private_stats->get_rounded_rating();
+	}
+
+	public function get_displayed_public_evaluations() {
+		if ( ! WSB()->settings->get( WSB_Options::TRAINER_DISPLAY_PUBLIC_RATING ) ) {
+			return null;
+		}
+		return $this->stats->total->public_stats->evaluations;
+	}
+
+	public function get_displayed_private_evaluations() {
+		if ( ! WSB()->settings->get( WSB_Options::TRAINER_DISPLAY_PRIVATE_RATING ) ) {
+			return null;
+		}
+		return $this->stats->total->private_stats->evaluations;
+	}
+
+	public function get_displayed_years_of_experience() {
+		if ( ! WSB()->settings->get( WSB_Options::TRAINER_DISPLAY_YEARS ) ) {
+			return null;
+		}
+		return $this->stats->years_of_experience;
+	}
+
+	public function get_displayed_events_held() {
+		if ( ! WSB()->settings->get( WSB_Options::TRAINER_DISPLAY_EVENTS_HELD ) ) {
+			return null;
+		}
+		return $this->stats->total->total;
 	}
 
 }

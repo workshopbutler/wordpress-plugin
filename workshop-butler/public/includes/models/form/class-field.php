@@ -77,6 +77,55 @@ class Field {
 		} else {
 			$this->custom = false;
 		}
+	}
 
+	/**
+	 * Returns the type of the field
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_type() {
+		return $this->type;
+	}
+
+	/**
+	 * Returns the name of the field
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_name() {
+		return $this->name;
+	}
+
+	/**
+	 * Returns the label of the field
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function get_label() {
+		return $this->label;
+	}
+
+	/**
+	 * Returns true if the field is required
+	 *
+	 * @return string
+	 * @since 3.0.0
+	 */
+	public function is_required() {
+		return $this->required;
+	}
+
+	/**
+	 * Returns true if the field is custom
+	 *
+	 * @return bool
+	 * @since 3.0.0
+	 */
+	public function is_custom() {
+		return $this->custom;
 	}
 }

@@ -42,6 +42,22 @@ class WSB_Integration_Public {
 	private $version;
 
 	/**
+	 * Plugin dictionary
+	 *
+	 * @var		WSB_Dictionary $dict
+	 * @since	3.0.0
+	 */
+	public $dict;
+
+	/**
+	 * Plugin settings
+	 *
+	 * @since   3.0.0
+	 * @var     WSB_Options $settings Plugin settings
+	 */
+	public $settings;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @param string $plugin_name The name of the plugin.
@@ -67,7 +83,6 @@ class WSB_Integration_Public {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer-list-page.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-trainer-page.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-schedule-page.php';
-		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-old-schedule-page.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-event-page.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-registration-page.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-testimonial.php';
@@ -75,6 +90,21 @@ class WSB_Integration_Public {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-event.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes/class-wsb-next-event.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-ajax.php';
+
+		/**
+		 * The class responsible for providing an access to entities, loaded from API
+		 */
+		require_once WSB_ABSPATH . 'public/includes/class-wsb-dictionary.php';
+
+		$this->dict = new WSB_Dictionary();
+
+		/**
+		 * The class responsible for all plugin-related options
+		 * core plugin.
+		 */
+		require_once WSB_ABSPATH . 'includes/class-wsb-options.php';
+
+		$this->settings = new WSB_Options();
 	}
 
 	/**
@@ -83,10 +113,15 @@ class WSB_Integration_Public {
 	 * @since    2.0.0
 	 */
 	public function enqueue_styles() {
-		wp_register_style( 'wsb-fontawesome-styles', plugin_dir_url( __FILE__ ) . 'css/fontawesome-all.min.css', array(), $this->version );
-		wp_register_style( 'wsb-themes', plugin_dir_url( __FILE__ ) . 'css/styles.1.12.1.min.css', array(), $this->version );
-		wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb.wordpress.css', array(), $this->version );
-
+		if( $this->settings->get( WSB_Options::USE_OLD_TEMPLATES )) {
+			wp_register_style( 'wsb-themes', plugin_dir_url( __FILE__ ) . 'css/styles.1.12.1.min.css' );
+			wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb.wordpress.css' );
+		} else {
+			wp_register_style( 'wsb-flag-icons', 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/css/flag-icon.min.css' );
+			wp_register_style( 'wsb-themes', plugin_dir_url( __FILE__ ) . 'css/widgets.1.15.5.min.css' );
+			wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb3.wordpress.css' );
+		}
+		wp_register_style( 'wsb-fontawesome-styles', plugin_dir_url( __FILE__ ) . 'css/fontawesome-all.min.css' );
 		wp_register_style( 'wsb-font-arapey', 'https://fonts.googleapis.com/css?family=Arapey' );
 		wp_register_style( 'wsb-font-montserrat', 'https://fonts.googleapis.com/css?family=Montserrat' );
 		wp_register_style( 'wsb-font-droid-sans', 'https://fonts.googleapis.com/css?family=Droid+Sans' );
@@ -96,6 +131,7 @@ class WSB_Integration_Public {
 		wp_enqueue_style( 'wsb-themes' );
 		wp_enqueue_style( 'wsb-wordpress-themes' );
 		wp_enqueue_style( 'wsb-fontawesome-styles' );
+		wp_enqueue_style( 'wsb-flag-icons' );
 	}
 
 	/**
@@ -105,23 +141,42 @@ class WSB_Integration_Public {
 	 */
 	public function enqueue_scripts() {
 		wp_register_script( 'wsb-all-trainers-scripts', plugin_dir_url( __FILE__ ) . 'js/all-trainers-scripts.js', array( 'jquery' ), $this->version, true );
-		wp_register_script( 'wsb-event-page', plugin_dir_url( __FILE__ ) . 'js/event-page.js', array(
-			'jquery',
-			'wsb-dateformat'
-		), $this->version, true );
-		wp_register_script( 'wsb-registration-page', plugin_dir_url( __FILE__ ) . 'js/registration-page.js', array(
-			'jquery',
-			'wsb-dateformat'
-		), $this->version, true );
+		wp_register_script(
+			'wsb-event-page',
+			plugin_dir_url( __FILE__ ) . 'js/event-page.js',
+			array(
+				'jquery',
+				'wsb-dateformat',
+			),
+			$this->version,
+			true
+		);
+		wp_register_script(
+			'wsb-registration-page',
+			plugin_dir_url( __FILE__ ) . 'js/registration-page.js',
+			array(
+				'jquery',
+				'wsb-dateformat',
+			),
+			$this->version,
+			true
+		);
 
-		wp_register_script( 'wsb-single-trainer-scripts', plugin_dir_url( __FILE__ ) . 'js/single-trainer-scripts.js', array(
-			'jquery',
-			'wsb-dateformat'
-		), $this->version, true );
+		wp_register_script(
+			'wsb-single-trainer-scripts',
+			plugin_dir_url( __FILE__ ) . 'js/single-trainer-scripts.js',
+			array(
+				'jquery',
+				'wsb-dateformat',
+				'wsb-owl-carousel',
+			),
+			$this->version,
+			true
+		);
 
+		wp_register_script( 'wsb-owl-carousel', plugin_dir_url( __FILE__ ) . 'js/owl.carousel.min.js', array( 'jquery' ), $this->version, true );
 		wp_register_script( 'wsb-dateformat', plugin_dir_url( __FILE__ ) . 'js/jquery-dateFormat.min.js', array( 'jquery' ), $this->version, true );
 		wp_register_script( 'wsb-all-events-scripts', plugin_dir_url( __FILE__ ) . 'js/all-events-scripts.js', array( 'jquery' ), $this->version, true );
-
 		wp_register_script( 'wsb-next-event', plugin_dir_url( __FILE__ ) . 'js/next-event.js', array( 'jquery' ), $this->version, true );
 		wp_deregister_script( 'jquery' );
 		wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', false, null );
@@ -129,7 +184,7 @@ class WSB_Integration_Public {
 
 		wp_register_script( 'stripe', 'https://js.stripe.com/v3/' );
 
-		$ga_key = WSB_Options::get_option( WSB_Options::GA_API_KEY );
+		$ga_key = $this->settings->get( WSB_Options::GA_API_KEY );
 		wp_localize_script(
 			'wsb-registration-page',
 			'wsb_ga',
@@ -147,11 +202,10 @@ class WSB_Integration_Public {
 	 * @since 2.0.0
 	 */
 	public function set_title( $title, $id = null ) {
-		$options      = new WSB_Options();
 		$reserved_ids = array(
-			intval( $options->get( WSB_Options::EVENT_PAGE ) ),
-			intval( $options->get( WSB_Options::REGISTRATION_PAGE ) ),
-			intval( $options->get( WSB_Options::TRAINER_PROFILE_PAGE ) ),
+			intval( $this->settings->get( WSB_Options::EVENT_PAGE ) ),
+			intval( $this->settings->get( WSB_Options::REGISTRATION_PAGE ) ),
+			intval( $this->settings->get( WSB_Options::TRAINER_PROFILE_PAGE ) ),
 		);
 		if ( in_array( $id, $reserved_ids, true ) ) {
 			return $this->get_title( $title );
@@ -186,12 +240,10 @@ class WSB_Integration_Public {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wsb-requests.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/models/class-event.php';
 
-		$options = new WSB_Options();
-
 		$post_url = get_permalink( $post );
-		if ( $post_url === $options->get_event_page_url() || $post_url === $options->get_registration_page_url() ) {
+		if ( $post_url === $this->settings->get_event_page_url() || $post_url === $this->settings->get_registration_page_url() ) {
 			return $this->get_event_title( $title );
-		} elseif ( $post_url === $options->get_trainer_page_url() ) {
+		} elseif ( $post_url === $this->settings->get_trainer_page_url() ) {
 			return $this->get_trainer_name( $title );
 		} else {
 			return $title;
@@ -206,10 +258,9 @@ class WSB_Integration_Public {
 	 * @return string
 	 */
 	protected function get_trainer_name( $default_title ) {
-		$dict           = new WSB_Dictionary();
-		$may_be_trainer = $dict->get_trainer();
+		$may_be_trainer = $this->dict->get_trainer();
 		if ( is_a( $may_be_trainer, 'WorkshopButler\Trainer' ) ) {
-			return $may_be_trainer->full_name();
+			return $may_be_trainer->get_full_name();
 		} elseif ( is_wp_error( $may_be_trainer ) ) {
 			return $default_title;
 		} elseif ( empty( $_GET['id'] ) ) {
@@ -220,7 +271,7 @@ class WSB_Integration_Public {
 			if ( is_wp_error( $response ) ) {
 				return $default_title;
 			} else {
-				return $response->full_name();
+				return $response->get_full_name();
 			}
 		}
 	}
@@ -233,8 +284,7 @@ class WSB_Integration_Public {
 	 * @return string
 	 */
 	protected function get_event_title( $default_title ) {
-		$dict           = new WSB_Dictionary();
-		$may_be_event   = $dict->get_event();
+		$may_be_event = $this->dict->get_event();
 		if ( is_a( $may_be_event, 'WorkshopButler\Event' ) ) {
 			return $may_be_event->title;
 		} elseif ( is_wp_error( $may_be_event ) ) {
@@ -256,9 +306,6 @@ class WSB_Integration_Public {
 	 * Adds Workshop Butler shortcodes and initialises custom query parameters
 	 */
 	public function init() {
-
-		// Old version support.
-		add_shortcode( 'wb_content', array( 'WorkshopButler\WSB_Old_Schedule_Page', 'page' ) );
 
 		// Pages.
 		add_shortcode( 'wsb_schedule', array( 'WorkshopButler\WSB_Schedule_Page', 'page' ) );
@@ -348,29 +395,29 @@ class WSB_Integration_Public {
 	 * @return bool
 	 */
 	protected function is_reserved_page() {
-		$options = new WSB_Options();
 		global $post;
 		$reserved_ids = array(
-			intval( $options->get( WSB_Options::EVENT_PAGE ) ),
-			intval( $options->get( WSB_Options::REGISTRATION_PAGE ) ),
-			intval( $options->get( WSB_Options::TRAINER_PROFILE_PAGE ) ),
+			intval( $this->settings->get( WSB_Options::EVENT_PAGE ) ),
+			intval( $this->settings->get( WSB_Options::REGISTRATION_PAGE ) ),
+			intval( $this->settings->get( WSB_Options::TRAINER_PROFILE_PAGE ) ),
 		);
 
-		return in_array( $post->ID, $reserved_ids, true);
+		return in_array( $post->ID, $reserved_ids, true );
 	}
 
 	/**
 	 * Add opengraph image
 	 *
 	 * @param \Yoast\WP\SEO\Values\Open_Graph\Images $image_container The image container.
-	 *
 	 */
-	public function wpseo_add_opengraph_additional_images($image_container) {
-		if(! $this->is_reserved_page()) return;
+	public function wpseo_add_opengraph_additional_images( $image_container ) {
+		if ( ! $this->is_reserved_page() ) {
+			return;
+		}
 
-		$dict           = new WSB_Dictionary();
-		$may_be_event   = $dict->get_event();
-		$may_be_trainer = $dict->get_trainer();
+
+		$may_be_event   = $this->dict->get_event();
+		$may_be_trainer = $this->dict->get_trainer();
 		if ( is_a( $may_be_event, 'WorkshopButler\Event' ) ) {
 			$image_container->add_image_by_url( $may_be_event->cover_image->url );
 		} elseif ( is_a( $may_be_trainer, 'WorkshopButler\Trainer' ) ) {
@@ -390,7 +437,7 @@ class WSB_Integration_Public {
 	 *
 	 * @return string[] The presenters.
 	 */
-	public function wpseo_frontend_presenters($presenters){
+	public function wpseo_frontend_presenters( $presenters ) {
 
 		$keep[] = 'Yoast\WP\SEO\Presenters\Title_Presenter';
 		$keep[] = 'Yoast\WP\SEO\Presenters\Meta_Description_Presenter';
@@ -402,7 +449,9 @@ class WSB_Integration_Public {
 		$keep[] = 'Yoast\WP\SEO\Presenters\Open_Graph\Title_Presenter';
 		$keep[] = 'Yoast\WP\SEO\Presenters\Twitter\Card_Presenter';
 
-		if($this->is_reserved_page()) return $keep;
+		if ( $this->is_reserved_page() ) {
+			return $keep;
+		}
 
 		return $presenters;
 	}

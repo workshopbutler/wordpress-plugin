@@ -124,7 +124,7 @@ class Embed_Event_List extends WSB_Page {
 		$sliced             = array_slice( $events, 0, $this->length );
 		$tags               = 'free';
 		$highlight_featured = false;
-		if ( $this->settings->is_featured_events_active() ) {
+		if ( $this->settings->is_highlight_featured() ) {
 			$highlight_featured = true;
 			$tags               = 'all';
 		}

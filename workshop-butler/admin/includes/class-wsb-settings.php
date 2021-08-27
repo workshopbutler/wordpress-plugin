@@ -104,17 +104,19 @@ class WSB_Settings {
 				'fields'           => $this->get_trainer_settings(),
 			)
 		);
-		Redux::setSection(
-			$this->opt_name,
-			array(
-				'title'            => __( 'Pages', 'wsbintegration' ),
-				'id'               => 'pages',
-				'customizer_width' => '500px',
-				'icon'             => 'el el-edit',
-			)
-		);
+		if (WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING )) {
+			Redux::setSection(
+				$this->opt_name,
+				array(
+					'title'            => __( 'Old Templates (deprecated)', 'wsbintegration' ),
+					'id'               => 'pages',
+					'customizer_width' => '500px',
+					'icon'             => 'el el-edit',
+				)
+			);
 
-		$this->get_pages_settings();
+			$this->get_pages_settings();
+		}
 
 		Redux::setSection(
 			$this->opt_name,
@@ -264,6 +266,47 @@ class WSB_Settings {
 	protected function get_general_settings() {
 		return array(
 			array(
+				'id' => 'info_old_template',
+				'type' => 'info',
+				'notice' => false,
+				'style' => 'warning',
+				'title' => 'Upgrade to the new template system',
+				'desc'  => 'In the version 3.0.0, we introduce a modern layout with a new template system instead of the old Twig templates you are currently using. To get the benefits of the new layout, please turn off the old templates below. Read more in the <a href="https://support.workshopbutler.com/article/229-upgrade-templates" target="_blank">upgrade guide</a>',
+				'required' => array(
+					array(WSB_Options::ALLOW_TEMPLATE_SWITCHING, 'equals', true),
+					array(WSB_Options::USE_OLD_TEMPLATES, 'equals', true)
+				)
+			),
+			array(
+				'id' => 'info_templates_switch',
+				'type' => 'info',
+				'notice' => false,
+				'style' => 'success',
+				'title' => 'Complete the upgrade to the new template system',
+				'desc'  => 'Ensure that everything works well and complete the upgrade by disabling the template switching',
+				'required' => array(
+					array(WSB_Options::ALLOW_TEMPLATE_SWITCHING, 'equals', true),
+					array(WSB_Options::USE_OLD_TEMPLATES, 'equals', false)
+				)
+			),
+			WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING )?array(
+				'id'      => WSB_Options::USE_OLD_TEMPLATES,
+				'type'    => 'switch',
+				'title'   => 'Old templates',
+				'desc'    => 'Switch to the new template system with a modern layout by turning off the old one',
+				'default' => true,
+				'required' => array(WSB_Options::ALLOW_TEMPLATE_SWITCHING, 'equals', true)
+			):array(),
+			WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING )?array(
+				'id'      => WSB_Options::ALLOW_TEMPLATE_SWITCHING,
+				'type'    => 'switch',
+				'title'   => 'Template switching',
+				'desc'    => 'Disable switching to old templates to complete the upgrade. This action is irreversible',
+				'default' => false,
+				'on' => 'Enabled',
+				'off' => 'Disabled',
+			):array(),
+			array(
 				'id'         => WSB_Options::API_KEY,
 				'type'       => 'text',
 				'title'      => __( 'Workshop Butler API Key', 'wsbintegration' ),
@@ -279,9 +322,6 @@ class WSB_Settings {
 					'alfred'  => 'Alfred',
 					'britton' => 'Britton',
 					'custom'  => 'Custom',
-					'dacota'  => 'Dacota',
-					'hayes'   => 'Hayes',
-					'gatsby'  => 'Gatbsy',
 				),
 				'default' => 'alfred',
 			),
@@ -340,6 +380,34 @@ class WSB_Settings {
 				'required' => array( WSB_Options::TRAINER_MODULE, '=', true ),
 				'desc'     => 'To make it work, add [wsb_trainer] shortcode to the page when you complete the setup',
 			),
+			array(
+				'id'       => WSB_Options::TRAINER_DISPLAY_PUBLIC_RATING,
+				'type'     => 'switch',
+				'title'    => 'Public rating',
+				'subtitle' => 'Switch to ON to display public rating everywhere on trainer profile',
+				'default'  => true,
+			),
+			array(
+				'id'       => WSB_Options::TRAINER_DISPLAY_PRIVATE_RATING,
+				'type'     => 'switch',
+				'title'    => 'Private rating',
+				'subtitle' => 'Switch to ON to display private rating on the trainer page',
+				'default'  => true,
+			),
+			array(
+				'id'       => WSB_Options::TRAINER_DISPLAY_EVENTS_HELD,
+				'type'     => 'switch',
+				'title'    => 'Events held',
+				'subtitle' => 'Switch to ON to display numbers of events held on the trainer page',
+				'default'  => true,
+			),
+			array(
+				'id'       => WSB_Options::TRAINER_DISPLAY_YEARS,
+				'type'     => 'switch',
+				'title'    => 'Years as trainer',
+				'subtitle' => 'Switch to ON to display amount years as a trainer on the trainer page',
+				'default'  => false,
+			),
 		);
 	}
 
@@ -386,8 +454,8 @@ class WSB_Settings {
 				'id'   => 'schedule_info_id',
 				'type' => 'info',
 				'desc' => '<h3>Filters</h3> In some rare cases, you may need to change the name of query string parameters for schedule filter. For example,
-					a default parameter for <b>Location</b> filter is <code>location</code> and the url with an applied filter would look like 
-					<code>https://example.com/schedule?location=DE</code>. If you change <code>location</code> to <code>loc</code>, then 
+					a default parameter for <b>Location</b> filter is <code>location</code> and the url with an applied filter would look like
+					<code>https://example.com/schedule?location=DE</code>. If you change <code>location</code> to <code>loc</code>, then
 					the url with an applied filter becomes <code>https://example.com/schedule?loc=DE</code>.<br><br>
 					We recommend changing these values only if the default ones do not work due to other plugins.',
 			),
@@ -435,6 +503,13 @@ class WSB_Settings {
 	 */
 	private function get_event_page_settings() {
 		return array(
+			array(
+				'id'       => WSB_Options::REGISTRATION_PAGE_NEW_TAB,
+				'type'     => 'switch',
+				'title'    => 'Open registration page in a new tab',
+				'subtitle' => 'Switch to ON to open registration page in a new tab',
+				'default'  => false,
+			),
 			array(
 				'id'       => WSB_Options::CUSTOM_EVENT_DETAILS,
 				'type'     => 'switch',

@@ -13,6 +13,8 @@
 
 namespace WorkshopButler;
 
+use WorkshopButler\Hooks\All_Hooks;
+
 /**
  * The core plugin class.
  *
@@ -28,6 +30,14 @@ namespace WorkshopButler;
  * @author     Sergey Kotlov <sergey@workshopbutler.com>
  */
 class WSB_Integration {
+
+	/**
+	 * The single instance of the class.
+	 *
+	 * @var WSB_Integration
+	 * @since 3.0.0
+	 */
+	protected static $instance = null;
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -58,6 +68,22 @@ class WSB_Integration {
 	protected $version;
 
 	/**
+	 * Plugin dictionary
+	 *
+	 * @var WSB_Dictionary $dict
+	 * @since 3.0.0
+	 */
+	public $dict;
+
+	/**
+	 * Plugin settings
+	 *
+	 * @since   2.0.0
+	 * @var     WSB_Options $settings Plugin settings
+	 */
+	public $settings;
+
+	/**
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -74,11 +100,72 @@ class WSB_Integration {
 		}
 		$this->plugin_name = 'workshop-butler-plugin';
 
+		$this->define_constants();
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_common_hooks();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->loader->run();
+	}
+
+
+	/**
+	 * Main WorkshopButler Instance.
+	 *
+	 * Ensures only one instance of WorkshopButler is loaded or can be loaded.
+	 *
+	 * @return WSB_Integration - Main instance.
+	 * @see WSB()
+	 * @since 2.1
+	 * @static
+	 */
+	public static function instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+
+	/**
+	 * Get the plugin path.
+	 *
+	 * @return string
+	 */
+	public function plugin_path() {
+		return untrailingslashit( plugin_dir_path( WSB_PLUGIN_FILE ) );
+	}
+
+	/**
+	 * Get the template path.
+	 *
+	 * @return string
+	 */
+	public function template_path() {
+		return apply_filters( 'wsb_template_path', 'workshop-butler/' );
+	}
+
+	/**
+	 * Define WSB Constants.
+	 */
+	private function define_constants() {
+		$this->define( 'WSB_TEMPLATE_DEBUG_MODE', false );
+	}
+
+	/**
+	 * Define constant if not already set.
+	 *
+	 * @param string      $name Constant name.
+	 * @param string|bool $value Constant value.
+	 *
+	 * @since 3.0.0
+	 */
+	private function define( $name, $value ) {
+		if ( ! defined( $name ) ) {
+			define( $name, $value );
+		}
 	}
 
 	/**
@@ -103,36 +190,75 @@ class WSB_Integration {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wsb-integration-loader.php';
+		require_once WSB_ABSPATH . 'includes/class-wsb-integration-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wsb-integration-i18n.php';
+		require_once WSB_ABSPATH . 'includes/class-wsb-integration-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wsb-integration-admin.php';
+		require_once WSB_ABSPATH . 'admin/class-wsb-integration-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wsb-integration-public.php';
+		require_once WSB_ABSPATH . 'public/class-wsb-integration-public.php';
 
 		$this->loader = new WSB_Integration_Loader();
 
 		/**
 		 * The class responsible rendering and configuring a sidebar
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/includes/class-sidebar-widget.php';
+		require_once WSB_ABSPATH . 'public/includes/class-sidebar-widget.php';
 
 		/**
 		 * The class responsible for orchestrating the upgrade plugin process
 		 */
-		require_once plugin_dir_path( __FILE__ ) . 'class-wsb-integration-upgrade.php';
+		require_once WSB_ABSPATH . 'includes/class-wsb-integration-upgrade.php';
+
+		/**
+		 * The class responsible for defining all template system hooks
+		 */
+		require_once WSB_ABSPATH . 'public/includes/hooks/class-all-hooks.php';
+
+		All_Hooks::init();
+
+		/**
+		 * The class responsible for providing an access to entities, loaded from API
+		 */
+		require_once WSB_ABSPATH . 'public/includes/class-wsb-dictionary.php';
+
+		$this->dict = new WSB_Dictionary();
+
+		/**
+		 * The class responsible for all plugin-related options
+		 * core plugin.
+		 */
+		require_once WSB_ABSPATH . 'includes/class-wsb-options.php';
+
+		$this->settings = new WSB_Options();
+	}
+
+	/**
+	 * Returns true if the request is a non-legacy REST API request.
+	 *
+	 * @since    3.0.0
+	 * @return bool
+	 */
+	public function is_rest_api_request() {
+		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
+			return false;
+		}
+
+		$rest_prefix         = trailingslashit( rest_get_url_prefix() );
+		$is_rest_api_request = ( false !== strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		return apply_filters( 'wsb_is_rest_api_request', $is_rest_api_request );
 	}
 
 	/**
@@ -165,7 +291,6 @@ class WSB_Integration {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'redux/options/wsb-settings/saved', $plugin_admin, 'save_internal_settings' );
 		$this->loader->add_action( 'init', $plugin_admin, 'init' );
 
 		$upgrader = new WSB_Integration_Upgrade();
@@ -203,8 +328,8 @@ class WSB_Integration {
 			$this->loader->add_filter( 'the_title', $plugin_public, 'set_title', 10, 2 );
 			// Yoast SEO hooks
 			$this->loader->add_filter( 'wpseo_frontend_presenter_classes', $plugin_public, 'wpseo_frontend_presenters', 10, 1 );
-			$this->loader->add_filter( 'wpseo_opengraph_title', $plugin_public, 'set_document_title');
-			$this->loader->add_filter( 'wpseo_add_opengraph_additional_images', $plugin_public, 'wpseo_add_opengraph_additional_images');
+			$this->loader->add_filter( 'wpseo_opengraph_title', $plugin_public, 'set_document_title' );
+			$this->loader->add_filter( 'wpseo_add_opengraph_additional_images', $plugin_public, 'wpseo_add_opengraph_additional_images' );
 			// Also useful hooks wpseo_metadesc, wpseo_opengraph_desc
 		}
 		$this->loader->add_action( 'init', $plugin_public, 'add_ajax_handlers' );
@@ -223,8 +348,8 @@ class WSB_Integration {
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     2.0.0
 	 * @return    string    The name of the plugin.
+	 * @since     2.0.0
 	 */
 	public function get_plugin_name() {
 		return $this->plugin_name;
@@ -233,8 +358,8 @@ class WSB_Integration {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     2.0.0
 	 * @return    WSB_Integration_Loader    Orchestrates the hooks of the plugin.
+	 * @since     2.0.0
 	 */
 	public function get_loader() {
 		return $this->loader;
@@ -243,8 +368,8 @@ class WSB_Integration {
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     2.0.0
 	 * @return    string    The version number of the plugin.
+	 * @since     2.0.0
 	 */
 	public function get_version() {
 		return $this->version;

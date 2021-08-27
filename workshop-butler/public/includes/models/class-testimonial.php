@@ -24,7 +24,8 @@ class Testimonial {
 	 * @return Testimonial
 	 */
 	static function from_json( $json ) {
-		return new Testimonial( $json->attendee, $json->content, $json->company, $json->rating );
+		return new Testimonial( $json->attendee, $json->content, $json->company, $json->rating,
+			@$json->verified, @$json->avatar, @$json->reason );
 	}
 
 	/**
@@ -60,6 +61,30 @@ class Testimonial {
 	public $rating;
 
 	/**
+	 * Is rating verified
+	 *
+	 * @var boolean $is_verified
+	 * @since 3.0.0
+	 */
+	public $is_verified;
+
+	/**
+	 * Attendee avatar
+	 *
+	 * @var string|null $avatar
+	 * @since 3.0.0
+	 */
+	public $avatar;
+
+	/**
+	 * Reason
+	 *
+	 * @var string|null $reason
+	 * @since 3.0.0
+	 */
+	public $reason;
+
+	/**
 	 * Testimonial constructor.
 	 *
 	 * @param string      $attendee Name of attendee.
@@ -67,10 +92,13 @@ class Testimonial {
 	 * @param string|null $company Name of the company the attendee works at.
 	 * @param int|null    $rating Verified rating.
 	 */
-	public function __construct( $attendee, $content, $company, $rating ) {
+	public function __construct( $attendee, $content, $company, $rating, $is_verified, $avatar, $reason ) {
 		$this->attendee = $attendee;
 		$this->company  = $company;
 		$this->content  = $content;
 		$this->rating   = $rating;
+		$this->is_verified = $is_verified;
+		$this->avatar   = $avatar;
+		$this->reason   = $reason;
 	}
 }
