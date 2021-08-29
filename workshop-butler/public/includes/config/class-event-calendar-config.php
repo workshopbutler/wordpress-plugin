@@ -140,7 +140,7 @@ class Event_Calendar_Config {
 			'only_featured'     => false,
 			'featured_on_top'   => WSB()->settings->is_highlight_featured() && WSB()->settings->get( WSB_Options::FEATURED_ON_TOP, false ),
 			'highlight_featured'=> WSB()->settings->is_highlight_featured(),
-			'filters'           => array( 'location', 'language', 'trainer', 'type' ),
+			'filters'           => 'location,language,trainer,type',
 			'tag_type'          => WSB()->settings->is_highlight_featured() ? 'all' : 'free',
 			'skip_event_page'   => false,
 			'show_trainer_name' => true,
@@ -154,7 +154,6 @@ class Event_Calendar_Config {
 					Calendar_Item_Elements::REGISTER_BTN,
 				),
 		);
-
 		$this->init( shortcode_atts( $defaults, $attrs ) );
 	}
 

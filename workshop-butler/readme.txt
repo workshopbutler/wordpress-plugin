@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 3.0.1 =
+* Fix default filters for schedule
+
 = 3.0.0 =
 * Completely new template system
 * New templates layout
