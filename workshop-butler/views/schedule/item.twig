@@ -2,9 +2,9 @@
     {% if highlight_featured and event.featured %} wsb-featured {% endif %}"
      data-event-obj
      data-event-type="{{ event.type.id }}"
-     data-event-location="{{ event.location.country_code }}"
-     data-event-language="{{ event.language.spoken| join(',') }}"
-     data-event-trainer="{{ event.names_of_trainers| join(',') }}">
+     data-event-location="{{ event.get_country_code }}"
+     data-event-language="{{ event.get_spoken_languages| join(',') }}"
+     data-event-trainer="{{ event.get_names_of_trainers| join(',') }}">
     {% if layout == 'table' %}
         {% set mobile = true %}
     {% endif %}
