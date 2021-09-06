@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: workshopbutlers
 Tags: event management, training management, event schedule, workshop crm, online registrations
-Requires at least: 5.2
+Requires at least: 5.5
 Tested up to: 5.8
 Requires PHP: 7.2.5
 License: GPLv2 or later
@@ -68,6 +68,11 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 3.0.2 =
+* Fix schedule filters for old templates
+* Use default jQuery
+* Bump lower supported WP version to 5.5
+
 = 3.0.1 =
 * Fix default filters for schedule
 
