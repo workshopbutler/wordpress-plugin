@@ -178,9 +178,6 @@ class WSB_Integration_Public {
 		wp_register_script( 'wsb-dateformat', plugin_dir_url( __FILE__ ) . 'js/jquery-dateFormat.min.js', array( 'jquery' ), $this->version, true );
 		wp_register_script( 'wsb-all-events-scripts', plugin_dir_url( __FILE__ ) . 'js/all-events-scripts.js', array( 'jquery' ), $this->version, true );
 		wp_register_script( 'wsb-next-event', plugin_dir_url( __FILE__ ) . 'js/next-event.js', array( 'jquery' ), $this->version, true );
-		wp_deregister_script( 'jquery' );
-		wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', false, null );
-		wp_enqueue_script( 'jquery' );
 
 		wp_register_script( 'stripe', 'https://js.stripe.com/v3/' );
 
