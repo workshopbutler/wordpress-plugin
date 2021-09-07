@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 3.0.3 =
+* Fix schedule shortcode elements option and schedule time formatting
+
 = 3.0.2 =
 * Fix schedule filters for old templates
 * Use default jQuery
