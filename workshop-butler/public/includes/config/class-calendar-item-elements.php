@@ -15,15 +15,25 @@ namespace WorkshopButler\Config;
  * @package WorkshopButler\Config
  */
 final class Calendar_Item_Elements {
-	const SCHEDULE     = 'schedule';
-	const LOCATION     = 'location';
-	const DATE         = 'date';
-	const TIME         = 'time';
-	const TITLE        = 'title';
-	const REGISTER_BTN = 'register';
-	const LANGUAGE     = 'language';
-	const IMAGE        = 'image';
-	const TRAINERS     = 'trainers';
+
+	public static $elements = array(
+		'schedule',
+		'location',
+		'date',
+		'time',
+		'title',
+		'register',
+		'language',
+		'image',
+		'trainers',
+	);
+
+	public static $default_elements = array(
+		'schedule',
+		'location',
+		'title',
+		'register',
+	);
 
 	/**
 	 * Returns true if the element is valid
@@ -33,18 +43,10 @@ final class Calendar_Item_Elements {
 	 * @return bool
 	 */
 	public static function is_valid( $element_name ) {
-		$elements = array(
-			self::SCHEDULE,
-			self::LOCATION,
-			self::DATE,
-			self::TIME,
-			self::TITLE,
-			self::REGISTER_BTN,
-			self::LANGUAGE,
-			self::IMAGE,
-			self::TRAINERS,
-		);
+		return in_array( $element_name, self::$elements, true );
+	}
 
-		return in_array( $element_name, $elements, true );
+	public static function get_defaults_as_string() {
+		return implode(",", self::$default_elements);
 	}
 }

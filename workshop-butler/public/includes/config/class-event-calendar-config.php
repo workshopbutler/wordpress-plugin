@@ -146,13 +146,7 @@ class Event_Calendar_Config {
 			'show_trainer_name' => true,
 			'timezone'          => 'online',
 			'timezone_format'   => 'short',
-			'elements'          =>
-				array(
-					Calendar_Item_Elements::SCHEDULE,
-					Calendar_Item_Elements::LOCATION,
-					Calendar_Item_Elements::TITLE,
-					Calendar_Item_Elements::REGISTER_BTN,
-				),
+			'elements'          =>	Calendar_Item_Elements::get_defaults_as_string(),
 		);
 		$this->init( shortcode_atts( $defaults, $attrs ) );
 	}
@@ -309,9 +303,7 @@ class Event_Calendar_Config {
 		$this->layout            = $attrs['layout'];
 		$this->only_featured     = $attrs['only_featured'];
 		$this->filters           = array_map(
-										function ( $name ) {
-											return trim( $name );
-										},
+										function ( $name ) { return trim( $name ); },
 										explode( ',', $attrs['filters'] )
 									);
 		$this->tag_type          = $attrs['tag_type'];
@@ -319,6 +311,9 @@ class Event_Calendar_Config {
 		$this->show_trainer_name = $attrs['show_trainer_name'];
 		$this->timezone          = $attrs['timezone'];
 		$this->timezone_format   = $attrs['timezone_format'];
-		$this->elements          = $attrs['elements'];
+		$this->elements          = array_map(
+										function ( $name ) { return trim( $name ); },
+										explode( ',', $attrs['elements'] )
+									);
 	}
 }
