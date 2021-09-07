@@ -264,7 +264,7 @@ class WSB_Settings {
 	 * @return array
 	 */
 	protected function get_general_settings() {
-		return array(
+		$template_options = WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING )?array(
 			array(
 				'id' => 'info_old_template',
 				'type' => 'info',
@@ -289,15 +289,24 @@ class WSB_Settings {
 					array(WSB_Options::USE_OLD_TEMPLATES, 'equals', false)
 				)
 			),
-			WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING )?array(
+			array(
+				'id' => 'info_irreversible_action',
+				'type' => 'info',
+				'notice' => false,
+				'style' => 'critical',
+				'title' => 'The action is irreversible',
+				'desc'  => 'Old templates will no longer be available for this installation',
+				'required' => array(WSB_Options::ALLOW_TEMPLATE_SWITCHING, 'equals', false)
+			),
+			array(
 				'id'      => WSB_Options::USE_OLD_TEMPLATES,
 				'type'    => 'switch',
 				'title'   => 'Old templates',
 				'desc'    => 'Switch to the new template system with a modern layout by turning off the old one',
 				'default' => true,
 				'required' => array(WSB_Options::ALLOW_TEMPLATE_SWITCHING, 'equals', true)
-			):array(),
-			WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING )?array(
+			),
+			array(
 				'id'      => WSB_Options::ALLOW_TEMPLATE_SWITCHING,
 				'type'    => 'switch',
 				'title'   => 'Template switching',
@@ -305,7 +314,10 @@ class WSB_Settings {
 				'default' => false,
 				'on' => 'Enabled',
 				'off' => 'Disabled',
-			):array(),
+			),
+		):array();
+
+		return array_merge($template_options, array(
 			array(
 				'id'         => WSB_Options::API_KEY,
 				'type'       => 'text',
@@ -346,7 +358,7 @@ class WSB_Settings {
 				'desc'    => 'When a request to Workshop Butler API fails, the plugin sends this information to our logging servers helping us to find the source of the problem faster. We do not collect any personal information, only detailed error reports.',
 				'default' => true,
 			),
-		);
+		));
 	}
 
 	/**
