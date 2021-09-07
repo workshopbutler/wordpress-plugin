@@ -60,7 +60,7 @@ class Date_Formatter {
 	 */
 	public static function format_one_day( $start_date, $end_date ) {
 		$formatted_date = date_i18n( self::get_date_format( $start_date ), self::get_timestamp_with_offset( $start_date ) );
-		$formatted_time = $start_date->format( get_option( 'time_format' ) ) . '—' . $end_date->format( get_option( 'time_format' ) );
+		$formatted_time = $start_date->format( get_option( 'time_format' ) ) . ' — ' . $end_date->format( get_option( 'time_format' ) );
 
 		return trim( $formatted_date . ' ' . $formatted_time, '.,-/ ' );
 	}

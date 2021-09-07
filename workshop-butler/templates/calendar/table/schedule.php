@@ -16,7 +16,7 @@ use WorkshopButler\Formatter;
 	if ( $event->schedule->at_one_day() ) {
 		echo esc_html( Formatter::format( $event->schedule, 'full_long' ) );
 		if ( $event->location->is_online() && $event->schedule->timezone ) {
-			echo esc_html( Formatter::format( $event->schedule, 'timezone_short' ) );
+			echo esc_html( '&nbsp;' . Formatter::format( $event->schedule, 'timezone_short' ) );
 		}
 	} else {
 		echo esc_html( Formatter::format( $event->schedule, 'full_short' ) );
