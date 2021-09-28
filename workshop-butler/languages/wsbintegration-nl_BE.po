@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-01-26T18:55:23.893Z\n"
-"PO-Revision-Date: 2021-01-26T18:55:23.893Z\n"
+"POT-Creation-Date: 2021-09-28T15:30:47.112Z\n"
+"PO-Revision-Date: 2021-09-28T15:30:47.112Z\n"
 "Language: nl\n"
 
 msgid "attendees.empty"
@@ -831,6 +831,9 @@ msgstr "Engels"
 msgid "language.ES"
 msgstr "Spaans"
 
+msgid "language.ET"
+msgstr "Ests"
+
 msgid "language.FI"
 msgstr "Fins"
 
@@ -900,6 +903,15 @@ msgstr "Vietnamees"
 msgid "language.ZH"
 msgstr "Chinees"
 
+msgid "language.EL"
+msgstr "Grieks"
+
+msgid "language.ID"
+msgstr "Indonesisch"
+
+msgid "language.MS"
+msgstr "Maleis"
+
 msgid "rating.one"
 msgstr "Meer dan 1"
 
@@ -935,6 +947,9 @@ msgstr "Wanneer"
 
 msgid "schedule.where"
 msgstr "Waar"
+
+msgid "schedule.language"
+msgstr "Taal"
 
 msgid "schedule.what"
 msgstr "Wat"
@@ -977,6 +992,12 @@ msgstr "Evenement is in %s"
 
 msgid "event.info.twoLangs"
 msgstr "Evenement is in %s en %s"
+
+msgid "event.info.oneLangShort"
+msgstr "In %s"
+
+msgid "event.info.twoLangsShort"
+msgstr "In %s and %s"
 
 msgid "event.info.materials"
 msgstr ", alle materialen en handouts staan in %s"
@@ -1256,3 +1277,35 @@ msgstr "Registreren"
 
 msgid "nextEvent.notAvailable"
 msgstr "Geen geplande evenementen"
+
+msgid "promo.register"
+msgstr "Registreer nu"
+
+msgid "promo.info.loc"
+msgstr "Locatie"
+
+msgid "promo.info.date"
+msgstr "Datum"
+
+msgid "promo.info.trainer"
+msgid_plural "promo.info.trainer"
+msgstr[0] "Trainer"
+msgstr[1] "Trainers"
+
+msgid "promo.header.prefixIn"
+msgstr "Begint over"
+
+msgid "promo.header.prefixOn"
+msgstr "Begint op"
+
+msgid "promo.header.tomorrow"
+msgstr "Begint morgen"
+
+msgid "promo.timer.days"
+msgstr "dagen"
+
+msgid "promo.timer.hours"
+msgstr "uren"
+
+msgid "promo.timer.minutes"
+msgstr "minuten"

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"POT-Creation-Date: 2021-01-26T18:55:23.637Z\n"
-"PO-Revision-Date: 2021-01-26T18:55:23.637Z\n"
+"POT-Creation-Date: 2021-09-28T15:30:45.856Z\n"
+"PO-Revision-Date: 2021-09-28T15:30:45.856Z\n"
 "Language: fr\n"
 
 msgid "attendees.empty"
@@ -811,25 +811,28 @@ msgid "country.AX"
 msgstr "Åland Islands"
 
 msgid "language.AR"
-msgstr "arabe"
+msgstr "Arabe"
 
 msgid "language.BG"
-msgstr "bulgare"
+msgstr "Bulgare"
 
 msgid "language.CS"
 msgstr "Tchèque"
 
 msgid "language.DA"
-msgstr "danois"
+msgstr "Danois"
 
 msgid "language.DE"
-msgstr "allemand"
+msgstr "Allemand"
 
 msgid "language.EN"
 msgstr "Anglais"
 
 msgid "language.ES"
 msgstr "Espagnol"
+
+msgid "language.ET"
+msgstr "Estonien"
 
 msgid "language.FI"
 msgstr "Finlandais"
@@ -841,7 +844,7 @@ msgid "language.HE"
 msgstr "Hébreu"
 
 msgid "language.HR"
-msgstr "croate"
+msgstr "Croate"
 
 msgid "language.HU"
 msgstr "Hongrois"
@@ -898,7 +901,16 @@ msgid "language.VI"
 msgstr "Vietnamien"
 
 msgid "language.ZH"
-msgstr "chinois"
+msgstr "Chinois"
+
+msgid "language.EL"
+msgstr "Grecque"
+
+msgid "language.ID"
+msgstr "Indonésien"
+
+msgid "language.MS"
+msgstr "Malais"
 
 msgid "rating.one"
 msgstr "Plus de 1"
@@ -936,6 +948,9 @@ msgstr "Quand"
 msgid "schedule.where"
 msgstr "Où"
 
+msgid "schedule.language"
+msgstr "Langue"
+
 msgid "schedule.what"
 msgstr "Quelle"
 
@@ -943,7 +958,7 @@ msgid "schedule.who"
 msgstr "Qui"
 
 msgid "schedule.event.register"
-msgstr "Registre"
+msgstr "S'Inscrire"
 
 msgid "schedule.event.soldOut"
 msgstr "Épuisé"
@@ -955,7 +970,7 @@ msgid "trainers.noTrainers"
 msgstr "Aucun formateur n'a été trouvé"
 
 msgid "event.register"
-msgstr "Inscrire maintenant"
+msgstr "S'Inscrire"
 
 msgid "event.soldOut"
 msgstr "Épuisé"
@@ -977,6 +992,12 @@ msgstr "L'événement est en langue %s"
 
 msgid "event.info.twoLangs"
 msgstr "L'événement est en langue  %s et en %s"
+
+msgid "event.info.oneLangShort"
+msgstr "En %s"
+
+msgid "event.info.twoLangsShort"
+msgstr "En %s and %s"
 
 msgid "event.info.materials"
 msgstr ", Tous les matériaux et documents sont en langue %s"
@@ -1032,7 +1053,7 @@ msgid "event.form.title"
 msgstr "Inscrivez-vous pour l'événement"
 
 msgid "event.form.button"
-msgstr "Registre"
+msgstr "S'Inscrire"
 
 msgid "trainer.email"
 msgstr "Contacter par email"
@@ -1254,7 +1275,39 @@ msgid "sidebar.noEvents"
 msgstr "Pas d'événements"
 
 msgid "nextEvent.register"
-msgstr "Registre"
+msgstr "S'Inscrire"
 
 msgid "nextEvent.notAvailable"
 msgstr "Aucun événement prévu"
+
+msgid "promo.register"
+msgstr "S'inscrire maintenant"
+
+msgid "promo.info.loc"
+msgstr "Emplacement"
+
+msgid "promo.info.date"
+msgstr "Date"
+
+msgid "promo.info.trainer"
+msgid_plural "promo.info.trainer"
+msgstr[0] "Formateur"
+msgstr[1] "Formateurs"
+
+msgid "promo.header.prefixIn"
+msgstr "Commence en"
+
+msgid "promo.header.prefixOn"
+msgstr "Commence le"
+
+msgid "promo.header.tomorrow"
+msgstr "Commence demain"
+
+msgid "promo.timer.days"
+msgstr "journées"
+
+msgid "promo.timer.hours"
+msgstr "heures"
+
+msgid "promo.timer.minutes"
+msgstr "minutes"

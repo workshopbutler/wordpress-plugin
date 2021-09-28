@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-01-26T18:55:24.143Z\n"
-"PO-Revision-Date: 2021-01-26T18:55:24.143Z\n"
+"POT-Creation-Date: 2021-09-28T15:30:48.374Z\n"
+"PO-Revision-Date: 2021-09-28T15:30:48.374Z\n"
 "Language: nn\n"
 
 msgid "attendees.empty"
@@ -861,6 +861,15 @@ msgstr "Vietnamesisk"
 msgid "language.ZH"
 msgstr "Kinesisk"
 
+msgid "language.EL"
+msgstr "Gresk"
+
+msgid "language.ID"
+msgstr "Indonesisk"
+
+msgid "language.MS"
+msgstr "Malaysisk"
+
 msgid "rating.one"
 msgstr "Mer enn 1"
 
@@ -896,6 +905,9 @@ msgstr "Når"
 
 msgid "schedule.where"
 msgstr "Hvor"
+
+msgid "schedule.language"
+msgstr "Språk"
 
 msgid "schedule.what"
 msgstr "Hva"
@@ -938,6 +950,12 @@ msgstr "Arrangement er på %s"
 
 msgid "event.info.twoLangs"
 msgstr "Arrangement er på %s og %s"
+
+msgid "event.info.oneLangShort"
+msgstr "På %s"
+
+msgid "event.info.twoLangsShort"
+msgstr "På %s and %s"
 
 msgid "event.info.materials"
 msgstr ", alle materialer og brosjyrer er på %s"
@@ -1217,3 +1235,35 @@ msgstr "Registrer"
 
 msgid "nextEvent.notAvailable"
 msgstr "Ingen planlagte hendelser"
+
+msgid "promo.register"
+msgstr "Registrer deg nå"
+
+msgid "promo.info.loc"
+msgstr "Lokasjon"
+
+msgid "promo.info.date"
+msgstr "Dato"
+
+msgid "promo.info.trainer"
+msgid_plural "promo.info.trainer"
+msgstr[0] "Trener"
+msgstr[1] "Trenere"
+
+msgid "promo.header.prefixIn"
+msgstr "Starter om"
+
+msgid "promo.header.prefixOn"
+msgstr "Starter"
+
+msgid "promo.header.tomorrow"
+msgstr "Starter i morgen"
+
+msgid "promo.timer.days"
+msgstr "dager"
+
+msgid "promo.timer.hours"
+msgstr "timer"
+
+msgid "promo.timer.minutes"
+msgstr "minutter"

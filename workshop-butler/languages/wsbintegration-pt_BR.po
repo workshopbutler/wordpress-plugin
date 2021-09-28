@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"POT-Creation-Date: 2021-01-26T18:55:24.665Z\n"
-"PO-Revision-Date: 2021-01-26T18:55:24.665Z\n"
+"POT-Creation-Date: 2021-09-28T15:30:50.833Z\n"
+"PO-Revision-Date: 2021-09-28T15:30:50.833Z\n"
 "Language: pt\n"
 
 msgid "attendees.empty"
@@ -831,6 +831,9 @@ msgstr "Inglês"
 msgid "language.ES"
 msgstr "espanhol"
 
+msgid "language.ET"
+msgstr "Estoniano"
+
 msgid "language.FI"
 msgstr "finlandês"
 
@@ -900,6 +903,15 @@ msgstr "vietnamita"
 msgid "language.ZH"
 msgstr "chinês"
 
+msgid "language.EL"
+msgstr "grego"
+
+msgid "language.ID"
+msgstr "indonésio"
+
+msgid "language.MS"
+msgstr "malaio"
+
 msgid "rating.one"
 msgstr "Mais de 1"
 
@@ -935,6 +947,9 @@ msgstr "Quando"
 
 msgid "schedule.where"
 msgstr "Onde"
+
+msgid "schedule.language"
+msgstr "Língua"
 
 msgid "schedule.what"
 msgstr "Que"
@@ -977,6 +992,12 @@ msgstr "O evento é em %s"
 
 msgid "event.info.twoLangs"
 msgstr "O evento é em %s e %s"
+
+msgid "event.info.oneLangShort"
+msgstr "Em %s"
+
+msgid "event.info.twoLangsShort"
+msgstr "Em %s and %s"
 
 msgid "event.info.materials"
 msgstr ", todos os materiais e folhetos são em %s"
@@ -1256,3 +1277,35 @@ msgstr "Registrar"
 
 msgid "nextEvent.notAvailable"
 msgstr "Nenhum evento planejado"
+
+msgid "promo.register"
+msgstr "Registrar agora"
+
+msgid "promo.info.loc"
+msgstr "Localização"
+
+msgid "promo.info.date"
+msgstr "Data"
+
+msgid "promo.info.trainer"
+msgid_plural "promo.info.trainer"
+msgstr[0] "Treinador"
+msgstr[1] "Treinadores"
+
+msgid "promo.header.prefixIn"
+msgstr "Começa em"
+
+msgid "promo.header.prefixOn"
+msgstr "Começa em"
+
+msgid "promo.header.tomorrow"
+msgstr "Começa amanhã"
+
+msgid "promo.timer.days"
+msgstr "dias"
+
+msgid "promo.timer.hours"
+msgstr "horas"
+
+msgid "promo.timer.minutes"
+msgstr "minutos"

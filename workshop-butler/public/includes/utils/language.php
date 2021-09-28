@@ -53,7 +53,8 @@ function get_lang_code( $lang ) {
 		'Chinese'    => 'ZH',
 		'Greek'      => 'EL',
 		'Indonesian' => 'ID',
-		'Malay'      => 'MS'
+		'Malay'      => 'MS',
+		'Estonian'   => 'ET',
 	);
 	$code  = $langs[ $lang ];
 	return $code ? $code : $lang;

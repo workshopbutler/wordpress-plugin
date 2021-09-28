@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-01-26T18:55:22.729Z\n"
-"PO-Revision-Date: 2021-01-26T18:55:22.729Z\n"
+"POT-Creation-Date: 2021-09-28T15:30:42.003Z\n"
+"PO-Revision-Date: 2021-09-28T15:30:42.003Z\n"
 "Language: en\n"
 
 msgid "attendees.empty"
@@ -792,6 +792,9 @@ msgstr "English"
 msgid "language.ES"
 msgstr "Spanish"
 
+msgid "language.ET"
+msgstr "Estonian"
+
 msgid "language.FI"
 msgstr "Finnish"
 
@@ -861,6 +864,15 @@ msgstr "Vietnamese"
 msgid "language.ZH"
 msgstr "Chinese"
 
+msgid "language.EL"
+msgstr "Greek"
+
+msgid "language.ID"
+msgstr "Indonesian"
+
+msgid "language.MS"
+msgstr "Malay"
+
 msgid "rating.one"
 msgstr "More than 1"
 
@@ -896,6 +908,9 @@ msgstr "When"
 
 msgid "schedule.where"
 msgstr "Where"
+
+msgid "schedule.language"
+msgstr "Language"
 
 msgid "schedule.what"
 msgstr "What"
@@ -938,6 +953,12 @@ msgstr "Event is in %s"
 
 msgid "event.info.twoLangs"
 msgstr "Event is in %s and %s"
+
+msgid "event.info.oneLangShort"
+msgstr "In %s"
+
+msgid "event.info.twoLangsShort"
+msgstr "In %s and %s"
 
 msgid "event.info.materials"
 msgstr ", all materials and handouts are in %s"
@@ -1217,3 +1238,35 @@ msgstr "Register"
 
 msgid "nextEvent.notAvailable"
 msgstr "No planned events"
+
+msgid "promo.register"
+msgstr "Register now"
+
+msgid "promo.info.loc"
+msgstr "Location"
+
+msgid "promo.info.date"
+msgstr "Date"
+
+msgid "promo.info.trainer"
+msgid_plural "promo.info.trainer"
+msgstr[0] "Trainer"
+msgstr[1] "Trainers"
+
+msgid "promo.header.prefixIn"
+msgstr "Starts in"
+
+msgid "promo.header.prefixOn"
+msgstr "Starts on"
+
+msgid "promo.header.tomorrow"
+msgstr "Starts tomorrow"
+
+msgid "promo.timer.days"
+msgstr "days"
+
+msgid "promo.timer.hours"
+msgstr "hours"
+
+msgid "promo.timer.minutes"
+msgstr "minutes"
