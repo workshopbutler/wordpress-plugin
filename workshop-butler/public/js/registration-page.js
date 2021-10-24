@@ -37,7 +37,7 @@ function submitGaEvent() {
  *
  */
 function logInfo(msg) {
-  console.log('Workshop Butler INFO: '+msg);
+  console.log('Workshop Butler INFO: ', msg);
 }
 
 /**
@@ -244,6 +244,143 @@ function getTranslatedErrorMessages() {
   };
 }
 
+var TaxWidget = /*#__PURE__*/function () {
+  function TaxWidget($el, taxExemptCallback) {
+    this.root = $el;
+    this.taxExemptCallback = taxExemptCallback;
+    this.message = $el.find('[data-tax-widget-message]');
+    this.applyButton = $el.find('[data-tax-widget-apply]');
+    this.clearButton = $el.find('[data-tax-widget-clear]');
+    this.input = $el.find('[data-tax-widget-value]');
+    this.intentId = $el.find('[data-tax-intent-id]');
+    this.resetOnChange = false;
+    this.reset();
+    this.activateEvents();
+  }
+
+  var _proto = TaxWidget.prototype;
+
+  _proto.reset = function reset(resetInput) {
+    if (resetInput === void 0) {
+      resetInput = true;
+    }
+
+    this.renderApplyButton(true);
+    this.renderClearButton(false);
+
+    if (resetInput) {
+      this.input.val('');
+    }
+
+    this.message.hide('fast');
+    this.intentId.val('');
+    this.resetOnChange = false;
+    this.taxExemptCallback(false);
+  };
+
+  _proto.activateEvents = function activateEvents() {
+    this.applyButton.on('click', this.onApplyClick.bind(this));
+    this.clearButton.on('click', this.onClearClick.bind(this));
+    this.input.on('input', this.onChangeValue.bind(this));
+  };
+
+  _proto.onApplyClick = function onApplyClick() {
+    if (this.applyButton.hasClass('disabled')) {
+      return;
+    }
+
+    this.apply(this.input.val());
+  };
+
+  _proto.onClearClick = function onClearClick() {
+    if (this.clearButton.hasClass('disabled')) {
+      return;
+    }
+
+    this.reset(true);
+  };
+
+  _proto.onChangeValue = function onChangeValue() {
+    if (!this.resetOnChange) {
+      return;
+    }
+
+    this.reset(false);
+  };
+
+  _proto.renderClearButton = function renderClearButton(enabled) {
+    if (enabled === void 0) {
+      enabled = true;
+    }
+
+    this.clearButton.toggleClass('disabled', !enabled);
+  };
+
+  _proto.renderApplyButton = function renderApplyButton(enabled) {
+    if (enabled === void 0) {
+      enabled = true;
+    }
+
+    this.applyButton.toggleClass('disabled', !enabled);
+  };
+
+  _proto.renderMessage = function renderMessage(type, text) {
+    this.message.text(text);
+    this.message.attr('class', type + '-message');
+    this.message.show('fast');
+  };
+
+  _proto.apply = function apply(taxNumber) {
+    var _this = this;
+
+    if (!taxNumber) {
+      return;
+    }
+
+    this.renderApplyButton(false);
+    this.renderClearButton(true);
+    this.resetOnChange = true;
+
+    jQuery.ajax({
+      url: wsb_event.ajax_url,
+      data: {
+        _ajax_nonce: wsb_event.nonce,
+        action: 'wsb_tax_validation',
+        number: taxNumber,
+      },
+      method: 'GET',
+      dataType: 'json'
+    })
+    .done(function (data) {
+      _this.processOkResponse(data);
+    })
+    .fail(function (response) {
+      _this.processFailResponse(response);
+    });
+  };
+
+  _proto.processOkResponse = function processOkResponse(response) {
+    if (!this.resetOnChange) {
+      // FIXME: potential race condition may happen here
+      return;
+    }
+
+    var data = response.data;
+
+    logInfo(data);
+    this.intentId.val(data.tax_intent_id);
+    this.renderMessage(data.message_type, data.message_text);
+    this.taxExemptCallback(data.tax_exempt);
+  };
+
+  _proto.processFailResponse = function processFailResponse(response) {
+    logInfo(response);
+    this.reset(false);
+  };
+
+  return TaxWidget;
+}();
+
 var EventRegistrationForm = /*#__PURE__*/function () {
   function EventRegistrationForm(selector) {
     this.root = jQuery(selector);
@@ -257,6 +394,7 @@ var EventRegistrationForm = /*#__PURE__*/function () {
     this.payPalPaymentEnabled = this.initPayPal();
     this.invoicePaymentEnabled = !this.isCardPaymentActive() || this.invoicePaymentAllowed();
     this.formIsLocked = false;
+    this.taxExempt = false;
     this.activateEvents();
     this.init();
   }
@@ -270,6 +408,7 @@ var EventRegistrationForm = /*#__PURE__*/function () {
   _proto.init = function init() {
     this.successMessage.hide();
     this.initPromoActivation();
+    this.initTaxApplication();
     this.initActiveTicketSelection();
     this.deactivateCardPayment();
     this.lockIfNoPaymentMethod();
@@ -497,7 +636,7 @@ var EventRegistrationForm = /*#__PURE__*/function () {
   _proto.getTotalAmount = function getTotalAmount() {
     var ticket = this.root.find('[name="ticket"]:checked');
     return {
-      amount: ticket.data('amount'),
+      amount: ticket.data('amount') + (this.taxExempt ? 0 : ticket.data('tax') || 0),
       currency: ticket.data('currency')
     };
   }
@@ -609,7 +748,17 @@ var EventRegistrationForm = /*#__PURE__*/function () {
 
       self.root.find('[data-promo-code]').toggle();
     });
-  }
+  };
+
+  _proto.initTaxApplication = function initTaxApplication() {
+    var self = this;
+
+    this.root.find('[data-vat-apply-link]').on('click', function () {
+      self.root.find('[data-tax-description]').hide('fast');
+      self.root.find('#wsb-form-tax-widget').show('fast');
+    });
+    return new TaxWidget(this.root.find('#wsb-form-tax-widget'), this.applyTaxExempt.bind(this));
+  };
 
   _proto.initActiveTicketSelection = function initActiveTicketSelection() {
     var _this2 = this;
@@ -635,6 +784,15 @@ var EventRegistrationForm = /*#__PURE__*/function () {
     } else {
       tickets.removeProp('checked');
       tickets.parent().removeClass(name);
+    }
+  };
+
+  _proto.applyTaxExempt = function applyTaxExempt(exempt) {
+    this.taxExempt = exempt;
+    if(exempt) {
+      this.root.find('.wsb-ticket__tax').css('display', 'none');
+    } else {
+      this.root.find('.wsb-ticket__tax').removeAttr('style');
     }
   };
 

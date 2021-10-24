@@ -34,6 +34,12 @@ class Ticket_Formatter {
 				} else {
 					return '';
 				}
+			case 'tax':
+				if ( $ticket_type instanceof Paid_Ticket_Type ) {
+					return self::format_tax( $ticket_type );
+				} else {
+					return '';
+				}
 			case 'price':
 				if ( $ticket_type instanceof Paid_Ticket_Type ) {
 					return self::format_price( $ticket_type );
@@ -46,6 +52,29 @@ class Ticket_Formatter {
 	}
 
 	/**
+	 * Returns correctly-formatted amount of money
+	 *
+	 * @param Paid_Ticket_Type $ticket_type Ticket type to format.
+	 *
+	 * @return string
+	 * @since 3.1.0
+	 */
+	protected static function format_amount( $ticket_type, $amount ) {
+		if ( class_exists( 'NumberFormatter' ) ) {
+			$formatter = new \NumberFormatter( get_locale(), \NumberFormatter::CURRENCY );
+
+			return $formatter->formatCurrency( $amount, $ticket_type->price->currency );
+		} else {
+			$without_fraction = ( $amount - floor( $amount ) ) < 0.001;
+			$decimals         = $without_fraction ? 0 : 2;
+
+			$sign = $ticket_type->price->sign ? $ticket_type->price->sign : $ticket_type->price->currency;
+
+			return $sign . number_format_i18n( $amount, $decimals );
+		}
+	}
+
+	/**
 	 * Returns correctly-formatted price
 	 *
 	 * @param Paid_Ticket_Type $ticket_type Ticket type to format.
@@ -54,19 +83,22 @@ class Ticket_Formatter {
 	 * @since 2.0.0
 	 */
 	protected static function format_price( $ticket_type ) {
-		if ( class_exists( 'NumberFormatter' ) ) {
-			$formatter = new \NumberFormatter( get_locale(), \NumberFormatter::CURRENCY );
-
-			return $formatter->formatCurrency( $ticket_type->price->amount, $ticket_type->price->currency );
-		} else {
-			$without_fraction = ( $ticket_type->price->amount - floor( $ticket_type->price->amount ) ) < 0.001;
-			$decimals         = $without_fraction ? 0 : 2;
-
-			$sign = $ticket_type->price->sign ? $ticket_type->price->sign : $ticket_type->price->currency;
-
-			return $sign . number_format_i18n( $ticket_type->price->amount, $decimals );
-		}
+		return self::format_amount( $ticket_type,  $ticket_type->price->amount );
 	}
+
+
+	/**
+	 * Returns correctly-formatted tax
+	 *
+	 * @param Paid_Ticket_Type $ticket_type Ticket type to format.
+	 *
+	 * @return string
+	 * @since 3.1.0
+	 */
+	protected static function format_tax( $ticket_type ) {
+		return self::format_amount( $ticket_type,  $ticket_type->price->tax );
+	}
+
 
 	/**
 	 * Returns correctly-formatted stated of the given ticket type

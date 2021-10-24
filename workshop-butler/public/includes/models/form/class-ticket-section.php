@@ -56,7 +56,7 @@ class Ticket_Section extends Section {
 	 * @var float|null $tax
 	 * @since 2.7.0
 	 */
-	public $tax;
+	public $tax_rate;
 
 	/**
 	 * Related event
@@ -85,15 +85,6 @@ class Ticket_Section extends Section {
 		$this->with_promo   = $with_promo;
 		$this->event        = $event;
 		$this->excluded_tax = $event->tickets->excluded_tax;
-		$this->tax          = 25;
-	}
-
-	/**
-	 * True if it's important to show summary
-	 *
-	 * @return bool
-	 */
-	public function show_summary() {
-		return ! $this->excluded_tax || $this->tax;
+		$this->tax_rate          = $event->tickets->tax_rate;
 	}
 }

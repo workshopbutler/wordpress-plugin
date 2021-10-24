@@ -63,15 +63,6 @@ class Event_Type {
 	}
 
 	/**
-	 * Returns type's name
-	 *
-	 * @return int
-	 */
-	public function get_name() {
-		return $this->name;
-	}
-
-	/**
 	 * Returns the URL to the type's badge
 	 *
 	 * @return string|null

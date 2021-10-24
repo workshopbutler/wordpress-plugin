@@ -19,14 +19,15 @@ $next_loop = false;
 	foreach ( $field->tickets->get_types() as $ticket ) {
 		if ( $ticket->active() ) {
 			?>
-			<div class="wsb-form__ticket">
+			<div class="wsb-form__radio">
 				<input id="<?= esc_attr( $ticket->get_id() ); ?>"
 						name="<?= esc_attr( $field->get_name() ); ?>"
 						title="<?= esc_attr( $field->get_label() ); ?>"
 						type="radio"
 						data-control required value="<?= esc_attr( $ticket->get_id() ); ?>"
-						data-amount="<?= esc_attr( $ticket->get_price()->get_amount() ); ?>"
-						data-currency="<?= esc_attr( $ticket->get_price()->get_currency() ); ?>"
+						data-amount="<?= esc_attr( $ticket->price->amount ); ?>"
+						data-tax="<?= esc_attr( $ticket->price->tax ); ?>"
+						data-currency="<?= esc_attr( $ticket->price->currency ); ?>"
 					<?php
 					if ( ! $next_loop ) {
 						echo 'checked';
@@ -34,7 +35,13 @@ $next_loop = false;
 					?>/>
 
 				<label for="<?= esc_attr( $ticket->get_id() ); ?>" class="wsb-label">
-					<strong><?= esc_html( Formatter::format( $ticket, 'price' ) ); ?></strong> <?= esc_html( $ticket->get_name() ); ?>
+					<strong><?= esc_html( Formatter::format( $ticket, 'price' ) ); ?></strong>
+					<?= esc_html( $ticket->name ); ?>
+					<?php if ( $field->tickets->excluded_tax && $ticket->price->tax > 0 ) { ?>
+						<span class="wsb-ticket__tax">
+						+ <?= esc_html( Formatter::format( $ticket, 'tax' ) ); ?> VAT
+						</span>
+					<?php } ?>
 				</label>
 			</div>
 			<?php
@@ -42,12 +49,15 @@ $next_loop = false;
 		}
 	}
 	?>
-	<div class="wsb-form__tax">
+	<div class="wsb-form__tax" data-tax-description>
 		<?php
-		if ( $field->tickets->is_tax_excluded() ) {
+		if ( $field->tickets->excluded_tax ) {
 			echo esc_html__( 'tax.excluded_all', 'wsbintegration' );
-			if ( $field->tickets->get_tax() ) {
-				echo esc_html( $field->tickets->get_tax() );
+			if ( $field->tickets->tax_rate ) {
+				printf(" %s%%", esc_html( $field->tickets->tax_rate ));
+			}
+			if ( $field->tickets->validate_tax ) {
+				echo " <a data-vat-apply-link>Enter VAT ID</a>";
 			}
 		} else {
 			echo esc_html__( 'tax.included_all', 'wsbintegration' );

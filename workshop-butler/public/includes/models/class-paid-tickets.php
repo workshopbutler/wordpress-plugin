@@ -31,7 +31,7 @@ class Paid_Tickets {
 		foreach ( $json->types as $type ) {
 			array_push( $types, Paid_Ticket_Type::from_json( $type ) );
 		}
-		return new Paid_Tickets( $types, $json->vat_excluded, $json->vat_amount );
+		return new Paid_Tickets( $types, $json->tax_excluded, $json->tax_rate, $json->tax_validation );
 	}
 
 	/**
@@ -43,12 +43,20 @@ class Paid_Tickets {
 	public $excluded_tax;
 
 	/**
+	 * True when VAT validation is allowed
+	 *
+	 * @since 3.1.0
+	 * @var boolean $validate_tax
+	 */
+	public $validate_tax;
+
+	/**
 	 * Tax size (in percents)
 	 *
-	 * @since 2.7.0
+	 * @since 3.1.0
 	 * @var number|null $tax
 	 */
-	public $tax;
+	public $tax_rate;
 
 	/**
 	 * Available ticket types for a workshop
@@ -73,10 +81,11 @@ class Paid_Tickets {
 	 * @param boolean            $excluded_tax True if the tax is excluded.
 	 * @param number|null        $tax Size of the tax.
 	 */
-	function __construct( $types, $excluded_tax, $tax ) {
+	function __construct( $types, $excluded_tax, $tax_rate, $validate_tax ) {
 		$this->types            = $types;
 		$this->excluded_tax     = $excluded_tax;
-		$this->tax              = $tax ? $tax : null;
+		$this->validate_tax     = $validate_tax;
+		$this->tax_rate         = $tax_rate ? $tax_rate : null;
 		$this->active_ticket_id = $this->get_active_ticket_id();
 	}
 
@@ -195,25 +204,5 @@ class Paid_Tickets {
 		} else {
 			return null;
 		}
-	}
-
-	/**
-	 * Returns true if the tax should be excluded from the price
-	 *
-	 * @since 3.0.0
-	 * @return bool
-	 */
-	public function is_tax_excluded() {
-		return $this->excluded_tax;
-	}
-
-	/**
-	 * Returns the size of sales tax
-	 *
-	 * @since 3.0.0
-	 * @return number|null
-	 */
-	public function get_tax() {
-		return $this->tax;
 	}
 }

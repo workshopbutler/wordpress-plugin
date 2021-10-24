@@ -118,7 +118,7 @@ class WSB_Integration_Public {
 			wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb.wordpress.css' );
 		} else {
 			wp_register_style( 'wsb-flag-icons', 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/css/flag-icon.min.css' );
-			wp_register_style( 'wsb-themes', plugin_dir_url( __FILE__ ) . 'css/widgets.1.15.5.min.css' );
+			wp_register_style( 'wsb-themes', plugin_dir_url( __FILE__ ) . 'css/widgets.1.16.0.min.css' );
 			wp_register_style( 'wsb-wordpress-themes', plugin_dir_url( __FILE__ ) . 'css/wsb3.wordpress.css' );
 		}
 		wp_register_style( 'wsb-fontawesome-styles', plugin_dir_url( __FILE__ ) . 'css/fontawesome-all.min.css' );
@@ -383,6 +383,9 @@ class WSB_Integration_Public {
 
 		add_action( 'wp_ajax_nopriv_wsb_pre_register', array( 'WorkshopButler\WSB_Ajax', 'pre_register' ) );
 		add_action( 'wp_ajax_wsb_pre_register', array( 'WorkshopButler\WSB_Ajax', 'pre_register' ) );
+
+		add_action( 'wp_ajax_nopriv_wsb_tax_validation', array( 'WorkshopButler\WSB_Ajax', 'tax_validation' ) );
+		add_action( 'wp_ajax_wsb_tax_validation', array( 'WorkshopButler\WSB_Ajax', 'tax_validation' ) );
 	}
 
 
