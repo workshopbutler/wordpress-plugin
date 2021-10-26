@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"POT-Creation-Date: 2021-09-28T15:30:50.833Z\n"
-"PO-Revision-Date: 2021-09-28T15:30:50.833Z\n"
+"POT-Creation-Date: 2021-10-26T17:07:44.994Z\n"
+"PO-Revision-Date: 2021-10-26T17:07:44.994Z\n"
 "Language: pt\n"
 
 msgid "attendees.empty"
@@ -1091,6 +1091,21 @@ msgstr "Todos os preços não incluem IVA"
 
 msgid "tax.included_all"
 msgstr "Todos os preços incluem IVA"
+
+msgid "tax.amount"
+msgstr "%s IVA"
+
+msgid "tax.widget.apply"
+msgstr "Aplicar"
+
+msgid "tax.widget.clear"
+msgstr "Limpar"
+
+msgid "tax.widget.apply-link"
+msgstr "Insira o ID do IVA"
+
+msgid "tax.widget.tax_id"
+msgstr "ID de IVA"
 
 msgid "form.country"
 msgstr "Escolha um país"

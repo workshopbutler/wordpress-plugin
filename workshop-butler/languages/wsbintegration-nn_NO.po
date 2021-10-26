@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-28T15:30:48.374Z\n"
-"PO-Revision-Date: 2021-09-28T15:30:48.374Z\n"
+"POT-Creation-Date: 2021-10-26T17:07:44.538Z\n"
+"PO-Revision-Date: 2021-10-26T17:07:44.538Z\n"
 "Language: nn\n"
 
 msgid "attendees.empty"
@@ -792,6 +792,9 @@ msgstr "Engelsk"
 msgid "language.ES"
 msgstr "Spansk"
 
+msgid "language.ET"
+msgstr "Estisk"
+
 msgid "language.FI"
 msgstr "Finsk"
 
@@ -1049,6 +1052,21 @@ msgstr "Alle priser uten MVA"
 
 msgid "tax.included_all"
 msgstr "Alle priser med MVA"
+
+msgid "tax.amount"
+msgstr "%s MVA"
+
+msgid "tax.widget.apply"
+msgstr "Apply"
+
+msgid "tax.widget.clear"
+msgstr "Clear"
+
+msgid "tax.widget.apply-link"
+msgstr "Skriv inn MVA-ID"
+
+msgid "tax.widget.tax_id"
+msgstr "MVA-ID"
 
 msgid "form.country"
 msgstr "Velg et land"

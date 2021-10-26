@@ -61,13 +61,10 @@ class Form {
 		$this->instructions = $instructions;
 		$this->sections     = array();
 		foreach ( $sections as $json_section ) {
-			$section = null;
-			if ( Ticket_Section::$section_id === $json_section->id ) {
-				$section = new Ticket_Section( $json_section->label, $json_section->fields, $event );
-			} else {
-				$section = new Section( $json_section->id, $json_section->label, $json_section->fields, $event );
-			}
-			array_push( $this->sections, $section );
+			array_push(
+				$this->sections,
+				new Section( $json_section->id, $json_section->label, $json_section->fields, $event )
+			);
 		}
 	}
 

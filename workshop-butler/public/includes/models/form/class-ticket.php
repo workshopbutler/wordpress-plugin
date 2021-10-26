@@ -45,22 +45,6 @@ class Ticket extends Field {
 	public function __construct( $json_data, $tickets ) {
 		parent::__construct( $json_data );
 		$this->tickets      = $tickets;
-		$this->excluded_tax = false;
-		foreach ( $tickets->types as $ticket ) {
-			if ( $ticket->excluded_tax ) {
-				$this->excluded_tax = true;
-				break;
-			}
-		}
-	}
-
-	/**
-	 * Returns true if the tax should be excluded from the price
-	 *
-	 * @since 3.0.0
-	 * @return bool
-	 */
-	public function is_tax_excluded() {
-		return $this->excluded_tax;
+		$this->excluded_tax = $tickets->excluded_tax;
 	}
 }

@@ -15,7 +15,7 @@ $with_badge = $event_type->has_badge() ? 'with-badge' : '';
 <div class="wsb-table__col wsb-table__col-title <?= esc_attr( $with_badge ); ?>">
 	<?php if ( $event_type->has_badge() ) { ?>
 		<img class="wsb-table__img" src="<?= esc_attr( $event_type->get_badge_url() ); ?>"
-				alt="<?= esc_attr( $event_type->get_name() ); ?>"/>
+				alt="<?= esc_attr( $event_type->name ); ?>"/>
 	<?php } ?>
 	<a href="<?= esc_attr( $event->get_url() ); ?>" class="wsb-table__link"
 		<?php

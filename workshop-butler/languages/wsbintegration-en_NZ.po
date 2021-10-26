@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-28T15:30:42.003Z\n"
-"PO-Revision-Date: 2021-09-28T15:30:42.003Z\n"
+"POT-Creation-Date: 2021-10-26T17:07:43.218Z\n"
+"PO-Revision-Date: 2021-10-26T17:07:43.218Z\n"
 "Language: en\n"
 
 msgid "attendees.empty"
@@ -1052,6 +1052,21 @@ msgstr "All prices do not include VAT"
 
 msgid "tax.included_all"
 msgstr "All prices include VAT"
+
+msgid "tax.amount"
+msgstr "%s VAT"
+
+msgid "tax.widget.apply"
+msgstr "Apply"
+
+msgid "tax.widget.clear"
+msgstr "Clear"
+
+msgid "tax.widget.apply-link"
+msgstr "Enter VAT ID"
+
+msgid "tax.widget.tax_id"
+msgstr "VAT ID"
 
 msgid "form.country"
 msgstr "Choose a country"

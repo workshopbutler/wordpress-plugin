@@ -146,6 +146,24 @@ class WSB_Ajax {
 	}
 
 	/**
+	 * Makes a GET tax_validation request to Workshop Butler API
+	 */
+	public static function tax_validation() {
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			check_ajax_referer( 'wsb-nonce' );
+
+			$requests = new WSB_Requests();
+			$response = $requests->get(
+				'tax-validation/'.rawurlencode( $_GET['number'] ),
+				array( 'lang' => substr( get_locale(), 0, 2) )
+			);
+			wp_send_json( $response->body, $response->http_code );
+		} else {
+			exit();
+		}
+	}
+
+	/**
 	 * Corrects form keys
 	 *
 	 * By some reason, WordPress replaces '.' in keys to '_'. We have to replace it back.

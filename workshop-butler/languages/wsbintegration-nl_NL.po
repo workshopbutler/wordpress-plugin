@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-28T15:30:47.112Z\n"
-"PO-Revision-Date: 2021-09-28T15:30:47.112Z\n"
+"POT-Creation-Date: 2021-10-26T17:07:44.310Z\n"
+"PO-Revision-Date: 2021-10-26T17:07:44.310Z\n"
 "Language: nl\n"
 
 msgid "attendees.empty"
@@ -1091,6 +1091,21 @@ msgstr "Alle prijzen zijn exclusief BTW"
 
 msgid "tax.included_all"
 msgstr "Alle prijzen zijn inclusief BTW"
+
+msgid "tax.amount"
+msgstr "%s BTW"
+
+msgid "tax.widget.apply"
+msgstr "Toepassen"
+
+msgid "tax.widget.clear"
+msgstr "Wissen"
+
+msgid "tax.widget.apply-link"
+msgstr "Voer BTW-nummer in"
+
+msgid "tax.widget.tax_id"
+msgstr "BTW-nummer"
 
 msgid "form.country"
 msgstr "Kies een land"
