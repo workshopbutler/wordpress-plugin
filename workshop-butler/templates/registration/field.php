@@ -32,15 +32,15 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 </div>
 <?php if ( 'ticket' === $field->get_type() && $field->tickets->validate_tax) { ?>
 <div class="wsb-form__field" style="display:none;" id="wsb-form-tax-widget">
-	<label class="wsb-label">VAT ID</label>
+	<label class="wsb-label"><?= esc_html__( 'tax.widget.tax_id', 'wsbintegration' ); ?></label>
 	<div class="wsb-form__tax-widget">
 		<div class="wsb-form__tax-widget-input">
 		<input name="tax_id" title="tax" type="text" data-tax-widget-value/>
 		<input name="tax_intent_id" type="hidden" data-control data-tax-intent-id/>
 		</div>
 		<div class="wsb-form__tax-widget-buttons">
-		<a class="wsb-form__tax-widget-apply" data-tax-widget-apply>Apply</a>
-		<a class="wsb-form__tax-widget-clear" data-tax-widget-clear>Clear</a>
+		<a class="wsb-form__tax-widget-apply" data-tax-widget-apply><?= esc_html__( 'tax.widget.apply', 'wsbintegration' ); ?></a>
+		<a class="wsb-form__tax-widget-clear" data-tax-widget-clear><?= esc_html__( 'tax.widget.clear', 'wsbintegration' ); ?></a>
 		</div>
 		<div class="wsb-form__tax-widget-message"><div data-tax-widget-message></div></div>
 	</div>

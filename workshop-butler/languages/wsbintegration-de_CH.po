@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-28T15:30:43.301Z\n"
-"PO-Revision-Date: 2021-09-28T15:30:43.301Z\n"
+"POT-Creation-Date: 2021-10-26T17:07:43.490Z\n"
+"PO-Revision-Date: 2021-10-26T17:07:43.490Z\n"
 "Language: de\n"
 
 msgid "attendees.empty"
@@ -1087,10 +1087,25 @@ msgid "trainer.feedback"
 msgstr "Teilnehmerfeedback"
 
 msgid "tax.excluded_all"
-msgstr "Alle Preise enthalten keine MwSt"
+msgstr "Alle Preise enthalten keine MwSt."
 
 msgid "tax.included_all"
-msgstr "Alle Preisangaben inkl. MwSt"
+msgstr "Alle Preisangaben inkl. MwSt."
+
+msgid "tax.amount"
+msgstr "%s MwSt."
+
+msgid "tax.widget.apply"
+msgstr "Anwenden"
+
+msgid "tax.widget.clear"
+msgstr "löschen"
+
+msgid "tax.widget.apply-link"
+msgstr "MwSt. eingeben"
+
+msgid "tax.widget.tax_id"
+msgstr "Umsatzsteuer-ID"
 
 msgid "form.country"
 msgstr "Wählen Sie ein Land"

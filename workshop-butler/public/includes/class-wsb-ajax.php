@@ -155,7 +155,7 @@ class WSB_Ajax {
 			$requests = new WSB_Requests();
 			$response = $requests->get(
 				'tax-validation/'.rawurlencode( $_GET['number'] ),
-				array( 'lang' => $_GET['lang'] )
+				array( 'lang' => substr( get_locale(), 0, 2) )
 			);
 			wp_send_json( $response->body, $response->http_code );
 		} else {

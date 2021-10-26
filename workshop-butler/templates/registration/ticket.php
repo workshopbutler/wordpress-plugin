@@ -39,7 +39,7 @@ $next_loop = false;
 					<?= esc_html( $ticket->name ); ?>
 					<?php if ( $field->tickets->excluded_tax && $ticket->price->tax > 0 ) { ?>
 						<span class="wsb-ticket__tax">
-						+ <?= esc_html( Formatter::format( $ticket, 'tax' ) ); ?> VAT
+						+ <? printf( esc_html__( 'tax.amount', 'wsbintegration' ), Formatter::format( $ticket, 'tax' ) ); ?>
 						</span>
 					<?php } ?>
 				</label>
@@ -57,7 +57,7 @@ $next_loop = false;
 				printf(" %s%%", esc_html( $field->tickets->tax_rate ));
 			}
 			if ( $field->tickets->validate_tax ) {
-				echo " <a data-vat-apply-link>Enter VAT ID</a>";
+				printf(" <a data-vat-apply-link>%s</a>", esc_html__( 'tax.widget.apply-link', 'wsbintegration' ));
 			}
 		} else {
 			echo esc_html__( 'tax.included_all', 'wsbintegration' );
