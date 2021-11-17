@@ -264,7 +264,9 @@ class WSB_Settings {
 	 * @return array
 	 */
 	protected function get_general_settings() {
-		$template_options = WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING )?array(
+		// the constant can be defined in wordpress config to force template switching availability
+		$always_show = defined('WSB_ALWAYS_SHOW_TEMPLATE_SWITCH') && WSB_ALWAYS_SHOW_TEMPLATE_SWITCH;
+		$template_options = WSB_Options::get_option( WSB_Options::ALLOW_TEMPLATE_SWITCHING )||$always_show?array(
 			array(
 				'id' => 'info_old_template',
 				'type' => 'info',
