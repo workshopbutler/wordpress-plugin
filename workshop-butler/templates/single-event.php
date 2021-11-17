@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 	<div class="wsb-content">
 		<div class="wsb-page wsb-event-page">
 			<div class="wsb-header">
-				<?php if ( 1 || $event->confirmed ) { ?><div style="color:#819D44;">Confirmed <i class="fas fa-check"></i></div><?php } ?>
+				<?php if ( $event->is_confirmed ) { ?><div style="color:#819D44;">Confirmed <i class="fas fa-check"></i></div><?php } ?>
 				<h1><?= esc_html( $event->title ) ?></h1>
 			</div>
 			<div class="wsb-body">
