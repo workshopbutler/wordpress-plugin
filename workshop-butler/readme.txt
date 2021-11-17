@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 3.1.1 =
+* Fix "Confirmed" label on an event page
+
 = 3.1.0 =
 * Add the Estonian language
 * Add VAT calculation for ticket price
