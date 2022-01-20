@@ -68,6 +68,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 3.1.2 =
+* Add support for "jS" and "dS" formats for schedule dates
+
 = 3.1.1 =
 * Fix "Confirmed" label on an event page
 
