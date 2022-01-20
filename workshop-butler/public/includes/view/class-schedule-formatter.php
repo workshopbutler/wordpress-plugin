@@ -137,9 +137,6 @@ class Schedule_Formatter {
 		global $wp_locale;
 
 		if ( Date_Formatter::is_textual_month() ) {
-			$numeric_days     = $start->format( 'd' ) . '—' . $end->format( 'd' );
-			$without_zero_ays = $start->format( 'j' ) . '—' . $end->format( 'j' );
-
 			if ( ( ! empty( $wp_locale->month ) ) ) {
 				$textual_month      = $wp_locale->get_month( date( 'm', $start->getTimestamp() ) );
 				$textual_month_abbr = $wp_locale->get_month_abbrev( $textual_month );
@@ -147,14 +144,20 @@ class Schedule_Formatter {
 				$textual_month      = '';
 				$textual_month_abbr = '';
 			}
-			$long_year  = $start->format( 'Y' );
-			$short_year = $start->format( 'y' );
 
-			$date_format = Date_Formatter::get_date_format( $start );
-			$date        = str_replace( 'd', $numeric_days, $date_format );
-			$date        = str_replace( 'j', $without_zero_ays, $date );
-			$date        = str_replace( 'Y', $long_year, $date );
-			$date        = str_replace( 'y', $short_year, $date );
+			$date_format = $date = Date_Formatter::get_date_format( $start );
+			if ( strpos( $date_format, 'dS' ) !== false ) {
+				$date = str_replace( 'dS', $start->format( 'dS' ) . '—' . $end->format( 'dS' ), $date );
+			} else {
+				$date = str_replace( 'd', $start->format( 'd' ) . '—' . $end->format( 'd' ), $date );
+			}
+			if ( strpos( $date_format, 'jS' ) !== false ) {
+				$date = str_replace( 'jS', $start->format( 'jS' ) . '—' . $end->format( 'jS' ), $date );
+			} else {
+				$date = str_replace( 'j', $start->format( 'j' ) . '—' . $end->format( 'j' ), $date );
+			}
+			$date = str_replace( 'Y', $start->format( 'Y' ), $date );
+			$date = str_replace( 'y', $start->format( 'y' ), $date );
 			if ( strpos( $date_format, 'F' ) !== false ) {
 				$date = str_replace( 'F', $textual_month, $date );
 			} else {
