@@ -18,13 +18,13 @@ if ( $event->with_tickets() ) {
 		<?php if ( $event->is_free ) { ?>
 			<div class="wsb-ticket">
 				<div class="wsb-ticket__val">
-					<?= esc_html__( 'event.ticket.free', 'wsbintegration' ); ?>
+					<?php echo esc_html__( 'event.ticket.free', 'wsbintegration' ); ?>
 				</div>
 				<div class="wsb-ticket__name">
-					<?= esc_html__( 'event.ticket.freeDescr', 'wsbintegration' ); ?>
+					<?php echo esc_html__( 'event.ticket.freeDescr', 'wsbintegration' ); ?>
 				</div>
 				<div class="wsb-ticket__footer">
-					<?= esc_html( Formatter::format( $event->tickets, 'state' ) ); ?>
+					<?php echo esc_html( Formatter::format( $event->tickets, 'state' ) ); ?>
 				</div>
 			</div>
 			<?php
@@ -34,12 +34,12 @@ if ( $event->with_tickets() ) {
 				$visible = $config->is_show_expired_tickets() || $ticket->active() || $ticket->in_future();
 				if ( $visible ) {
 					?>
-					<div class="wsb-ticket <?= esc_attr( $closed ); ?>">
+					<div class="wsb-ticket <?php echo esc_attr( $closed ); ?>">
 						<div class="wsb-ticket__val">
-							<?= esc_html( Formatter::format( $ticket, 'price' ) ); ?>
+							<?php echo esc_html( Formatter::format( $ticket, 'price' ) ); ?>
 						</div>
 						<div class="wsb-ticket__name">
-							<?= esc_html( $ticket->name ); ?>
+							<?php echo esc_html( $ticket->name ); ?>
 						</div>
 						<div class="wsb-ticket__footer">
 						<?php

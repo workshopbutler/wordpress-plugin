@@ -17,16 +17,16 @@ if ( !$trainer->social_links->is_empty() ) {
 
 <div class="wsb-trainer__social-networks">
 <?php
-function render_link($link, $content) {
+function render_link($link, $class) {
     if ( $link ) {
-        echo '<a href="'.$link.'" target="_blank">'.$content.'</a>';
+        echo '<a href="'.esc_attr( $link ).'" target="_blank"><i class="'.esc_attr( $class ).'"></i></a>';
     }
 }
 
-render_link($trainer->social_links->website, '<i class="fas fa-globe"></i>');
-render_link($trainer->social_links->blog, '<i class="fab fa-wordpress-simple"></i>');
-render_link($trainer->social_links->twitter, '<i class="fab fa-twitter"></i>');
-render_link($trainer->social_links->facebook, '<i class="fab fa-facebook"></i>');
-render_link($trainer->social_links->linked_in, '<i class="fab fa-linkedin"></i>');
+render_link($trainer->social_links->website, 'fas fa-globe');
+render_link($trainer->social_links->blog, 'fab fa-wordpress-simple');
+render_link($trainer->social_links->twitter, 'fab fa-twitter');
+render_link($trainer->social_links->facebook, 'fab fa-facebook');
+render_link($trainer->social_links->linked_in, 'fab fa-linkedin');
 ?>
 </div>

@@ -12,6 +12,6 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 ?>
 <div class="wsb-trainer-tile__badges">
     <?php foreach ( $trainer->badges as $badge ) { ?>
-        <img src="<?= esc_attr($badge->url) ?>" width="30px"/>
+        <img src="<?php echo esc_attr($badge->url) ?>" width="30px"/>
     <?php } ?>
 </div>

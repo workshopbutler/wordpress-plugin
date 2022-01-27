@@ -15,4 +15,4 @@ if ( !$trainer->country_code ) {
 
 ?>
 
-<div class="wsb-trainer-country"><?= esc_html__('country.'.$trainer->country_code, 'wsbintegration'); ?></div>
+<div class="wsb-trainer-country"><?php echo esc_html__('country.'.$trainer->country_code, 'wsbintegration'); ?></div>

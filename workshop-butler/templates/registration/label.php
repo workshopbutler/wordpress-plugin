@@ -28,7 +28,7 @@ if ( $field->is_custom() ) {
 }
 if ( 'checkbox' !== $field->get_type() ) {
 	if ( 'promo_code' !== $field->get_name() ) { ?>
-		<label for="<?= esc_attr( $field->get_name() ); ?>" class="wsb-label">
+		<label for="<?php echo esc_attr( $field->get_name() ); ?>" class="wsb-label">
 			<?php
 			echo esc_html( $label );
 			if ( $field->is_required() ) {
@@ -40,6 +40,6 @@ if ( 'checkbox' !== $field->get_type() ) {
 	}
 } else {
 	?>
-	<label for="<?= esc_attr( $field->get_name() ); ?>" class="wsb-label"></label>
+	<label for="<?php echo esc_attr( $field->get_name() ); ?>" class="wsb-label"></label>
 	<?php
 }

@@ -20,23 +20,23 @@ $next_loop = false;
 		if ( $ticket->active() ) {
 			?>
 			<div class="wsb-form__radio">
-				<input id="<?= esc_attr( $ticket->get_id() ); ?>"
-						name="<?= esc_attr( $field->get_name() ); ?>"
-						title="<?= esc_attr( $field->get_label() ); ?>"
+				<input id="<?php echo esc_attr( $ticket->get_id() ); ?>"
+						name="<?php echo esc_attr( $field->get_name() ); ?>"
+						title="<?php echo esc_attr( $field->get_label() ); ?>"
 						type="radio"
-						data-control required value="<?= esc_attr( $ticket->get_id() ); ?>"
-						data-amount="<?= esc_attr( $ticket->price->amount ); ?>"
-						data-tax="<?= esc_attr( $ticket->price->tax ); ?>"
-						data-currency="<?= esc_attr( $ticket->price->currency ); ?>"
+						data-control required value="<?php echo esc_attr( $ticket->get_id() ); ?>"
+						data-amount="<?php echo esc_attr( $ticket->price->amount ); ?>"
+						data-tax="<?php echo esc_attr( $ticket->price->tax ); ?>"
+						data-currency="<?php echo esc_attr( $ticket->price->currency ); ?>"
 					<?php
 					if ( ! $next_loop ) {
 						echo 'checked';
 					}
 					?>/>
 
-				<label for="<?= esc_attr( $ticket->get_id() ); ?>" class="wsb-label">
-					<strong><?= esc_html( Formatter::format( $ticket, 'price' ) ); ?></strong>
-					<?= esc_html( $ticket->name ); ?>
+				<label for="<?php echo esc_attr( $ticket->get_id() ); ?>" class="wsb-label">
+					<strong><?php echo esc_html( Formatter::format( $ticket, 'price' ) ); ?></strong>
+					<?php echo esc_html( $ticket->name ); ?>
 					<?php if ( $field->tickets->excluded_tax && $ticket->price->tax > 0 ) { ?>
 						<span class="wsb-ticket__tax">
 						+ <? printf( esc_html__( 'tax.amount', 'wsbintegration' ), Formatter::format( $ticket, 'tax' ) ); ?>

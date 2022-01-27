@@ -16,7 +16,7 @@ $no_event_title = $config->get_no_event_title() ? $config->get_no_event_title() 
 
 ?>
 
-<div class="<?= esc_attr( $theme ); ?>">
+<div class="<?php echo esc_attr( $theme ); ?>">
 	<div class="wsb-content wsb-next-event">
 
 	<?php
@@ -25,13 +25,13 @@ $no_event_title = $config->get_no_event_title() ? $config->get_no_event_title() 
 		$button_title = $config->get_title() ? $config->get_title() : esc_html__( 'nextEvent.register', 'wsbintegration' );
 		?>
 
-		<a href="<?= esc_attr( $url ); ?>"
-				target="<?= esc_attr( $config->open_page_in() ); ?>" class="wsb-next-element-button">
-			<?= esc_html( $button_title ); ?>
+		<a href="<?php echo esc_attr( $url ); ?>"
+				target="<?php echo esc_attr( $config->open_page_in() ); ?>" class="wsb-next-element-button">
+			<?php echo esc_html( $button_title ); ?>
 		</a>
 	<?php } else { ?>
 		<span class="wsb-next-element-no-event">
-			<?= esc_html( $no_event_title ); ?>
+			<?php echo esc_html( $no_event_title ); ?>
 		</span>
 		<?php
 	}

@@ -10,8 +10,8 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 if ( $trainer->url ) { ?>
-    <a href="<?= esc_attr($trainer->url) ?>"><?= esc_html($trainer->get_full_name()) ?></a>
+    <a href="<?php echo esc_attr($trainer->url) ?>"><?php echo esc_html($trainer->get_full_name()) ?></a>
 <?php } else { ?>
-    <div><?= esc_html($trainer->get_full_name()) ?></div>
+    <div><?php echo esc_html($trainer->get_full_name()) ?></div>
 <?php
 }

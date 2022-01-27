@@ -11,4 +11,4 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 ?>
 
-<img src="<?= esc_attr(  $trainer->get_photo_or_default()  ); ?>" alt="<?= esc_attr( $trainer->get_full_name() ); ?>"width="100%"/>
+<img src="<?php echo esc_attr(  $trainer->get_photo_or_default()  ); ?>" alt="<?php echo esc_attr( $trainer->get_full_name() ); ?>"width="100%"/>

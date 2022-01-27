@@ -12,7 +12,7 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 ?>
-<div class="<?= esc_attr( $theme ); ?>">
+<div class="<?php echo esc_attr( $theme ); ?>">
     <div class="wsb-content">
         <?php do_action( 'wsb_trainer_list_filters' ); ?>
         <div class="wsb-trainer-list">
@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
                 <?php do_action( 'wsb_after_trainer_list' ); ?>
             </div>
             <div class="wsb-no-trainers" data-empty-list>
-                <?= esc_html__( 'schedule.noEvents', 'wsbintegration' ); ?>
+                <?php echo esc_html__( 'schedule.noEvents', 'wsbintegration' ); ?>
             </div>
          </div>
          <div class="wsb-copyright"><a href="https://workshopbutler.com/" target="_blank">Powered by Workshop Butler</a></div>

@@ -38,17 +38,17 @@ if ( !$testimonials ) {
         <?php } ?>
 
         <div class="wsb-testimonials-desc">
-            <?= esc_html( wp_trim_words($testimonial->content, 35, '...') ); ?>
+            <?php echo esc_html( wp_trim_words($testimonial->content, 35, '...') ); ?>
         </div>
 
         <div class="wsb-cite">
             <div class="wsb-cite__inner">
                 <?php  if ( $testimonial->avatar ) { ?>
-                    <img class="userpic" src="<?= esc_attr( $testimonial->avatar ); ?>"/>
+                    <img class="userpic" src="<?php echo esc_attr( $testimonial->avatar ); ?>"/>
                 <?php } ?>
                 <div>
                 <div class="who">
-                    <strong><?= esc_html( $testimonial->attendee ); ?></strong>
+                    <strong><?php echo esc_html( $testimonial->attendee ); ?></strong>
                     <?php  if ( $testimonial->is_verified ) { ?><span class="wsb-verified"></span><?php } ?>
                     <?php  if ( $testimonial->company ) { echo esc_html( $testimonial->company ); } ?>
                 </div>

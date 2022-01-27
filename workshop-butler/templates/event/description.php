@@ -12,6 +12,6 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 if ( $event->description ) {
 	?>
-	<div class="wsb-description-text"><?= $event->description ?></div>
+	<div class="wsb-description-text"><?php echo wp_kses_post( $event->description ); ?></div>
 	<?php
 }

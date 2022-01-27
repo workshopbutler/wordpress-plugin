@@ -10,15 +10,15 @@
 
 $without_name = $config->is_show_trainer_name() ? '' : 'without-name';
 ?>
-<div class="wsb-table__col wsb-table__col-trainers <?= esc_attr( $without_name ); ?>">
+<div class="wsb-table__col wsb-table__col-trainers <?php echo esc_attr( $without_name ); ?>">
 	<?php foreach ( $event->trainers as $trainer ) { ?>
 		<div class="wsb-trainer">
 			<?php if ( $trainer->url ) { ?>
-				<a href="<?= esc_attr( $trainer->url ); ?>">
-					<img class="wsb-photo" src="<?= esc_attr( $trainer->get_photo_or_default() ); ?>"
-							alt="<?= esc_attr( $trainer->get_full_name() ); ?>"/>
+				<a href="<?php echo esc_attr( $trainer->url ); ?>">
+					<img class="wsb-photo" src="<?php echo esc_attr( $trainer->get_photo_or_default() ); ?>"
+							alt="<?php echo esc_attr( $trainer->get_full_name() ); ?>"/>
 				</a>
-				<a class="wsb-name" href="<?= esc_attr( $trainer->url ); ?>">
+				<a class="wsb-name" href="<?php echo esc_attr( $trainer->url ); ?>">
 					<?php
 					if ( $config->is_show_trainer_name() ) {
 						echo esc_html( $trainer->get_full_name() );
@@ -26,8 +26,8 @@ $without_name = $config->is_show_trainer_name() ? '' : 'without-name';
 					?>
 				</a>
 			<?php } else { ?>
-				<img class="wsb-photo" src="<?= esc_attr( $trainer->get_photo_or_default() ); ?>"
-						alt="<?= esc_attr( $trainer->get_full_name() ); ?>"/>
+				<img class="wsb-photo" src="<?php echo esc_attr( $trainer->get_photo_or_default() ); ?>"
+						alt="<?php echo esc_attr( $trainer->get_full_name() ); ?>"/>
 				<?php
 				if ( $config->is_show_trainer_name() ) {
 					echo esc_html( $trainer->get_full_name() );

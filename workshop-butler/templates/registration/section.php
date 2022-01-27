@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 if ( 'ticket' === $section->get_id() ) { ?>
 	<section class="wsb-ticket-section">
 		<div class="wsb-form__section-title">
-			<?= esc_html__( strtolower( 'form.section.' . $section->get_id() ), 'wsbintegration' ); ?>
+			<?php echo esc_html__( strtolower( 'form.section.' . $section->get_id() ), 'wsbintegration' ); ?>
 		</div>
 		<?php do_action( 'wsb_registration_form_fields' ); ?>
 	</section>
@@ -40,7 +40,7 @@ if ( 'ticket' === $section->get_id() ) { ?>
 	<section>
 		<?php if ( 'footer' !== $section->get_id() ) { ?>
 			<div class="wsb-form__section-title">
-				<?= esc_html__( strtolower( 'form.section.' . $section->get_id() ), 'wsbintegration' ); ?>
+				<?php echo esc_html__( strtolower( 'form.section.' . $section->get_id() ), 'wsbintegration' ); ?>
 			</div>
 		<?php } ?>
 		<?php do_action( 'wsb_registration_form_fields' ); ?>

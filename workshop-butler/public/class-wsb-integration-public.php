@@ -264,7 +264,7 @@ class WSB_Integration_Public {
 			return $default_title;
 		} else {
 			$requests = new WSB_Requests();
-			$response = $requests->retrieve_trainer( $_GET['id'] );
+			$response = $requests->retrieve_trainer( sanitize_text_field( $_GET['id'] ) );
 			if ( is_wp_error( $response ) ) {
 				return $default_title;
 			} else {
@@ -290,7 +290,7 @@ class WSB_Integration_Public {
 			return $default_title;
 		} else {
 			$requests = new WSB_Requests();
-			$response = $requests->retrieve_event( $_GET['id'] );
+			$response = $requests->retrieve_event( sanitize_text_field( $_GET['id'] ) );
 			if ( is_wp_error( $response ) ) {
 				return $default_title;
 			} else {

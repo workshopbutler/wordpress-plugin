@@ -31,24 +31,24 @@ class WSB_Ajax {
 			// Nonce check.
 			check_ajax_referer( 'wsb-nonce' );
 
-			$type     = $_GET['type'];
+			$type     = sanitize_text_field( $_GET['type'] );
 			$event_id = null;
 
 			switch ( $type ) {
 				case 'event-page-sidebar':
 					$method   = 'events';
 					$query    = WSB_Ajax::get_event_page_sidebar_params();
-					$event_id = rawurlencode( $_GET['event_id'] );
+					$event_id = rawurlencode( sanitize_text_field( $_GET['event_id'] ) );
 					break;
 				case 'future-trainer-events':
-					$method = 'facilitators/' . rawurlencode( $_GET['id'] ) . '/events';
+					$method = 'facilitators/' . rawurlencode( sanitize_text_field( $_GET['id'] ) ) . '/events';
 					$query  = array(
 						'dates'  => 'future',
 						'public' => true,
 					);
 					break;
 				case 'past-trainer-events':
-					$method = 'facilitators/' . rawurlencode( $_GET['id'] ) . '/events';
+					$method = 'facilitators/' . rawurlencode( sanitize_text_field( $_GET['id'] ) ) . '/events';
 					$query  = array(
 						'dates'  => 'past',
 						'public' => true,
@@ -96,13 +96,13 @@ class WSB_Ajax {
 		if ( 'type' === WSB_Options::get_option( WSB_Options::EVENT_PAGE_SIDEBAR_TYPE ) ) {
 			return array(
 				'dates'     => 'future',
-				'eventType' => rawurldecode( $_GET['type_id'] ),
+				'eventType' => rawurldecode( sanitize_text_field( $_GET['type_id'] ) ),
 			);
 		} else {
 			return array(
 				'dates'       => 'future',
-				'countryCode' => rawurlencode( $_GET['country_code'] ),
-				'trainerId'   => rawurldecode( $_GET['trainer_id'] ),
+				'countryCode' => rawurlencode( sanitize_text_field( $_GET['country_code'] ) ),
+				'trainerId'   => rawurldecode( sanitize_text_field( $_GET['trainer_id'] ) ),
 			);
 		}
 	}
@@ -154,7 +154,7 @@ class WSB_Ajax {
 
 			$requests = new WSB_Requests();
 			$response = $requests->get(
-				'tax-validation/'.rawurlencode( $_GET['number'] ),
+				'tax-validation/'.rawurlencode( sanitize_text_field($_GET['number']) ),
 				array( 'lang' => substr( get_locale(), 0, 2) )
 			);
 			wp_send_json( $response->body, $response->http_code );

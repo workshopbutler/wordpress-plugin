@@ -12,11 +12,11 @@ $url = $config->is_skip_event_page() ? $event->registration_page->get_url() : $e
 ?>
 <div class="wsb-table__col wsb-table__col-register">
 	<?php if ( $event->state->closed() ) { ?>
-		<button disabled class="wsb-table__btn"><?= esc_html__( 'schedule.event.soldOut', 'wsbintegration' ); ?></button>
+		<button disabled class="wsb-table__btn"><?php echo esc_html__( 'schedule.event.soldOut', 'wsbintegration' ); ?></button>
 	<?php } else { ?>
-		<a href="<?= esc_attr( $url ); ?>"
+		<a href="<?php echo esc_attr( $url ); ?>"
 				class="wsb-table__btn">
-			<?= esc_html__( 'schedule.event.register', 'wsbintegration' ); ?>
+			<?php echo esc_html__( 'schedule.event.register', 'wsbintegration' ); ?>
 		</a>
 	<?php } ?>
 </div>

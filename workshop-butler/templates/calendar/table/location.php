@@ -11,4 +11,4 @@
 use WorkshopButler\Formatter;
 
 ?>
-<div class="wsb-table__col wsb-table__col-location"><?= esc_html( Formatter::format( $event->location ) ); ?></div>
+<div class="wsb-table__col wsb-table__col-location"><?php echo esc_html( Formatter::format( $event->location ) ); ?></div>

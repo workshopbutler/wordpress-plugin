@@ -17,4 +17,4 @@ if ( !$url ) {
 	return;
 }
 ?>
-<img src="<?= esc_attr( $url ); ?>" alt="<?= esc_attr( $event->title ); ?>" class="wsb-cover-image"/>
+<img src="<?php echo esc_attr( $url ); ?>" alt="<?php echo esc_attr( $event->title ); ?>" class="wsb-cover-image"/>

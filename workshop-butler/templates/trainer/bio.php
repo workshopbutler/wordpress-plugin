@@ -11,5 +11,5 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 ?>
 <div class="wsb-description-text">
-    <?= $trainer->bio ?>
+    <?php echo wp_kses_post( $trainer->bio ) ?>
 </div>

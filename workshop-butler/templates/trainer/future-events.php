@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 <div class="wsb-events" id="upcoming-events">
     <div class="wsb-events__title">
-    <?= esc_html__('sidebar.future', 'wsbintegration'); ?>
+    <?php echo esc_html__('sidebar.future', 'wsbintegration'); ?>
     </div>
     <div data-events-list></div>
 </div>

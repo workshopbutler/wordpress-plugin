@@ -17,12 +17,12 @@ if ( is_a( $event, 'WP_Error' ) || ! $event ) {
 	exit();
 }
 ?>
-<div class="wsb-table__row <?= esc_attr( $show_featured ); ?>"
+<div class="wsb-table__row <?php echo esc_attr( $show_featured ); ?>"
 		data-event-obj
-		data-event-type="<?= esc_attr( $event->type->get_id() ); ?>"
-		data-event-location="<?= esc_attr( $event->get_country_code() ); ?>"
-		data-event-language="<?= esc_attr( implode( ',', $event->get_spoken_languages() ) ); ?>"
-		data-event-trainer="<?= esc_attr( implode( ',', $event->get_names_of_trainers() ) ); ?>">
+		data-event-type="<?php echo esc_attr( $event->type->get_id() ); ?>"
+		data-event-location="<?php echo esc_attr( $event->get_country_code() ); ?>"
+		data-event-language="<?php echo esc_attr( implode( ',', $event->get_spoken_languages() ) ); ?>"
+		data-event-trainer="<?php echo esc_attr( implode( ',', $event->get_names_of_trainers() ) ); ?>">
 	<?php do_action( 'wsb_calendar_item_tag', $row_level_tag ); ?>
 	<?php
 	foreach ( $config->get_elements() as $element ) {

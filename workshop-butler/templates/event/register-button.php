@@ -16,13 +16,13 @@ use WorkshopButler\Formatter;
 <div class="wsb-register__btn-wrapper">
 	<?php if ( $event->state->closed() ) { ?>
 		<button class="wsb-register__btn" disabled>
-			<?= esc_html( Formatter::format( $event->state ) ); ?>
+			<?php echo esc_html( Formatter::format( $event->state ) ); ?>
 		</button>
 	<?php } else { ?>
-		<a href="<?= esc_attr( $event->get_registration_url() ); ?>"
-				target="<?= esc_attr( $config->open_registration_page_in() ); ?>"
+		<a href="<?php echo esc_attr( $event->get_registration_url() ); ?>"
+				target="<?php echo esc_attr( $config->open_registration_page_in() ); ?>"
 				class="wsb-register__btn">
-			<?= esc_html__( 'event.register', 'wsbintegration' ); ?>
+			<?php echo esc_html__( 'event.register', 'wsbintegration' ); ?>
 		</a>
 	<?php } ?>
 </div>

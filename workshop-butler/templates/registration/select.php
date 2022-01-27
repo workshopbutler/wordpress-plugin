@@ -12,8 +12,8 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 ?>
 <select data-control
-		name="<?= esc_attr( $field->get_name() ); ?>"
-		title="<?= esc_attr( $field->get_label() ); ?>"
+		name="<?php echo esc_attr( $field->get_name() ); ?>"
+		title="<?php echo esc_attr( $field->get_label() ); ?>"
 	<?php
 	if ( $field->is_required() ) {
 		echo 'required';
@@ -26,7 +26,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 <?php
 foreach ( $field->get_options() as $option ) {
 	?>
-		<option value="<?= esc_attr( $option->get_value() ); ?>"><?= esc_html( $option->get_label() ); ?>
+		<option value="<?php echo esc_attr( $option->get_value() ); ?>"><?php echo esc_html( $option->get_label() ); ?>
 		</option>
 	<?php } ?>
 </select>

@@ -13,8 +13,8 @@ use WorkshopButler\Formatter;
 ?>
 <div class="wsb-date-place">
 	<div class="wsb-tile-info wsb-tile-location">
-		<span class="flag-icon flag-icon-<?= strtolower( $event->location->country_code ) ?> wsb-flag"></span>
-		<?= esc_html( Formatter::format( $event->location ) ); ?>
+		<span class="flag-icon flag-icon-<?php echo esc_attr( strtolower( $event->location->country_code ) ); ?> wsb-flag"></span>
+		<?php echo esc_html( Formatter::format( $event->location ) ); ?>
 	</div>
 
 	<div class="wsb-tile-info wsb-tile-datetime">

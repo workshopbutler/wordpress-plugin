@@ -93,22 +93,22 @@ class Sidebar_Widget extends \WP_Widget {
 				case 'eventtype':
 					?>
                     <p>
-                        <label for="<?= $this->get_field_id( $name ); ?>"><?= $field->description; ?></label>
-                        <input class="widefat" id="<?= $this->get_field_id( $name ); ?>"
-                               name="<?= $this->get_field_name( $name ); ?>"
-                               type="<?= $this->get_field_name( $field->type ); ?>"
-                               value="<?= esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
+                        <label for="<?php echo esc_attr( $this->get_field_id( $name ) ); ?>"><?php echo esc_html( $field->description ); ?></label>
+                        <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( $name ) ); ?>"
+                               name="<?php echo esc_attr( $this->get_field_name( $name ) ); ?>"
+                               type="<?php echo esc_attr( $this->get_field_name( $field->type ) ); ?>"
+                               value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
                     </p>
 					<?php
 					break;
 				default:
 					?>
                     <p>
-                        <label for="<?= $this->get_field_id( $name ); ?>"><?= $field->description; ?></label>
-                        <input class="widefat" id="<?= $this->get_field_id( $name ); ?>"
-                               name="<?= $this->get_field_name( $name ); ?>"
-                               type="<?= $this->get_field_name( $field->type ); ?>"
-                               value="<?= esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
+                        <label for="<?php echo esc_attr( $this->get_field_id( $name ) ); ?>"><?php echo esc_html( $field->description ); ?></label>
+                        <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( $name ) ); ?>"
+                               name="<?php echo esc_attr( $this->get_field_name( $name ) ); ?>"
+                               type="<?php echo esc_attr( $this->get_field_name( $field->type ) ); ?>"
+                               value="<?php echo esc_attr( isset( $instance[ $name ] ) ? $instance[ $name ] : $field->default_value ); ?>"/>
                     </p>
 				<?php
 			}

@@ -14,12 +14,12 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 ?>
-<div class="<?= esc_attr( $theme ); ?>">
+<div class="<?php echo esc_attr( $theme ); ?>">
 	<div class="wsb-content">
 		<div class="wsb-page wsb-event-page">
 			<div class="wsb-header">
 				<?php if ( $event->is_confirmed ) { ?><div style="color:#819D44;">Confirmed <i class="fas fa-check"></i></div><?php } ?>
-				<h1><?= esc_html( $event->title ) ?></h1>
+				<h1><?php echo esc_html( $event->title ) ?></h1>
 			</div>
 			<div class="wsb-body">
 				<div class="wsb-description">

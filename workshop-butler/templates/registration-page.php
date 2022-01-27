@@ -13,11 +13,11 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 ?>
-<div class="<?= esc_attr( $theme ); ?>">
+<div class="<?php echo esc_attr( $theme ); ?>">
 	<div class="wsb-content">
 		<div class="wsb-page wsb-registration-page">
 			<div class="wsb-header">
-				<h1><?= esc_html( $event->title ); ?></h1>
+				<h1><?php echo esc_html( $event->title ); ?></h1>
 			</div>
 			<div class="wsb-body">
 				<section class="wsb-info-section">

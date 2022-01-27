@@ -16,8 +16,8 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 ?>
 <select data-control
-		name="<?= esc_attr( $field->get_name() ); ?>"
-		title="<?= esc_attr( $field->get_label() ); ?>"
+		name="<?php echo esc_attr( $field->get_name() ); ?>"
+		title="<?php echo esc_attr( $field->get_label() ); ?>"
 	<?php
 	if ( $field->is_required() ) {
 		echo 'required';
@@ -27,10 +27,10 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 	}
 	?>
 >
-	<option value="" selected disabled><?= esc_html__( 'form.country', 'wsbintegration' ); ?></option>
+	<option value="" selected disabled><?php echo esc_html__( 'form.country', 'wsbintegration' ); ?></option>
 	<?php
 	foreach ( Countries::get() as $code => $name ) {
 		?>
-		<option value="<?= esc_attr( $code ); ?>"><?= esc_attr( $name ); ?></option>
+		<option value="<?php echo esc_attr( $code ); ?>"><?php echo esc_attr( $name ); ?></option>
 	<?php } ?>
 </select>

@@ -64,7 +64,7 @@ class WSB_Trainer_Page extends WSB_Page {
 		if ( empty( $_GET['id'] ) ) {
 			return $this->format_error( 'empty trainer ID' );
 		}
-		$id             = $_GET['id'];
+		$id             = sanitize_text_field( $_GET['id'] );
 		$may_be_trainer = $this->dict->get_trainer();
 		if ( is_null( $may_be_trainer ) ) {
 			$may_be_trainer = $this->requests->retrieve_trainer( $id );

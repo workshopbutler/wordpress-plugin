@@ -11,8 +11,8 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 ?>
-<textarea name="<?= esc_attr( $field->get_name() ); ?>" data-control
-		title="<?= esc_attr( $field->get_label() ); ?>"
+<textarea name="<?php echo esc_attr( $field->get_name() ); ?>" data-control
+		title="<?php echo esc_attr( $field->get_label() ); ?>"
 	<?php
 	if ( $field->is_required() ) {
 		echo 'required';

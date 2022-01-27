@@ -12,8 +12,8 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 ?>
 <input type="checkbox" value="yes" data-control
-		name="<?= esc_attr( $field->get_name() ); ?>"
-		title="<?= esc_attr( $field->get_label() ); ?>"
+		name="<?php echo esc_attr( $field->get_name() ); ?>"
+		title="<?php echo esc_attr( wp_strip_all_tags( $field->get_label() ) ); ?>"
 	<?php
 	if ( $field->is_required() ) {
 		echo 'required';
@@ -23,6 +23,6 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 	}
 	?>
 />
-<label class="wsb-checkbox" for="<?= esc_attr( $field->get_name() ); ?>">
-	<?= $field->get_label(); ?>
+<label class="wsb-checkbox" for="<?php echo esc_attr( $field->get_name() ); ?>">
+	<?php echo wp_kses_post( $field->get_label() ); ?>
 </label>

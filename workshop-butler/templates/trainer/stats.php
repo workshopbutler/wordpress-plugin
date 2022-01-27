@@ -22,16 +22,16 @@ $render_based_on = function ($evaluations) {
 <?php if ( $trainer->get_displayed_public_evaluations() ) { ?>
     <div class="wsb-trainer-details-fact">
     <div>
-        <span class="wsb-fact-description"><?= esc_html__('trainer.experience.rating.public', 'wsbintegration') ?></span>
+        <span class="wsb-fact-description"><?php echo esc_html__('trainer.experience.rating.public', 'wsbintegration') ?></span>
 
         <span class="wsb-fact-description__sub">
-        <?= esc_html( $render_based_on( $trainer->get_displayed_public_evaluations() )) ?>
+        <?php echo esc_html( $render_based_on( $trainer->get_displayed_public_evaluations() )) ?>
         </span>
     </div>
 
     <div class="wsb-trainer-number-box">
         <span class="wsb-big-number">
-        <?= esc_html( $trainer->get_displayed_public_rating() ) ?>
+        <?php echo esc_html( $trainer->get_displayed_public_rating() ) ?>
         </span>
 
         <i class="fas fa-star"></i>
@@ -42,16 +42,16 @@ $render_based_on = function ($evaluations) {
 <?php if ( $trainer->get_displayed_private_evaluations() ) { ?>
     <div class="wsb-trainer-details-fact">
     <div>
-        <span class="wsb-wsb-fact-description"><?= esc_html__('trainer.experience.rating.private', 'wsbintegration') ?></span>
+        <span class="wsb-wsb-fact-description"><?php echo esc_html__('trainer.experience.rating.private', 'wsbintegration') ?></span>
 
         <span class="wsb-fact-description__sub">
-        <?= esc_html( $render_based_on( $trainer->get_displayed_private_evaluations() )) ?>
+        <?php echo esc_html( $render_based_on( $trainer->get_displayed_private_evaluations() )) ?>
         </span>
     </div>
 
     <div class="wsb-trainer-number-box">
         <span class="wsb-big-number">
-        <?= esc_html( $trainer->get_displayed_private_rating() ) ?>
+        <?php echo esc_html( $trainer->get_displayed_private_rating() ) ?>
         </span>
 
         <i class="fas fa-star"></i>
@@ -61,16 +61,16 @@ $render_based_on = function ($evaluations) {
 
 <?php if ( $trainer->get_displayed_events_held() ) { ?>
     <div class="wsb-trainer-details-fact">
-    <span class="wsb-fact-description"><?= esc_html__('trainer.experience.events', 'wsbintegration') ?></span>
-    <span class="wsb-big-number wsb-trainer-number-box"><?= esc_html(
+    <span class="wsb-fact-description"><?php echo esc_html__('trainer.experience.events', 'wsbintegration') ?></span>
+    <span class="wsb-big-number wsb-trainer-number-box"><?php echo esc_html(
         $trainer->get_displayed_events_held() ) ?></span>
     </div>
     <?php } ?>
 
 <?php if ( $trainer->get_displayed_years_of_experience() ) { ?>
     <div class="wsb-trainer-details-fact">
-    <span class="wsb-fact-description"><?= esc_html__('trainer.experience.years', 'wsbintegration') ?></span>
-    <span class="wsb-big-number wsb-trainer-number-box"><?= esc_html( $trainer->get_displayed_years_of_experience() ) ?></span>
+    <span class="wsb-fact-description"><?php echo esc_html__('trainer.experience.years', 'wsbintegration') ?></span>
+    <span class="wsb-big-number wsb-trainer-number-box"><?php echo esc_html( $trainer->get_displayed_years_of_experience() ) ?></span>
     </div>
 <?php } ?>
 </div>
