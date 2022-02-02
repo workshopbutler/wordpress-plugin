@@ -67,7 +67,6 @@ class WSB_Settings {
 			array(
 				'title'            => __( 'General', 'wsbintegration' ),
 				'id'               => 'general',
-				'customizer_width' => '400px',
 				'icon'             => 'el el-home',
 				'fields'           => $this->get_general_settings(),
 			)
@@ -78,7 +77,6 @@ class WSB_Settings {
 			array(
 				'title'            => __( 'Schedule', 'wsbintegration' ),
 				'id'               => 'schedule',
-				'customizer_width' => '400px',
 				'icon'             => 'el el-calendar',
 				'fields'           => $this->get_schedule_settings(),
 			)
@@ -89,7 +87,6 @@ class WSB_Settings {
 			array(
 				'title'            => __( 'Event Page', 'wsbintegration' ),
 				'id'               => 'event-page',
-				'customizer_width' => '400px',
 				'icon'             => 'el el-website',
 				'fields'           => $this->get_event_page_settings(),
 			)
@@ -99,7 +96,6 @@ class WSB_Settings {
 			array(
 				'title'            => __( 'Trainers', 'wsbintegration' ),
 				'id'               => 'trainers',
-				'customizer_width' => '400px',
 				'icon'             => 'el el-child',
 				'fields'           => $this->get_trainer_settings(),
 			)
@@ -110,7 +106,6 @@ class WSB_Settings {
 				array(
 					'title'            => __( 'Old Templates (deprecated)', 'wsbintegration' ),
 					'id'               => 'pages',
-					'customizer_width' => '500px',
 					'icon'             => 'el el-edit',
 				)
 			);
@@ -123,7 +118,6 @@ class WSB_Settings {
 			array(
 				'title'            => __( 'Custom CSS', 'wsbintegration' ),
 				'id'               => 'css-editor',
-				'customizer_width' => '500px',
 				'icon'             => 'el el-edit',
 				'fields'           => array(
 					array(
@@ -627,7 +621,7 @@ class WSB_Settings {
 			// Show the time the page took to load, etc.
 			'update_notice'        => true,
 			// If dev_mode is enabled, will notify developer of updated versions available in the GitHub Repo.
-			'customizer'           => true,
+			'customizer'           => false,
 			// Enable basic customizer support
 			// 'open_expanded'     => true,                    // Allow you to start the panel in an expanded way initially.
 			// 'disable_save_warn' => true,                    // Disable the save warning when a user changes a field
