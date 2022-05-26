@@ -245,9 +245,10 @@ function getTranslatedErrorMessages() {
 }
 
 var TaxWidget = /*#__PURE__*/function () {
-  function TaxWidget($el, taxExemptCallback) {
+  function TaxWidget($el, taxExemptCallback, eventHashedId) {
     this.root = $el;
     this.taxExemptCallback = taxExemptCallback;
+    this.eventHashedId = eventHashedId;
     this.message = $el.find('[data-tax-widget-message]');
     this.applyButton = $el.find('[data-tax-widget-apply]');
     this.clearButton = $el.find('[data-tax-widget-clear]');
@@ -341,13 +342,19 @@ var TaxWidget = /*#__PURE__*/function () {
     this.renderClearButton(true);
     this.resetOnChange = true;
 
+    var validationData = {
+      _ajax_nonce: wsb_event.nonce,
+      action: 'wsb_tax_validation',
+      number: taxNumber,
+    };
+
+    if (this.eventHashedId) {
+      validationData.eventId = this.eventHashedId;
+    }
+
     jQuery.ajax({
       url: wsb_event.ajax_url,
-      data: {
-        _ajax_nonce: wsb_event.nonce,
-        action: 'wsb_tax_validation',
-        number: taxNumber,
-      },
+      data: validationData,
       method: 'GET',
       dataType: 'json'
     })
@@ -757,7 +764,11 @@ var EventRegistrationForm = /*#__PURE__*/function () {
       self.root.find('[data-tax-description]').hide('fast');
       self.root.find('#wsb-form-tax-widget').show('fast');
     });
-    return new TaxWidget(this.root.find('#wsb-form-tax-widget'), this.applyTaxExempt.bind(this));
+    return new TaxWidget(
+      this.root.find('#wsb-form-tax-widget'),
+      this.applyTaxExempt.bind(this),
+      wsb_event.hashed_id
+    );
   };
 
   _proto.initActiveTicketSelection = function initActiveTicketSelection() {

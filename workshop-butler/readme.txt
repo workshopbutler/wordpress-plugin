@@ -3,7 +3,7 @@ Contributors: workshopbutlers
 Tags: event management, training management, event schedule, workshop crm, online registrations
 Requires at least: 5.5
 Tested up to: 6.0
-Stable tag: 3.1.5
+Stable tag: 3.1.6
 Requires PHP: 7.2.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -69,6 +69,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 3.1.6 =
+* Fix an issue with tax exempt for brands integration
+
 = 3.1.5 =
 * Disable theme customizer integration
 
