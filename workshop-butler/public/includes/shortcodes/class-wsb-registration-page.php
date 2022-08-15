@@ -143,6 +143,7 @@ class WSB_Registration_Page extends WSB_Page {
 				'is_registration_closed'   => $event->state->closed(),
 				'id'                       => $event->id,
 				'hashed_id'                => $event->hashed_id,
+				'eu_countries'             => Countries::getEUCodes(),
 				'error_required'           => __( 'form.error.required', 'wsbintegration' ),
 				'error_email'              => __( 'form.error.email', 'wsbintegration' ),
 				'error_url'                => __( 'form.error.url', 'wsbintegration' ),

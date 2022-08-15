@@ -246,6 +246,11 @@ function getTranslatedErrorMessages() {
 
 var TaxWidget = /*#__PURE__*/function () {
   function TaxWidget($el, taxExemptCallback, eventHashedId) {
+    if (!$el.length) {
+      this.enabled = false;
+      return this;
+    }
+    this.enabled = true;
     this.root = $el;
     this.taxExemptCallback = taxExemptCallback;
     this.eventHashedId = eventHashedId;
@@ -402,6 +407,7 @@ var EventRegistrationForm = /*#__PURE__*/function () {
     this.invoicePaymentEnabled = !this.isCardPaymentActive() || this.invoicePaymentAllowed();
     this.formIsLocked = false;
     this.taxExempt = false;
+    this.billingEU = true;
     this.activateEvents();
     this.init();
   }
@@ -764,11 +770,15 @@ var EventRegistrationForm = /*#__PURE__*/function () {
       self.root.find('[data-tax-description]').hide('fast');
       self.root.find('#wsb-form-tax-widget').show('fast');
     });
-    return new TaxWidget(
+    this.taxWidget = new TaxWidget(
       this.root.find('#wsb-form-tax-widget'),
       this.applyTaxExempt.bind(this),
       wsb_event.hashed_id
     );
+    if (this.taxWidget.enabled) {
+      this.root.find('[data-control]select[name="billing.country"]').on('change', this.onChangeBillingCountry.bind(this));
+    }
+
   };
 
   _proto.initActiveTicketSelection = function initActiveTicketSelection() {
@@ -806,6 +816,27 @@ var EventRegistrationForm = /*#__PURE__*/function () {
       this.root.find('.wsb-ticket__tax').removeAttr('style');
     }
   };
+
+  _proto.onChangeBillingCountry = function onChangeBillingCountry(e) {
+    const euCountries = wsb_event.eu_countries;
+    const country = jQuery(e.target).val();
+    logInfo('change country '+country);
+    if (euCountries.includes(country)) {
+      if (!this.billingEU) {
+        this.applyTaxExempt(false);
+        this.root.find('#wsb-form__billing-message')
+        .text('Additional VAT has been applied. See ticket section for more details.').show(150).delay(5000).hide(150);
+      }
+      this.billingEU = true;
+    } else {
+      if (this.billingEU) {
+        this.taxWidget.reset();
+        this.root.find('#wsb-form__billing-message').text('VAT has been excluded').show(150).delay(5000).hide(150);
+      }
+      this.applyTaxExempt(true);
+      this.billingEU = false;
+    }
+  }
 
   EventRegistrationForm.plugin = function plugin(selector) {
     var $elems = jQuery(selector);

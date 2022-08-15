@@ -1,4 +1,29 @@
 .wsb-content .wsb-event-page .wsb-header h1,
 .wsb-content .wsb-registration-page .wsb-header h1 {
-    display: none;
+  display: none;
+}
+
+.wsb-content .wsb-form__billing-message {
+  display: none;
+  margin-left: 160px;
+  margin-top: 5px;
+  border-left: solid 2px orange;
+  background-color: #FFF9DB;
+  border-radius: 2px;
+  padding: 10px 20px;
+
+}
+
+.wsb-content .wsb-form__billing-message + .wsb-form__field {
+  margin-top: 20px;
+}
+
+@media (max-width: 800px) {
+  .wsb-content .wsb-form__billing-message {
+    margin-left: 0px;
+  }
+
+  .wsb-content .wsb-form__billing-message + .wsb-form__field {
+    margin-top: 10px;
+  }
 }

@@ -275,4 +275,14 @@ class Countries {
 
 		return $countries;
 	}
+
+	/**
+	 * Returns a list of EU country codes
+	 *
+	 * @return array
+	 */
+	public static function getEUCodes() {
+		return  array('BE','BG','CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY',
+			'LV','LT','LU','HU','MT','NL','AT','PL','PT','RO','SI','SK','FI','SE');
+	}
 }

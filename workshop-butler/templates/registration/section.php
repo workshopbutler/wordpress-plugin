@@ -37,7 +37,7 @@ if ( 'ticket' === $section->get_id() ) { ?>
 		</div>
 	</section>
 <?php } else { ?>
-	<section>
+	<section class="wsb-form-section__<?php echo esc_attr( $section->get_id() ); ?>">
 		<?php if ( 'footer' !== $section->get_id() ) { ?>
 			<div class="wsb-form__section-title">
 				<?php echo esc_html__( strtolower( 'form.section.' . $section->get_id() ), 'wsbintegration' ); ?>

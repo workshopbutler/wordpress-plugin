@@ -30,6 +30,9 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 	}
 	?>
 </div>
+<?php if ( 'billing.country' === $field->get_name() ) { ?>
+	<div id="wsb-form__billing-message" class="wsb-form__billing-message"></div>
+<?php } ?>
 <?php if ( 'ticket' === $field->get_type() && $field->tickets->validate_tax) { ?>
 <div class="wsb-form__field" style="display:none;" id="wsb-form-tax-widget">
 	<label class="wsb-label"><?php echo esc_html__( 'tax.widget.tax_id', 'wsbintegration' ); ?></label>

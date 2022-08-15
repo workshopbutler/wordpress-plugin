@@ -39,7 +39,7 @@ $next_loop = false;
 					<?php echo esc_html( $ticket->name ); ?>
 					<?php if ( $field->tickets->excluded_tax && $ticket->price->tax > 0 ) { ?>
 						<span class="wsb-ticket__tax">
-						+ <? printf( esc_html__( 'tax.amount', 'wsbintegration' ), Formatter::format( $ticket, 'tax' ) ); ?>
+						+ <?php printf( esc_html__( 'tax.amount', 'wsbintegration' ), Formatter::format( $ticket, 'tax' ) ); ?>
 						</span>
 					<?php } ?>
 				</label>
