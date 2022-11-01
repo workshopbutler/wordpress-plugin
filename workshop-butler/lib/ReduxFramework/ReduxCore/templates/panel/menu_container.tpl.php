@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 /**
  * The template for the menu container of the panel.
  *

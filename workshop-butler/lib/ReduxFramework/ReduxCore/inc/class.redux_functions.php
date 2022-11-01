@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     /**
      * Redux Framework Private Functions Container Class
@@ -13,7 +13,7 @@
     }
 
 // Don't duplicate me!
-    if ( ! class_exists( 'Redux_Functions' ) ) {
+    if ( ! class_exists( 'WorkshopButler\Redux_Functions' ) ) {
 
         /**
          * Redux Functions Class
@@ -202,7 +202,7 @@
                 //if ( 1 == strcmp( $ver, $curVer ) ) {
                 if ( version_compare( $ver, $curVer, '>' ) ) {
                     $msg = '<strong>A new build of Redux is now available!</strong><br/><br/>Your version:  <strong>' . $curVer . '</strong><br/>New version:  <strong><span style="color: red;">' . $ver . '</span></strong><br/><br/><em>If you are not a developer, your theme/plugin author shipped with <code>dev_mode</code> on. Contact them to fix it, but in the meantime you can use our <a href="' . 'https://' . 'wordpress.org/plugins/redux-developer-mode-disabler/" target="_blank">dev_mode disabler</a>.</em><br /><br /><a href="' . 'https://' . 'github.com/ReduxFramework/redux-framework">Get it now</a>&nbsp;&nbsp;|';
-                    
+
                     $data = array(
                         'parent'    => $parent,
                         'type'      => 'updated',
@@ -223,7 +223,7 @@
                 }
 
                 //if ( isset( $redux->args['dev_mode'] ) && $redux->args['dev_mode'] == true && ! ( isset( $redux->args['forced_dev_mode_off'] ) && $redux->args['forced_dev_mode_off'] == true ) ) {
-                if ( isset( $redux->args['dev_mode'] ) && $redux->args['dev_mode'] == true  ) {                
+                if ( isset( $redux->args['dev_mode'] ) && $redux->args['dev_mode'] == true  ) {
                         update_user_option( get_current_user_id(), 'r_tru_u_x', array(
                             'id'      => '',
                             'expires' => 60 * 60 * 24
@@ -253,17 +253,17 @@
 
                 return $name;
             }
-            
+
             public static function bub($fname, $opt_name){
                 $name = apply_filters('redux/' . $opt_name . '/aNF_filter', $fname);
 
                 return $name;
             }
-            
+
             public static function yo($fname, $opt_name){
                 $name = apply_filters('redux/' . $opt_name . '/aNFM_filter', $fname);
 
                 return $name;
-            }            
+            }
         }
     }

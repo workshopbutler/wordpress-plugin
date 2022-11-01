@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Don't duplicate me!
-if ( ! class_exists( 'ReduxFramework_image_select' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_image_select' ) ) {
 
     /**
      * Main ReduxFramework_image_select class
@@ -80,8 +80,8 @@ if ( ! class_exists( 'ReduxFramework_image_select' ) ) {
 
                     if ( ! isset( $v['class'] ) ) {
                         $v['class'] = '';
-                    }                    
-                    
+                    }
+
                     $style = '';
 
                     if ( ! empty( $this->field['width'] ) ) {
@@ -107,9 +107,9 @@ if ( ! class_exists( 'ReduxFramework_image_select' ) ) {
                     }
 
                     $theValue = $k;
-                    
+
                     $selected = ( checked( $this->value, $theValue, false ) != '' ) ? ' redux-image-select-selected' : '';
-                    
+
                     if ( ! empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {
                         $theValue = $v['img'];
                     }

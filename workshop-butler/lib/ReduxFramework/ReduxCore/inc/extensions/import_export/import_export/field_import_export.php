@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
     }
 
 // Don't duplicate me!
-    if ( ! class_exists( 'ReduxFramework_import_export' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework_import_export' ) ) {
 
         /**
          * Main ReduxFramework_import_export class
@@ -93,7 +93,7 @@
                     <p>
                         <a href="javascript:void(0);" id="redux-import-code-button" class="button-secondary">
                             <?php esc_html_e( 'Import from File', 'redux-framework' ); ?>
-                        </a> 
+                        </a>
                         <a href="javascript:void(0);" id="redux-import-link-button" class="button-secondary">
                             <?php esc_html_e( 'Import from URL', 'redux-framework' ) ?>
                         </a>

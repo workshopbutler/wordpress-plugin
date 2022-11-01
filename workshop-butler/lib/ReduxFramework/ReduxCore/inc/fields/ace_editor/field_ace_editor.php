@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@
     }
 
 // Don't duplicate me!
-    if ( ! class_exists( 'ReduxFramework_ace_editor' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework_ace_editor' ) ) {
         class ReduxFramework_ace_editor {
 
             /**
@@ -76,7 +76,7 @@
 
                 ?>
                 <div class="ace-wrapper">
-                    <input type="hidden" 
+                    <input type="hidden"
                         class="localize_data"
                         value="<?php echo htmlspecialchars( json_encode( $params ) ); ?>"
                     />

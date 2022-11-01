@@ -1,11 +1,11 @@
-<?php
+<?php namespace WorkshopButler;
 
 // Exit if accessed directly
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
 
-    if ( ! class_exists( 'ReduxFramework_sorter' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework_sorter' ) ) {
         class ReduxFramework_sorter {
 
             /**

@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
     /**
      * Redux ThemeCheck
      *
@@ -16,7 +16,7 @@
      * @author  Dovy <dovy@redux.io>
      */
     // Don't duplicate me!
-    if ( ! class_exists( 'Redux_ThemeCheck' ) ) {
+    if ( ! class_exists( 'WorkshopButler\Redux_ThemeCheck' ) ) {
         class Redux_ThemeCheck {
 
             /**
@@ -66,7 +66,7 @@
              */
             private function __construct() {
 
-                if ( ! class_exists( 'ThemeCheckMain' ) ) {
+                if ( ! class_exists( 'WorkshopButler\ThemeCheckMain' ) ) {
                     return;
                 }
 

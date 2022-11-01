@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
     /**
      * The template for the header sticky bar.
      * Override this template by specifying the path where it is stored (templates_path) in your Redux config.
@@ -17,12 +17,12 @@
 
         <div class="redux-action_bar">
             <span class="spinner"></span>
-<?php 
+<?php
             if ( false === $this->parent->args['hide_save'] ) {
                 submit_button( esc_attr__( 'Save Changes', 'redux-framework' ), 'primary', 'redux_save_sticky', false );
                 echo '&nbsp';
             }
-            
+
             if ( false === $this->parent->args['hide_reset'] ) {
                 submit_button( esc_attr__( 'Reset Section', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults-section]', false, array( 'id' => 'redux-defaults-section-sticky' ) );
                 echo '&nbsp';

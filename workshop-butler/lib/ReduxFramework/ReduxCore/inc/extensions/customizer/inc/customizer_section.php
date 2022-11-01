@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
 
     /**
@@ -146,5 +146,3 @@
         }
 
     }
-
-

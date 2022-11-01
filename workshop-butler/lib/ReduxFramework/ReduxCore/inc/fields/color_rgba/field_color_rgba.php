@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
@@ -24,7 +24,7 @@
     }
 
     // Don't duplicate me!
-    if ( ! class_exists( 'ReduxFramework_color_rgba' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework_color_rgba' ) ) {
 
         /**
          * Main ReduxFramework_color_rgba class
@@ -99,8 +99,8 @@
                 $field_id = $this->field['id'];
 
                 // Color picker container
-                echo '<div 
-                      class="redux-color-rgba-container ' . $this->field['class'] . '" 
+                echo '<div
+                      class="redux-color-rgba-container ' . $this->field['class'] . '"
                       data-id="' . $field_id . '"
                       data-show-input="' . $this->field['options']['show_input'] . '"
                       data-show-initial="' . $this->field['options']['show_initial'] . '"

@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -20,18 +20,18 @@
         exit;
     }
 
-    if ( ! class_exists( 'ReduxFrameworkInstances' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFrameworkInstances' ) ) {
         // Instance Container
         require_once dirname( __FILE__ ) . '/inc/class.redux_instances.php';
         require_once dirname( __FILE__ ) . '/inc/lib.redux_instances.php';
     }
 
-    if ( class_exists( 'ReduxFrameworkInstances' ) ) {
-        add_action( 'redux/init', 'ReduxFrameworkInstances::get_instance' );
+    if ( class_exists( 'WorkshopButler\ReduxFrameworkInstances' ) ) {
+        add_action( 'redux/init', 'WorkshopButler\ReduxFrameworkInstances::get_instance' );
     }
 
     // Don't duplicate me!
-    if ( ! class_exists( 'ReduxFramework' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework' ) ) {
 
         // Redux CDN class
         require_once dirname( __FILE__ ) . '/inc/class.redux_cdn.php';
@@ -54,9 +54,6 @@
 
         // ThemeCheck checks
         require_once dirname( __FILE__ ) . '/inc/themecheck/class.redux_themecheck.php';
-
-        // Welcome
-        require_once dirname( __FILE__ ) . '/inc/welcome/welcome.php';
 
         /**
          * Main ReduxFramework class
@@ -180,7 +177,7 @@
             public $omit_admin_items = false;
             public $apiHasRun = false;
             public $transients;
-            
+
             /**
              * Class Constructor. Defines the args for the theme options class
              *
@@ -287,9 +284,9 @@
                             $this->args['page_slug'] = str_replace( '-', '_', $this->args['opt_name'] );
                         }
                     }
-                    
+
                     $this->change_demo_defaults();
-                    
+
                     // Get rid of extra_tabs! Not needed.
                     if ( is_array( $extra_tabs ) && ! empty ( $extra_tabs ) ) {
                         foreach ( $extra_tabs as $tab ) {
@@ -1611,7 +1608,7 @@
                         /** @noinspection PhpUnusedLocalVariableInspection */
                         foreach ( $section['fields'] as $fieldk => $field ) {
                             if ( isset ( $field['type'] ) && $field['type'] != "callback" ) {
-                                $field_class = "ReduxFramework_{$field['type']}";
+                                $field_class = "WorkshopButler\ReduxFramework_{$field['type']}";
                                 if ( ! class_exists( $field_class ) ) {
 
                                     if ( ! isset ( $field['compiler'] ) ) {
@@ -2443,7 +2440,7 @@
                         continue;
                     }
 
-                    $extension_class = 'ReduxFramework_Extension_' . $folder;
+                    $extension_class = 'WorkshopButler\ReduxFramework_Extension_' . $folder;
 
                     /**
                      * filter 'redux-extensionclass-load'
@@ -3006,7 +3003,7 @@
                             }
 
                             if ( isset ( $field['validate'] ) ) {
-                                $validate = 'Redux_Validation_' . $field['validate'];
+                                $validate = 'WorkshopButler\Redux_Validation_' . $field['validate'];
 
                                 if ( ! class_exists( $validate ) ) {
                                     /**
@@ -3390,7 +3387,7 @@
                         return;
                     }
 
-                    $field_class = "ReduxFramework_{$field['type']}";
+                    $field_class = "WorkshopButler\ReduxFramework_{$field['type']}";
 
                     if ( ! class_exists( $field_class ) ) {
                         //                    $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
@@ -4027,7 +4024,7 @@
                             'id'        => 'admin_config',
                             'dismiss'   => true
                         );
-                        
+
                         Redux_Admin_Notices::set_notice($data);
                     }
                 }
@@ -4041,7 +4038,7 @@
                             'id'        => 'share_config',
                             'dismiss'   => true
                         );
-                        
+
                         Redux_Admin_Notices::set_notice($data);
                     }
                 }
@@ -4120,7 +4117,7 @@
              */
             public static function user_can( $user, $capabilities, $object_id = null ) {
                 static $depth = 0;
-                
+
                 if ( $depth >= 30 ) {
                     return false;
                 }
@@ -4250,5 +4247,5 @@
          */
         ReduxFramework::init();
         do_action( 'redux/init' );
-        
-    } // class_exists('ReduxFramework')
+
+    } // class_exists('WorkshopButler\ReduxFramework')

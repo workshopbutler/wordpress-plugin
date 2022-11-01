@@ -1,11 +1,11 @@
-<?php
+<?php namespace WorkshopButler;
 
 // Exit if accessed directly
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
 
-    if ( ! class_exists( 'ReduxFramework_radio' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework_radio' ) ) {
         class ReduxFramework_radio {
 
             /**

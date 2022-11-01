@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Don't duplicate me!
-if ( ! class_exists( 'ReduxFramework_media' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_media' ) ) {
 
     /**
      * Main ReduxFramework_media class
@@ -229,7 +229,7 @@ if ( ! class_exists( 'ReduxFramework_media' ) ) {
             } else {
                 wp_enqueue_script( 'media-upload' );
             }
-            
+
             wp_enqueue_script(
                 'redux-field-media-js',
                 ReduxFramework::$_url . 'assets/js/media/media' . Redux_Functions::isMin() . '.js',

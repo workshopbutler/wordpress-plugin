@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
     /**
      * The template for the main panel container.
      * Override this template by specifying the path where it is stored (templates_path) in your Redux config.
@@ -14,9 +14,9 @@
 ?>
 <div class="redux-container<?php echo esc_attr( $expanded ); ?>">
     <?php $action = ( $this->parent->args['database'] == "network" && $this->parent->args['network_admin'] && is_network_admin() ? './edit.php?action=redux_' . $this->parent->args['opt_name'] : './options.php' ) ?>
-    <form method="post" 
-          action="<?php echo esc_attr($action); ?>" 
-          data-nonce="<?php echo esc_attr($nonce); ?>" 
+    <form method="post"
+          action="<?php echo esc_attr($action); ?>"
+          data-nonce="<?php echo esc_attr($nonce); ?>"
           enctype="multipart/form-data"
           id="redux-form-wrapper">
         <?php // $this->parent->args['opt_name'] is sanitized in the Framework class, no need to re-sanitize it. ?>
@@ -29,7 +29,7 @@
             value=""/>
         <?php // $this->parent->args['opt_name'] is sanitized in the Framework class, no need to re-sanitize it. ?>
         <?php if ( ! empty( $this->parent->no_panel ) ) { ?>
-            <input type="hidden" 
+            <input type="hidden"
                 name="<?php echo $this->parent->args['opt_name']; ?>[redux-no_panel]"
                 value="<?php echo esc_attr(implode( '|', $this->parent->no_panel )); ?>"
             />
@@ -42,8 +42,8 @@
             $this->parent->options['last_tab'] = ( isset( $_GET['tab'] ) && ! isset( $this->parent->transients['last_save_mode'] ) ) ? esc_attr( $_GET['tab'] ) : '';
         ?>
         <?php // $this->parent->args['opt_name'] is sanitized in the Framework class, no need to re-sanitize it. ?>
-        <input type="hidden" 
-               id="last_tab" 
+        <input type="hidden"
+               id="last_tab"
                name="<?php echo $this->parent->args['opt_name']; ?>[last_tab]"
                value="<?php echo esc_attr( $this->parent->options['last_tab'] ); ?>"
         />

@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     class Redux_P {
 
@@ -300,4 +300,3 @@
     }
 
     new Redux_P();
-

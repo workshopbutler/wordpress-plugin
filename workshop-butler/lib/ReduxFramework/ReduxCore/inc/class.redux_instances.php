@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     /**
      * Redux Framework Instance Container Class
@@ -24,12 +24,12 @@
          */
         private static $instances;
 
-        
+
         /**
          * @var array
          */
-        private $options = array();        
-        
+        private $options = array();
+
         /**
          * Get Instance
          * Get ReduxFrameworkInstances instance
@@ -69,7 +69,7 @@
             add_action( 'wp_ajax_nopriv_' . $hash, array( $this, 'tracking_arg' ) );
             add_action( 'wp_ajax_' . $hash, array( $this, 'tracking_arg' ) );
 
-            if (!class_exists('Redux_Tracking') || !method_exists('Redux_Tracking', 'trackingObject')) {
+            if (!class_exists('WorkshopButler\Redux_Tracking') || !method_exists('WorkshopButler\Redux_Tracking', 'trackingObject')) {
                 $hash = md5( md5( AUTH_KEY . SECURE_AUTH_KEY . '-redux' ) . '-support' );
                 add_action( 'wp_ajax_nopriv_' . $hash, array( $this, 'support_args' ) );
                 add_action( 'wp_ajax_' . $hash, array( $this, 'support_args' ) );
@@ -112,7 +112,7 @@
             $instances = ReduxFrameworkInstances::get_all_instances();
 
             $array = array();
-            
+
             if ( isset( $_REQUEST['i'] ) && ! empty( $_REQUEST['i'] ) ) {
                 if ( is_array( $instances ) && ! empty( $instances ) ) {
                     foreach ( $instances as $opt_name => $data ) {
@@ -134,11 +134,11 @@
                             }
                         }
                     }
-                    
+
                     if ( isset( $array->import_export ) ) {
                         unset( $array->import_export );
                     }
-                    
+
                     if ( isset( $array->debug ) ) {
                         unset( $array->debug );
                     }

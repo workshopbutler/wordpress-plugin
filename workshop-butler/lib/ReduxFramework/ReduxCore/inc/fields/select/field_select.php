@@ -1,11 +1,11 @@
-<?php
+<?php namespace WorkshopButler;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'ReduxFramework_select' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_select' ) ) {
     class ReduxFramework_select {
 
         /**
@@ -96,7 +96,7 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
                     foreach ( $this->value as $value ) {
                         $this->field['options'][ $value ] = $origOption[ $value ];
                     }
-            
+
                     if ( count( $this->field['options'] ) < count( $origOption ) ) {
                         foreach ( $origOption as $key => $value ) {
                             if ( ! in_array( $key, $this->field['options'] ) ) {
@@ -142,7 +142,7 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
                 $selected = selected( $this->value, $id, false );
             }
 
-            echo '<option value="' . $id . '"' . $selected . '>' . $value . '</option>';                
+            echo '<option value="' . $id . '"' . $selected . '>' . $value . '</option>';
         }
 
         /**
@@ -157,7 +157,7 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
             if (isset($this->field['sortable']) && $this->field['sortable']) {
                 wp_enqueue_script('jquery-ui-sortable');
             }
-            
+
             wp_enqueue_script(
                 'redux-field-select-js',
                 ReduxFramework::$_url . 'inc/fields/select/field_select' . Redux_Functions::isMin() . '.js',

@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
@@ -237,19 +237,19 @@ if ( !class_exists ( 'ReduxFramework_slides' ) ) {
             } else {
                 wp_enqueue_script( 'media-upload' );
             }
-                
+
             if ($this->parent->args['dev_mode']){
                 wp_enqueue_style ('redux-field-media-css');
-                
+
                 wp_enqueue_style (
-                    'redux-field-slides-css', 
-                    ReduxFramework::$_url . 'inc/fields/slides/field_slides.css', 
+                    'redux-field-slides-css',
+                    ReduxFramework::$_url . 'inc/fields/slides/field_slides.css',
                     array(),
-                    time (), 
+                    time (),
                     'all'
                 );
             }
-            
+
             wp_enqueue_script(
                 'redux-field-media-js',
                 ReduxFramework::$_url . 'assets/js/media/media' . Redux_Functions::isMin() . '.js',
@@ -259,10 +259,10 @@ if ( !class_exists ( 'ReduxFramework_slides' ) ) {
             );
 
             wp_enqueue_script (
-                'redux-field-slides-js', 
-                ReduxFramework::$_url . 'inc/fields/slides/field_slides' . Redux_Functions::isMin () . '.js', 
+                'redux-field-slides-js',
+                ReduxFramework::$_url . 'inc/fields/slides/field_slides' . Redux_Functions::isMin () . '.js',
                 array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'jquery-ui-sortable', 'redux-field-media-js' ),
-                time (), 
+                time (),
                 true
             );
         }

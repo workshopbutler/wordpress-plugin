@@ -1,6 +1,6 @@
-<?php
+<?php namespace WorkshopButler;
 
-    if ( ! class_exists( 'Redux_Validation_str_replace' ) ) {
+    if ( ! class_exists( 'WorkshopButler\Redux_Validation_str_replace' ) ) {
         class Redux_Validation_str_replace {
 
             /**

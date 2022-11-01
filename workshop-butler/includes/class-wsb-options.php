@@ -105,7 +105,7 @@ class WSB_Options {
 	 * @since  2.0.0
 	 */
 	public static function get_option( $name, $default = false ) {
-		$option = \Redux::getOption( self::PLUGIN_SETTINGS, $name );
+		$option = Redux::getOption( self::PLUGIN_SETTINGS, $name );
 		if ( null === $option ) {
 			return $default;
 		}
@@ -139,7 +139,7 @@ class WSB_Options {
 	 * @since 2.0.0
 	 */
 	public static function set_option( $name, $value ) {
-		\Redux::setOption( self::PLUGIN_SETTINGS, $name, $value );
+		Redux::setOption( self::PLUGIN_SETTINGS, $name, $value );
 	}
 
 	/**
@@ -185,7 +185,7 @@ class WSB_Options {
 	 * @since  2.0.0
 	 */
 	public function get( $name, $default = null ) {
-		$option = \Redux::getOption( self::PLUGIN_SETTINGS, $name );
+		$option = Redux::getOption( self::PLUGIN_SETTINGS, $name );
 		if ( null === $option ) {
 			return $default;
 		}

@@ -1,6 +1,6 @@
-<?php
+<?php namespace WorkshopButler;
 
-    if ( ! class_exists( 'Redux_Customizer_Control_rAds' ) && ! class_exists( 'Redux_Customizer_section_rAds' ) ) {
+    if ( ! class_exists( 'WorkshopButler\Redux_Customizer_Control_rAds' ) && ! class_exists( 'WorkshopButler\Redux_Customizer_section_rAds' ) ) {
         /**
          * Customizer section representing widget area (sidebar).
          *

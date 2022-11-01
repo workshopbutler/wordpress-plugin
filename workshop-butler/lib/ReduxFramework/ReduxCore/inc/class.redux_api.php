@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     /**
      * Redux Framework API Class
@@ -15,7 +15,7 @@
     }
 
     // Don't duplicate me!
-    if ( ! class_exists( 'Redux' ) ) {
+    if ( ! class_exists( 'WorkshopButler\Redux' ) ) {
 
         /**
          * Redux API Class
@@ -44,15 +44,15 @@
             }
 
             public static function load() {
-                add_action( 'after_setup_theme', array( 'Redux', 'createRedux' ));
-                add_action( 'init', array( 'Redux', 'createRedux' ));
-                add_action( 'switch_theme', array( 'Redux', 'createRedux' ));
+                add_action( 'after_setup_theme', array( 'WorkshopButler\Redux', 'createRedux' ));
+                add_action( 'init', array( 'WorkshopButler\Redux', 'createRedux' ));
+                add_action( 'switch_theme', array( 'WorkshopButler\Redux', 'createRedux' ));
             }
 
             public static function init( $opt_name = "" ) {
                 if ( ! empty( $opt_name ) ) {
                     self::loadRedux( $opt_name );
-                    remove_action( 'setup_theme', array( 'Redux', 'createRedux' ) );
+                    remove_action( 'setup_theme', array( 'WorkshopButler\Redux', 'createRedux' ) );
                 }
             }
 
@@ -72,7 +72,7 @@
                             //if (isset($ReduxFramework->extensions[ $name ]->min_redux_version)) {
                                 //var_dump($ReduxFramework->extensions[ $name ]->min_redux_version);
                             //}
-                                
+
                             } else {
                                 echo '<div id="message" class="error"><p>No class named <strong>' . $extension['class'] . '</strong> exists. Please verify your extension path.</p></div>';
                             }
@@ -109,14 +109,14 @@
 
                 $args     = self::constructArgs( $opt_name );
                 $sections = self::constructSections( $opt_name );
-                if ( ! class_exists( 'ReduxFramework' ) ) {
+                if ( ! class_exists( 'WorkshopButler\ReduxFramework' ) ) {
                     echo '<div id="message" class="error"><p>Redux Framework is <strong>not installed</strong>. Please install it.</p></div>';
 
                     return;
                 }
 
                 if ( isset( self::$uses_extensions[ $opt_name ] ) && ! empty( self::$uses_extensions[ $opt_name ] ) ) {
-                    add_action( "redux/extensions/{$opt_name}/before", array( 'Redux', 'loadExtensions' ), 0 );
+                    add_action( "redux/extensions/{$opt_name}/before", array( 'WorkshopButler\Redux', 'loadExtensions' ), 0 );
                 }
 
                 $redux                   = new ReduxFramework( $sections, $args );
@@ -535,7 +535,7 @@
                     self::$extensions[ $name ][ $version ] = isset( self::$extensions[ $name ][ $version ] ) ? self::$extensions[ $name ][ $version ] : $class_file;
 
                     $api_check = str_replace( 'extension_' . $name, $name . '_api', $class_file );
-                    if ( file_exists( $api_check ) && ! class_exists( 'Redux_' . ucfirst( $name ) ) ) {
+                    if ( file_exists( $api_check ) && ! class_exists( 'WorkshopButler\Redux_' . ucfirst( $name ) ) ) {
                         include_once( $api_check );
                     }
                 }

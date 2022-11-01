@@ -1,11 +1,11 @@
-<?php
+<?php namespace WorkshopButler;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'ReduxFramework_switch' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_switch' ) ) {
     class ReduxFramework_switch {
 
         /**
