@@ -1,11 +1,11 @@
-<?php
+<?php namespace WorkshopButler;
 
 
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
 
-    if ( ! class_exists( 'Redux_Filesystem' ) ) {
+    if ( ! class_exists( 'WorkshopButler\Redux_Filesystem' ) ) {
         class Redux_Filesystem {
 
             /**

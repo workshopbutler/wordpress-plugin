@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Don't duplicate me!
-if ( ! class_exists( 'ReduxFramework_multi_text' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_multi_text' ) ) {
 
     /**
      * Main ReduxFramework_multi_text class
@@ -84,12 +84,12 @@ if ( ! class_exists( 'ReduxFramework_multi_text' ) ) {
             if (isset($this->value) && empty($this->value) && $this->show_empty == false) {
                 $the_name = $this->field['name'] . $this->field['name_suffix'];
             }
-            
+
             echo     '<li style="display:none;"><input type="text" id="' . $this->field['id'] . '" name="' . $the_name . '" value="" class="regular-text" /> ';
             echo         '<a' . ' data-id="' . $this->field['id'] . '-ul" href="javascript:void(0);" class="deletion redux-multi-text-remove">' . __( 'Remove', 'redux-framework' ) . '</a>';
             echo     '</li>';
             echo '</ul>';
-            
+
             echo '<span style="clear:both;display:block;height:0;" /></span>';
             $this->field['add_number'] = ( isset( $this->field['add_number'] ) && is_numeric( $this->field['add_number'] ) ) ? $this->field['add_number'] : 1;
             echo '<a href="javascript:void(0);" class="button button-primary redux-multi-text-add" data-add_number="' . $this->field['add_number'] . '" data-id="' . $this->field['id'] . '-ul" data-name="' . $this->field['name'] . $this->field['name_suffix'] . '">' . $this->add_text . '</a><br/>';

@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Don't duplicate me!
-if ( ! class_exists( 'ReduxFramework_color' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_color' ) ) {
 
     /**
      * Main ReduxFramework_color class
@@ -86,9 +86,9 @@ if ( ! class_exists( 'ReduxFramework_color' ) ) {
             if ($this->parent->args['dev_mode']) {
                 wp_enqueue_style( 'redux-color-picker-css' );
             }
-            
+
             wp_enqueue_style( 'wp-color-picker' );
-            
+
             wp_enqueue_script(
                 'redux-field-color-js',
                 ReduxFramework::$_url . 'inc/fields/color/field_color' . Redux_Functions::isMin() . '.js',

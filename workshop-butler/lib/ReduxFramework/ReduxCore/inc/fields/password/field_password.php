@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     /**
      * Class ReduxFramework_password
@@ -9,7 +9,7 @@
         exit;
     }
 
-    if ( ! class_exists( 'ReduxFramework_password' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework_password' ) ) {
         class ReduxFramework_password {
 
             /**

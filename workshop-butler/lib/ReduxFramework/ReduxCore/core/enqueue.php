@@ -1,10 +1,10 @@
-<?php
+<?php namespace WorkshopButler;
 
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
 
-    if ( ! class_exists( 'reduxCoreEnqueue' ) ) {
+    if ( ! class_exists( 'WorkshopButler\reduxCoreEnqueue' ) ) {
         class reduxCoreEnqueue {
             public $parent = null;
 
@@ -32,10 +32,10 @@
 
                 $this->enqueue_fields();
 
-                add_filter("redux/{$this->parent->args['opt_name']}/localize", array('Redux_Helpers', 'localize'));
+                add_filter("redux/{$this->parent->args['opt_name']}/localize", array('WorkshopButler\Redux_Helpers', 'localize'));
 
                 $this->set_localized_data();
-                
+
                 /**
                  * action 'redux-enqueue-{opt_name}'
                  *
@@ -95,7 +95,7 @@
                 //if ($this->parent->args['dev_mode']) {
                     $css_file = 'redux-spectrum.css';
                 //}
-                
+
                 wp_register_style(
                     'redux-spectrum-css',
                     ReduxFramework::$_url . 'assets/css/vendor/spectrum/' . $css_file,
@@ -209,15 +209,15 @@
                 //*****************************************************************
                 // Select2 JS
                 //*****************************************************************
-                
+
                 // JWp6 plugin giving us problems.  They need to update.
                 if (  wp_script_is ( 'jquerySelect2' )) {
                     wp_deregister_script( 'jquerySelect2' );
                     wp_dequeue_script('jquerySelect2');
                     wp_dequeue_style('jquerySelect2Style');
                 }
-                
-                
+
+
                 Redux_CDN::register_script(
                     'select2-js',
                     '//cdn.jsdelivr.net/select2/3.5.2/select2' . $this->min . '.js',
@@ -233,7 +233,7 @@
                 if ($this->parent->args['dev_mode']) {
                     $js_file = 'jquery.qtip.js';
                 }
-                
+
                 wp_enqueue_script(
                     'qtip-js',
                     ReduxFramework::$_url . 'assets/js/vendor/qtip/' . $js_file,
@@ -249,15 +249,15 @@
                 if ($this->parent->args['dev_mode']) {
                     $js_file = 'redux-spectrum.js';
                 }
-                
+
                 wp_register_script(
                     'redux-spectrum-js',
                     ReduxFramework::$_url . 'assets/js/vendor/spectrum/' . $js_file,
                     array( 'jquery' ),
                     '1.3.3',
                     true
-                );                
-                
+                );
+
                 $depArray = array( 'jquery' );
 
                 //*****************************************************************
@@ -299,7 +299,7 @@
                 // if( isset( $field['type'] ) && $field['type'] != 'callback' ) {
                 if ( isset( $field['type'] ) && $field['type'] != 'callback' ) {
 
-                    $field_class = 'ReduxFramework_' . $field['type'];
+                    $field_class = 'WorkshopButler\ReduxFramework_' . $field['type'];
 
                     /**
                      * Field class file

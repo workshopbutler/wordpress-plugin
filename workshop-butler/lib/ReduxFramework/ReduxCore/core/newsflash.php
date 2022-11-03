@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     // Added by KP on March 31, 2015.  So, if something is buggered, it's probably my bad!  ;-)
 
@@ -6,7 +6,7 @@
         exit;
     }
 
-    if ( ! class_exists( 'reduxNewsflash' ) ) {
+    if ( ! class_exists( 'WorkshopButler\reduxNewsflash' ) ) {
         class reduxNewsflash {
             private $parent = null;
             private $notice_data = '';
@@ -50,12 +50,12 @@
             private function bub() {
                 $this->notice_data = '';
             }
-            
+
             private function get_notice_json() {
 
                 // get notice data from server
                 $data = @wp_remote_get( $this->server_file, array( 'sslverify' => false ) );
-                
+
                 if ( isset( $data ) && ! empty( $data ) && ! is_wp_error( $data ) && $data['response']['code'] == 200 ) {
                     $data = $data['body'];
                     // if some data exists

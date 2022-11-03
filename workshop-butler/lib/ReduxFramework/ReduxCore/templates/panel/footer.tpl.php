@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
     /**
      * The template for the panel footer area.
      * Override this template by specifying the path where it is stored (templates_path) in your Redux config.
@@ -11,8 +11,8 @@
 <div id="redux-sticky-padder" style="display: none;">&nbsp;</div>
 <div id="redux-footer-sticky">
     <div id="redux-footer">
-<?php 
-        if ( isset( $this->parent->args['share_icons'] )) { 
+<?php
+        if ( isset( $this->parent->args['share_icons'] )) {
 
             $skip_icons = false;
             if (!$this->parent->args['dev_mode'] && $this->parent->omit_share_icons ) {
@@ -20,12 +20,12 @@
             }
 ?>
             <div id="redux-share">
-<?php 
+<?php
                 foreach ( $this->parent->args['share_icons'] as $link ) {
                     if ($skip_icons) {
                         continue;
                     }
-                    
+
                     // SHIM, use URL now
                     if ( isset( $link['link'] ) && ! empty( $link['link'] ) ) {
                         $link['url'] = $link['link'];
@@ -52,7 +52,7 @@
 
         <div class="redux-action_bar">
             <span class="spinner"></span>
-<?php 
+<?php
             if ( false === $this->parent->args['hide_save'] ) {
                 submit_button( __( 'Save Changes', 'redux-framework' ), 'primary', 'redux_save', false );
                 echo '&nbsp';
@@ -62,7 +62,7 @@
                 submit_button( __( 'Reset Section', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults-section]', false, array( 'id' => 'redux-defaults-section' ) );
                 echo '&nbsp';
                 submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults]', false, array( 'id' => 'redux-defaults' ) );
-            } 
+            }
 ?>
         </div>
 

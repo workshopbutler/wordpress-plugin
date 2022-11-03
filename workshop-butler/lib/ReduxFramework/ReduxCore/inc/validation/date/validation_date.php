@@ -1,6 +1,6 @@
-<?php
+<?php namespace WorkshopButler;
 
-    if ( ! class_exists( 'Redux_Validation_date' ) ) {
+    if ( ! class_exists( 'WorkshopButler\Redux_Validation_date' ) ) {
         class Redux_Validation_date {
 
             /**

@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Don't duplicate me!
-if ( ! class_exists( 'ReduxFramework_color_gradient' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_color_gradient' ) ) {
 
     /**
      * Main ReduxFramework_color_gradient class
@@ -103,7 +103,7 @@ if ( ! class_exists( 'ReduxFramework_color_gradient' ) ) {
          */
         public function enqueue() {
             wp_enqueue_style( 'wp-color-picker' );
-            
+
             wp_enqueue_script(
                 'redux-field-color-gradient-js',
                 ReduxFramework::$_url . 'inc/fields/color_gradient/field_color_gradient' . Redux_Functions::isMin() . '.js',
@@ -114,7 +114,7 @@ if ( ! class_exists( 'ReduxFramework_color_gradient' ) ) {
 
             if ($this->parent->args['dev_mode']) {
                 wp_enqueue_style( 'redux-color-picker-css' );
-                
+
                 wp_enqueue_style(
                     'redux-field-color_gradient-css',
                     ReduxFramework::$_url . 'inc/fields/color_gradient/field_color_gradient.css',

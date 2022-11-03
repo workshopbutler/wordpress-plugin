@@ -1,6 +1,6 @@
-<?php
+<?php namespace WorkshopButler;
 
-    if ( ! class_exists( 'Redux_Validation_no_html' ) ) {
+    if ( ! class_exists( 'WorkshopButler\Redux_Validation_no_html' ) ) {
         class Redux_Validation_no_html {
 
             /**

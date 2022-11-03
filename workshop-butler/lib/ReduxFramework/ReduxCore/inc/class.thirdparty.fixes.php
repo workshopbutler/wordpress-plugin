@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
 // Exit if accessed directly
     if ( ! defined( 'ABSPATH' ) ) {

@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@
     }
 
 // Don't duplicate me!
-    if ( ! class_exists( 'ReduxFramework_button_set' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework_button_set' ) ) {
 
         /**
          * Main ReduxFramework_button_set class
@@ -83,24 +83,24 @@
                 }
 
                 $is_multi = (isset( $this->field['multi'] ) && $this->field['multi'] == true) ? true: false;
-                        
+
                 $name = $this->field['name'] . $this->field['name_suffix'];
-                
+
                 // multi => true renders the field multi-selectable (checkbox vs radio)
                 echo '<div class="buttonset ui-buttonset">';
-                
+
                 if ($is_multi) {
                     $s      = '';
-                    
+
                     if (empty($this->value)) {
                         $s = $name;
                     }
 
                     echo '<input type="hidden" data-name="' . $name . '" class="buttonset-empty" name="' . $s . '" value=""/>';
-                    
+
                     $name   = $name . '[]';
                 }
-                
+
                 foreach ( $this->field['options'] as $k => $v ) {
                     $selected = '';
 
@@ -110,7 +110,7 @@
 
                         if ( ! empty( $this->value ) && ! is_array( $this->value ) ) {
                             $this->value = array( $this->value );
-                        } 
+                        }
 
                         if ( is_array( $this->value ) && in_array( $k, $this->value ) ) {
                             $selected = 'checked="checked"';
@@ -128,21 +128,21 @@
                     $the_name   = $name;
                     $data_val   = '';
                     $multi_class = '';
-                    
+
                     if ($is_multi) {
                         $the_val    = '';
                         $the_name   = '';
                         $data_val   = ' data-val="' . $k . '"';
                         $hidden_name = $name;
                         $multi_class = 'multi ';
-                        
+
                         if ($post_value == '') {
                             $hidden_name = '';
                         }
-                        
+
                         echo '<input type="hidden" class="buttonset-check" id="' . $this->field['id'] . '-buttonset' . $k . '-hidden" name="' .$hidden_name . '" value="' . $post_value . '"/>';
                     }
-                    
+
                     echo '<input' . $data_val . ' data-id="' . $this->field['id'] . '" type="' . $type . '" id="' . $this->field['id'] . '-buttonset' . $k . '" name="' . $the_name . '" class="buttonset-item ' . $multi_class . $this->field['class'] . '" value="' . $the_val . '" ' . $selected . '/>';
                     echo '<label for="' . $this->field['id'] . '-buttonset' . $k . '">' . $v . '</label>';
                 }
@@ -159,7 +159,7 @@
              * @return      void
              */
             public function enqueue() {
-                
+
                 if (!wp_script_is ( 'redux-field-button-set-js' )) {
                     wp_enqueue_script(
                         'redux-field-button-set-js',

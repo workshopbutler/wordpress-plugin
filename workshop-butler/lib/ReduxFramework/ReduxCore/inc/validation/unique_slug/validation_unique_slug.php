@@ -1,6 +1,6 @@
-<?php
+<?php namespace WorkshopButler;
 
-    if ( ! class_exists( 'Redux_Validation_unique_slug' ) ) {
+    if ( ! class_exists( 'WorkshopButler\Redux_Validation_unique_slug' ) ) {
         class Redux_Validation_unique_slug {
 
             /**
@@ -59,7 +59,7 @@
                 } else if ( isset( $this->field['flush_permalinks'] ) && $this->field['flush_permalinks'] == true ) {
                     add_action( 'init', array( $this, 'flush_permalinks' ), 99 );
                 }
-                
+
             } //function
 
             function flush_permalinks() {

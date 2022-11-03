@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'ReduxFramework_slider' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_slider' ) ) {
     class ReduxFramework_slider {
 
         /**
@@ -346,7 +346,7 @@ if ( ! class_exists( 'ReduxFramework_slider' ) ) {
             }
 
             // DIV output
-            echo 
+            echo
             '<div
                 class="redux-slider-container ' . $this->field['class'] . '"
                 id="' . $fieldID . '"

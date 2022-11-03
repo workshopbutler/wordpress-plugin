@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@
     }
 
 // Don't duplicate me!
-    if ( ! class_exists( 'ReduxFramework_Extension_options_object' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework_Extension_options_object' ) ) {
 
 
         /**
@@ -63,17 +63,17 @@
 
 
                 self::$theInstance = $this;
-                
+
                 $this->is_field = Redux_Helpers::isFieldInUse($parent, 'options_object');
 
                 if ( !$this->is_field && $this->parent->args['dev_mode'] && $this->parent->args['show_options_object'] ) {
                     $this->add_section();
                 }
-             
+
                 add_filter( 'redux/' . $this->parent->args['opt_name'] . '/field/class/' . $this->field_name, array(
                     &$this,
                     'overload_field_path'
-                ) ); // Adds the local field                
+                ) ); // Adds the local field
             }
 
             public function add_section() {

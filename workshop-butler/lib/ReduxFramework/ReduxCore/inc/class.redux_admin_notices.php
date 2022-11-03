@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     /**
      * Redux Framework Admin Notice Class
@@ -16,7 +16,7 @@
     }
 
     // Don't duplicate me!
-    if ( ! class_exists( 'Redux_Admin_Notices' ) ) {
+    if ( ! class_exists( 'WorkshopButler\Redux_Admin_Notices' ) ) {
 
         /**
          * Redux API Class
@@ -30,14 +30,14 @@
 
             public static function load() {
                 add_action( 'wp_ajax_redux_hide_admin_notice', array(
-                    'Redux_Admin_Notices',
+                    'WorkshopButler\Redux_Admin_Notices',
                     'dismissAdminNoticeAJAX'
                 ) );
             }
 
             public static function set_notice($data) {
                 extract($data);
-                
+
                 $parent->admin_notices[$parent->args['page_slug']][] = array(
                     'type'      => $type,
                     'msg'       => $msg,
@@ -46,7 +46,7 @@
                     'color'     => isset($color) ? $color : '#00A2E3'
                 );
             }
-            
+
             /**
              * adminNotices - Evaluates user dismiss option for displaying admin notices
              *
@@ -56,12 +56,12 @@
              */
             public static function adminNotices($parent, $notices = array() ) {
                 global $current_user, $pagenow, $wp_version;;
-                
+
                 // Check for an active admin notice array
                 if ( ! empty( $notices ) ) {
-                    
+
                     if (isset($_GET) && isset($_GET['page']) && $_GET['page'] == $parent->args['page_slug']) {
-                        
+
                     // Enum admin notices
                     foreach ( $notices[$parent->args['page_slug']] as $notice ) {
 
@@ -85,7 +85,7 @@
                                 // on.
                                 $pageName = '';
                                 $curTab   = '';
-                                
+
                                 if ( $pagenow == 'admin.php' || $pagenow == 'themes.php' ) {
 
                                     // Get the current page.  To avoid errors, we'll set

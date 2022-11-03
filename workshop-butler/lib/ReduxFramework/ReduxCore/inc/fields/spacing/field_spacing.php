@@ -1,11 +1,11 @@
-<?php
+<?php namespace WorkshopButler;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'ReduxFramework_spacing' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_spacing' ) ) {
     class ReduxFramework_spacing {
 
         /**
@@ -277,7 +277,7 @@ if ( ! class_exists( 'ReduxFramework_spacing' ) ) {
          */
         function enqueue() {
             wp_enqueue_style( 'select2-css' );
-            
+
             wp_enqueue_script(
                 'redux-field-spacing-js',
                 ReduxFramework::$_url . 'inc/fields/spacing/field_spacing' . Redux_Functions::isMin() . '.js',

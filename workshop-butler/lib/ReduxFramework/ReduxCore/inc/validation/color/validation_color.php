@@ -1,6 +1,6 @@
-<?php
+<?php namespace WorkshopButler;
 
-    if ( ! class_exists( 'Redux_Validation_color' ) ) {
+    if ( ! class_exists( 'WorkshopButler\Redux_Validation_color' ) ) {
         class Redux_Validation_color {
 
             /**

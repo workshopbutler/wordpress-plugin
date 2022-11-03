@@ -1,11 +1,11 @@
-<?php
+<?php namespace WorkshopButler;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'ReduxFramework_sortable' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_sortable' ) ) {
     class ReduxFramework_sortable {
 
         /**
@@ -88,7 +88,7 @@ if ( ! class_exists( 'ReduxFramework_sortable' ) ) {
                     $label_class = ' labeled';
                 }
             }
-            
+
             echo '<ul id="' . $this->field['id'] . '-list" class="redux-sortable ' . $class . ' ' . $label_class . '">';
 
 

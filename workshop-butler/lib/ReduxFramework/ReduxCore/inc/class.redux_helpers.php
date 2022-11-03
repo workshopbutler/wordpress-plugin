@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
 // Exit if accessed directly
     if ( ! defined( 'ABSPATH' ) ) {
@@ -6,7 +6,7 @@
     }
 
 // Don't duplicate me!
-    if ( ! class_exists( 'Redux_Helpers' ) ) {
+    if ( ! class_exists( 'WorkshopButler\Redux_Helpers' ) ) {
 
         /**
          * Redux Helpers Class
@@ -390,14 +390,14 @@
                 $sysinfo['redux_ver']      = esc_html( ReduxFramework::$_version );
                 $sysinfo['redux_data_dir'] = ReduxFramework::$_upload_dir;
                 $f                         = 'fo' . 'pen';
-                
+
                 $res = true;
                 if ($f( ReduxFramework::$_upload_dir . 'test-log.log', 'a' ) === false) {
                     $res = false;
                 }
-                
+
                 // Only is a file-write check
-                $sysinfo['redux_data_writeable'] = $res;                
+                $sysinfo['redux_data_writeable'] = $res;
                 $sysinfo['wp_content_url']       = WP_CONTENT_URL;
                 $sysinfo['wp_ver']               = get_bloginfo( 'version' );
                 $sysinfo['wp_multisite']         = is_multisite();
@@ -423,7 +423,7 @@
 
                 $sysinfo['wp_lang'] = get_locale();
 
-                if ( ! class_exists( 'Browser' ) ) {
+                if ( ! class_exists( 'WorkshopButler\Browser' ) ) {
                     require_once ReduxFramework::$_dir . 'inc/browser.php';
                 }
 

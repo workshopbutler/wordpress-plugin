@@ -1,11 +1,11 @@
-<?php
+<?php namespace WorkshopButler;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'ReduxFramework_text' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_text' ) ) {
     class ReduxFramework_text {
 
         /**
@@ -46,14 +46,14 @@ if ( ! class_exists( 'ReduxFramework_text' ) ) {
             //}
 
             $readonly       = ( isset( $this->field['readonly'] ) && $this->field['readonly']) ? ' readonly="readonly"' : '';
-            $autocomplete   = ( isset($this->field['autocomplete']) && $this->field['autocomplete'] == false) ? ' autocomplete="off"' : ''; 
+            $autocomplete   = ( isset($this->field['autocomplete']) && $this->field['autocomplete'] == false) ? ' autocomplete="off"' : '';
 
             if ( isset( $this->field['options'] ) && ! empty( $this->field['options'] ) ) {
 
                 $placeholder = '';
                 if ( isset( $this->field['placeholder'] ) ) {
                     $placeholder = $this->field['placeholder'];
-                }                    
+                }
 
                 foreach ( $this->field['options'] as $k => $v ) {
                     if ( ! empty( $placeholder ) ) {

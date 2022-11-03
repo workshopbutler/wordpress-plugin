@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
@@ -23,8 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Don't duplicate me!
-if ( ! class_exists( 'ReduxFramework_border' ) ) {
-    
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_border' ) ) {
+
     class ReduxFramework_border {
 
         /**
@@ -44,7 +44,7 @@ if ( ! class_exists( 'ReduxFramework_border' ) ) {
 
             // Regex is our friend.  THERE ARE FOUR LIGHTS!!
             return preg_replace('/[^\d.-]/', '', $s);
-        }             
+        }
 
         /**
          * Field Render Function.
@@ -207,15 +207,15 @@ if ( ! class_exists( 'ReduxFramework_border' ) ) {
          */
         function enqueue() {
             $min = Redux_Functions::isMin();
-            
+
             if (!wp_style_is ( 'select2-css' )) {
                 wp_enqueue_style( 'select2-css' );
             }
-            
+
             if (!wp_style_is ( 'wp-color-picker' )) {
                 wp_enqueue_style( 'wp-color-picker' );
             }
-            
+
             if (!wp_script_is ( 'redux-field-border-js' )) {
                 wp_enqueue_script(
                     'redux-field-border-js',
@@ -230,7 +230,7 @@ if ( ! class_exists( 'ReduxFramework_border' ) ) {
                 if (!wp_style_is ( 'redux-color-picker-css' )) {
                     wp_enqueue_style( 'redux-color-picker-css' );
                 }
-                
+
                 if (!wp_style_is ( 'redux-field-border-css' )) {
                     wp_enqueue_style(
                         'redux-field-border-css',
@@ -305,7 +305,7 @@ if ( ! class_exists( 'ReduxFramework_border' ) ) {
 
             if ( ! empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
                 $keys = implode( ",", $this->field['output'] );
-                
+
                 if (!empty($style)) {
                     $this->parent->outputCSS .= $keys . "{" . $style . '}';
                 }
@@ -313,7 +313,7 @@ if ( ! class_exists( 'ReduxFramework_border' ) ) {
 
             if ( ! empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
                 $keys = implode( ",", $this->field['compiler'] );
-                
+
                 if (!empty($style)) {
                     $this->parent->compilerCSS .= $keys . "{" . $style . '}';
                 }

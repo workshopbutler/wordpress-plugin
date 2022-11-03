@@ -1,10 +1,10 @@
-<?php
+<?php namespace WorkshopButler;
 
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
 
-    if ( ! class_exists( 'ReduxFramework_dimensions' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework_dimensions' ) ) {
         class ReduxFramework_dimensions {
 
             /**
@@ -17,7 +17,7 @@
                 $this->parent = $parent;
                 $this->field  = $field;
                 $this->value  = $value;
-                
+
                 // No errors please
                 $defaults = array(
                     'width'          => true,
@@ -267,12 +267,12 @@
 
                 if (!is_array($this->field['mode'])) {
                     $height = isset( $this->field['mode'] ) && ! empty( $this->field['mode'] ) ? $this->field['mode'] : 'height';
-                    $width  = isset( $this->field['mode'] ) && ! empty( $this->field['mode'] ) ? $this->field['mode'] : 'width';                   
+                    $width  = isset( $this->field['mode'] ) && ! empty( $this->field['mode'] ) ? $this->field['mode'] : 'width';
                 } else {
                     $height = $this->field['mode']['height'] != false ? $this->field['mode']['height'] : 'height';
                     $width  = $this->field['mode']['width'] != false ? $this->field['mode']['width'] : 'width';
                 }
-                
+
                 $cleanValue = array(
                     $height => isset( $this->value['height'] ) ? filter_var( $this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) : '',
                     $width  => isset( $this->value['width'] ) ? filter_var( $this->value['width'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) : '',
@@ -301,5 +301,3 @@
             } //function
         } //class
     }
-
-

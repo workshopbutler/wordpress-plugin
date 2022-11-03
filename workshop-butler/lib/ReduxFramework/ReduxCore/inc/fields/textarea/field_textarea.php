@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     /*
      * @package     Redux_Framework
@@ -27,7 +27,7 @@
         exit;
     }
 
-    if ( ! class_exists( 'ReduxFramework_textarea' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework_textarea' ) ) {
         class ReduxFramework_textarea {
 
             /**

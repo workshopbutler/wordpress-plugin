@@ -8,8 +8,6 @@
 
 namespace WorkshopButler;
 
-use Redux;
-
 /**
  * General plugin settings
  *
@@ -580,7 +578,7 @@ class WSB_Settings {
 	}
 
 	/**
-	 * Returns list of arguments for \Redux::setArgs method
+	 * Returns list of arguments for Redux::setArgs method
 	 *
 	 * @param boolean $save_ajax True when the changes should be saved via Ajax.
 	 *

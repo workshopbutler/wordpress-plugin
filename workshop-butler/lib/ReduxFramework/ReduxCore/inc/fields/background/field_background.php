@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@
     }
 
 // Don't duplicate me!
-    if ( ! class_exists( 'ReduxFramework_background' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework_background' ) ) {
 
         /**
          * Main ReduxFramework_background class
@@ -355,15 +355,15 @@
                         wp_enqueue_script( 'media-upload' );
                     }
                 }
-                
+
                 if (!wp_style_is ( 'select2-css' )) {
                     wp_enqueue_style( 'select2-css' );
                 }
-                
+
                 if (!wp_style_is ( 'wp-color-picker' )) {
                     wp_enqueue_style( 'wp-color-picker' );
                 }
-                
+
                 if (!wp_script_is ( 'redux-field-background-js' )) {
                     wp_enqueue_script(
                         'redux-field-background-js',
@@ -384,7 +384,7 @@
                             'all'
                         );
                     }
-                    
+
                     if (!wp_style_is ( 'redux-color-picker-css' )) {
                         wp_enqueue_style( 'redux-color-picker-css' );
                     }

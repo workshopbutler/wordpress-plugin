@@ -1,11 +1,11 @@
-<?php
+<?php namespace WorkshopButler;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'ReduxFramework_spinner' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_spinner' ) ) {
     class ReduxFramework_spinner {
 
         /**
@@ -142,7 +142,7 @@ if ( ! class_exists( 'ReduxFramework_spinner' ) ) {
                 );
             }
         }
-        
+
         public function output() {
             $style = '';
 
@@ -157,15 +157,15 @@ if ( ! class_exists( 'ReduxFramework_spinner' ) ) {
                     $this->parent->compilerCSS .= $css;
 
                 }
-            }            
+            }
         }
-        
+
         private function parseCSS($value, $output){
             // No notices
             $css = '';
-            
+
             $unit = isset($this->field['output_unit']) ? $this->field['output_unit'] : 'px';
-            
+
             // Must be an array
             if (is_numeric($value)) {
                 if (is_array($output)) {

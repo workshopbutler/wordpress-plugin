@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'ReduxFramework_palette' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework_palette' ) ) {
     class ReduxFramework_palette {
 
         /**
@@ -39,7 +39,7 @@ if ( ! class_exists( 'ReduxFramework_palette' ) ) {
             $this->field  = $field;
             $this->value  = $value;
         }
-        
+
         /**
          * Field Render Function.
          * Takes the vars and outputs the HTML for the field in the settingss
@@ -53,22 +53,22 @@ if ( ! class_exists( 'ReduxFramework_palette' ) ) {
                 echo 'No palettes have been set.';
                 return;
             }
-            
+
             echo '<div id="' . $this->field['id'] . '" class="buttonset">';
 
             foreach ( $this->field['palettes'] as $value => $colorSet ) {
                 $checked = checked( $this->value , $value, false );
                 echo '<input type="radio" value="' . $value . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" class="redux-palette-set ' . $this->field['class'] . '" id="' . $this->field['id'] . '-' . $value . '"' . $checked . '>';
                 echo '<label for="' . $this->field['id'] . '-' . $value . '">';
-                
+
                 foreach ( $colorSet as $color ) {
                     printf( "<span style='background: {$color}'>{$color}</span>" );
-                }                
-                
+                }
+
                 echo '</label>';
                 echo '</input>';
             }
-            
+
             echo '</div>';
         }
 
@@ -82,15 +82,15 @@ if ( ! class_exists( 'ReduxFramework_palette' ) ) {
          */
         public function enqueue() {
             $min = Redux_Functions::isMin();
-            
+
             wp_enqueue_script(
                 'redux-field-palette-js',
                 ReduxFramework::$_url . 'inc/fields/palette/field_palette' . $min . '.js',
                 array( 'jquery', 'redux-js', 'jquery-ui-button', 'jquery-ui-core' ),
                 time(),
                 true
-            );  
-            
+            );
+
             if ($this->parent->args['dev_mode']) {
                 wp_enqueue_style(
                     'redux-field-palette-css',
@@ -99,12 +99,12 @@ if ( ! class_exists( 'ReduxFramework_palette' ) ) {
                     time(),
                     'all'
                 );
-            }            
-        }        
-        
-        
+            }
+        }
+
+
         public function output() {
-            
+
         }
     }
 }

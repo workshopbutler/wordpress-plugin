@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
     // <input type="radio" value="1" name="_customize-radio-redux_demo[opt-radio]" data-customize-setting-link="redux_demo[opt-color-title]">
     //return;
     /**
@@ -24,7 +24,7 @@
     }
 
     // Don't duplicate me!
-    if ( ! class_exists( 'ReduxFramework_extension_customizer' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework_extension_customizer' ) ) {
 
         /**
          * Main ReduxFramework customizer extension class
@@ -259,19 +259,19 @@
             // All sections, settings, and controls will be added here
             public function _register_customizer_controls( $wp_customize ) {
 
-                if ( ! class_exists( 'Redux_Customizer_Section' ) ) {
+                if ( ! class_exists( 'WorkshopButler\Redux_Customizer_Section' ) ) {
                     require_once dirname( __FILE__ ) . '/inc/customizer_section.php';
                     if ( method_exists( $wp_customize, 'register_section_type' ) ) {
                         $wp_customize->register_section_type( 'Redux_Customizer_Section' );
                     }
                 }
-                if ( ! class_exists( 'Redux_Customizer_Panel' ) ) {
+                if ( ! class_exists( 'WorkshopButler\Redux_Customizer_Panel' ) ) {
                     require_once dirname( __FILE__ ) . '/inc/customizer_panel.php';
                     if ( method_exists( $wp_customize, 'register_panel_type' ) ) {
                         $wp_customize->register_panel_type( 'Redux_Customizer_Panel' );
                     }
                 }
-                if ( ! class_exists( 'Redux_Customizer_Control' ) ) {
+                if ( ! class_exists( 'WorkshopButler\Redux_Customizer_Control' ) ) {
                     require_once dirname( __FILE__ ) . '/inc/customizer_control.php';
                 }
 
@@ -540,7 +540,7 @@
                             $option['options'] = $this->parent->get_wordpress_data( $option['data'], $option['args'] );
                         }
 
-                        $class_name = 'Redux_Customizer_Control_' . $option['type'];
+                        $class_name = 'WorkshopButler\Redux_Customizer_Control_' . $option['type'];
 
                         do_action( 'redux/extension/customizer/control_init', $option );
 
@@ -555,7 +555,7 @@
                             'type'            => 'redux-' . $option['type'],
                             'field'           => $option,
                             'ReduxFramework'  => $this->parent,
-                            'active_callback' => ( isset( $option['required'] ) && class_exists( 'Redux_Customizer_Active_Callback' ) ) ? array(
+                            'active_callback' => ( isset( $option['required'] ) && class_exists( 'WorkshopButler\Redux_Customizer_Active_Callback' ) ) ? array(
                                 'Redux_Customizer_Active_Callback',
                                 'evaluate'
                             ) : '__return_true',
@@ -744,7 +744,7 @@
                     if ( isset( $section['fields'] ) ) {
                         foreach ( $section['fields'] as $field ) {
                             if ( isset( $field['type'] ) ) {
-                                $field_class = 'ReduxFramework_' . $field['type'];
+                                $field_class = 'WorkshopButler\ReduxFramework_' . $field['type'];
 
                                 if ( ! class_exists( $field_class ) ) {
                                     $class_file = apply_filters( 'redux-typeclass-load', $this->path . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );

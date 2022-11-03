@@ -1,10 +1,10 @@
-<?php
+<?php namespace WorkshopButler;
 
 	if ( !defined ( 'ABSPATH' ) ) {
 		exit;
 	}
 
-	if (!class_exists('reduxCoreRequired')){
+	if (!class_exists('WorkshopButler\reduxCoreRequired')){
 		class reduxCoreRequired {
 			public $parent      = null;
 

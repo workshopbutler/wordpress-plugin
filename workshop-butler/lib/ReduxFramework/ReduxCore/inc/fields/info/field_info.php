@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@
     }
 
 // Don't duplicate me!
-    if ( ! class_exists( 'ReduxFramework_info' ) ) {
+    if ( ! class_exists( 'WorkshopButler\ReduxFramework_info' ) ) {
 
         /**
          * Main ReduxFramework_info class

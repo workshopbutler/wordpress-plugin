@@ -1,4 +1,4 @@
-<?php
+<?php namespace WorkshopButler;
 
     class Redux_Embedded implements themecheck {
         protected $error = array();
@@ -56,5 +56,5 @@
     }
 
     $themechecks = array();
-    
+
     $themechecks[] = new Redux_Embedded;
