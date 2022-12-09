@@ -10,7 +10,7 @@
 
 namespace WorkshopButler;
 
-if ( ! class_exists( 'ReduxFramework' ) && file_exists( dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php' ) ) {
+if ( ! class_exists( 'WorkshopButler\ReduxFramework' ) && file_exists( dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php' ) ) {
 	require_once dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php';
 }
 

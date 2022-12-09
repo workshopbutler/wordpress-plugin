@@ -72,7 +72,7 @@ class WSB_Integration_Admin {
 	 * @access   private
 	 */
 	private function load_dependencies() {
-		if ( ! class_exists( 'ReduxFramework' )
+		if ( ! class_exists( 'WorkshopButler\ReduxFramework' )
 			&& file_exists( dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php' ) ) {
 			require_once dirname( __FILE__ ) . '/../lib/ReduxFramework/ReduxCore/framework.php';
 		}
