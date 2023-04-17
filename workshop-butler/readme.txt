@@ -2,8 +2,8 @@
 Contributors: workshopbutlers
 Tags: event management, training management, event schedule, workshop crm, online registrations
 Requires at least: 5.5
-Tested up to: 6.1
-Stable tag: 3.1.9
+Tested up to: 6.2
+Stable tag: 3.2
 Requires PHP: 7.2.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -69,6 +69,11 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 3.2 =
+* Update compatibility up to WP 6.2
+* Add Google Analytics 4 support
+* Do not load the GA analytics script any further; it should be loaded externally.
+
 = 3.1.9 =
 * Fix compatibility issue with ReduxFramework
 
