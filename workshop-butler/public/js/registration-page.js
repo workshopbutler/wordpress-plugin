@@ -4,32 +4,32 @@
  * Sends GA event on registration
  */
 function submitGaEvent() {
-	let wsb_ga_key = wsb_ga.google_analytics_key;
+	const wsb_ga_key = wsb_ga.google_analytics_key;
 
-	if (wsb_ga_key !== '') {
-		if (typeof ga === 'function') {
+	if (!wsb_ga_key) {
+    return;
+  }
 
-			ga('create', wsb_ga_key, 'auto');
-			ga('send', 'event', 'Registration Completed', 'submit');
+  if (typeof ga === 'function') {
+    ga('create', wsb_ga_key, 'auto', 'wsbIntegration');
+    ga('wsbIntegration.send', 'event', 'Registration Completed', 'submit');
+    return;
+  }
 
-		} else {
+  // check if google tag manager is initialized
+  if (typeof window.dataLayer !== 'object') {
+    return;
+  }
 
-			(function (i, s, o, g, r, a, m) {
-				i['GoogleAnalyticsObject'] = r;
-				i[r] = i[r] || function () {
-					(i[r].q = i[r].q || []).push(arguments)
-				}, i[r].l = 1 * new Date();
-				a = s.createElement(o),
-					m = s.getElementsByTagName(o)[0];
-				a.async = 1;
-				a.src = g;
-				m.parentNode.insertBefore(a, m)
-			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  if (typeof gtag !== 'function') {
+    function gtag(){dataLayer.push(arguments);}
+  }
 
-			ga('create', wsb_ga_key, 'auto');
-			ga('send', 'event', 'Registration Completed', 'submit');
-		}
-	}
+  gtag('event', 'submit', {
+    'send_to': wsb_ga_key,
+    'event_category': 'Registration Completed'
+  });
+
 }
 
 /**
