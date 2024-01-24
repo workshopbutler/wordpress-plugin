@@ -2,8 +2,8 @@
 Contributors: workshopbutlers
 Tags: event management, training management, event schedule, workshop crm, online registrations
 Requires at least: 5.5
-Tested up to: 6.2
-Stable tag: 3.2.1
+Tested up to: 6.4
+Stable tag: 3.2.2
 Requires PHP: 7.2.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -69,6 +69,9 @@ Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 Please, open an issue [here](https://github.com/workshopbutler/wordpress-plugin)
 
 == Changelog ==
+= 3.2.2 =
+* Update compatibility up to WP 6.4
+
 = 3.2.1 =
 * Fix a wording issue on the event page for multiple languages
 
